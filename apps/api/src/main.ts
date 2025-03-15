@@ -10,6 +10,8 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app/app.module';
 
 async function bootstrap() {
+	Logger.log(`Application is starting...`);
+
 	const globalPrefix = 'api';
 	const port = process.env.PORT ?? 3000 as number;
 
