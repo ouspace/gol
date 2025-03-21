@@ -83,6 +83,12 @@ export default [
 			'**/dist',
 			'**/.custom',
 			'jest.config.ts',
+			'**/eslint.config.cjs',
+			'**/postcss.config.cjs',
+			'**/rollup.config.cjs',
+			'**/webpack.config.cjs',
+			'**/vite.config.*.timestamp*',
+			'**/vitest.config.*.timestamp*',
 		],
 	},
 	{
@@ -106,9 +112,12 @@ export default [
 	{
 		files: ['**/*.ts', '**/*.tsx'],
 		rules: {
-			'@typescript-eslint/restrict-template-expressions': ['error', {
-				allowNumber: true
-			}],
+			'@typescript-eslint/restrict-template-expressions': [
+				'error',
+				{
+					allowNumber: true,
+				},
+			],
 		},
 	},
 	{
@@ -116,11 +125,21 @@ export default [
 		// Override or add rules here
 		rules: {
 			indent: ['error', 'tab', { SwitchCase: 1, ignoredNodes: ['PropertyDefinition'] }],
-			'n/no-missing-import': ['error', {
-				"tryExtensions": [".js", ".ts", ".jsx", ".tsx", ".json", ".css"],
-				'ignoreTypeImport': true
-			}],
+			'n/no-missing-import': [
+				'error',
+				{
+					tryExtensions: ['.js', '.ts', '.jsx', '.tsx', '.json', '.css'],
+					ignoreTypeImport: true,
+				},
+			],
+			'n/no-extraneous-import': [
+				'error',
+				{
+					allowModules: ['lodash', 'react', 'react-dom', 'react-router-dom'],
+				},
+			],
 			'unicorn/prefer-top-level-await': ['warn'],
+			'unicorn/no-null': ['off'],
 		},
 	},
 ];

@@ -15,9 +15,7 @@
 		"skipDefaultLibCheck": true,
 		"skipLibCheck": true,
 		"strict": true,
-		"lib": [
-			"ESNext"
-		],
+		"lib": ["ESNext"],
 		"module": "NodeNext",
 		"moduleResolution": "NodeNext",
 		"target": "ESNext",
@@ -26,10 +24,11 @@
 		"noImplicitOverride": true,
 		"noImplicitReturns": true,
 		"noUnusedLocals": true,
-		"typeRoots": ["./node_modules/@types"]
+		"typeRoots": ["node_modules/@types", "node_modules/@nx/react/typings"],
+		"paths": {
+			"@gol/ui-components": ["libs/ui-components/src/index.ts"],
+			"@gol/ui-module": ["libs/ui-module/src/index.ts"]
+		}
 	},
-	"exclude": [
-		"node_modules",
-		"tmp"
-	]
+	"exclude": ["node_modules", "tmp"]
 }

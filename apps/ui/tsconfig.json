@@ -1,0 +1,33 @@
+{
+	"extends": "../../tsconfig.base.json",
+	"compilerOptions": {
+		"allowSyntheticDefaultImports": true,
+		"jsx": "react-jsx",
+		"lib": [
+			"dom",
+			"esnext"
+		],
+		"module": "esnext",
+		"moduleResolution": "node",
+		"skipLibCheck": true,
+		"resolveJsonModule": true,
+		"strict": true,
+		"declaration": true
+	},
+	"files": [],
+	"include": [
+		"**/*.ts",
+		"**/*.tsx",
+		"**/*.js",
+		"**/*.jsx",
+		"src/components/button/__tests__/button.test.tsx"
+	],
+	"references": [
+		{
+			"path": "./tsconfig.app.json"
+		},
+		{
+			"path": "./tsconfig.storybook.json"
+		}
+	]
+}

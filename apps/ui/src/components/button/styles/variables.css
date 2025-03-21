@@ -1,0 +1,23 @@
+:root {
+	/* Button common variables */
+	--button-size: '';
+	--button-color: '';
+
+	/* Button core variables */
+	--button-background-primary-color: '';
+	--button-background-secondary-color: '';
+	--button-background-tertiary-color: '';
+	--button-border-primary-color: '';
+	--button-border-secondary-color: '';
+	--button-border-tertiary-color: '';
+
+	/* ButtonText variables */
+	--button-text-size: '';
+	--button-text-primary-color: '';
+	--button-text-secondary-color: '';
+	--button-text-tertiary-color: '';
+
+	/* ButtonIcon variables */
+	--button-icon-size: '';
+	--button-icon-color: '';
+}

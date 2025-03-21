@@ -1,0 +1,16 @@
+@import url('./variables.css');
+
+/* ButtonIcon core */
+.button {
+	background-color: transparent;
+}
+
+/* ButtonIcon core styles */
+.button .icon {
+	background-color: transparent;
+}
+
+/* ButtonText core styles */
+.button .text {
+	background-color: transparent;
+}
