@@ -1,14 +1,15 @@
 import type { Properties } from './types';
-import _ from 'lodash';
 
 /**
  *
  * @param properties
  * @returns
  */
+// Después
 export function toDefaults(properties?: Properties): Required<Properties> {
-	return _.defaults(properties, {
+	return {
 		as: 'button',
-		children: null,
-	}) as Required<Properties>;
+		children: properties?.children ?? null,
+		...properties,
+	} as Required<Properties>;
 }
