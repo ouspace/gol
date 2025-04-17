@@ -3,15 +3,22 @@
 	"version": "0.0.1",
 	"private": true,
 	"scripts": {
-		"eas-build-post-install": "cd ../../ && node tools/scripts/eas-build-post-install.mjs . apps/ui"
+		"eas-build-post-install": "cd ../../ && node tools/scripts/eas-build-post-install.mjs . apps/ui",
+		"storybook": "storybook dev -p 6006",
+		"build-storybook": "build-storybook"
 	},
 	"dependencies": {
 		"@testing-library/jest-native": "*",
 		"@testing-library/react-native": "*",
+		"expo": "*",
 		"metro-config": "*",
 		"react-native": "*",
-		"expo": "*",
 		"react-native-svg": "*",
 		"react-native-web": "*"
+	},
+	"devDependencies": {
+		"@storybook/addon-essentials": "^8.6.12",
+		"@storybook/react": "^8.6.12",
+		"@storybook/react-webpack5": "^8.6.12"
 	}
 }
