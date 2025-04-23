@@ -1,11 +1,11 @@
 import React, { useRef, useCallback, useLayoutEffect } from 'react';
-import { Properties } from './types';
+import type { Properties } from './types';
 import './styles/index.css';
 import { toDefaults, getContainerClass, getLabelClass } from './helpers';
 
 /**
- * 
- * @param properties 
+ *
+ * @param properties
  * @returns
  */
 export default function Checkbox(properties?: Properties) {
@@ -39,7 +39,7 @@ export default function Checkbox(properties?: Properties) {
 
 	return (
 		<div className={getContainerClass(defaults.variant, defaults.disabled)}>
-			<div 
+			<div
 				className="container"
 				onClick={onContainerClickHandler}
 				role="presentation"
@@ -56,7 +56,7 @@ export default function Checkbox(properties?: Properties) {
 				/>
 			</div>
 			{defaults.label && (
-				<label 
+				<label
 					className={getLabelClass(defaults.disabled)}
 					htmlFor={defaults.id}
 					onClick={onLabelClickHandler}

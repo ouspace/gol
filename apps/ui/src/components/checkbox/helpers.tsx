@@ -1,17 +1,17 @@
 import _ from 'lodash';
 import clsx from 'clsx';
-import { Properties } from './types';
+import type { Properties } from './types';
 
 /**
- * 
- * @returns 
+ *
+ * @returns
  */
 export const generateId = (): string => {
 	return `checkbox-${Math.random().toString(36).slice(2, 9)}`;
 };
 
 /**
- * 
+ *
  * @param properties
  * @returns
  */
@@ -27,7 +27,7 @@ export function toDefaults(properties?: Properties): Required<Properties> {
 }
 
 /**
- * 
+ *
  * @param variant
  * @param disabled
  * @returns
@@ -44,7 +44,7 @@ export function getContainerClass(variant: string, disabled: boolean): string {
 }
 
 /**
- * 
+ *
  * @param disabled
  * @returns
  */
