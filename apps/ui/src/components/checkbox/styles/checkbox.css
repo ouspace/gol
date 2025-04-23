@@ -1,0 +1,98 @@
+.checkbox-container {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px; /* Target size */
+  height: 48px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.checkbox-input {
+  appearance: none;
+  position: absolute;
+  width: 18px; /* Container size */
+  height: 18px;
+  border: 2px solid rgb(73, 69, 79); /* M3 unselected color */
+  border-radius: 2px;
+  margin: 0;
+  transition: all 0.2s ease;
+  background-color: transparent;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.checkbox-input:checked {
+  background-color: rgb(103, 80, 164); /* M3 primary color */
+  border-color: rgb(103, 80, 164);
+}
+
+.checkbox-input:checked::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 45%;
+  width: 5px;
+  height: 9px;
+  border: solid rgb(255, 255, 255);
+  border-width: 0 2px 2px 0;
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.checkbox-label {
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  font-size: 14px;
+  color: rgb(29, 27, 32); /* M3 on-surface color */
+  line-height: 1.5;
+  letter-spacing: 0.00938em;
+  margin-left: 48px; /* Espacio después del área de toque */
+  cursor: pointer;
+}
+
+.checkbox-input:disabled {
+  border-color: rgba(29, 27, 32, 0.12); /* M3 disabled color */
+  background-color: transparent;
+  cursor: not-allowed;
+}
+
+.checkbox-input:disabled:checked {
+  background-color: rgba(29, 27, 32, 0.38);
+  border-color: transparent;
+}
+
+.checkbox-label:has(+ input:disabled) {
+  color: rgba(29, 27, 32, 0.38); /* M3 disabled text */
+  cursor: not-allowed;
+}
+
+/* State layer effect */
+.checkbox-container::before {
+  content: '';
+  position: absolute;
+  width: 40px; /* State-layer size */
+  height: 40px;
+  border-radius: 50%;
+  background-color: transparent;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: background-color 0.2s ease;
+}
+
+.checkbox-container:hover::before {
+  background-color: rgba(103, 80, 164, 0.08); /* M3 hover state */
+}
+
+.checkbox-container:active::before {
+  background-color: rgba(103, 80, 164, 0.12); /* M3 pressed state */
+}
+
+.checkbox-input:focus-visible + .checkbox-container::before {
+  background-color: rgba(103, 80, 164, 0.12); /* M3 focus state */
+}
+
+.checkbox-input:hover:not(:disabled) {
+  border-color: rgb(103, 80, 164);
+}
