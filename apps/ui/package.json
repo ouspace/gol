@@ -5,7 +5,8 @@
 	"scripts": {
 		"eas-build-post-install": "cd ../../ && node tools/scripts/eas-build-post-install.mjs . apps/ui",
 		"storybook": "storybook dev -p 6006",
-		"build-storybook": "build-storybook"
+		"build-storybook": "build-storybook",
+		"test": "jest"
 	},
 	"dependencies": {
 		"@testing-library/jest-native": "*",
@@ -19,6 +20,8 @@
 	"devDependencies": {
 		"@storybook/addon-essentials": "^8.6.12",
 		"@storybook/react": "^8.6.12",
-		"@storybook/react-webpack5": "^8.6.12"
+		"@storybook/react-webpack5": "^8.6.12",
+		"@testing-library/jest-dom": "^6.6.3",
+		"@testing-library/react": "^16.3.0"
 	}
 }
