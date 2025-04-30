@@ -3,8 +3,8 @@ import '@testing-library/jest-dom';
 import TonalButton from '../button.tonal';
 
 describe('TonalButton', () => {
-  it('renders with default text', () => {
-    render(<TonalButton>Click Me</TonalButton>);
+	it('renders with default text', () => {
+		render(<TonalButton>Click Me</TonalButton>);
     expect(screen.getByText('Click Me')).toBeInTheDocument();
   });
 
