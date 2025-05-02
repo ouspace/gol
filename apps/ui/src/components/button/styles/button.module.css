@@ -2,7 +2,7 @@
 @import './animations.css';
 
 /* Estilo base del botón */
-.button {
+.buttonBase {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -18,61 +18,77 @@
   overflow: hidden;
 }
 
-/* Ícono dentro del botón */
-.button .icon {
+/* Modificador para el ancho completo */
+.fullWidth {
+  width: 100%;
+}
+
+/* Estilo para los íconos dentro del botón */
+.icon {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 /* Variantes de Material 3 */
-.button.filled {
+
+/* Estilo para el botón lleno */
+.filled {
   background-color: var(--md-filled-bg);
   color: var(--md-filled-text);
   box-shadow: var(--md-elevation-1);
 }
 
-.button.filled:hover {
+.filled:hover {
   background-color: var(--md-filled-hover);
   box-shadow: var(--md-elevation-2);
 }
 
-.button.elevated {
+/* Estilo para el botón elevado */
+.elevated {
   background-color: var(--md-elevated-bg);
   color: var(--md-elevated-text);
   box-shadow: var(--md-elevation-2);
 }
 
-.button.elevated:hover {
+.elevated:hover {
   background-color: var(--md-elevated-hover);
   box-shadow: var(--md-elevation-3);
 }
 
-.button.tonal {
+/* Estilo para el botón tonal */
+.tonal {
   background-color: var(--md-tonal-bg);
   color: var(--md-tonal-text);
   box-shadow: var(--md-elevation-1);
 }
 
-.button.tonal:hover {
+.tonal:hover {
   background-color: var(--md-tonal-hover);
 }
 
-.button.outlined {
+/* Estilo para el botón con borde */
+.outlined {
   background-color: transparent;
   color: var(--md-outlined-text);
   border: 1px solid var(--md-outlined-border);
 }
 
-.button.outlined:hover {
+.outlined:hover {
   background-color: var(--md-outlined-hover);
 }
 
-.button.text {
+/* Estilo para el botón de texto */
+.text {
   background-color: transparent;
   color: var(--md-text-text);
 }
 
-.button.text:hover {
+.text:hover {
   background-color: var(--md-text-hover);
+}
+
+/* Animación */
+.fadeIn {
+  animation: fadeIn 0.4s ease-in-out both;
 }
