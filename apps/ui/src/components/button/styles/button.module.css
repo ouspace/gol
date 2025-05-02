@@ -2,7 +2,7 @@
 @import './animations.css';
 
 /* Estilo base del botón */
-.buttonBase {
+.button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -18,70 +18,61 @@
   overflow: hidden;
 }
 
-.fullWidth {
-  width: 100%;
-}
-
-.icon {
+/* Ícono dentro del botón */
+.button .icon {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 /* Variantes de Material 3 */
-
-.filled {
+.button.filled {
   background-color: var(--md-filled-bg);
   color: var(--md-filled-text);
   box-shadow: var(--md-elevation-1);
 }
 
-.filled:hover {
+.button.filled:hover {
   background-color: var(--md-filled-hover);
   box-shadow: var(--md-elevation-2);
 }
 
-.elevated {
+.button.elevated {
   background-color: var(--md-elevated-bg);
   color: var(--md-elevated-text);
   box-shadow: var(--md-elevation-2);
 }
 
-.elevated:hover {
+.button.elevated:hover {
   background-color: var(--md-elevated-hover);
   box-shadow: var(--md-elevation-3);
 }
 
-.tonal {
+.button.tonal {
   background-color: var(--md-tonal-bg);
   color: var(--md-tonal-text);
   box-shadow: var(--md-elevation-1);
 }
 
-.tonal:hover {
+.button.tonal:hover {
   background-color: var(--md-tonal-hover);
 }
 
-.outlined {
+.button.outlined {
   background-color: transparent;
   color: var(--md-outlined-text);
   border: 1px solid var(--md-outlined-border);
 }
 
-.outlined:hover {
+.button.outlined:hover {
   background-color: var(--md-outlined-hover);
 }
 
-.text {
+.button.text {
   background-color: transparent;
   color: var(--md-text-text);
 }
 
-.text:hover {
+.button.text:hover {
   background-color: var(--md-text-hover);
-}
-
-/* Animación */
-.fadeIn {
-  animation: fadeIn 0.4s ease-in-out both;
 }
