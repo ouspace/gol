@@ -1,0 +1,94 @@
+@import './variables.css';
+@import './animations.css';
+
+/* Estilo base del botón */
+.buttonBase {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.2rem;
+  font-weight: 500;
+  font-size: 1rem;
+  border-radius: 0.5rem;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Modificador para el ancho completo */
+.fullWidth {
+  width: 100%;
+}
+
+/* Estilo para los íconos dentro del botón */
+.icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Variantes de Material 3 */
+
+/* Estilo para el botón lleno */
+.filled {
+  background-color: var(--md-filled-bg);
+  color: var(--md-filled-text);
+  box-shadow: var(--md-elevation-1);
+}
+
+.filled:hover {
+  background-color: var(--md-filled-hover);
+  box-shadow: var(--md-elevation-2);
+}
+
+/* Estilo para el botón elevado */
+.elevated {
+  background-color: var(--md-elevated-bg);
+  color: var(--md-elevated-text);
+  box-shadow: var(--md-elevation-2);
+}
+
+.elevated:hover {
+  background-color: var(--md-elevated-hover);
+  box-shadow: var(--md-elevation-3);
+}
+
+/* Estilo para el botón tonal */
+.tonal {
+  background-color: var(--md-tonal-bg);
+  color: var(--md-tonal-text);
+  box-shadow: var(--md-elevation-1);
+}
+
+.tonal:hover {
+  background-color: var(--md-tonal-hover);
+}
+
+/* Estilo para el botón con borde */
+.outlined {
+  background-color: transparent;
+  color: var(--md-outlined-text);
+  border: 1px solid var(--md-outlined-border);
+}
+
+.outlined:hover {
+  background-color: var(--md-outlined-hover);
+}
+
+/* Estilo para el botón de texto */
+.text {
+  background-color: transparent;
+  color: var(--md-text-text);
+}
+
+.text:hover {
+  background-color: var(--md-text-hover);
+}
+
+/* Animación */
+.fadeIn {
+  animation: fadeIn 0.4s ease-in-out both;
+}

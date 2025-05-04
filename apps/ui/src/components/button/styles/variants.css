@@ -1,0 +1,21 @@
+@import url('./variables.css');
+
+.button {
+	/* By default is `text` button */
+
+	&.filled {
+		background-color: transparent;
+	}
+
+	&.tonal {
+		background-color: transparent;
+	}
+
+	&.outlined {
+		background-color: transparent;
+	}
+
+	&.elevated {
+		background-color: transparent;
+	}
+}

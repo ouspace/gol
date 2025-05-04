@@ -1,0 +1,47 @@
+:root {
+	/* Button common variables */
+	--button-size: 1rem;
+	--button-color: #6750a4;
+  
+	/* Button core variables */
+	--button-background-primary-color: #6750a4;
+	--button-background-secondary-color: #d0bcff;
+	--button-background-tertiary-color: #ffffff;
+	--button-border-primary-color: #6750a4;
+	--button-border-secondary-color: #79747e;
+	--button-border-tertiary-color: transparent;
+  
+	/* ButtonText variables */
+	--button-text-size: 1rem;
+	--button-text-primary-color: #ffffff;
+	--button-text-secondary-color: #1c1b1f;
+	--button-text-tertiary-color: #381e72;
+  
+	/* ButtonIcon variables */
+	--button-icon-size: 1.2rem;
+	--button-icon-color: #6750a4;
+  
+	/* Material 3 Design Tokens */
+	--md-filled-bg: #6750a4;
+	--md-filled-hover: #5b4696;
+	--md-filled-text: #ffffff;
+  
+	--md-elevated-bg: #ffffff;
+	--md-elevated-hover: #f5f5f5;
+	--md-elevated-text: #6750a4;
+  
+	--md-tonal-bg: #d0bcff;
+	--md-tonal-hover: #c1aef5;
+	--md-tonal-text: #381e72;
+  
+	--md-outlined-border: #6750a4;
+	--md-outlined-hover: rgba(103, 80, 164, 0.08);
+	--md-outlined-text: #6750a4;
+  
+	--md-text-text: #6750a4;
+	--md-text-hover: rgba(103, 80, 164, 0.08);
+  
+	--md-elevation-1: 0px 1px 2px rgba(0, 0, 0, 0.12);
+	--md-elevation-2: 0px 2px 4px rgba(0, 0, 0, 0.16);
+	--md-elevation-3: 0px 3px 6px rgba(0, 0, 0, 0.20);
+  }

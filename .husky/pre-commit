@@ -1,0 +1,21 @@
+# List of protected branches (you can add more separated by spaces)
+protected_branches="main"
+current_branch="$(git branch --show-current)"
+commits="$(git rev-list --all)"
+
+# Check if current branch is in the protected branches list
+is_protected=false
+for protected in $protected_branches; do
+  if [ "$current_branch" = "$protected" ] && [ "$commits" != "" ]; then
+    is_protected=true
+    break
+  fi
+done
+
+if [ "$is_protected" = true ]; then
+  echo "Commit blocked on '$current_branch' branch. This is a protected branch and commits already exist."
+  exit 1
+fi
+
+# Run npx lint-staged to run configured linters/formatters
+npx lint-staged
