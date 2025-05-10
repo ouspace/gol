@@ -1,0 +1,24 @@
+/* base style for input */
+.input {
+  background-color: transparent;
+}
+
+/* style when checked */
+.input:checked {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.input:checked::after {
+  border-color: white;
+}
+
+/* increases prominence of selected elements */
+.input:checked {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+}
+
+/* label colors */
+.label {
+  color: var(--color-surface-text);
+}
