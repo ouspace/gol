@@ -6,7 +6,7 @@
   border: none;
   background: transparent;
   cursor: pointer;
-  
+
   /* base styles */
   border: 2px solid var(--checkbox-color-outline);
   border-radius: var(--checkbox-size-border-radius);
