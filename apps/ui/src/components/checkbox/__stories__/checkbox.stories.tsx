@@ -1,11 +1,16 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Checkbox } from '../checkbox';
+import { default as Checkbox } from '../checkbox';
 
 const meta: Meta<typeof Checkbox> = {
-	// title: 'Components/Checkbox',
 	component: Checkbox,
-	//👇 Enables auto-generated documentation for this component and includes all stories in this file
 	tags: ['autodocs'],
+	argTypes: {
+		onChange: { action: 'changed' },
+		theme: {
+			control: 'select',
+			options: ['primary', 'secondary', 'error'],
+		}
+	}
 };
 
 export default meta;
@@ -25,3 +30,25 @@ export const Checked: Story = {
 	},
 };
 
+export const Disabled: Story = {
+	args: {
+		label: 'Disabled Checkbox',
+		disabled: true,
+	},
+};
+
+export const ThemeSecondary: Story = {
+	args: {
+		label: 'Secondary Theme',
+		checked: true,
+		theme: 'secondary',
+	},
+};
+
+export const ThemeError: Story = {
+	args: {
+		label: 'Error Theme',
+		checked: true,
+		theme: 'error',
+	},
+};
