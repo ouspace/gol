@@ -1,0 +1,56 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.container {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--size-checkbox-container);
+  height: var(--size-checkbox-container);
+}
+
+/* input positioning */
+.input {
+  position: absolute;
+  width: var(--size-checkbox-input);
+  height: var(--size-checkbox-input);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* state layer (circular effect) */
+.container::before {
+  content: '';
+  position: absolute;
+  width: var(--size-state-layer);
+  height: var(--size-state-layer);
+  border-radius: 50%;
+  background-color: transparent;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: background-color var(--animation-duration-standard) ease;
+}
+
+/* check icon */
+.input::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 45%;
+  width: 5px;
+  height: 9px;
+  border: solid transparent;
+  border-width: 0 2px 2px 0;
+  transform: translate(-50%, -50%) rotate(45deg);
+  transition: border-color var(--animation-duration-standard) ease;
+}
+
+/* space between checkbox and label */
+.label {
+  margin-left: 8px;
+}

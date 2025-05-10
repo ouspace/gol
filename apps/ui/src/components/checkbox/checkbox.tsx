@@ -1,48 +1,63 @@
-import React, { useState, useEffect } from 'react';
-import type { CheckboxProperties } from './types';
-import './styles/checkbox.css';
-import { generateId } from './helpers';
+import React, { useRef, useCallback } from 'react';
+import { Properties } from './types';
+import './styles/index.css';
+import { toDefaults, getContainerClass, getLabelClass } from './helpers';
 
-export const Checkbox: React.FC<CheckboxProperties> = ({ 
-	id,
-	label,
-	checked = false,
-	disabled = false,
-	onChange,
-}) => {
-	const [isChecked, setIsChecked] = useState(checked);
-	const checkboxId = id ?? generateId();
+/**
+ * 
+ * @param properties 
+ * @returns
+ */
+export default function Checkbox(properties?: Properties) {
+	const defaults = toDefaults(properties);
 
-	useEffect(() => {
-		setIsChecked(checked);
-	}, [checked]);
+	const inputReference = useRef<HTMLInputElement>(null);
 
-	const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-		if (disabled) return;
-		const newState = event.target.checked;
-		setIsChecked(newState);
-		onChange(newState);
-	};
+	const onChangeHandler = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
+		if (!defaults.disabled) {
+			defaults.onChange(event.target.checked);
+		}
+	}, [defaults]);
+
+	const onContainerClickHandler = useCallback(() => {
+		if (inputReference.current && !defaults.disabled) {
+			inputReference.current.click();
+		}
+	}, [defaults.disabled]);
+
+	const onLabelClickHandler = useCallback((event: React.MouseEvent) => {
+		if (defaults.disabled) {
+			event.preventDefault();
+		}
+	}, [defaults.disabled]);
 
 	return (
-		<div style={{ display: 'flex', alignItems: 'center' }}>
-			<div className="checkbox-container">
+		<div className={getContainerClass(defaults.theme, defaults.disabled)}>
+			<div 
+				className="container"
+				onClick={onContainerClickHandler}
+				role="presentation"
+			>
 				<input
+					ref={inputReference}
 					type="checkbox"
-					className="checkbox-input"
-					checked={isChecked}
-					onChange={handleChange}
-					id={checkboxId}
-					disabled={disabled}
+					className="input"
+					checked={defaults.checked}
+					onChange={onChangeHandler}
+					id={defaults.id}
+					disabled={defaults.disabled}
+					aria-checked={defaults.checked}
 				/>
 			</div>
-			{label && (
-				<label className="checkbox-label" htmlFor={checkboxId}>
-					{label}
+			{defaults.label && (
+				<label 
+					className={getLabelClass(defaults.disabled)}
+					htmlFor={defaults.id}
+					onClick={onLabelClickHandler}
+				>
+					{defaults.label}
 				</label>
 			)}
 		</div>
 	);
-};
-
-
+}

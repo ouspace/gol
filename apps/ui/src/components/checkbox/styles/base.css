@@ -1,0 +1,26 @@
+.input {
+  /* input reset */
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  
+  /* base styles */
+  border: 2px solid var(--color-outline);
+  border-radius: var(--size-border-radius);
+  transition: all var(--animation-duration-standard) ease;
+}
+
+.label {
+  /* base font */
+  font-family: var(--typography-font-family);
+  font-size: var(--typography-font-size);
+  line-height: var(--typography-line-height);
+  letter-spacing: var(--typography-letter-spacing);
+  cursor: pointer;
+  user-select: none;
+}

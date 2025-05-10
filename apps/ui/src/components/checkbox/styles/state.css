@@ -1,0 +1,36 @@
+/* focus state */
+.input:focus-visible {
+  outline: none;
+}
+
+.input:focus-visible + .container::before {
+  background-color: var(--color-primary-pressed);
+}
+
+.theme-secondary .input:focus-visible + .container::before {
+  background-color: var(--color-secondary-pressed);
+}
+
+.theme-error .input:focus-visible + .container::before {
+  background-color: var(--color-error-pressed);
+}
+
+/* disabled state */
+.disabled .input {
+  border-color: var(--color-outline-disabled);
+  cursor: not-allowed;
+}
+
+.disabled .input:checked {
+  background-color: var(--color-surface-text-disabled);
+  border-color: transparent;
+}
+
+.disabled .container:hover::before {
+  background-color: transparent;
+}
+
+.label-disabled {
+  color: var(--color-surface-text-disabled);
+  cursor: not-allowed;
+}
