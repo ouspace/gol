@@ -1,8 +1,8 @@
 @import './variables.css';
 @import './animations.css';
 
-/* Estilo base del botón */
-.buttonBase {
+/* Base del botón */
+.button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -18,77 +18,75 @@
   overflow: hidden;
 }
 
-/* Modificador para el ancho completo */
-.fullWidth {
+
+.button--fullWidth {
   width: 100%;
 }
 
-/* Estilo para los íconos dentro del botón */
-.icon {
+
+.button__icon {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-/* Variantes de Material 3 */
 
-/* Estilo para el botón lleno */
-.filled {
+.button--filled {
   background-color: var(--md-filled-bg);
   color: var(--md-filled-text);
   box-shadow: var(--md-elevation-1);
 }
-
-.filled:hover {
+.button--filled:hover {
   background-color: var(--md-filled-hover);
   box-shadow: var(--md-elevation-2);
 }
 
-/* Estilo para el botón elevado */
-.elevated {
+
+.button--elevated {
   background-color: var(--md-elevated-bg);
   color: var(--md-elevated-text);
   box-shadow: var(--md-elevation-2);
 }
-
-.elevated:hover {
+.button--elevated:hover {
   background-color: var(--md-elevated-hover);
   box-shadow: var(--md-elevation-3);
 }
 
-/* Estilo para el botón tonal */
-.tonal {
+
+.button--tonal {
   background-color: var(--md-tonal-bg);
   color: var(--md-tonal-text);
   box-shadow: var(--md-elevation-1);
 }
-
-.tonal:hover {
+.button--tonal:hover {
   background-color: var(--md-tonal-hover);
 }
 
-/* Estilo para el botón con borde */
-.outlined {
+
+.button--outlined {
   background-color: transparent;
   color: var(--md-outlined-text);
   border: 1px solid var(--md-outlined-border);
 }
-
-.outlined:hover {
+.button--outlined:hover {
   background-color: var(--md-outlined-hover);
 }
 
-/* Estilo para el botón de texto */
-.text {
+
+.button--text {
   background-color: transparent;
   color: var(--md-text-text);
 }
-
-.text:hover {
+.button--text:hover {
   background-color: var(--md-text-hover);
 }
 
-/* Animación */
-.fadeIn {
+
+.button--selected {
+  outline: 2px solid var(--md-outlined-border);
+}
+
+
+.button--fadeIn {
   animation: fadeIn 0.4s ease-in-out both;
 }
