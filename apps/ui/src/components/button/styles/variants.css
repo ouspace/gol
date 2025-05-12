@@ -1,21 +1,56 @@
 @import url('./variables.css');
 
+
 .button {
-	/* By default is `text` button */
+	background-color: transparent;
+}
 
-	&.filled {
-		background-color: transparent;
-	}
 
-	&.tonal {
-		background-color: transparent;
-	}
+.button.filled {
+	background-color: var(--md-filled-bg);
+	color: var(--md-filled-text);
+	box-shadow: var(--md-elevation-1);
+}
 
-	&.outlined {
-		background-color: transparent;
-	}
+.button.filled:hover {
+	background-color: var(--md-filled-hover);
+	box-shadow: var(--md-elevation-2);
+}
 
-	&.elevated {
-		background-color: transparent;
-	}
+.button.elevated {
+	background-color: var(--md-elevated-bg);
+	color: var(--md-elevated-text);
+	box-shadow: var(--md-elevation-2);
+}
+
+.button.elevated:hover {
+	background-color: var(--md-elevated-hover);
+	box-shadow: var(--md-elevation-3);
+}
+
+.button.tonal {
+	background-color: var(--md-tonal-bg);
+	color: var(--md-tonal-text);
+	box-shadow: var(--md-elevation-1);
+}
+
+.button.tonal:hover {
+	background-color: var(--md-tonal-hover);
+}
+
+.button.outlined {
+	color: var(--md-outlined-text);
+	border: 1px solid var(--md-outlined-border);
+}
+
+.button.outlined:hover {
+	background-color: var(--md-outlined-hover);
+}
+
+.button.text {
+	color: var(--md-text-text);
+}
+
+.button.text:hover {
+	background-color: var(--md-text-hover);
 }
