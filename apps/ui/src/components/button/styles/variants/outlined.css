@@ -1,0 +1,10 @@
+@import url('../variables.css');
+
+.button--outlined {
+  color: var(--md-outlined-text);
+  border: 1px solid var(--md-outlined-border);
+}
+
+.button--outlined:hover {
+  background-color: var(--md-outlined-hover);
+}
