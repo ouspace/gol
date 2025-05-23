@@ -1,0 +1,11 @@
+@import url('../variables.css');
+
+.button--tonal {
+  background-color: var(--md-tonal-bg);
+  color: var(--md-tonal-text);
+  box-shadow: var(--md-elevation-1);
+}
+
+.button--tonal:hover {
+  background-color: var(--md-tonal-hover);
+}

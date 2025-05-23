@@ -141,4 +141,15 @@ export default [
 			'unicorn/no-null': ['off'],
 		},
 	},
+	{
+		files: ['**/*.spec.*', '**/*.test.*'],
+		env: {
+			jest: true,
+		},
+		plugins: ['jest'],
+		extends: ['plugin:jest/recommended'],
+		rules: {
+			
+		},
+	}
 ];

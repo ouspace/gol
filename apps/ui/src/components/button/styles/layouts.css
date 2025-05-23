@@ -1,5 +1,18 @@
-@import url('./variables.css');
+.layout--horizontal {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+}
 
-.button {
-	background-color: transparent;
+.layout--vertical {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.layout--centered {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
