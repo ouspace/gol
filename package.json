@@ -47,7 +47,7 @@
 		"@nx/web": "^20.7.1",
 		"@nx/webpack": "^20.7.1",
 		"@nx/workspace": "^20.7.1",
-		"@playwright/test": "^1.51.1",
+		"@playwright/test": "^1.52.0",
 		"@pmmmwh/react-refresh-webpack-plugin": "^0.5.16",
 		"@rollup/plugin-url": "^8.0.2",
 		"@storybook/addon-essentials": "^8.6.12",

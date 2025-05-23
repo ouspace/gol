@@ -1,85 +1,40 @@
 import { render, screen } from '@testing-library/react';
-import '@testing-library/jest-dom';
+import Button from '../button';
 
-import {
-	FilledButton,
-	ElevatedButton,
-	TonalButton,
-	OutlinedButton,
-	TextButton,
-	IconButton,
-} from '../button';
-
-describe('Button Variants', () => {
-	describe('FilledButton', () => {
-		it('renders with default text', () => {
-			render(<FilledButton>Click Me</FilledButton>);
-			expect(screen.getByText('Click Me')).toBeInTheDocument();
-		});
-
-		it('renders with disabled prop', () => {
-			render(<FilledButton disabled>Disabled</FilledButton>);
-			expect(screen.getByRole('button')).toBeDisabled();
-		});
+describe('Button', () => {
+	it('renders with default variant (filled)', () => {
+		render(<Button>Click Me</Button>);
+		const button = screen.getByRole('button', { name: /click me/i });
+		expect(button).toBeInTheDocument();
+		expect(button).toHaveClass('button--filled');
 	});
 
-	describe('ElevatedButton', () => {
-		it('renders with default text', () => {
-			render(<ElevatedButton>Click Me</ElevatedButton>);
-			expect(screen.getByText('Click Me')).toBeInTheDocument();
-		});
-
-		it('renders with disabled prop', () => {
-			render(<ElevatedButton disabled>Disabled</ElevatedButton>);
-			expect(screen.getByRole('button')).toBeDisabled();
-		});
+	it('renders with specified variant', () => {
+		render(<Button variant="outlined">Outlined</Button>);
+		const button = screen.getByRole('button', { name: /outlined/i });
+		expect(button).toHaveClass('button--outlined');
 	});
 
-	describe('TonalButton', () => {
-		it('renders with default text', () => {
-			render(<TonalButton>Click Me</TonalButton>);
-			expect(screen.getByText('Click Me')).toBeInTheDocument();
-		});
-
-		it('renders with disabled prop', () => {
-			render(<TonalButton disabled>Disabled</TonalButton>);
-			expect(screen.getByRole('button')).toBeDisabled();
-		});
+	it('applies custom className', () => {
+		render(<Button className="custom-class">Custom</Button>);
+		const button = screen.getByRole('button', { name: /custom/i });
+		expect(button).toHaveClass('custom-class');
 	});
 
-	describe('OutlinedButton', () => {
-		it('renders with default text', () => {
-			render(<OutlinedButton>Click Me</OutlinedButton>);
-			expect(screen.getByText('Click Me')).toBeInTheDocument();
-		});
-
-		it('renders with disabled prop', () => {
-			render(<OutlinedButton disabled>Disabled</OutlinedButton>);
-			expect(screen.getByRole('button')).toBeDisabled();
-		});
+	it('renders icon if provided', () => {
+		render(<Button icon={<span data-testid="icon">⭐</span>}>Star</Button>);
+		expect(screen.getByTestId('icon')).toBeInTheDocument();
 	});
 
-	describe('TextButton', () => {
-		it('renders with default text', () => {
-			render(<TextButton>Click Me</TextButton>);
-			expect(screen.getByText('Click Me')).toBeInTheDocument();
-		});
-
-		it('renders with disabled prop', () => {
-			render(<TextButton disabled>Disabled</TextButton>);
-			expect(screen.getByRole('button')).toBeDisabled();
-		});
+	it('handles layout prop correctly', () => {
+		render(<Button layout="centered">Centered</Button>);
+		const button = screen.getByRole('button', { name: /centered/i });
+		expect(button).toHaveClass('layout--centered');
 	});
 
-	describe('IconButton', () => {
-		it('renders with icon', () => {
-			render(<IconButton aria-label="Icon button">🔔</IconButton>);
-			expect(screen.getByRole('button', { name: /icon button/i })).toBeInTheDocument();
-		});
-
-		it('renders with disabled prop', () => {
-			render(<IconButton aria-label="Disabled icon" disabled>🔕</IconButton>);
-			expect(screen.getByRole('button', { name: /disabled icon/i })).toBeDisabled();
-		});
+	it('adds fullWidth class if fullWidth is true', () => {
+		render(<Button fullWidth>Full</Button>);
+		const button = screen.getByRole('button', { name: /full/i });
+		expect(button).toHaveClass('button--fullWidth');
 	});
 });
