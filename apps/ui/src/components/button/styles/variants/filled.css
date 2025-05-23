@@ -10,7 +10,7 @@
 }
 
 .button--filled:hover {
-  background-color: #5a4795; 
+  background-color: #5a4795;
   box-shadow: var(--md-elevation-2);
 }
 

@@ -1,5 +1,15 @@
 import * as React from 'react';
 import clsx from 'clsx';
+import './styles/core.css';
+import './styles/animations.css';
+import './styles/layouts.css';
+
+
+import { filled } from './variants/filled';
+import { elevated } from './variants/elevated';
+import { tonal } from './variants/tonal';
+import { outlined } from './variants/outlined';
+import { text } from './variants/text';
 
 import './styles/core.css';
 import './styles/animations.css';
