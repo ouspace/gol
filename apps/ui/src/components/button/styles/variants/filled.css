@@ -1,0 +1,12 @@
+@import url('../variables.css');
+
+.button--filled {
+  background-color: var(--md-filled-bg);
+  color: var(--md-filled-text);
+  box-shadow: var(--md-elevation-1);
+}
+
+.button--filled:hover {
+  background-color: var(--md-filled-hover);
+  box-shadow: var(--md-elevation-2);
+}
