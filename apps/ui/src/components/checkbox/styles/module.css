@@ -1,24 +1,39 @@
-/* base style for input */
-.input {
+.checkbox .input {
   background-color: transparent;
 }
 
-/* style when checked */
-.input:checked {
+.checkbox .input:checked {
   background-color: var(--color-primary);
   border-color: var(--color-primary);
 }
 
-.input:checked::after {
+.checkbox .input:checked::after {
   border-color: white;
 }
 
-/* increases prominence of selected elements */
-.input:checked {
+.checkbox .input:checked {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 }
 
-/* label colors */
-.label {
+.checkbox .input:indeterminate {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+}
+
+.checkbox .input:indeterminate::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 8px;
+  height: 2px;
+  background-color: white;
+  border: none;
+  transform: translate(-50%, -50%);
+  transition: background-color var(--animation-duration-standard) ease;
+}
+
+.checkbox .label {
   color: var(--color-surface-text);
 }
