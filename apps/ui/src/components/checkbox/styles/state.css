@@ -1,36 +1,45 @@
 /* focus state */
-.input:focus-visible {
+.checkbox .input:focus-visible {
   outline: none;
 }
 
-.input:focus-visible + .container::before {
+.checkbox .input:focus-visible + .container::before {
   background-color: var(--color-primary-pressed);
 }
 
-.theme-secondary .input:focus-visible + .container::before {
+.checkbox.variant-secondary .input:focus-visible + .container::before {
   background-color: var(--color-secondary-pressed);
 }
 
-.theme-error .input:focus-visible + .container::before {
+.checkbox.variant-error .input:focus-visible + .container::before {
   background-color: var(--color-error-pressed);
 }
 
 /* disabled state */
-.disabled .input {
+.checkbox.disabled .input {
   border-color: var(--color-outline-disabled);
   cursor: not-allowed;
 }
 
-.disabled .input:checked {
+.checkbox.disabled .input:checked {
   background-color: var(--color-surface-text-disabled);
   border-color: transparent;
 }
 
-.disabled .container:hover::before {
+.checkbox.disabled .input:indeterminate {
+  background-color: var(--color-surface-text-disabled);
+  border-color: transparent;
+}
+
+.checkbox.disabled .input:indeterminate::after {
+  background-color: white;
+}
+
+.checkbox.disabled .container:hover::before {
   background-color: transparent;
 }
 
-.label-disabled {
+.checkbox .label-disabled {
   color: var(--color-surface-text-disabled);
   cursor: not-allowed;
 }

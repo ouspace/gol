@@ -1,8 +1,6 @@
-.input {
+.checkbox .input {
   /* input reset */
   appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
   margin: 0;
   padding: 0;
   border: none;
@@ -15,7 +13,7 @@
   transition: all var(--animation-duration-standard) ease;
 }
 
-.label {
+.checkbox .label {
   /* base font */
   font-family: var(--typography-font-family);
   font-size: var(--typography-font-size);
