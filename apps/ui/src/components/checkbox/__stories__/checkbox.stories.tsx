@@ -65,6 +65,13 @@ export const Indeterminate: Story = {
 	},
 };
 
+export const Indeterminate: Story = {
+	args: {
+		label: 'Indeterminate Checkbox',
+		indeterminate: true,
+	},
+};
+
 export const Disabled: Story = {
 	args: {
 		label: 'Disabled Checkbox',
