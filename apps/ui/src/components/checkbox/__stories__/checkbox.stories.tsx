@@ -6,9 +6,12 @@ const meta: Meta<typeof Checkbox> = {
 	tags: ['autodocs'],
 	argTypes: {
 		onChange: { action: 'changed' },
-		theme: {
+		variant: {
 			control: 'select',
 			options: ['primary', 'secondary', 'error'],
+		},
+		indeterminate: {
+			control: 'boolean',
 		}
 	}
 };
@@ -30,6 +33,13 @@ export const Checked: Story = {
 	},
 };
 
+export const Indeterminate: Story = {
+	args: {
+		label: 'Indeterminate Checkbox',
+		indeterminate: true,
+	},
+};
+
 export const Disabled: Story = {
 	args: {
 		label: 'Disabled Checkbox',
@@ -37,18 +47,18 @@ export const Disabled: Story = {
 	},
 };
 
-export const ThemeSecondary: Story = {
+export const VariantSecondary: Story = {
 	args: {
-		label: 'Secondary Theme',
+		label: 'Secondary Variant',
 		checked: true,
-		theme: 'secondary',
+		variant: 'secondary',
 	},
 };
 
 export const ThemeError: Story = {
 	args: {
-		label: 'Error Theme',
+		label: 'Error Variant',
 		checked: true,
-		theme: 'error',
+		variant: 'error',
 	},
 };
