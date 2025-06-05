@@ -1,5 +1,13 @@
 import * as React from 'react';
 import clsx from 'clsx';
+
+import './styles/variants/filled.css';
+import './styles/variants/elevated.css';
+import './styles/variants/text.css';
+import './styles/variants/outlined.css';
+import './styles/variants/tonal.css';
+
+
 import './styles/core.css';
 import './styles/animations.css';
 import './styles/layouts.css';
