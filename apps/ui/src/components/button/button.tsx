@@ -1,15 +1,16 @@
 import React from 'react';
 import clsx from 'clsx';
+
+import './styles/variants/filled.css';
+import './styles/variants/elevated.css';
+import './styles/variants/text.css';
+import './styles/variants/outlined.css';
+import './styles/variants/tonal.css';
+
+
 import './styles/core.css';
 import './styles/animations.css';
 import './styles/layouts.css';
-
-
-import { filled } from './variants/filled';
-import { elevated } from './variants/elevated';
-import { tonal } from './variants/tonal';
-import { outlined } from './variants/outlined';
-import { text } from './variants/text';
 
 export type ButtonVariant = 'filled' | 'elevated' | 'tonal' | 'outlined' | 'text';
 
@@ -23,14 +24,6 @@ export interface ButtonBaseProperties extends React.ButtonHTMLAttributes<HTMLBut
   layout?: 'horizontal' | 'vertical' | 'centered';
 }
 
-const variantClassMap: Record<ButtonVariant, () => string> = {
-	filled,
-	elevated,
-	tonal,
-	outlined,
-	text,
-};
-
 const Button: React.FC<ButtonBaseProperties> = ({
 	children,
 	variant = 'filled',
@@ -41,15 +34,14 @@ const Button: React.FC<ButtonBaseProperties> = ({
 	layout,
 	...properties
 }) => {
-	const variantClass = variantClassMap[variant]();
-
 	const classes = clsx(
-		'button',
-		variantClass,
-		fullWidth && 'button--fullWidth',
-		selected && 'button--selected',
-		layout && `layout--${layout}`,
-		'fade-in',
+		'button fade-in',
+		`button--${variant}`, 
+		{
+			'button--fullWidth': fullWidth,
+			'button--selected': selected,
+		},
+		layout && `layout--${layout}`, 
 		className
 	);
 

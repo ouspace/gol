@@ -5,7 +5,7 @@ import type { Properties } from './types';
  * @param properties
  * @returns
  */
-// Después
+// after
 export function toDefaults(properties?: Properties): Required<Properties> {
 	return {
 		as: 'button',
