@@ -133,9 +133,8 @@ export default [
 				},
 			],
 			'n/no-extraneous-import': [
-				'error',
-				{
-					allowModules: ['lodash', 'react', 'react-dom', 'react-router-dom'],
+				'warn', {
+					resolverConfig: { modules: ['node_modules'] }
 				},
 			],
 			'unicorn/prefer-top-level-await': ['warn'],

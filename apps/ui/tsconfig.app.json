@@ -28,6 +28,7 @@
 		"**/*.ts",
 		"**/*.tsx",
 		"**/*.js",
-		"**/*.jsx"
-, "src/components/button/__tests__/button.test.tsx"	]
+		"**/*.jsx",
+		"postcss.config.js"
+	]
 }
