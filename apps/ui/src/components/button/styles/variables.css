@@ -1,30 +1,46 @@
 :root {
-  
-  --md-filled-bg: #6750a4;
-  --md-filled-text: #ffffff;
-  --md-filled-hover: #5a4795;
+  /* === COLOR TOKENS === */
+  /* Filled Button */
+  --gol-btn-filled-bg: #6750a4;
+  --gol-btn-filled-text: #ffffff;
+  --gol-btn-filled-hover: #5a4795;
 
- 
-  --md-elevated-bg: #ffffff;
-  --md-elevated-text: #1d1b20;
-  --md-elevated-hover: #f1edf5;
+  /* Elevated Button */
+  --gol-btn-elevated-bg: #ffffff;
+  --gol-btn-elevated-text: #1d1b20;
+  --gol-btn-elevated-hover: #f1edf5;
 
-  
-  --md-tonal-bg: #625b71;
-  --md-tonal-text: #ffffff;
-  --md-tonal-hover: #574f65;
+  /* Tonal Button */
+  --gol-btn-tonal-bg: #625b71;
+  --gol-btn-tonal-text: #ffffff;
+  --gol-btn-tonal-hover: #574f65;
 
- 
-  --md-outlined-border: #79747e;
-  --md-outlined-text: #1d1b20;
-  --md-outlined-hover: rgba(0, 0, 0, 0.05);
+  /* Outlined Button */
+  --gol-btn-outlined-border: #79747e;
+  --gol-btn-outlined-text: #1d1b20;
+  --gol-btn-outlined-hover: rgba(0, 0, 0, 0.05);
 
- 
-  --md-text-text: #1d1b20;
-  --md-text-hover: rgba(0, 0, 0, 0.05);
+  /* Text Button */
+  --gol-btn-text-text: #1d1b20;
+  --gol-btn-text-hover: rgba(0, 0, 0, 0.05);
 
-  
-  --md-elevation-1: 0px 1px 3px rgba(0, 0, 0, 0.2);
-  --md-elevation-2: 0px 3px 6px rgba(0, 0, 0, 0.3);
-  --md-elevation-3: 0px 6px 10px rgba(0, 0, 0, 0.4);
+  /* === ELEVATION TOKENS === */
+  --gol-elevation-1: 0px 1px 3px rgba(0, 0, 0, 0.2);
+  --gol-elevation-2: 0px 3px 6px rgba(0, 0, 0, 0.3);
+  --gol-elevation-3: 0px 6px 10px rgba(0, 0, 0, 0.4);
+
+  /* === TRANSITIONS === */
+  --gol-transition-fast: 0.15s ease-in-out;
+  --gol-transition-base: 0.2s ease-in-out;
+  --gol-transition-slow: 0.3s ease-in-out;
+
+  /* === TYPOGRAPHY === */
+  --gol-font-family-base: 'Roboto', sans-serif;
+  --gol-font-size-base: 14px;
+
+  /* === SPACING & RADIUS === */
+  --gol-btn-padding-y: 8px;
+  --gol-btn-padding-x: 16px;
+  --gol-btn-gap: 8px;
+  --gol-radius-sm: 4px;
 }

@@ -1,10 +1,30 @@
 @import url('../variables.css');
+@import url('../animations.css');
+
+/* === BUTTON: Outlined Variant === */
 
 .button--outlined {
+  background-color: transparent;
   color: var(--md-outlined-text);
   border: 1px solid var(--md-outlined-border);
+  transition: background-color 0.2s ease, border-color 0.2s ease;
 }
 
+/* === Hover State === */
 .button--outlined:hover {
   background-color: var(--md-outlined-hover);
+  border-color: var(--md-outlined-border);
+}
+
+/* === Pressed State === */
+.button--outlined:active {
+  animation: gol-button-press 0.2s ease-in-out;
+}
+
+/* === Disabled State === */
+.button--outlined:disabled {
+  border-color: rgba(29, 27, 32, 0.12);
+  color: rgba(0, 0, 0, 0.38);
+  cursor: default;
+  pointer-events: none;
 }

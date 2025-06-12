@@ -1,12 +1,32 @@
 @import url('../variables.css');
+@import url('../animations.css');
+
+/* === BUTTON: Filled Variant === */
 
 .button--filled {
   background-color: var(--md-filled-bg);
   color: var(--md-filled-text);
   box-shadow: var(--md-elevation-1);
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
 }
 
+/* === Hover State === */
 .button--filled:hover {
   background-color: var(--md-filled-hover);
   box-shadow: var(--md-elevation-2);
+}
+
+/* === Pressed State === */
+.button--filled:active {
+  animation: gol-button-press 0.2s ease-in-out;
+  box-shadow: var(--md-elevation-1);
+}
+
+/* === Disabled State === */
+.button--filled:disabled {
+  background-color: rgba(103, 80, 164, 0.12); /* On-surface overlay */
+  color: rgba(0, 0, 0, 0.38);
+  box-shadow: none;
+  cursor: default;
+  pointer-events: none;
 }
