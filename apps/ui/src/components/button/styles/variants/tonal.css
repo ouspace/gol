@@ -1,11 +1,33 @@
 @import url('../variables.css');
+@import url('../animations.css');
+
+/* === BUTTON: Tonal Variant === */
 
 .button--tonal {
   background-color: var(--md-tonal-bg);
   color: var(--md-tonal-text);
+  box-shadow: var(--md-elevation-0, none);
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+  border: none;
+}
+
+/* === Hover State === */
+.button--tonal:hover {
+  background-color: var(--md-tonal-hover);
   box-shadow: var(--md-elevation-1);
 }
 
-.button--tonal:hover {
-  background-color: var(--md-tonal-hover);
+/* === Pressed State === */
+.button--tonal:active {
+  animation: gol-button-press 0.2s ease-in-out;
+  box-shadow: var(--md-elevation-0, none);
+}
+
+/* === Disabled State === */
+.button--tonal:disabled {
+  background-color: rgba(29, 27, 32, 0.12);
+  color: rgba(0, 0, 0, 0.38);
+  box-shadow: none;
+  cursor: default;
+  pointer-events: none;
 }
