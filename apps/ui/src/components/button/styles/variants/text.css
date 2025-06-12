@@ -1,9 +1,28 @@
 @import url('../variables.css');
+@import url('../animations.css');
+
+/* === BUTTON: Text Variant === */
 
 .button--text {
+  background-color: transparent;
   color: var(--md-text-text);
+  border: none;
+  transition: background-color 0.2s ease;
 }
 
+/* === Hover State === */
 .button--text:hover {
   background-color: var(--md-text-hover);
+}
+
+/* === Pressed State === */
+.button--text:active {
+  animation: gol-button-press 0.2s ease-in-out;
+}
+
+/* === Disabled State === */
+.button--text:disabled {
+  color: rgba(0, 0, 0, 0.38);
+  cursor: default;
+  pointer-events: none;
 }
