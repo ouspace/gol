@@ -9,6 +9,7 @@
   transition: background-color var(--md-transition-base), box-shadow var(--md-transition-base);
 }
 
+/* === Hover State === */
 .button--filled:hover {
   background-color: #5a4795;
   box-shadow: var(--md-elevation-2);
