@@ -8,6 +8,7 @@
   transition: background-color var(--md-transition-base);
 }
 
+/* === Hover State === */
 .button--text:hover {
   background-color: var(--md-state-hover-layer);
 }
@@ -18,4 +19,16 @@
 
 .button--text:disabled {
   color: var(--md-disabled-content);
+}
+
+/* === Pressed State === */
+.button--text:active {
+  animation: gol-button-press 0.2s ease-in-out;
+}
+
+/* === Disabled State === */
+.button--text:disabled {
+  color: rgba(0, 0, 0, 0.38);
+  cursor: default;
+  pointer-events: none;
 }
