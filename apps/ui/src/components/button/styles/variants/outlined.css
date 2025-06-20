@@ -8,7 +8,6 @@
   transition: background-color var(--md-transition-base), border-color var(--md-transition-base);
 }
 
-/* === Hover State === */
 .button--outlined:hover {
   background-color: var(--md-state-hover-layer);
 }
