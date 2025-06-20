@@ -1,33 +1,26 @@
 @import url('../variables.css');
 @import url('../animations.css');
 
-/* === BUTTON: Elevated Variant === */
-
 .button--elevated {
-  background-color: var(--md-elevated-bg);
-  color: var(--md-elevated-text);
+  background-color: var(--md-sys-color-surface);
+  color: var(--md-sys-color-primary);
   box-shadow: var(--md-elevation-1);
-  transition: background-color 0.2s ease, box-shadow 0.2s ease;
   border: none;
+  transition: background-color var(--md-transition-base), box-shadow var(--md-transition-base);
 }
 
-/* === Hover State === */
 .button--elevated:hover {
-  background-color: var(--md-elevated-hover);
+  background-color: #f1edf5;
   box-shadow: var(--md-elevation-2);
 }
 
-/* === Pressed State === */
 .button--elevated:active {
-  animation: gol-button-press 0.2s ease-in-out;
+  animation: gol-button-press var(--md-transition-base);
   box-shadow: var(--md-elevation-1);
 }
 
-/* === Disabled State === */
 .button--elevated:disabled {
-  background-color: rgba(29, 27, 32, 0.12); /* On-surface overlay */
-  color: rgba(0, 0, 0, 0.38);
+  background-color: var(--md-disabled-bg);
+  color: var(--md-disabled-content);
   box-shadow: none;
-  cursor: default;
-  pointer-events: none;
 }
