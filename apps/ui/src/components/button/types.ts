@@ -1,10 +1,11 @@
-import type { ReactNode, ReactElement, ButtonHTMLAttributes } from 'react';
+export type ButtonVariant = 'filled' | 'elevated' | 'tonal' | 'outlined' | 'text';
 
-/**
- * 
- */
-export type Properties = ButtonHTMLAttributes<HTMLButtonElement> & {
-  as?: ReactElement;
-  className?: string;
-  children?: ReactNode;
-};
+export interface ButtonProperties extends React.ButtonHTMLAttributes<HTMLButtonElement | HTMLAnchorElement> {
+  children?: React.ReactNode;
+  variant?: ButtonVariant;
+  fullWidth?: boolean;
+  icon?: React.ReactNode;
+  selected?: boolean;
+  layout?: 'horizontal' | 'vertical' | 'centered';
+  href?: string;
+}
