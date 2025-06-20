@@ -1,30 +1,18 @@
 import React from 'react';
 import clsx from 'clsx';
 
-
 import './styles/core.css';
 import './styles/animations.css';
 import './styles/layouts.css';
-
 import './styles/variants/filled.css';
 import './styles/variants/elevated.css';
 import './styles/variants/tonal.css';
 import './styles/variants/outlined.css';
 import './styles/variants/text.css';
 
-export type ButtonVariant = 'filled' | 'elevated' | 'tonal' | 'outlined' | 'text';
+import type { ButtonProperties } from './types';
 
-export interface ButtonBaseProperties extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  children: React.ReactNode;
-  variant?: ButtonVariant;
-  fullWidth?: boolean;
-  icon?: React.ReactNode;
-  selected?: boolean;
-  className?: string;
-  layout?: 'horizontal' | 'vertical' | 'centered';
-}
-
-const Button: React.FC<ButtonBaseProperties> = ({
+const Button = ({
 	children,
 	variant = 'filled',
 	fullWidth = false,
@@ -32,8 +20,8 @@ const Button: React.FC<ButtonBaseProperties> = ({
 	selected = false,
 	className,
 	layout,
-	...properties
-}) => {
+	...rest
+}: ButtonProperties): JSX.Element => {
 	const classes = clsx(
 		'button fade-in',
 		`button--${variant}`,
@@ -48,8 +36,8 @@ const Button: React.FC<ButtonBaseProperties> = ({
 	return (
 		<button
 			className={classes}
-			{...(selected ? { 'aria-pressed': true } : {})}
-			{...properties}
+			aria-pressed={selected || undefined}
+			{...rest}
 		>
 			{icon && <span className="button__icon">{icon}</span>}
 			<span className="button__label">{children}</span>
