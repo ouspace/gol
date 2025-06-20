@@ -1,7 +1,6 @@
 import * as React from 'react';
 import clsx from 'clsx';
 
-
 import './styles/core.css';
 import './styles/animations.css';
 import './styles/layouts.css';
