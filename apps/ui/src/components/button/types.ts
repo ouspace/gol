@@ -8,4 +8,5 @@ export interface ButtonProperties extends React.ButtonHTMLAttributes<HTMLButtonE
   selected?: boolean;
   layout?: 'horizontal' | 'vertical' | 'centered';
   href?: string;
+  as?: 'button' | 'a' | 'div' | 'span';
 }
