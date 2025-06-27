@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import clsx from 'clsx';
 
 import './styles/core.css';
@@ -12,7 +12,11 @@ import './styles/variants/text.css';
 
 import type { ButtonProperties } from './types';
 
-const Button = ({
+type ElementTag = 'button' | 'a' | 'div' | 'span';
+
+const Button = React.forwardRef<HTMLElement, ButtonProperties>(({
+	as,
+	href,
 	children,
 	variant = 'filled',
 	fullWidth = false,
@@ -21,9 +25,12 @@ const Button = ({
 	className,
 	layout,
 	...rest
-}: ButtonProperties): JSX.Element => {
+}, reference) => {
+	const isLink = typeof href === 'string';
+	const Tag = (as ?? (isLink ? 'a' : 'button')) as ElementTag;
+
 	const classes = clsx(
-		'button fade-in',
+		'button',
 		`button--${variant}`,
 		{
 			'button--fullWidth': fullWidth,
@@ -33,16 +40,34 @@ const Button = ({
 		className
 	);
 
+	const elementProperties = {
+		className: classes,
+		'aria-pressed': selected || undefined,
+		...(isLink ? { href } : {}),
+		...(Tag === 'button' && !('type' in rest) ? { type: 'button' as const } : {}),
+		...rest,
+	};
+
+	if (process.env.NODE_ENV === 'development') {
+		if (!children && !icon) {
+			console.warn('[Button]: Se recomienda incluir al menos texto o ícono.');
+		}
+		if (typeof (rest as Record<string, unknown>).onClick === 'string') {
+			console.warn('[Button]: onClick debe ser una función, no una cadena.');
+		}
+	}
+
 	return (
-		<button
-			className={classes}
-			aria-pressed={selected || undefined}
-			{...rest}
-		>
+		<Tag ref={reference} {...elementProperties}>
 			{icon && <span className="button__icon">{icon}</span>}
-			<span className="button__label">{children}</span>
-		</button>
+			{children && <span className="button__label">{children}</span>}
+			{!icon && !children && (
+				<span className="button__label">Button</span>
+			)}
+		</Tag>
 	);
-};
+});
+
+Button.displayName = 'Button';
 
 export default Button;
