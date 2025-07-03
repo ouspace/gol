@@ -68,7 +68,14 @@ export const Indeterminate: Story = {
 export const Indeterminate: Story = {
 	args: {
 		label: 'Indeterminate Checkbox',
-		indeterminate: true,
+		value: null,
+	},
+	parameters: {
+		docs: {
+			source: {
+				code: `<Checkbox label="Indeterminate Checkbox" value={null} onChange={() => {}} />`,
+			},
+		},
 	},
 };
 

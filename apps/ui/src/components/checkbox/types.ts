@@ -13,7 +13,6 @@ export interface Properties {
    * @default undefined
    */
   value?: boolean | null;
-
   /**
    *
    * @default false
