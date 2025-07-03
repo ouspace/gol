@@ -10,8 +10,9 @@ const meta: Meta<typeof Checkbox> = {
 			control: 'select',
 			options: ['primary', 'secondary', 'error'],
 		},
-		indeterminate: {
-			control: 'boolean',
+		value: {
+			control: 'select',
+			options: [false, true, null],
 		}
 	}
 };
@@ -22,21 +23,45 @@ type Story = StoryObj<typeof Checkbox>;
 export const Default: Story = {
 	args: {
 		label: 'Default Checkbox',
-		checked: false,
+		value: false,
+		onChange: (event, properties) => {
+			console.log('onChange', event, properties);
+		},
+	},
+	parameters: {
+		docs: {
+			source: {
+				code: `<Checkbox label="Default Checkbox" value={false} onChange={() => {}} />`,
+			},
+		},
 	},
 };
 
 export const Checked: Story = {
 	args: {
 		label: 'Checked Checkbox',
-		checked: true,
+		value: true,
+	},
+	parameters: {
+		docs: {
+			source: {
+				code: `<Checkbox label="Checked Checkbox" value={true} onChange={() => {}} />`,
+			},
+		},
 	},
 };
 
 export const Indeterminate: Story = {
 	args: {
 		label: 'Indeterminate Checkbox',
-		indeterminate: true,
+		value: null,
+	},
+	parameters: {
+		docs: {
+			source: {
+				code: `<Checkbox label="Indeterminate Checkbox" value={null} onChange={() => {}} />`,
+			},
+		},
 	},
 };
 
@@ -45,20 +70,41 @@ export const Disabled: Story = {
 		label: 'Disabled Checkbox',
 		disabled: true,
 	},
+	parameters: {
+		docs: {
+			source: {
+				code: `<Checkbox label="Disabled Checkbox" disabled onChange={() => {}} />`,
+			},
+		},
+	},
 };
 
 export const VariantSecondary: Story = {
 	args: {
 		label: 'Secondary Variant',
-		checked: true,
+		value: true,
 		variant: 'secondary',
+	},
+	parameters: {
+		docs: {
+			source: {
+				code: `<Checkbox label="Secondary Variant" value={true} variant="secondary" onChange={() => {}} />`,
+			},
+		},
 	},
 };
 
 export const ThemeError: Story = {
 	args: {
 		label: 'Error Variant',
-		checked: true,
+		value: true,
 		variant: 'error',
+	},
+	parameters: {
+		docs: {
+			source: {
+				code: `<Checkbox label="Error Variant" value={true} variant="error" onChange={() => {}} />`,
+			},
+		},
 	},
 };
