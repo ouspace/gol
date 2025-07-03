@@ -10,16 +10,10 @@ export type Properties = {
   label?: string;
   
   /**
-   * 
-   * @default false
+   *
+   * @default undefined
    */
-  checked?: boolean;
-  
-  /**
-   * 
-   * @default false
-   */
-  indeterminate?: boolean;
+  value?: boolean | null;
   
   /**
    *
@@ -36,5 +30,5 @@ export type Properties = {
   /**
    *
    */
-  onChange?: (checked: boolean) => void;
+  onChange?: (event: React.SyntheticEvent, properties: Properties) => void;
 }

@@ -3,66 +3,68 @@ import '@testing-library/jest-dom';
 import Checkbox from '../checkbox';
 
 describe('components/checkbox', () => {
-	describe('layout', () => {
-		test('should render by default', () => {
-			render(<Checkbox />);
-			const checkbox = screen.getByRole('checkbox');
-			expect(checkbox).not.toBeChecked();
+	function renderCheckbox(properties = {}) {
+		render(<Checkbox {...properties} />);
+		return screen.getByRole('checkbox');
+	}
+
+	describe('Layout', () => {
+		test('should render unchecked by default', () => {
+			const view = renderCheckbox();
+			expect(view).not.toBeChecked();
 		});
+
 		test('should render as checked', () => {
-			render(<Checkbox checked={true} />);
-			const checkbox = screen.getByRole('checkbox');
-			expect(checkbox).toBeChecked();
+			const view = renderCheckbox({ value: true });
+			expect(view).toBeChecked();
 		});
+
 		test('should render as indeterminate', () => {
-			render(<Checkbox indeterminate={true} />);
-			const checkbox = screen.getByRole('checkbox') as HTMLInputElement;
-			expect(checkbox.indeterminate).toBe(true);
+			const view = renderCheckbox({ value: null }) as HTMLInputElement;
+			expect(view.indeterminate).toBe(true);
 		});
+
 		test('should display label property', () => {
-			render(<Checkbox label="Test Label" />);
+			renderCheckbox({ label: 'Test Label' });
 			const label = screen.getByText('Test Label');
 			expect(label).toBeInTheDocument();
 		});
+
 		test('should display as disabled', () => {
-			render(<Checkbox disabled={true} />);
-			const checkbox = screen.getByRole('checkbox');
-			expect(checkbox).toBeDisabled();
+			const view = renderCheckbox({ disabled: true });
+			expect(view).toBeDisabled();
 		});
 	});
 
-	describe ('behavior', () => {
+	describe('Behavior', () => {
+		let onChange: jest.Mock;
+
+		beforeEach(() => {
+			onChange = jest.fn();
+		});
+
 		test('should trigger onChange event when checkbox is clicked', () => {
-			const onChange = jest.fn();
-			render(<Checkbox checked={false} onChange={onChange} />);
-			const checkbox = screen.getByRole('checkbox');
-			
-			fireEvent.click(checkbox);
-			
+			const view = renderCheckbox({ value: false, onChange });
+			fireEvent.click(view);
 			expect(onChange).toHaveBeenCalled();
 		});
+
 		test('should trigger onChange event when label is clicked', () => {
-			const onChange = jest.fn();
-			render(<Checkbox label="Test Label" checked={false} onChange={onChange} />);
+			renderCheckbox({ label: "Test Label", value: false, onChange });
 			const label = screen.getByText('Test Label');
-			
 			fireEvent.click(label);
-			
 			expect(onChange).toHaveBeenCalled();
 		});
+
 		test('should not trigger onChange event when it is disabled', () => {
-			const onChange = jest.fn();
-			render(<Checkbox disabled={true} checked={false} onChange={onChange} />);
-			const checkbox = screen.getByRole('checkbox');
-			
-			fireEvent.click(checkbox);
-			
+			const view = renderCheckbox({ disabled: true, value: false, onChange });
+			fireEvent.click(view);
 			expect(onChange).not.toHaveBeenCalled();
 		});
+
 		test('should have aria-checked="mixed" when indeterminate', () => {
-			render(<Checkbox indeterminate={true} />);
-			const checkbox = screen.getByRole('checkbox');
-			expect(checkbox).toHaveAttribute('aria-checked', 'mixed');
+			const view = renderCheckbox({ value: null });
+			expect(view).toHaveAttribute('aria-checked', 'mixed');
 		});
 	});
 });
