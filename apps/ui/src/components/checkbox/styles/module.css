@@ -3,8 +3,8 @@
 }
 
 .checkbox .input:checked {
-  background-color: var(--color-primary);
-  border-color: var(--color-primary);
+  background-color: var(--checkbox-color-primary);
+  border-color: var(--checkbox-color-primary);
 }
 
 .checkbox .input:checked::after {
@@ -16,8 +16,8 @@
 }
 
 .checkbox .input:indeterminate {
-  background-color: var(--color-primary);
-  border-color: var(--color-primary);
+  background-color: var(--checkbox-color-primary);
+  border-color: var(--checkbox-color-primary);
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 }
 
@@ -31,9 +31,9 @@
   background-color: white;
   border: none;
   transform: translate(-50%, -50%);
-  transition: background-color var(--animation-duration-standard) ease;
+  transition: background-color var(--checkbox-animation-duration-standard) ease;
 }
 
 .checkbox .label {
-  color: var(--color-surface-text);
+  color: var(--checkbox-color-surface-text);
 }

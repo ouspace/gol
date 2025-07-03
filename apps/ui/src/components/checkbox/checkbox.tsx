@@ -1,4 +1,4 @@
-import React, { useRef, useCallback, useEffect } from 'react';
+import React, { useRef, useCallback, useLayoutEffect } from 'react';
 import { Properties } from './types';
 import './styles/index.css';
 import { toDefaults, getContainerClass, getLabelClass } from './helpers';
@@ -13,15 +13,15 @@ export default function Checkbox(properties?: Properties) {
 
 	const inputReference = useRef<HTMLInputElement>(null);
 
-	useEffect(() => {
+	useLayoutEffect(() => {
 		if (inputReference.current) {
-			inputReference.current.indeterminate = defaults.indeterminate;
+			inputReference.current.indeterminate = defaults.value === null;
 		}
-	}, [defaults.indeterminate]);
+	}, [defaults.value]);
 
 	const onChangeHandler = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
 		if (!defaults.disabled) {
-			defaults.onChange(event.target.checked);
+			defaults.onChange(event, { ...defaults, value: event.target.checked });
 		}
 	}, [defaults]);
 
@@ -48,11 +48,11 @@ export default function Checkbox(properties?: Properties) {
 					ref={inputReference}
 					type="checkbox"
 					className="input"
-					checked={defaults.checked}
+					checked={defaults.value === true}
 					onChange={onChangeHandler}
 					id={defaults.id}
 					disabled={defaults.disabled}
-					aria-checked={defaults.indeterminate ? 'mixed' : defaults.checked}
+					aria-checked={defaults.value ?? 'mixed'}
 				/>
 			</div>
 			{defaults.label && (

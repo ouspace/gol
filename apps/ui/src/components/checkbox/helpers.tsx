@@ -19,8 +19,7 @@ export function toDefaults(properties?: Properties): Required<Properties> {
 	return _.defaults({}, properties, {
 		id: generateId(),
 		label: '',
-		checked: false,
-		indeterminate: false,
+		value: undefined,
 		disabled: false,
 		variant: 'primary',
 		onChange: _.noop,
@@ -37,7 +36,7 @@ export function getContainerClass(variant: string, disabled: boolean): string {
 	return clsx(
 		'checkbox',
 		'wrapper',
-		`variant-${variant}`,
+		variant,
 		{
 			disabled
 		}

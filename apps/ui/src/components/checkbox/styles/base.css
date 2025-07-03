@@ -8,17 +8,17 @@
   cursor: pointer;
   
   /* base styles */
-  border: 2px solid var(--color-outline);
-  border-radius: var(--size-border-radius);
-  transition: all var(--animation-duration-standard) ease;
+  border: 2px solid var(--checkbox-color-outline);
+  border-radius: var(--checkbox-size-border-radius);
+  transition: all var(--checkbox-animation-duration-standard) ease;
 }
 
 .checkbox .label {
   /* base font */
-  font-family: var(--typography-font-family);
-  font-size: var(--typography-font-size);
-  line-height: var(--typography-line-height);
-  letter-spacing: var(--typography-letter-spacing);
+  font-family: var(--checkbox-typography-font-family);
+  font-size: var(--checkbox-typography-font-size);
+  line-height: var(--checkbox-typography-line-height);
+  letter-spacing: var(--checkbox-typography-letter-spacing);
   cursor: pointer;
   user-select: none;
 }

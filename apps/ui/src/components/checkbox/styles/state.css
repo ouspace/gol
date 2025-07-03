@@ -4,30 +4,30 @@
 }
 
 .checkbox .input:focus-visible + .container::before {
-  background-color: var(--color-primary-pressed);
+  background-color: var(--checkbox-color-primary-pressed);
 }
 
-.checkbox.variant-secondary .input:focus-visible + .container::before {
-  background-color: var(--color-secondary-pressed);
+.checkbox.secondary .input:focus-visible + .container::before {
+  background-color: var(--checkbox-color-secondary-pressed);
 }
 
-.checkbox.variant-error .input:focus-visible + .container::before {
-  background-color: var(--color-error-pressed);
+.checkbox.error .input:focus-visible + .container::before {
+  background-color: var(--checkbox-color-error-pressed);
 }
 
 /* disabled state */
 .checkbox.disabled .input {
-  border-color: var(--color-outline-disabled);
+  border-color: var(--checkbox-color-outline-disabled);
   cursor: not-allowed;
 }
 
 .checkbox.disabled .input:checked {
-  background-color: var(--color-surface-text-disabled);
+  background-color: var(--checkbox-color-surface-text-disabled);
   border-color: transparent;
 }
 
 .checkbox.disabled .input:indeterminate {
-  background-color: var(--color-surface-text-disabled);
+  background-color: var(--checkbox-color-surface-text-disabled);
   border-color: transparent;
 }
 
@@ -40,6 +40,6 @@
 }
 
 .checkbox .label-disabled {
-  color: var(--color-surface-text-disabled);
+  color: var(--checkbox-color-surface-text-disabled);
   cursor: not-allowed;
 }
