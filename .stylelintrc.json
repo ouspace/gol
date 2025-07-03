@@ -1,0 +1,14 @@
+{
+	"plugins": ["stylelint-prettier"],
+	"extends": ["stylelint-config-standard", "stylelint-prettier/recommended"],
+	"rules": {
+		"prettier/prettier": true,
+		"at-rule-no-unknown": null
+	},
+	"ignoreFiles": ["**/*.{ts,tsx,js,jsx,json,md,sass,svg,png,jpeg,html}"],
+	"overrides": [
+		{
+			"files": ["*.css"]
+		}
+	]
+}
