@@ -1,7 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import BaseButton from '../button';
 
-
 const meta: Meta<typeof BaseButton> = {
 	title: 'Components/Buttons',
 	component: BaseButton,
@@ -11,7 +10,7 @@ const meta: Meta<typeof BaseButton> = {
 export default meta;
 type Story = StoryObj<typeof BaseButton>;
 
-// Filled Button
+// Filled variant
 export const Filled: Story = {
 	render: (arguments_) => <BaseButton {...arguments_}>Filled</BaseButton>,
 	args: {
@@ -19,7 +18,7 @@ export const Filled: Story = {
 	},
 };
 
-// Elevated Button
+// Elevated variant
 export const Elevated: Story = {
 	render: (arguments_) => <BaseButton {...arguments_}>Elevated</BaseButton>,
 	args: {
@@ -27,7 +26,7 @@ export const Elevated: Story = {
 	},
 };
 
-// Tonal Button
+// Tonal variant
 export const Tonal: Story = {
 	render: (arguments_) => <BaseButton {...arguments_}>Tonal</BaseButton>,
 	args: {
@@ -35,7 +34,7 @@ export const Tonal: Story = {
 	},
 };
 
-// Outlined Button
+// Outlined variant
 export const Outlined: Story = {
 	render: (arguments_) => <BaseButton {...arguments_}>Outlined</BaseButton>,
 	args: {
@@ -43,7 +42,7 @@ export const Outlined: Story = {
 	},
 };
 
-// Text Button
+// Text variant
 export const Text: Story = {
 	render: (arguments_) => <BaseButton {...arguments_}>Text</BaseButton>,
 	args: {
@@ -51,14 +50,11 @@ export const Text: Story = {
 	},
 };
 
-// Icon Button
+// Icon button example
 export const Icon: Story = {
 	render: (arguments_) => (
-		<BaseButton
-			{...arguments_}
-			icon={<span style={{ fontSize: '20px' }}>🔍</span>}
-		>
-      Icon
+		<BaseButton {...arguments_} icon={<span style={{ fontSize: '20px' }}>🔍</span>}>
+      Download
 		</BaseButton>
 	),
 	args: {
@@ -66,13 +62,10 @@ export const Icon: Story = {
 	},
 };
 
-// FAB - Floating Action Button
+// Floating Action Button (FAB)
 export const FAB: Story = {
 	render: (arguments_) => (
-		<BaseButton
-			{...arguments_}
-			icon={<span style={{ fontSize: '24px' }}>➕</span>}
-		>
+		<BaseButton {...arguments_} icon={<span style={{ fontSize: '24px' }}>➕</span>}>
       FAB
 		</BaseButton>
 	),
@@ -82,12 +75,61 @@ export const FAB: Story = {
 	},
 };
 
-// Segmented Button (placeholder)
+// Segmented group of buttons
 export const Segmented: Story = {
 	render: () => (
 		<div style={{ display: 'flex', gap: '0.5rem' }}>
 			<BaseButton variant="filled">Option 1</BaseButton>
 			<BaseButton variant="outlined">Option 2</BaseButton>
 		</div>
+	),
+};
+
+// Button with onClick handler
+export const Clickable: Story = {
+	render: () => {
+		const handleClick = () => {
+			const result = document.querySelector('#click-result');
+			if (result) result.innerText = 'Clicked!';
+		};
+
+		return (
+			<>
+				<BaseButton onClick={handleClick}>Click Me</BaseButton>
+				<div id="click-result" />
+			</>
+		);
+	},
+};
+
+// Button rendered as anchor tag
+export const AsLink: Story = {
+	render: () => (
+		<BaseButton variant="filled" href="/dashboard">
+      Go to Dashboard
+		</BaseButton>
+	),
+};
+
+// Disabled button
+export const Disabled: Story = {
+	render: () => (
+		<BaseButton disabled>Disabled</BaseButton>
+	),
+};
+
+// Empty button (no text or icon)
+export const Empty: Story = {
+	render: () => (
+		<BaseButton />
+	),
+};
+
+// Layout and fullWidth example
+export const Layout: Story = {
+	render: () => (
+		<BaseButton layout="horizontal" fullWidth>
+      Layout Test
+		</BaseButton>
 	),
 };

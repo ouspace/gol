@@ -3,7 +3,9 @@
 	"version": "0.0.0",
 	"license": "MIT",
 	"description": "GOL is a solution to teach new developer about Computer Science.",
-	"scripts": {},
+	"scripts": {
+		"test:playwright": "playwright test apps/ui-tests/tests"
+	},
 	"private": true,
 	"type": "module",
 	"overrides": {
