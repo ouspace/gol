@@ -3,7 +3,9 @@
 	"version": "0.0.0",
 	"license": "MIT",
 	"description": "GOL is a solution to teach new developer about Computer Science.",
-	"scripts": {},
+	"scripts": {
+		"test:playwright": "playwright test apps/ui-tests/tests"
+	},
 	"private": true,
 	"type": "module",
 	"overrides": {
@@ -47,7 +49,7 @@
 		"@nx/web": "^20.7.1",
 		"@nx/webpack": "^20.7.1",
 		"@nx/workspace": "^20.7.1",
-		"@playwright/test": "^1.52.0",
+		"@playwright/test": "^1.53.2",
 		"@pmmmwh/react-refresh-webpack-plugin": "^0.5.16",
 		"@rollup/plugin-url": "^8.0.2",
 		"@storybook/addon-essentials": "^8.6.12",
