@@ -1,14 +1,21 @@
-import type { Properties } from './types';
-import _ from 'lodash';
+import clsx from 'clsx';
+import type { ButtonProperties } from './types';
 
-/**
- *
- * @param properties
- * @returns
- */
-export function toDefaults(properties?: Properties): Required<Properties> {
-	return _.defaults(properties, {
-		as: 'button',
-		children: null,
-	}) as Required<Properties>;
+export function generateButtonClassNames({
+	variant,
+	fullWidth,
+	selected,
+	layout,
+	className,
+}: Partial<ButtonProperties>) {
+	return clsx(
+		'button',
+		variant && `button--${variant}`,
+		{
+			'button--fullWidth': fullWidth,
+			'button--selected': selected,
+		},
+		layout && `layout--${layout}`,
+		className
+	);
 }

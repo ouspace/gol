@@ -1,0 +1,22 @@
+@import url('../variables.css');
+@import url('../animations.css');
+
+.button--outlined {
+  background-color: transparent;
+  color: var(--md-sys-color-primary);
+  border: 1px solid var(--md-sys-color-outline);
+  transition: background-color var(--md-transition-base), border-color var(--md-transition-base);
+}
+
+.button--outlined:hover {
+  background-color: var(--md-state-hover-layer);
+}
+
+.button--outlined:active {
+  animation: gol-button-press var(--md-transition-base);
+}
+
+.button--outlined:disabled {
+  border-color: var(--md-disabled-bg);
+  color: var(--md-disabled-content);
+}

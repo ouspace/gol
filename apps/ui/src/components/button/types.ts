@@ -1,35 +1,12 @@
-import type { ReactNode, HTMLAttributes, Ref, ReactElement } from 'react';
+export type ButtonVariant = 'filled' | 'elevated' | 'tonal' | 'outlined' | 'text';
 
-export type IconProperties = HTMLAttributes<{
-	/**
-	 *
-	 */
-	children?: ReactNode | null;
-}>;
-
-export type TextProperties = HTMLAttributes<{
-	/**
-	 *
-	 */
-	children?: ReactNode | null;
-}>
-
-/**
- *
- */
-export type Properties = HTMLAttributes<{
-	/**
-	 *
-	 */
-	as?: ReactElement;
-
-	/**
-	 *
-	 */
-	ref?: Ref<HTMLElement> | undefined;
-
-	/**
-	 *
-	 */
-	children?: ReactNode | null;
-}>;
+export interface ButtonProperties extends React.ButtonHTMLAttributes<HTMLButtonElement | HTMLAnchorElement> {
+  children?: React.ReactNode;
+  variant?: ButtonVariant;
+  fullWidth?: boolean;
+  icon?: React.ReactNode;
+  selected?: boolean;
+  layout?: 'horizontal' | 'vertical' | 'centered';
+  href?: string;
+  as?: 'button' | 'a' | 'div' | 'span';
+}

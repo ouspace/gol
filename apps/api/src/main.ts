@@ -7,7 +7,7 @@ import { FastifyAdapter } from '@nestjs/platform-fastify';
 import { Logger } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 // import { json } from 'body-parser';
-import { AppModule } from './app/app.module';
+import { AppModule } from './app/controller/app.module';
 
 async function bootstrap() {
 	Logger.log(`Application is starting...`);

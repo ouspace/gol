@@ -1,0 +1,21 @@
+@import url('../variables.css');
+@import url('../animations.css');
+
+.button--text {
+  background-color: transparent;
+  color: var(--md-sys-color-primary);
+  border: none;
+  transition: background-color var(--md-transition-base);
+}
+
+.button--text:hover {
+  background-color: var(--md-state-hover-layer);
+}
+
+.button--text:active {
+  animation: gol-button-press var(--md-transition-base);
+}
+
+.button--text:disabled {
+  color: var(--md-disabled-content);
+}

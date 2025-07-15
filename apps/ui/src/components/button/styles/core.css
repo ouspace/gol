@@ -1,16 +1,21 @@
-@import url('./variables.css');
-
-/* ButtonIcon core */
 .button {
-	background-color: transparent;
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
 }
 
-/* ButtonIcon core styles */
-.button .icon {
-	background-color: transparent;
+.button:focus-visible {
+  outline: 2px solid var(--md-focus-ring);
+  outline-offset: 2px;
 }
 
-/* ButtonText core styles */
-.button .text {
-	background-color: transparent;
+.button--fullWidth {
+  width: 100%;
 }
