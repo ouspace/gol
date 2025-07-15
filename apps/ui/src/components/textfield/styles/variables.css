@@ -1,0 +1,54 @@
+:root {
+  /* === COLOR TOKENS === */
+  --md-textfield-container-height: 56px;
+  --md-textfield-container-radius: 4px 4px 0 0;
+  
+  /* Container Colors */
+  --md-textfield-container-bg-filled: var(--md-sys-color-surface-container-highest);
+  --md-textfield-container-bg-outlined: transparent;
+  --md-textfield-container-outline: var(--md-sys-color-outline);
+  
+  /* Label Colors */
+  --md-textfield-label-color: var(--md-sys-color-on-surface-variant);
+  --md-textfield-label-focused: var(--md-sys-color-primary);
+  --md-textfield-label-error: var(--md-sys-color-error);
+  --md-textfield-label-disabled: var(--md-sys-color-on-surface);
+  
+  /* Input Colors */
+  --md-textfield-input-color: var(--md-sys-color-on-surface);
+  --md-textfield-input-placeholder: var(--md-sys-color-on-surface-variant);
+  --md-textfield-input-disabled: var(--md-sys-color-on-surface);
+  --md-textfield-input-error: var(--md-sys-color-on-surface);
+  
+  /* Supporting Text */
+  --md-textfield-supporting-color: var(--md-sys-color-on-surface-variant);
+  --md-textfield-error-color: var(--md-sys-color-error);
+  
+  /* Icons */
+  --md-textfield-icon-color: var(--md-sys-color-on-surface-variant);
+  --md-textfield-icon-error: var(--md-sys-color-error);
+  --md-textfield-icon-disabled: var(--md-sys-color-on-surface);
+  
+  /* Active Indicator */
+  --md-textfield-active-indicator: var(--md-sys-color-on-surface-variant);
+  --md-textfield-active-indicator-error: var(--md-sys-color-error);
+  --md-textfield-active-indicator-focused: var(--md-sys-color-primary);
+  
+  /* State Layers */
+  --md-textfield-hover-state-layer: rgba(29, 27, 32, 0.08);
+  --md-textfield-pressed-state-layer: rgba(29, 27, 32, 0.12);
+  
+  /* Opacity */
+  --md-textfield-disabled-opacity: 0.38;
+  --md-textfield-hover-opacity: 0.08;
+  
+  /* Typography */
+  --md-textfield-label-font: var(--md-sys-typescale-body-large-font);
+  --md-textfield-label-size: var(--md-sys-typescale-body-large-size);
+  --md-textfield-label-weight: var(--md-sys-typescale-body-large-weight);
+  --md-textfield-label-line-height: var(--md-sys-typescale-body-large-line-height);
+  --md-textfield-label-tracking: var(--md-sys-typescale-body-large-tracking);
+  
+  /* Transitions */
+  --md-textfield-transition: 200ms cubic-bezier(0.4, 0, 0.2, 1);
+}

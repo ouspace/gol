@@ -1,0 +1,27 @@
+.textfield--hovered {
+  cursor: pointer;
+}
+
+.textfield--hovered.textfield--filled {
+  background-color: var(--md-state-hover-layer);
+}
+
+.textfield--hovered.textfield--outlined .textfield__input-wrapper {
+  border-color: var(--md-sys-color-on-surface);
+}
+
+.textfield--hovered .textfield__label {
+  color: var(--md-sys-color-on-surface-variant);
+}
+
+.textfield--hovered .textfield__icon--trailing {
+  color: var(--md-sys-color-on-surface-variant);
+}
+
+.textfield--hovered::after {
+  background-color: var(--md-sys-color-on-surface);
+}
+
+.textfield--hovered:not(.textfield--disabled):hover {
+  background-color: var(--md-textfield-hover-state-layer);
+}

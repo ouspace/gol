@@ -1,0 +1,12 @@
+@keyframes textFieldLabelFloat {
+  from {
+    transform: translateY(-50%);
+  }
+  to {
+    transform: translateY(-24px) scale(0.75);
+  }
+}
+
+.textfield__label--animated {
+  animation: textFieldLabelFloat var(--md-textfield-transition);
+}

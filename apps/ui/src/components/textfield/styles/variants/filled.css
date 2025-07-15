@@ -1,0 +1,28 @@
+.textfield--filled {
+  background-color: var(--md-textfield-container-bg-filled);
+  border-radius: var(--md-textfield-container-radius);
+}
+
+.textfield--filled::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background-color: var(--md-textfield-active-indicator);
+}
+
+.textfield--filled:focus-within::after {
+  height: 2px;
+  background-color: var(--md-textfield-active-indicator-focused);
+}
+
+.textfield--filled:focus-within .textfield__label {
+  transform: translateY(-24px) scale(0.75);
+  color: var(--md-textfield-label-focused);
+}
+
+.textfield--filled.textfield--populated .textfield__label {
+  transform: translateY(-24px) scale(0.75);
+}

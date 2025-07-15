@@ -1,0 +1,30 @@
+.textfield--focused .textfield__label {
+  color: var(--md-sys-color-primary);
+  transform: translateY(-24px) scale(0.75);
+}
+
+.textfield--focused.textfield--filled::after {
+  height: 2px;
+  background-color: var(--md-textfield-active-indicator-focused);
+}
+
+.textfield--focused.textfield--outlined .textfield__input-wrapper {
+  border-color: var(--md-sys-color-primary);
+  border-width: 2px;
+}
+
+.textfield--focused .textfield__input {
+  caret-color: var(--md-sys-color-primary);
+}
+
+.textfield--focused.textfield--error .textfield__label {
+  color: var(--md-sys-color-error);
+}
+
+.textfield--focused.textfield--error.textfield--filled::after {
+  background-color: var(--md-sys-color-error);
+}
+
+.textfield--focused.textfield--error.textfield--outlined .textfield__input-wrapper {
+  border-color: var(--md-sys-color-error);
+}

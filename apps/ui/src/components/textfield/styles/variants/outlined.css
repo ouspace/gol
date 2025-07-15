@@ -1,0 +1,26 @@
+.textfield--outlined {
+  background-color: var(--md-textfield-container-bg-outlined);
+}
+
+.textfield--outlined .textfield__input-wrapper {
+  border: 1px solid var(--md-textfield-container-outline);
+  border-radius: var(--md-textfield-container-radius);
+}
+
+.textfield--outlined:focus-within .textfield__input-wrapper {
+  border-color: var(--md-textfield-active-indicator-focused);
+  border-width: 2px;
+}
+
+.textfield--outlined:focus-within .textfield__label {
+  color: var(--md-textfield-label-focused);
+  transform: translateY(-24px) scale(0.75);
+  background-color: white;
+  padding: 0 4px;
+}
+
+.textfield--outlined.textfield--populated .textfield__label {
+  transform: translateY(-24px) scale(0.75);
+  background-color: white;
+  padding: 0 4px;
+}

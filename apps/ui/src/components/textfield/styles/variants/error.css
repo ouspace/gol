@@ -1,0 +1,15 @@
+.textfield--error .textfield__label {
+  color: var(--md-textfield-label-error);
+}
+
+.textfield--error.textfield--filled::after {
+  background-color: var(--md-textfield-active-indicator-error);
+}
+
+.textfield--error.textfield--outlined .textfield__input-wrapper {
+  border-color: var(--md-textfield-active-indicator-error);
+}
+
+.textfield--error .textfield__icon--trailing {
+  color: var(--md-textfield-icon-error);
+}

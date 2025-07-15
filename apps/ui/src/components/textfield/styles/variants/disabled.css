@@ -1,0 +1,18 @@
+.textfield--disabled {
+  pointer-events: none;
+}
+
+.textfield--disabled .textfield__label,
+.textfield--disabled .textfield__input,
+.textfield--disabled .textfield__icon,
+.textfield--disabled .textfield__supporting-text {
+  opacity: var(--md-textfield-disabled-opacity);
+}
+
+.textfield--disabled.textfield--filled {
+  background-color: rgba(29, 27, 32, 0.04);
+}
+
+.textfield--disabled.textfield--outlined .textfield__input-wrapper {
+  border-color: rgba(29, 27, 32, 0.12);
+}
