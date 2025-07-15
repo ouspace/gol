@@ -1,0 +1,45 @@
+/* focus state */
+.checkbox .input:focus-visible {
+  outline: none;
+}
+
+.checkbox .input:focus-visible + .container::before {
+  background-color: var(--checkbox-color-primary-pressed);
+}
+
+.checkbox.secondary .input:focus-visible + .container::before {
+  background-color: var(--checkbox-color-secondary-pressed);
+}
+
+.checkbox.error .input:focus-visible + .container::before {
+  background-color: var(--checkbox-color-error-pressed);
+}
+
+/* disabled state */
+.checkbox.disabled .input {
+  border-color: var(--checkbox-color-outline-disabled);
+  cursor: not-allowed;
+}
+
+.checkbox.disabled .input:checked {
+  background-color: var(--checkbox-color-surface-text-disabled);
+  border-color: transparent;
+}
+
+.checkbox.disabled .input:indeterminate {
+  background-color: var(--checkbox-color-surface-text-disabled);
+  border-color: transparent;
+}
+
+.checkbox.disabled .input:indeterminate::after {
+  background-color: white;
+}
+
+.checkbox.disabled .container:hover::before {
+  background-color: transparent;
+}
+
+.checkbox .label-disabled {
+  color: var(--checkbox-color-surface-text-disabled);
+  cursor: not-allowed;
+}
