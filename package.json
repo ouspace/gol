@@ -4,7 +4,8 @@
 	"license": "MIT",
 	"description": "GOL is a solution to teach new developer about Computer Science.",
 	"scripts": {
-		"test:playwright": "playwright test apps/ui-tests/tests"
+		"test:playwright": "playwright test apps/ui-tests/tests",
+		"md:icon:sync": "node ./tools/scripts/md-icon-sync.js"
 	},
 	"private": true,
 	"type": "module",
@@ -28,6 +29,7 @@
 		"@eslint/js": "^9.28.0",
 		"@expo/cli": "~0.24.14",
 		"@jest/globals": "^29.7.0",
+		"@material-design-icons/scripts": "^0.5.2",
 		"@nestjs/schematics": "^11.0.5",
 		"@nestjs/testing": "^11.1.3",
 		"@nx/devkit": "^21.1.3",
@@ -65,11 +67,13 @@
 		"@swc/cli": "~0.7.7",
 		"@swc/core": "~1.11.31",
 		"@swc/helpers": "~0.5.17",
+		"@tailwindcss/postcss": "^4.1.11",
 		"@testing-library/dom": "10.4.0",
 		"@testing-library/jest-dom": "^6.6.3",
 		"@testing-library/jest-native": "~5.4.3",
 		"@testing-library/react": "^16.3.0",
 		"@testing-library/react-native": "~13.2.0",
+		"@types/metro-config": "^0.76.2",
 		"@typescript-eslint/eslint-plugin": "^8.33.1",
 		"@typescript-eslint/parser": "^8.33.1",
 		"@vitejs/plugin-react": "^4.5.1",
@@ -143,6 +147,7 @@
 	"dependencies": {
 		"@expo/metro-config": "~0.20.14",
 		"@expo/metro-runtime": "~5.0.4",
+		"@expo/vector-icons": "^14.1.0",
 		"@nestjs/axios": "^4.0.0",
 		"@nestjs/common": "^11.1.3",
 		"@nestjs/core": "^11.1.3",
@@ -170,6 +175,7 @@
 		"i18next": "^25.2.1",
 		"immer": "^10.1.1",
 		"lodash": "^4.17.21",
+		"material-symbols": "^0.31.7",
 		"react": "^19.1.0",
 		"react-dom": "^19.1.0",
 		"react-error-boundary": "^6.0.0",
@@ -183,6 +189,8 @@
 		"react-router-dom": "^7.6.2",
 		"reflect-metadata": "^0.2.2",
 		"rxjs": "^7.8.2",
+		"tailwindcss": "^4.1.11",
+		"ts-pattern": "^5.7.1",
 		"uuid": "^11.1.0"
 	},
 	"nx": {
