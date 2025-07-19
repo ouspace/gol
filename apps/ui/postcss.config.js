@@ -19,6 +19,7 @@ export default {
 		},
 		'postcss-custom-media': { preserve: true },
 		'postcss-url': [{ filter: '**/*.svg', url: 'inline' }],
+		'@tailwindcss/postcss': {},
 		'postcss-svgo': {},
 		cssnano: { preset: 'default' },
 	},

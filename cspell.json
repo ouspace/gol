@@ -15,7 +15,6 @@
 		"geolocation",
 		"haptics",
 		"smartlook",
-		"ramenx",
 		"inappbrowser",
 		"gsap",
 		"immer",
@@ -33,13 +32,17 @@
 		"typeorm",
 		"automapper",
 		"noslash",
-		"casl"
+		"casl",
+		"fillest",
+		"filless",
+		"smallless",
+		"bigless",
+		"boldless"
 	],
 	"flagWords": [],
 	"ignorePaths": [
 		"node_modules/**",
 		"apps/capacitor/**",
-		"libs/mobile-module/.custom/**",
 		"**/package-lock.json",
 		"**/yarn.lock"
 	]
