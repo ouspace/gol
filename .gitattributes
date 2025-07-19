@@ -1,0 +1,4 @@
+# Defines attributes for Git LFS (Large File Storage)
+#
+# Consider adding a suffix `lfs` (ex: `*.lfs.json`) to a file which is managed by LFS.
+*.lfs.ts filter=lfs diff=lfs merge=lfs -text

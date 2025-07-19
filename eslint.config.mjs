@@ -26,6 +26,7 @@ const tsConfigs = tsEslint.config(
 		rules: {
 			'@typescript-eslint/consistent-type-imports': ['error', { prefer: 'type-imports' }],
 			'@typescript-eslint/require-await': ['warn'],
+			'@typescript-eslint/unbound-method': ['warn'],
 		},
 	},
 	{
@@ -89,6 +90,7 @@ export default [
 			'**/webpack.config.cjs',
 			'**/vite.config.*.timestamp*',
 			'**/vitest.config.*.timestamp*',
+			'**/metro.config.js',
 		],
 	},
 	{
@@ -149,7 +151,7 @@ export default [
 		plugins: ['jest'],
 		extends: ['plugin:jest/recommended'],
 		rules: {
-			
+
 		},
 	}
 ];
