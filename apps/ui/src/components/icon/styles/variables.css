@@ -1,0 +1,5 @@
+.icon {
+	--icon-color: var(--icon-color-inject, black);
+	--icon-weight: var(--icon-weight-inject, 400);
+	--icon-rotate: var(--icon-rotate-inject, 0deg);
+}
