@@ -3,7 +3,6 @@
   display: inline-flex;
   flex-direction: column;
   min-width: 200px;
-  height: var(--md-textfield-container-height);
   font-family: var(--md-textfield-label-font);
 }
 
@@ -12,7 +11,7 @@
   display: flex;
   align-items: center;
   width: 100%;
-  height: 100%;
+  height: var(--md-textfield-container-height);
 }
 
 .textfield__label {
@@ -26,48 +25,28 @@
   line-height: var(--md-textfield-label-line-height);
   letter-spacing: var(--md-textfield-label-tracking);
   transition: transform var(--md-textfield-transition),
-              font-size var(--md-textfield-transition);
+              font-size var(--md-textfield-transition),
+              color var(--md-textfield-transition);
   pointer-events: none;
 }
 
 .textfield__input {
   width: 100%;
   height: 100%;
-  padding: 8px 16px;
   border: none;
   background: none;
+  padding: 8px 16px;
   color: var(--md-textfield-input-color);
-  font-family: inherit;
   font-size: var(--md-textfield-label-size);
   line-height: var(--md-textfield-label-line-height);
+  font-family: inherit;
 }
 
 .textfield__input:focus {
   outline: none;
 }
 
-.textfield__supporting {
-  margin-top: 4px;
-  font-size: 12px;
-  line-height: 16px;
-  letter-spacing: 0.4px;
-}
-
-.textfield__supporting-text {
-  color: var(--md-textfield-supporting-color);
-}
-
-.textfield__error-text {
-  color: var(--md-textfield-error-color);
-}
-
-.textfield__counter {
-  position: absolute;
-  right: 0;
-  bottom: -20px;
-  font-size: 12px;
-  color: var(--md-textfield-supporting-color);
-}
+/* Icon slot (can render your external <Icon /> component) */
 
 .textfield__icon {
   display: flex;
@@ -88,6 +67,26 @@
   background: none;
   border: none;
   padding: 0;
+}
+
+.textfield__supporting {
+  margin-top: 4px;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0.4px;
+  color: var(--md-textfield-supporting-color);
+}
+
+.textfield__error-text {
+  color: var(--md-textfield-error-color);
+}
+
+.textfield__counter {
+  position: absolute;
+  right: 0;
+  bottom: -20px;
+  font-size: 12px;
+  color: var(--md-textfield-supporting-color);
 }
 
 .textfield__prefix,
