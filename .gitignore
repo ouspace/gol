@@ -123,6 +123,9 @@ dist
 .vscode
 .vscode-test
 
+# Stores Cursor versions used for testing cursor extensions
+.cursor
+
 # yarn v2
 .yarn/cache
 .yarn/unplugged
