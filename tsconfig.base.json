@@ -27,7 +27,8 @@
 		"typeRoots": ["node_modules/@types", "node_modules/@nx/react/typings"],
 		"paths": {
 			"@gol/ui-components": ["libs/ui-components/src/index.ts"],
-			"@gol/ui-module": ["libs/ui-module/src/index.ts"]
+			"@gol/ui-module": ["libs/ui-module/src/index.ts"],
+      		"components/*": ["apps/ui/src/components/*"]
 		}
 	},
 	"exclude": ["node_modules", "tmp"]

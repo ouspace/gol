@@ -21,7 +21,7 @@
 		"**/*.js",
 		"**/*.jsx",
 		"postcss.config.js"
-	],
+, "../ui-tests/tests/text-fieldComponent.test.ts"	],
 	"references": [
 		{
 			"path": "./tsconfig.app.json"

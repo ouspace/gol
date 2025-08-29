@@ -30,5 +30,5 @@
 		"**/*.js",
 		"**/*.jsx",
 		"postcss.config.js"
-	]
+, "../ui-tests/tests/text-fieldComponent.test.ts"	]
 }
