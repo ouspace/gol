@@ -1,0 +1,73 @@
+/* VARIANTE FILLED */
+   .chip.filled {
+    background-color: var(--chip-surface-variant);
+    color: var(--chip-on-surface-variant);
+    border: var(--chip-border-width) solid transparent;
+  }
+  
+  .chip.filled.default {
+    background-color: var(--chip-surface-variant);
+    color: var(--chip-on-surface-variant);
+  }
+  
+  .chip.filled.primary {
+    background-color: var(--chip-color-primary);
+    color: #ffffff;
+  }
+  
+  .chip.filled.secondary {
+    background-color: var(--chip-color-secondary);
+    color: #ffffff;
+  }
+  
+  .chip.filled.error {
+    background-color: var(--chip-color-error);
+    color: #ffffff;
+  }
+  
+  .chip.filled.success {
+    background-color: var(--chip-color-success);
+    color: #ffffff;
+  }
+  
+  .chip.filled.warning {
+    background-color: var(--chip-color-warning);
+    color: #ffffff;
+  }
+  
+  /* VARIANT OUTLINED*/
+  .chip.outlined {
+    background-color: transparent;
+    border: var(--chip-border-width) solid;
+  }
+  
+  .chip.outlined.default {
+    border-color: var(--chip-color-default);
+    color: var(--chip-color-default);
+  }
+  
+  .chip.outlined.primary {
+    border-color: var(--chip-color-primary);
+    color: var(--chip-color-primary);
+  }
+  
+  .chip.outlined.secondary {
+    border-color: var(--chip-color-secondary);
+    color: var(--chip-color-secondary);
+  }
+  
+  .chip.outlined.error {
+    border-color: var(--chip-color-error);
+    color: var(--chip-color-error);
+  }
+  
+  .chip.outlined.success {
+    border-color: var(--chip-color-success);
+    color: var(--chip-color-success);
+  }
+  
+  .chip.outlined.warning {
+    border-color: var(--chip-color-warning);
+    color: var(--chip-color-warning);
+  }
+  
