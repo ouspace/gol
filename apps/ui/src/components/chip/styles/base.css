@@ -1,0 +1,24 @@
+.chip {
+  display: inline-flex;
+  align-items: center;
+  box-sizing: border-box;
+  text-decoration: none;
+
+  height: var(--chip-height);
+  padding: var(--chip-padding-vertical) var(--chip-padding-horizontal);
+  gap: var(--chip-gap);
+
+  border-radius: var(--chip-border-radius-inject, var(--chip-border-radius));
+  border: var(--chip-border-width) solid transparent;
+  
+  font-family: var(--chip-font-family);
+  font-size: var(--chip-font-size);
+  font-weight: var(--chip-font-weight);
+  line-height: var(--chip-line-height);
+  letter-spacing: var(--chip-letter-spacing);
+  
+  cursor: pointer;
+  user-select: none;
+  
+  transition: box-shadow var(--chip-transition-duration) ease;
+}

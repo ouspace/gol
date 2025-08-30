@@ -1,0 +1,32 @@
+:root {
+  --chip-color-default: #000000;
+  --chip-color-primary: #6750A4;
+  --chip-color-secondary: #1976d2;
+  --chip-color-error: #d32f2f;
+  --chip-color-success: #2e7d32;
+  --chip-color-warning: #ed6c02;
+
+  --chip-surface-variant: #e0e0e0;
+  --chip-on-surface-variant: #49454f;
+
+  --chip-font-family: 'Roboto', system-ui, sans-serif;
+  --chip-font-size: 0.875rem; 
+  --chip-line-height: 1.25rem; 
+  --chip-letter-spacing: 0.00625rem; 
+  --chip-font-weight: 400;
+  
+  --chip-height: 32px;
+  --chip-border-radius: 15px;
+  --chip-border-width: 1px;
+  --chip-padding-horizontal: 16px;
+  --chip-padding-vertical: 6px;
+  --chip-gap: 8px;
+  --chip-icon-size: 18px;
+  --chip-avatar-size: 24px;
+  --chip-remove-size: 18px;
+
+  --chip-transition-duration: 0.2s;
+
+  --chip-elevation-1: 0px 1px 2px rgba(0, 0, 0, 0.3), 0px 1px 3px rgba(0, 0, 0, 0.15);
+  --chip-elevation-2: 0px 2px 6px rgba(0, 0, 0, 0.3), 0px 1px 2px rgba(0, 0, 0, 0.15);
+}
