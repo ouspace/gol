@@ -4,9 +4,11 @@ import path from 'node:path';
 const config: Config = {
 	displayName: 'ui',
 	resolver: '@nx/jest/plugins/resolver',
-	preset: 'jest-expo',
+	// Remove jest-expo preset to avoid window redefinition conflict
+	// preset: 'jest-expo',
 	testEnvironment: 'jsdom',
 	passWithNoTests: true,
+	setupFiles: ['<rootDir>/jest-setup-files.js'],
 	setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
 	transformIgnorePatterns: [
 		'node_modules/(?!((jest-)?react-native' +
