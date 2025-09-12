@@ -1,0 +1,30 @@
+/* @import url('material-symbols'); */
+@import url('./variables.css');
+
+.icon {
+	width: fit-content;
+	height: fit-content;
+	line-height: 0;
+
+	&.circular {
+		border-radius: 100%;
+	}
+
+	&.bordered {
+		border-style: solid;
+		border-width: calc(calc(var(--icon-weight) * 1px) / 100);
+		border-color: var(--icon-color);
+	}
+
+	&.disabled {
+		opacity: 0.37;
+	}
+
+	&.inverted {
+		filter: invert(1);
+	}
+
+	&.rotated {
+		rotate: var(--icon-rotate, 0deg);
+	}
+}
