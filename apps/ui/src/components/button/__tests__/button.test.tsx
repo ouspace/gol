@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import Button from 'components/button';
+import Button from '../button';
 
 describe('Button', () => {
 	it('should render with default variant (filled)', () => {
