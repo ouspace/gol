@@ -1,5 +1,5 @@
 import { render, screen, fireEvent } from '@testing-library/react';
-import '@testing-library/jest-dom';
+
 import Checkbox from '../checkbox';
 
 describe('components/checkbox', () => {
@@ -50,7 +50,7 @@ describe('components/checkbox', () => {
 		});
 
 		test('should trigger onChange event when label is clicked', () => {
-			renderCheckbox({ label: "Test Label", value: false, onChange });
+			renderCheckbox({ label: 'Test Label', value: false, onChange });
 			const label = screen.getByText('Test Label');
 			fireEvent.click(label);
 			expect(onChange).toHaveBeenCalled();
@@ -62,7 +62,7 @@ describe('components/checkbox', () => {
 			expect(onChange).not.toHaveBeenCalled();
 		});
 
-		test('should have aria-checked="mixed" when indeterminate', () => {
+		test(`should have aria-checked='mixed' when indeterminate`, () => {
 			const view = renderCheckbox({ value: null });
 			expect(view).toHaveAttribute('aria-checked', 'mixed');
 		});

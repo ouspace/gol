@@ -1,68 +1,68 @@
 /* variant: Primary */
 .checkbox.primary .input:checked {
-  background-color: var(--checkbox-color-primary);
-  border-color: var(--checkbox-color-primary);
+	background-color: var(--checkbox-color-primary);
+	border-color: var(--checkbox-color-primary);
 }
 
 .checkbox.primary .input:indeterminate {
-  background-color: var(--checkbox-color-primary);
-  border-color: var(--checkbox-color-primary);
+	background-color: var(--checkbox-color-primary);
+	border-color: var(--checkbox-color-primary);
 }
 
 .checkbox.primary .container:hover::before {
-  background-color: var(--checkbox-color-primary-hover);
+	background-color: var(--checkbox-color-primary-hover);
 }
 
 .checkbox.primary .container:active::before {
-  background-color: var(--checkbox-color-primary-pressed);
+	background-color: var(--checkbox-color-primary-pressed);
 }
 
 .checkbox.primary .input:hover:not(:disabled):not(:checked) {
-  border-color: var(--checkbox-color-primary);
+	border-color: var(--checkbox-color-primary);
 }
 
 /* variant: Secondary */
 .checkbox.secondary .input:checked {
-  background-color: var(--checkbox-color-secondary);
-  border-color: var(--checkbox-color-secondary);
+	background-color: var(--checkbox-color-secondary);
+	border-color: var(--checkbox-color-secondary);
 }
 
 .checkbox.secondary .input:indeterminate {
-  background-color: var(--checkbox-color-secondary);
-  border-color: var(--checkbox-color-secondary);
+	background-color: var(--checkbox-color-secondary);
+	border-color: var(--checkbox-color-secondary);
 }
 
 .checkbox.secondary .container:hover::before {
-  background-color: var(--checkbox-color-secondary-hover);
+	background-color: var(--checkbox-color-secondary-hover);
 }
 
 .checkbox.secondary .container:active::before {
-  background-color: var(--checkbox-color-secondary-pressed);
+	background-color: var(--checkbox-color-secondary-pressed);
 }
 
 .checkbox.secondary .input:hover:not(:disabled):not(:checked) {
-  border-color: var(--checkbox-color-secondary);
+	border-color: var(--checkbox-color-secondary);
 }
 
 /* variant: Error */
 .checkbox.error .input:checked {
-  background-color: var(--checkbox-color-error);
-  border-color: var(--checkbox-color-error);
+	background-color: var(--checkbox-color-error);
+	border-color: var(--checkbox-color-error);
 }
 
 .checkbox.error .input:indeterminate {
-  background-color: var(--checkbox-color-error);
-  border-color: var(--checkbox-color-error);
+	background-color: var(--checkbox-color-error);
+	border-color: var(--checkbox-color-error);
 }
 
 .checkbox.error .container:hover::before {
-  background-color: var(--checkbox-color-error-hover);
+	background-color: var(--checkbox-color-error-hover);
 }
 
 .checkbox.error .container:active::before {
-  background-color: var(--checkbox-color-error-pressed);
+	background-color: var(--checkbox-color-error-pressed);
 }
 
 .checkbox.error .input:hover:not(:disabled):not(:checked) {
-  border-color: var(--checkbox-color-error);
+	border-color: var(--checkbox-color-error);
 }

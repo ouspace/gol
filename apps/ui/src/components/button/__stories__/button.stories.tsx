@@ -54,7 +54,7 @@ export const Text: Story = {
 export const Icon: Story = {
 	render: (arguments_) => (
 		<BaseButton {...arguments_} icon={<span style={{ fontSize: '20px' }}>🔍</span>}>
-      Download
+			Download
 		</BaseButton>
 	),
 	args: {
@@ -66,7 +66,7 @@ export const Icon: Story = {
 export const FAB: Story = {
 	render: (arguments_) => (
 		<BaseButton {...arguments_} icon={<span style={{ fontSize: '24px' }}>➕</span>}>
-      FAB
+			FAB
 		</BaseButton>
 	),
 	args: {
@@ -79,8 +79,8 @@ export const FAB: Story = {
 export const Segmented: Story = {
 	render: () => (
 		<div style={{ display: 'flex', gap: '0.5rem' }}>
-			<BaseButton variant="filled">Option 1</BaseButton>
-			<BaseButton variant="outlined">Option 2</BaseButton>
+			<BaseButton variant='filled'>Option 1</BaseButton>
+			<BaseButton variant='outlined'>Option 2</BaseButton>
 		</div>
 	),
 };
@@ -90,13 +90,13 @@ export const Clickable: Story = {
 	render: () => {
 		const handleClick = () => {
 			const result = document.querySelector('#click-result');
-			if (result) result.innerText = 'Clicked!';
+			if (result) result.textContent = 'Clicked!';
 		};
 
 		return (
 			<>
 				<BaseButton onClick={handleClick}>Click Me</BaseButton>
-				<div id="click-result" />
+				<div id='click-result' />
 			</>
 		);
 	},
@@ -105,8 +105,8 @@ export const Clickable: Story = {
 // Button rendered as anchor tag
 export const AsLink: Story = {
 	render: () => (
-		<BaseButton variant="filled" href="/dashboard">
-      Go to Dashboard
+		<BaseButton variant='filled' href='/dashboard'>
+			Go to Dashboard
 		</BaseButton>
 	),
 };
@@ -128,8 +128,8 @@ export const Empty: Story = {
 // Layout and fullWidth example
 export const Layout: Story = {
 	render: () => (
-		<BaseButton layout="horizontal" fullWidth>
-      Layout Test
+		<BaseButton layout='horizontal' fullWidth>
+			Layout Test
 		</BaseButton>
 	),
 };

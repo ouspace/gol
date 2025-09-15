@@ -2,17 +2,17 @@
 // This replaces the problematic React Native Jest setup
 
 // Set up global environment variables
-global.IS_REACT_ACT_ENVIRONMENT = true;
-global.IS_REACT_NATIVE_TEST_ENVIRONMENT = true;
+globalThis.IS_REACT_ACT_ENVIRONMENT = true;
+globalThis.IS_REACT_NATIVE_TEST_ENVIRONMENT = true;
 
 // Set up essential globals for React Native components without redefining window
-if (typeof global.window === 'undefined') {
+if (globalThis.window === undefined) {
   // Only define window if it doesn't exist (jsdom will have already created it)
-  global.window = global;
+  globalThis.window = globalThis;
 }
 
 // Define other essential React Native globals
-Object.defineProperties(global, {
+Object.defineProperties(globalThis, {
   __DEV__: {
     configurable: true,
     enumerable: true,
@@ -61,7 +61,7 @@ jest.mock('react-native', () => ({
   },
   Platform: {
     OS: 'web',
-    select: (obj) => obj.web || obj.default,
+    select: (object) => object.web || object.default,
   },
 }));
 

@@ -1,42 +1,42 @@
 :root {
-  /* === COLOR: Surface & States === */
-  --md-sys-color-surface: #ffffff;
-  --md-sys-color-on-surface: #1d1b20;
-  --md-sys-color-surface-variant: #e7e0ec;
-  --md-sys-color-on-surface-variant: #49454f;
-  --md-sys-color-outline: #79747e;
+	/* === COLOR: Surface & States === */
+	--md-sys-color-surface: #ffffff;
+	--md-sys-color-on-surface: #1d1b20;
+	--md-sys-color-surface-variant: #e7e0ec;
+	--md-sys-color-on-surface-variant: #49454f;
+	--md-sys-color-outline: #79747e;
 
-  --md-state-hover-layer: rgba(0, 0, 0, 0.08);
-  --md-state-pressed-layer: rgba(0, 0, 0, 0.12);
-  --md-disabled-content: rgba(0, 0, 0, 0.38);
-  --md-disabled-bg: rgba(29, 27, 32, 0.12);
+	--md-state-hover-layer: rgba(0, 0, 0, 0.08);
+	--md-state-pressed-layer: rgba(0, 0, 0, 0.12);
+	--md-disabled-content: rgba(0, 0, 0, 0.38);
+	--md-disabled-bg: rgba(29, 27, 32, 0.12);
 
-  /* === COLOR: Primary === */
-  --md-sys-color-primary: #6750a4;
-  --md-sys-color-on-primary: #ffffff;
-  --md-sys-color-primary-container: #eaddff;
-  --md-sys-color-on-primary-container: #21005d;
+	/* === COLOR: Primary === */
+	--md-sys-color-primary: #6750a4;
+	--md-sys-color-on-primary: #ffffff;
+	--md-sys-color-primary-container: #eaddff;
+	--md-sys-color-on-primary-container: #21005d;
 
-  /* === TYPOGRAPHY === */
-  --md-typescale-label-large-family: 'Roboto', sans-serif;
-  --md-typescale-label-large-size: 14px;
+	/* === TYPOGRAPHY === */
+	--md-typescale-label-large-family: 'Roboto', sans-serif;
+	--md-typescale-label-large-size: 14px;
 
-  /* === ELEVATION === */
-  --md-elevation-0: none;
-  --md-elevation-1: 0px 1px 3px rgba(0, 0, 0, 0.2);
-  --md-elevation-2: 0px 3px 6px rgba(0, 0, 0, 0.3);
+	/* === ELEVATION === */
+	--md-elevation-0: none;
+	--md-elevation-1: 0px 1px 3px rgba(0, 0, 0, 0.2);
+	--md-elevation-2: 0px 3px 6px rgba(0, 0, 0, 0.3);
 
-  /* === SPACING === */
-  --md-spacing-button-padding-y: 8px;
-  --md-spacing-button-padding-x: 16px;
-  --md-spacing-button-gap: 8px;
-  --md-radius-button: 4px;
+	/* === SPACING === */
+	--md-spacing-button-padding-y: 8px;
+	--md-spacing-button-padding-x: 16px;
+	--md-spacing-button-gap: 8px;
+	--md-radius-button: 4px;
 
-  /* === FOCUS === */
-  --md-focus-ring: #6750a4;
+	/* === FOCUS === */
+	--md-focus-ring: #6750a4;
 
-  /* === TRANSITIONS === */
-  --md-transition-fast: 0.15s ease-in-out;
-  --md-transition-base: 0.2s ease-in-out;
-  --md-transition-slow: 0.3s ease-in-out;
+	/* === TRANSITIONS === */
+	--md-transition-fast: 0.15s ease-in-out;
+	--md-transition-base: 0.2s ease-in-out;
+	--md-transition-slow: 0.3s ease-in-out;
 }

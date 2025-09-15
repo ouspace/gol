@@ -4,17 +4,6 @@ import clsx from 'clsx';
 import './styles/core.css';
 import './styles/animations.css';
 import './styles/layouts.css';
-
-
-import { filled } from './variants/filled';
-import { elevated } from './variants/elevated';
-import { tonal } from './variants/tonal';
-import { outlined } from './variants/outlined';
-import { text } from './variants/text';
-
-import './styles/core.css';
-import './styles/animations.css';
-import './styles/layouts.css';
 import './styles/variants/filled.css';
 import './styles/variants/elevated.css';
 import './styles/variants/tonal.css';
@@ -70,10 +59,10 @@ const Button = React.forwardRef<HTMLElement, ButtonProperties>(({
 
 	return (
 		<Tag ref={reference} {...elementProperties}>
-			{icon && <span className="button__icon">{icon}</span>}
-			{children && <span className="button__label">{children}</span>}
+			{icon && <span className='button__icon'>{icon}</span>}
+			{children && <span className='button__label'>{children}</span>}
 			{!icon && !children && (
-				<span className="button__label">Button</span>
+				<span className='button__label'>Button</span>
 			)}
 		</Tag>
 	);

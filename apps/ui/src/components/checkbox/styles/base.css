@@ -1,24 +1,23 @@
 .checkbox .input {
-  /* input reset */
-  appearance: none;
-  margin: 0;
-  padding: 0;
-  border: none;
-  background: transparent;
-  cursor: pointer;
+	/* input reset */
+	appearance: none;
+	margin: 0;
+	padding: 0;
+	background: transparent;
+	cursor: pointer;
 
-  /* base styles */
-  border: 2px solid var(--checkbox-color-outline);
-  border-radius: var(--checkbox-size-border-radius);
-  transition: all var(--checkbox-animation-duration-standard) ease;
+	/* base styles */
+	border: 2px solid var(--checkbox-color-outline);
+	border-radius: var(--checkbox-size-border-radius);
+	transition: all var(--checkbox-animation-duration-standard) ease;
 }
 
 .checkbox .label {
-  /* base font */
-  font-family: var(--checkbox-typography-font-family);
-  font-size: var(--checkbox-typography-font-size);
-  line-height: var(--checkbox-typography-line-height);
-  letter-spacing: var(--checkbox-typography-letter-spacing);
-  cursor: pointer;
-  user-select: none;
+	/* base font */
+	font-family: var(--checkbox-typography-font-family);
+	font-size: var(--checkbox-typography-font-size);
+	line-height: var(--checkbox-typography-line-height);
+	letter-spacing: var(--checkbox-typography-letter-spacing);
+	cursor: pointer;
+	user-select: none;
 }

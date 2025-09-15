@@ -3,52 +3,55 @@
 /* === KEYFRAMES === */
 
 @keyframes gol-fade-in {
-  from {
-    opacity: 0;
-    transform: scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
+	from {
+		opacity: 0;
+		transform: scale(0.95);
+	}
+
+	to {
+		opacity: 1;
+		transform: scale(1);
+	}
 }
 
 @keyframes gol-button-hover {
-  from {
-    filter: brightness(1);
-  }
-  to {
-    filter: brightness(0.95);
-  }
+	from {
+		filter: brightness(1);
+	}
+
+	to {
+		filter: brightness(0.95);
+	}
 }
 
 @keyframes gol-button-press {
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(0.98);
-  }
-  100% {
-    transform: scale(1);
-  }
+	0% {
+		transform: scale(1);
+	}
+
+	50% {
+		transform: scale(0.98);
+	}
+
+	100% {
+		transform: scale(1);
+	}
 }
 
 /* === ANIMATION UTILITIES === */
 
 .gol-animate--fade-in {
-  animation: gol-fade-in 0.3s ease-in-out both;
+	animation: gol-fade-in 0.3s ease-in-out both;
 }
 
 .gol-animate--hover {
-  animation: gol-button-hover 0.2s ease-in-out forwards;
+	animation: gol-button-hover 0.2s ease-in-out forwards;
 }
 
 .gol-animate--press {
-  animation: gol-button-press 0.2s ease-in-out;
+	animation: gol-button-press 0.2s ease-in-out;
 }
 
-
 .fade-in {
-  animation: fadeIn 0.4s ease-in-out both;
+	animation: fadeIn 0.4s ease-in-out both;
 }

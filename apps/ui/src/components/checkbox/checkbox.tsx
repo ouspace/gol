@@ -40,14 +40,14 @@ export default function Checkbox(properties?: Properties) {
 	return (
 		<div className={getContainerClass(defaults.variant, defaults.disabled)}>
 			<div
-				className="container"
+				className='container'
 				onClick={onContainerClickHandler}
-				role="presentation"
+				role='presentation'
 			>
 				<input
 					ref={inputReference}
-					type="checkbox"
-					className="input"
+					type='checkbox'
+					className='input'
 					checked={defaults.value === true}
 					onChange={onChangeHandler}
 					id={defaults.id}

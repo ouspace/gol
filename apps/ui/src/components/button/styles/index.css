@@ -3,8 +3,6 @@
 @import url('./layouts.css');
 @import url('./variants.css');
 @import url('./animations.css');
-
-
 @import url('./variants/filled.css');
 @import url('./variants/elevated.css');
 @import url('./variants/tonal.css');

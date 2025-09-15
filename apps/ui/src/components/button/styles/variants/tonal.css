@@ -2,25 +2,25 @@
 @import url('../animations.css');
 
 .button--tonal {
-  background-color: var(--md-sys-color-primary-container);
-  color: var(--md-sys-color-on-primary-container);
-  box-shadow: var(--md-elevation-0);
-  border: none;
-  transition: background-color var(--md-transition-base), box-shadow var(--md-transition-base);
+	background-color: var(--md-sys-color-primary-container);
+	color: var(--md-sys-color-on-primary-container);
+	box-shadow: var(--md-elevation-0);
+	border: none;
+	transition: background-color var(--md-transition-base), box-shadow var(--md-transition-base);
 }
 
 .button--tonal:hover {
-  background-color: #d0bcff;
-  box-shadow: var(--md-elevation-1);
+	background-color: #d0bcff;
+	box-shadow: var(--md-elevation-1);
 }
 
 .button--tonal:active {
-  animation: gol-button-press var(--md-transition-base);
-  box-shadow: var(--md-elevation-0);
+	animation: gol-button-press var(--md-transition-base);
+	box-shadow: var(--md-elevation-0);
 }
 
 .button--tonal:disabled {
-  background-color: var(--md-disabled-bg);
-  color: var(--md-disabled-content);
-  box-shadow: none;
+	background-color: var(--md-disabled-bg);
+	color: var(--md-disabled-content);
+	box-shadow: none;
 }

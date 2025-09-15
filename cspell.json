@@ -43,6 +43,7 @@
 	"ignorePaths": [
 		"node_modules/**",
 		"apps/capacitor/**",
+		"apps/ui/src/components/icon/icon.list.lfs.ts",
 		"**/package-lock.json",
 		"**/yarn.lock"
 	]

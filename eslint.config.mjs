@@ -9,6 +9,7 @@ import pluginPromise from 'eslint-plugin-promise';
 import pluginUnicorn from 'eslint-plugin-unicorn';
 import eslintConfigPrettier from 'eslint-config-prettier';
 import tsEslint from 'typescript-eslint';
+import pluginJest from 'eslint-plugin-jest';
 
 const tsConfigs = tsEslint.config(
 	tsEslint.configs.recommendedTypeChecked,
@@ -27,6 +28,7 @@ const tsConfigs = tsEslint.config(
 			'@typescript-eslint/consistent-type-imports': ['error', { prefer: 'type-imports' }],
 			'@typescript-eslint/require-await': ['warn'],
 			'@typescript-eslint/unbound-method': ['warn'],
+			'@typescript-eslint/no-unsafe-call': ['warn'],
 		},
 	},
 	{
@@ -77,13 +79,14 @@ export default [
 	eslintConfigPrettier,
 	{
 		ignores: [
+			'jest.config.ts',
 			'**/.vscode',
 			'**/.idea',
 			'**/.nx',
 			'**/node_modules',
 			'**/dist',
 			'**/.custom',
-			'jest.config.ts',
+			'**/.babelrc.js',
 			'**/eslint.config.cjs',
 			'**/postcss.config.cjs',
 			'**/rollup.config.cjs',
@@ -126,7 +129,7 @@ export default [
 		files: ['**/*.ts', '**/*.tsx', '**/*.cts', '**/*.mts', '**/*.js', '**/*.jsx', '**/*.cjs', '**/*.mjs'],
 		// Override or add rules here
 		rules: {
-			indent: ['error', 'tab', { SwitchCase: 1, ignoredNodes: ['PropertyDefinition'] }],
+			indent: 'off',
 			'n/no-missing-import': [
 				'error',
 				{
@@ -139,18 +142,25 @@ export default [
 					resolverConfig: { modules: ['node_modules'] }
 				},
 			],
+			'n/no-unpublished-import': ['warn'],
 			'unicorn/prefer-top-level-await': ['warn'],
 			'unicorn/no-null': ['off'],
+			'unicorn/consistent-function-scoping': ['warn'],
 		},
 	},
 	{
-		files: ['**/*.spec.*', '**/*.test.*'],
-		env: {
-			jest: true,
+		files: [
+			'**/*.spec.ts',
+			'**/*.spec.tsx',
+			'**/*.test.ts',
+			'**/*.test.tsx',
+		],
+		languageOptions: {
+			globals: pluginJest.environments.globals.globals,
 		},
-		plugins: ['jest'],
-		extends: ['plugin:jest/recommended'],
+		plugins: { jest: pluginJest },
 		rules: {
+			...pluginJest.configs.recommended.rules,
 		},
 	}
 ];

@@ -32,7 +32,7 @@ export const Default: Story = {
 	parameters: {
 		docs: {
 			source: {
-				code: `<Checkbox label="Default Checkbox" value={false} onChange={() => {}} />`,
+				code: `<Checkbox label='Default Checkbox' value={false} onChange={() => {}} />`,
 			},
 		},
 	},
@@ -46,7 +46,7 @@ export const Checked: Story = {
 	parameters: {
 		docs: {
 			source: {
-				code: `<Checkbox label="Checked Checkbox" value={true} onChange={() => {}} />`,
+				code: `<Checkbox label='Checked Checkbox' value={true} onChange={() => {}} />`,
 			},
 		},
 	},
@@ -60,21 +60,7 @@ export const Indeterminate: Story = {
 	parameters: {
 		docs: {
 			source: {
-				code: `<Checkbox label="Indeterminate Checkbox" value={null} onChange={() => {}} />`,
-			},
-		},
-	},
-};
-
-export const Indeterminate: Story = {
-	args: {
-		label: 'Indeterminate Checkbox',
-		value: null,
-	},
-	parameters: {
-		docs: {
-			source: {
-				code: `<Checkbox label="Indeterminate Checkbox" value={null} onChange={() => {}} />`,
+				code: `<Checkbox label='Indeterminate Checkbox' value={null} onChange={() => {}} />`,
 			},
 		},
 	},
@@ -88,7 +74,7 @@ export const Disabled: Story = {
 	parameters: {
 		docs: {
 			source: {
-				code: `<Checkbox label="Disabled Checkbox" disabled onChange={() => {}} />`,
+				code: `<Checkbox label='Disabled Checkbox' disabled onChange={() => {}} />`,
 			},
 		},
 	},
@@ -103,7 +89,7 @@ export const VariantSecondary: Story = {
 	parameters: {
 		docs: {
 			source: {
-				code: `<Checkbox label="Secondary Variant" value={true} variant="secondary" onChange={() => {}} />`,
+				code: `<Checkbox label='Secondary Variant' value={true} variant='secondary' onChange={() => {}} />`,
 			},
 		},
 	},
@@ -118,7 +104,7 @@ export const ThemeError: Story = {
 	parameters: {
 		docs: {
 			source: {
-				code: `<Checkbox label="Error Variant" value={true} variant="error" onChange={() => {}} />`,
+				code: `<Checkbox label='Error Variant' value={true} variant='error' onChange={() => {}} />`,
 			},
 		},
 	},
