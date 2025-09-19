@@ -1,0 +1,22 @@
+/* hovered.css */
+
+/* Cursor al pasar por encima */
+.textfield--hovered {
+  cursor: text;
+}
+
+/* Hover para filled */
+.textfield--hovered.textfield--filled .textfield__input-wrapper {
+  background-color: var(--md-textfield-hover-state-layer);
+}
+
+/* Hover para outlined */
+.textfield--hovered.textfield--outlined .textfield__input-wrapper {
+  border-color: var(--md-sys-color-on-surface);
+}
+
+/* Íconos y label en hover */
+.textfield--hovered .textfield__label,
+.textfield--hovered .textfield__icon--trailing {
+  color: var(--md-sys-color-on-surface-variant);
+}

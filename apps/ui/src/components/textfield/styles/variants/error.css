@@ -1,0 +1,29 @@
+/* error.css */
+
+/* Label en error */
+.textfield--error .textfield__label {
+  color: var(--md-textfield-label-error);
+}
+
+/* Filled: underline en rojo */
+.textfield--error.textfield--filled::after {
+  background-color: var(--md-textfield-active-indicator-error);
+  height: 2px;
+}
+
+/* Outlined: borde rojo */
+.textfield--error.textfield--outlined .textfield__input-wrapper {
+  border-color: var(--md-textfield-active-indicator-error);
+  border-width: 2px;
+}
+
+/* Icono en error */
+.textfield--error .textfield__icon--trailing {
+  color: var(--md-textfield-icon-error);
+}
+
+/* Texto de ayuda en error */
+.textfield--error .textfield__supporting-text,
+.textfield--error .textfield__error-text {
+  color: var(--md-textfield-error-color);
+}

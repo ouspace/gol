@@ -1,0 +1,28 @@
+/* disabled.css */
+
+/* Estado disabled general */
+.textfield--disabled {
+  pointer-events: none;
+  opacity: var(--md-textfield-disabled-opacity);
+}
+
+/* Texto, label e íconos con color deshabilitado */
+.textfield--disabled .textfield__label,
+.textfield--disabled .textfield__input,
+.textfield--disabled .textfield__icon,
+.textfield--disabled .textfield__supporting-text {
+  color: var(--md-textfield-label-disabled);
+}
+
+/* Filled disabled */
+.textfield--disabled.textfield--filled .textfield__input-wrapper {
+  background-color: var(--md-textfield-container-bg-filled);
+  border-bottom: 1px solid var(--md-textfield-container-outline);
+  opacity: 0.12; /* siguiendo MD3 */
+}
+
+/* Outlined disabled */
+.textfield--disabled.textfield--outlined .textfield__input-wrapper {
+  border-color: var(--md-textfield-container-outline);
+  opacity: 0.12;
+}
