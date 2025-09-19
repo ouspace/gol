@@ -1,0 +1,44 @@
+/* outlined.css */
+
+/* Variante outlined: borde visible en reposo */
+.textfield--outlined .textfield__input-wrapper {
+  border: 1px solid var(--md-textfield-container-outline);
+  border-radius: var(--md-textfield-container-radius);
+  background-color: var(--md-textfield-container-bg-outlined);
+  transition: border-color var(--md-textfield-transition),
+              border-width var(--md-textfield-transition);
+}
+
+/* Hover */
+.textfield--outlined.textfield--hovered .textfield__input-wrapper {
+  border-color: var(--md-sys-color-on-surface);
+}
+
+/* Focused */
+.textfield--outlined.textfield--focused .textfield__input-wrapper {
+  border-color: var(--md-textfield-active-indicator-focused);
+  border-width: 2px;
+}
+
+.textfield--outlined.textfield--focused .textfield__label {
+  color: var(--md-textfield-label-focused);
+  transform: translateY(-24px) scale(0.75);
+  background-color: var(--md-sys-color-surface);
+  padding: 0 4px;
+}
+
+/* Error */
+.textfield--outlined.textfield--error .textfield__input-wrapper {
+  border-color: var(--md-textfield-active-indicator-error);
+}
+
+.textfield--outlined.textfield--error .textfield__label {
+  color: var(--md-textfield-label-error);
+}
+
+/* Label flotante cuando hay valor */
+.textfield--outlined.textfield--populated .textfield__label {
+  transform: translateY(-24px) scale(0.75);
+  background-color: var(--md-sys-color-surface);
+  padding: 0 4px;
+}
