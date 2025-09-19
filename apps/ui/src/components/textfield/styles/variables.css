@@ -1,0 +1,94 @@
+:root {
+  /* === DIMENSIONS === */
+  --md-textfield-container-height: 56px;
+  --md-textfield-container-radius: 4px 4px 0 0;
+
+  /* === CONTAINER COLORS === */
+  --md-textfield-container-bg-filled: #f3edf7; /* Surface Container Highest */
+  --md-textfield-container-bg-outlined: transparent;
+  --md-textfield-container-outline: #79747e; /* Outline */
+
+  /* === LABEL COLORS === */
+  --md-textfield-label-color: #49454f; /* On Surface Variant */
+  --md-textfield-label-focused: #6750a4; /* Primary */
+  --md-textfield-label-error: #b3261e; /* Error */
+  --md-textfield-label-disabled: #1d1b20; /* On Surface with opacity */
+
+  /* === INPUT COLORS === */
+  --md-textfield-input-color: #1d1b20; /* On Surface */
+  --md-textfield-input-placeholder: #49454f; /* On Surface Variant */
+  --md-textfield-input-disabled: #1d1b20;
+  --md-textfield-input-error: #b3261e;
+
+  /* === SUPPORTING TEXT === */
+  --md-textfield-supporting-color: #49454f; /* On Surface Variant */
+  --md-textfield-error-color: #b3261e; /* Error */
+
+  /* === ICONS === */
+  --md-textfield-icon-color: #49454f; /* On Surface Variant */
+  --md-textfield-icon-error: #b3261e;
+  --md-textfield-icon-disabled: #1d1b20;
+
+  /* === ACTIVE INDICATORS === */
+  --md-textfield-active-indicator: #49454f; /* On Surface Variant */
+  --md-textfield-active-indicator-error: #b3261e;
+  --md-textfield-active-indicator-focused: #6750a4;
+
+  /* === STATE LAYERS === */
+  --md-textfield-hover-state-layer: rgba(29, 27, 32, 0.08);
+  --md-textfield-pressed-state-layer: rgba(29, 27, 32, 0.12);
+
+  /* === OPACITY === */
+  --md-textfield-disabled-opacity: 0.38;
+  --md-textfield-hover-opacity: 0.08;
+
+  /* === TYPOGRAPHY === */
+  --md-textfield-label-font: "Roboto", sans-serif;
+  --md-textfield-label-size: 16px;
+  --md-textfield-label-weight: 400;
+  --md-textfield-label-line-height: 24px;
+  --md-textfield-label-tracking: 0.5px;
+
+  /* === TRANSITIONS === */
+  --md-textfield-transition: 200ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* === DARK THEME OVERRIDES === */
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* === CONTAINER COLORS === */
+    --md-textfield-container-bg-filled: #1c1b1f; /* Surface Container Highest Dark */
+    --md-textfield-container-bg-outlined: transparent;
+    --md-textfield-container-outline: #938f99; /* Outline Dark */
+
+    /* === LABEL COLORS === */
+    --md-textfield-label-color: #cac4d0; /* On Surface Variant Dark */
+    --md-textfield-label-focused: #d0bcff; /* Primary Dark */
+    --md-textfield-label-error: #f2b8b5; /* Error Dark */
+    --md-textfield-label-disabled: #e6e1e5; /* On Surface Dark */
+
+    /* === INPUT COLORS === */
+    --md-textfield-input-color: #e6e1e5; /* On Surface Dark */
+    --md-textfield-input-placeholder: #cac4d0; /* On Surface Variant Dark */
+    --md-textfield-input-disabled: #938f99;
+    --md-textfield-input-error: #f2b8b5;
+
+    /* === SUPPORTING TEXT === */
+    --md-textfield-supporting-color: #cac4d0; /* On Surface Variant Dark */
+    --md-textfield-error-color: #f2b8b5; /* Error Dark */
+
+    /* === ICONS === */
+    --md-textfield-icon-color: #cac4d0; /* On Surface Variant Dark */
+    --md-textfield-icon-error: #f2b8b5;
+    --md-textfield-icon-disabled: #938f99;
+
+    /* === ACTIVE INDICATORS === */
+    --md-textfield-active-indicator: #cac4d0; /* On Surface Variant Dark */
+    --md-textfield-active-indicator-error: #f2b8b5;
+    --md-textfield-active-indicator-focused: #d0bcff;
+
+    /* === STATE LAYERS === */
+    --md-textfield-hover-state-layer: rgba(230, 225, 229, 0.08);
+    --md-textfield-pressed-state-layer: rgba(230, 225, 229, 0.12);
+  }
+}

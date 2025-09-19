@@ -1,0 +1,39 @@
+.textfield {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 100%;
+}
+
+/* Container (applies background, border, spacing, and state integration) */
+.container {
+  position: relative;
+  min-height: 56px;
+  border-radius: 4px 4px 0 0;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: var(--md-sys-color-surface-container-highest);
+}
+
+/* Label with focus animation */
+.focused .textfield__label {
+  transform: translateY(-24px) scale(0.75);
+  color: var(--md-sys-color-primary);
+}
+
+/* Hover */
+.hovered:not(.disabled):hover .container {
+  background-color: var(--md-textfield-hover-state-layer);
+}
+
+/* States */
+.disabled {
+  opacity: 0.38;
+  pointer-events: none;
+}
+
+.error .textfield__supporting {
+  color: var(--md-sys-color-error);
+}
