@@ -2,7 +2,7 @@ import { useRef, useLayoutEffect, useMemo } from 'react';
 import _ from 'lodash';
 
 import type { ChipsProperties } from "./types";
-import { toDefaults, toClasses, toRadius } from "./helpers";
+import { toDefaults, toClasses, toRadius, toColor,toSize } from "./helpers";
 import { Icon } from '../icon/index';
 import "./styles/index.css";
 
@@ -21,19 +21,25 @@ export default function Chip(properties?: ChipsProperties) {
 	const defaults = toDefaults(properties);
 	const reference = useRef<HTMLElement | null>(null);
 	const Element = defaults.href ? 'a' : 'span';
-	const radius = useMemo(() => toRadius(defaults),[defaults]);
+	const { radius, color, size } = useMemo(() => ({
+  		radius: toRadius(defaults),
+  		color: toColor(defaults),
+		size: toSize(defaults)
+  	}), [defaults]);
 	
 	useLayoutEffect(() => {
 		if (!reference.current) return;
 		if (defaults.disabled) {reference.current.setAttribute('aria-disabled', 'true');}
-		if (defaults.selected) {reference.current.setAttribute('aria-pressed', 'true');}	
-	}, [defaults.disabled, defaults.selected]);
+		if (defaults.selected) {reference.current.setAttribute('aria-pressed', 'true');}
+		if (radius) {reference.current.style.setProperty('--chip-border-radius-inject', radius);}
+  		reference.current.style.setProperty('--chip-color-inject', color);	
+		reference.current.style.setProperty('--chip-size-inject', `${size}px`);
+	}, [defaults.disabled, defaults.selected, radius, color, size]);
 	
 	return (
 		<Element
 			ref={(element: HTMLElement | null) => {reference.current = element;}}
 			className={toClasses(defaults)}
-			style={radius ? { '--chip-border-radius-inject': radius } as React.CSSProperties : undefined}
 			href={defaults.href}
 			target={defaults.target}
 			tabIndex={0}

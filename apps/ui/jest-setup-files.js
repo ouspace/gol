@@ -75,4 +75,13 @@ jest.mock('react-native-svg', () => ({
   Rect: 'Rect',
   Path: 'Path',
   G: 'G',
+  SvgXml: ({ xml, ...props }) => {
+    // Mock SvgXml component for testing
+    const React = require('react');
+    return React.createElement('svg', {
+      ...props,
+      'data-testid': 'svg-xml-mock',
+      'data-xml': xml
+    }, xml ? 'svg-content' : null);
+  },
 }));

@@ -1,5 +1,8 @@
 import type { ReactNode, RefAttributes, SyntheticEvent } from 'react';
 
+type Size<TValue extends string> = TValue | number;
+type Color<TValue extends string> = TValue | `rgb(${string})` | `rgba(${string})` | `hsl(${string})` | `hsla(${string})` | `#${string}`;
+
 type AssistExcludedProperties  = 'selected' | 'onToggle' | 'onRemove' | 'avatar';
 type FilterExcludedProperties  = 'onRemove' | 'avatar';
 type InputExcludedProperties  = 'onToggle';
@@ -45,7 +48,7 @@ export type Properties = RefAttributes<HTMLElement> & {
   children: ReactNode;
 
   /**
-   * Defines the chip color theme
+   * Defines the chip color, and supports `rgb` | `rgba` | `hsl` | `hsla` | `hex` | `named colors`
    * 
    * @default "default"
    * @example
@@ -53,7 +56,19 @@ export type Properties = RefAttributes<HTMLElement> & {
    * color="success"   
    * color="error"    
    */
-  color?: 'default' | 'primary' | 'secondary' | 'error' | 'success' | 'warning';
+  color?: Color<'default' | 'primary' | 'secondary' | 'error' | 'success' | 'warning'>;
+
+  /**
+   * Defines the chip size
+   * 
+   * @default "normal"
+   * @example
+   * size="small"   
+   * size="normal"  
+   * size="big"    
+   * size={28}  
+   */
+  size?: Size<'small' | 'normal' | 'big'>;
 
   /**
    * Defines the visual style of the chip
@@ -124,6 +139,11 @@ export type Properties = RefAttributes<HTMLElement> & {
    * @default false
    */
   disabled?: boolean;
+
+  /**
+	 * Defines the chip class name
+	 */
+  className?: string;
 
   /**
    * Click event
