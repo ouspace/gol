@@ -1,0 +1,15 @@
+{
+  "name": "ui-tests",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/ui-tests/src",
+  "targets": {
+    "e2e": {
+      "executor": "@nx/workspace:run-commands",
+      "options": {
+        "command": "npx playwright test",
+        "cwd": "apps/ui-tests"
+      }
+    }
+  }
+}
