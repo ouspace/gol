@@ -194,10 +194,13 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProperties>((
 		}
 	}, [onChange]);
 
-	// Generate CSS classes based on current state
+	// ✅ Determinar si el campo está "poblado" (tiene valor)
+	const isPopulated = isFieldPopulated(stringValue);
+
+	// Generate CSS classes based on current state — ✅ incluye `textfield--populated`
 	const classes = useMemo(() => {
 		try {
-			const generatedClasses = generateTextFieldClassNames({
+			let baseClasses = generateTextFieldClassNames({
 				variant,
 				error,
 				disabled,
@@ -205,19 +208,19 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProperties>((
 				hovered,
 				className
 			});
-			
-			// Ensure we return a string
-			if (typeof generatedClasses === 'string') {
-				return generatedClasses;
+
+			// ✅ Agregar la clase `textfield--populated` si hay valor
+			if (isPopulated) {
+				baseClasses += ' textfield--populated';
 			}
-			
-			throw new Error('Invalid classes generated');
+
+			return baseClasses;
 		} catch (classError) {
 			const errorMessage = classError instanceof Error ? classError.message : 'Unknown class error';
 			console.error('TextField class generation error:', errorMessage);
-			return `textfield textfield--${variant} ${className ?? ''}`;
+			return `textfield textfield--${variant} ${isPopulated ? 'textfield--populated' : ''} ${className ?? ''}`;
 		}
-	}, [variant, error, disabled, focused, hovered, className]);
+	}, [variant, error, disabled, focused, hovered, isPopulated, className]);
 
 	// Generate ARIA properties for accessibility with proper type handling
 	const ariaProperties = useMemo(() => {
@@ -253,8 +256,6 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProperties>((
 
 	// Determine component state
 	const showCharacterCount = showCounter && typeof maxLength === 'number' && maxLength > 0;
-	const hasValue = isFieldPopulated(stringValue);
-	const isPopulated = hasValue || focused;
 	const currentLength = stringValue.length;
 	const isOverLimit = maxLength ? currentLength > maxLength : false;
 
@@ -309,44 +310,42 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProperties>((
 					</span>
 				)}
 				
-				<div className="textfield__content">
-					{label && (
-						<label htmlFor={ids.input} className="textfield__label">
-							{label}
-							{required && (
-								<span className="textfield__required" aria-hidden="true">
-									*
-								</span>
-							)}
-						</label>
-					)}
-					
-					<input
-						{...rest}
-						ref={reference}
-						id={ids.input}
-						type={type}
-						value={stringValue}
-						onChange={handleChange}
-						onFocus={handleFocus}
-						onBlur={handleBlur}
-						placeholder={placeholder}
-						disabled={disabled}
-						readOnly={readOnly}
-						required={required}
-						maxLength={maxLength}
-						autoComplete={autoComplete}
-						autoFocus={autoFocus}
-						name={name}
-						pattern={pattern}
-						inputMode={safeInputMode}
-						aria-invalid={finalAriaInvalid}
-						aria-label={finalAriaLabel}
-						aria-describedby={ariaDescribedByValue}
-						className="textfield__input"
-						data-testid="textfield-input"
-					/>
-				</div>
+				{label && (
+					<label htmlFor={ids.input} className="textfield__label">
+						{label}
+						{required && (
+							<span className="textfield__required" aria-hidden="true">
+								*
+							</span>
+						)}
+					</label>
+				)}
+				
+				<input
+					{...rest}
+					ref={reference}
+					id={ids.input}
+					type={type}
+					value={stringValue}
+					onChange={handleChange}
+					onFocus={handleFocus}
+					onBlur={handleBlur}
+					placeholder={placeholder}
+					disabled={disabled}
+					readOnly={readOnly}
+					required={required}
+					maxLength={maxLength}
+					autoComplete={autoComplete}
+					autoFocus={autoFocus}
+					name={name}
+					pattern={pattern}
+					inputMode={safeInputMode}
+					aria-invalid={finalAriaInvalid}
+					aria-label={finalAriaLabel}
+					aria-describedby={ariaDescribedByValue}
+					className="textfield__input"
+					data-testid="textfield-input"
+				/>
 				
 				{safeSuffix && (
 					<span id={ids.suffix} className="textfield__suffix" aria-label={suffixLabel}>

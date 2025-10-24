@@ -1,19 +1,15 @@
-/* eslint-disable n/no-extraneous-import */
-// cspell:ignore autodocs typescale
 import type { Meta, StoryObj } from '@storybook/react';
 import type { ComponentProps } from 'react';
-import { useCallback, useState } from 'react';
+import { useCallback, useState, useEffect } from 'react';
 
-// ⬇️ Ajusta este import según tu carpeta real: '../text-field' o '../textfield'
 import TextFieldComponent from '../text-field';
+import Icon from '../../icon/root'; // ✅ Ruta corregida
 
 import styles from './storybook.module.css';
 import {
 	EMAIL_REGEX,
 	MAX_BIO_LENGTH,
-	createIcon,
 	omitKey,
-	useControlledString,
 	validateForm,
 	type FormData,
 	type InputTypesState,
@@ -21,43 +17,33 @@ import {
 	type ValidationErrors,
 } from './helpers';
 
-// =======================
-// Meta de Storybook
-// =======================
 const meta: Meta<typeof TextFieldComponent> = {
 	title: 'Components/TextField',
 	component: TextFieldComponent,
 	parameters: {
 		docs: {
 			description: {
-				component:
-          'TextField basado en Material Design 3; soporta variantes `filled` y `outlined` y distintos tipos de input.',
+				component: 'Material Design 3 text field supporting `filled` and `outlined` variants.',
 			},
 		},
 	},
 	argTypes: {
-		variant: {
-			control: { type: 'select' },
-			options: ['filled', 'outlined'],
-		},
-		type: {
-			control: { type: 'select' },
-			options: ['text', 'password', 'email', 'tel', 'url', 'search', 'number'],
-		},
-		value: { control: { type: 'text' } },
-		label: { control: { type: 'text' } },
-		placeholder: { control: { type: 'text' } },
-		supportingText: { control: { type: 'text' } },
-		errorText: { control: { type: 'text' } },
-		prefix: { control: { type: 'text' } },
-		suffix: { control: { type: 'text' } },
-		maxLength: { control: { type: 'number' } },
-		required: { control: { type: 'boolean' } },
-		disabled: { control: { type: 'boolean' } },
-		readOnly: { control: { type: 'boolean' } },
-		error: { control: { type: 'boolean' } },
-		showCounter: { control: { type: 'boolean' } },
-		autoFocus: { control: { type: 'boolean' } },
+		variant: { control: 'select', options: ['filled', 'outlined'] },
+		type: { control: 'select', options: ['text', 'password', 'email', 'tel', 'url', 'search', 'number'] },
+		value: { control: 'text' },
+		label: { control: 'text' },
+		placeholder: { control: 'text' },
+		supportingText: { control: 'text' },
+		errorText: { control: 'text' },
+		prefix: { control: 'text' },
+		suffix: { control: 'text' },
+		maxLength: { control: 'number' },
+		required: { control: 'boolean' },
+		disabled: { control: 'boolean' },
+		readOnly: { control: 'boolean' },
+		error: { control: 'boolean' },
+		showCounter: { control: 'boolean' },
+		autoFocus: { control: 'boolean' },
 	},
 };
 
@@ -66,67 +52,43 @@ export default meta;
 type Story = StoryObj<typeof TextFieldComponent>;
 type TextFieldProperties = ComponentProps<typeof TextFieldComponent>;
 
-// =======================
-// Wrapper controlado
-// =======================
-/**
- * Enlaza el `value` a un estado local para que las stories sean interactivas,
- * pero permite que Storybook siga controlando el resto de props vía `args`.
- */
-const TextFieldWithState = (properties: Partial<TextFieldProperties>) => {
-	const initial = (properties.value ?? '') as string;
-	const { value, onChange, setValue } = useControlledString(initial);
+const TextFieldWithState = (props: Partial<TextFieldProperties>) => {
+	const [localValue, setLocalValue] = useState((props.value ?? '') as string);
 
-	// Si cambian los args desde controles, sincronizamos el estado local.
-	// (solo si el valor proviene de controles y difiere del local)
-	const syncFromArguments = String(properties.value ?? '');
-	if (syncFromArguments !== value) setTimeout(() => setValue(syncFromArguments), 0);
+	useEffect(() => {
+		if (props.value !== undefined && props.value !== localValue) {
+			setLocalValue(props.value as string);
+		}
+	}, [props.value]);
 
 	const handleChange = useCallback(
 		(v: string) => {
-			onChange(v);
-			properties.onChange?.(v as never);
+			setLocalValue(v);
+			props.onChange?.(v as never);
 		},
-		[onChange, properties],
+		[props],
 	);
 
-	return <TextFieldComponent {...(properties as TextFieldProperties)} value={value} onChange={handleChange} />;
+	return <TextFieldComponent {...(props as TextFieldProperties)} value={localValue} onChange={handleChange} />;
 };
 
-// =======================
-// Stories básicas
-// =======================
 export const Filled: Story = {
-	render: (arguments_) => <TextFieldWithState {...arguments_} />,
-	args: {
-		variant: 'filled',
-		label: 'Username',
-		placeholder: 'Enter your username',
-	},
+	render: (args) => <TextFieldWithState {...args} />,
+	args: { variant: 'filled', label: 'Username', placeholder: 'Enter your username' },
 };
 
 export const Outlined: Story = {
-	render: (arguments_) => <TextFieldWithState {...arguments_} />,
-	args: {
-		variant: 'outlined',
-		label: 'Email Address',
-		placeholder: 'Enter your email',
-		type: 'email',
-	},
+	render: (args) => <TextFieldWithState {...args} />,
+	args: { variant: 'outlined', label: 'Email Address', placeholder: 'Enter your email', type: 'email' },
 };
 
 export const WithSupportingText: Story = {
-	render: (arguments_) => <TextFieldWithState {...arguments_} />,
-	args: {
-		variant: 'filled',
-		label: 'Full Name',
-		supportingText: 'Enter your first and last name',
-		placeholder: 'John Doe',
-	},
+	render: (args) => <TextFieldWithState {...args} />,
+	args: { variant: 'filled', label: 'Full Name', supportingText: 'Enter your first and last name', placeholder: 'John Doe' },
 };
 
 export const ErrorState: Story = {
-	render: (arguments_) => <TextFieldWithState {...arguments_} />,
+	render: (args) => <TextFieldWithState {...args} />,
 	args: {
 		variant: 'outlined',
 		label: 'Password',
@@ -138,37 +100,22 @@ export const ErrorState: Story = {
 };
 
 export const Required: Story = {
-	render: (arguments_) => <TextFieldWithState {...arguments_} />,
-	args: {
-		variant: 'filled',
-		label: 'Required Field',
-		required: true,
-		placeholder: 'This field is required',
-	},
+	render: (args) => <TextFieldWithState {...args} />,
+	args: { variant: 'filled', label: 'Required Field', required: true, placeholder: 'This field is required' },
 };
 
 export const Disabled: Story = {
-	render: (arguments_) => <TextFieldWithState {...arguments_} />,
-	args: {
-		variant: 'outlined',
-		label: 'Disabled Field',
-		disabled: true,
-		value: 'This field is disabled',
-	},
+	render: (args) => <TextFieldWithState {...args} />,
+	args: { variant: 'outlined', label: 'Disabled Field', disabled: true, value: 'This field is disabled' },
 };
 
 export const ReadOnly: Story = {
-	render: (arguments_) => <TextFieldWithState {...arguments_} />,
-	args: {
-		variant: 'filled',
-		label: 'Read Only Field',
-		readOnly: true,
-		value: 'This field is read-only',
-	},
+	render: (args) => <TextFieldWithState {...args} />,
+	args: { variant: 'filled', label: 'Read Only Field', readOnly: true, value: 'This field is read-only' },
 };
 
 export const WithCounter: Story = {
-	render: (arguments_) => <TextFieldWithState {...arguments_} />,
+	render: (args) => <TextFieldWithState {...args} />,
 	args: {
 		variant: 'outlined',
 		label: 'Description',
@@ -180,42 +127,43 @@ export const WithCounter: Story = {
 };
 
 export const WithPrefixSuffix: Story = {
-	render: (arguments_) => <TextFieldWithState {...arguments_} />,
-	args: {
-		variant: 'filled',
-		label: 'Price',
-		prefix: '$',
-		suffix: 'USD',
-		type: 'number',
-		placeholder: '0.00',
-	},
+	render: (args) => <TextFieldWithState {...args} />,
+	args: { variant: 'filled', label: 'Price', prefix: '$', suffix: 'USD', type: 'number', placeholder: '0.00' },
 };
 
 export const WithLeadingIcon: Story = {
-	render: (arguments_) => <TextFieldWithState {...arguments_} />,
+	render: (args) => (
+		<TextFieldWithState
+			{...args}
+			leadingIcon={<Icon name="search" size="small" />}
+		/>
+	),
 	args: {
 		variant: 'outlined',
 		label: 'Search',
-		leadingIcon: createIcon('🔍', styles.icon),
 		placeholder: 'Search...',
 		type: 'search',
 	},
 };
 
 export const WithTrailingIcon: Story = {
-	render: (arguments_) => <TextFieldWithState {...arguments_} />,
+	render: (args) => (
+		<TextFieldWithState
+			{...args}
+			trailingIcon={<Icon name="visibility" size="small" />}
+			trailingIconLabel="Toggle password visibility"
+			type="password"
+		/>
+	),
 	args: {
 		variant: 'filled',
 		label: 'Password',
-		type: 'password',
-		trailingIcon: createIcon('👁️', styles.icon),
-		trailingIconLabel: 'Toggle password visibility',
 		placeholder: 'Enter password',
 	},
 };
 
 export const PhoneNumber: Story = {
-	render: (arguments_) => <TextFieldWithState {...arguments_} />,
+	render: (args) => <TextFieldWithState {...args} />,
 	args: {
 		variant: 'outlined',
 		label: 'Phone Number',
@@ -227,7 +175,7 @@ export const PhoneNumber: Story = {
 };
 
 export const WebsiteURL: Story = {
-	render: (arguments_) => <TextFieldWithState {...arguments_} />,
+	render: (args) => <TextFieldWithState {...args} />,
 	args: {
 		variant: 'filled',
 		label: 'Website',
@@ -237,9 +185,6 @@ export const WebsiteURL: Story = {
 	},
 };
 
-// =======================
-// Demos compuestas
-// =======================
 export const InputTypes: Story = {
 	render: () => {
 		const [values, setValues] = useState<InputTypesState>({
@@ -253,7 +198,7 @@ export const InputTypes: Story = {
 		});
 
 		const makeChange = (key: keyof InputTypesState) =>
-			useCallback((v: string) => { setValues((previous) => ({ ...previous, [key]: v })); }, [key]);
+			useCallback((v: string) => setValues((prev) => ({ ...prev, [key]: v })), [key]);
 
 		return (
 			<div className={styles.container}>
@@ -283,8 +228,8 @@ export const FormExample: Story = {
 		const onField = (field: keyof FormData) =>
 			useCallback(
 				(v: string) => {
-					setForm((previous) => ({ ...previous, [field]: v }));
-					if (errors[field]) setErrors((previous) => omitKey(previous, field));
+					setForm((prev) => ({ ...prev, [field]: v }));
+					if (errors[field]) setErrors((prev) => omitKey(prev, field));
 				},
 				[field, errors],
 			);
@@ -293,7 +238,6 @@ export const FormExample: Story = {
 			const next = validateForm(form);
 			setErrors(next);
 			if (Object.keys(next).length === 0) {
-				 
 				alert('Form is valid!');
 			}
 		}, [form]);
@@ -330,7 +274,7 @@ export const FormExample: Story = {
 					onChange={onField('email')}
 					error={!!errors.email}
 					errorText={errors.email}
-					leadingIcon={createIcon('📧', styles.icon)}
+					leadingIcon={<Icon name="mail" size="small" />}
 				/>
 
 				<TextFieldComponent
@@ -353,7 +297,7 @@ export const FormExample: Story = {
 				/>
 
 				<button type="button" className={styles.submitButton} onClick={submit}>
-          Submit Form
+					Submit Form
 				</button>
 			</div>
 		);
@@ -371,24 +315,22 @@ export const InteractiveStates: Story = {
 		});
 
 		const onValue = (key: keyof InteractiveState) =>
-			useCallback((v: string) => { setValues((previous) => ({ ...previous, [key]: v })); }, [key]);
+			useCallback((v: string) => setValues((prev) => ({ ...prev, [key]: v })), [key]);
 
 		const supporting = focused === 'focused' ? 'Field is focused!' : 'Click to focus this field';
 
 		return (
 			<div className={styles.container}>
 				<TextFieldComponent variant="filled" label="Normal State" value={values.normal} onChange={onValue('normal')} />
-
 				<TextFieldComponent
 					variant="outlined"
 					label="Focus State"
 					value={values.focused}
 					onChange={onValue('focused')}
-					onFocus={() => { setFocused('focused'); }}
-					onBlur={() => { setFocused(''); }}
+					onFocus={() => setFocused('focused')}
+					onBlur={() => setFocused('')}
 					supportingText={supporting}
 				/>
-
 				<TextFieldComponent
 					variant="filled"
 					label="Error State"
@@ -397,7 +339,6 @@ export const InteractiveStates: Story = {
 					value={values.error}
 					onChange={onValue('error')}
 				/>
-
 				<TextFieldComponent variant="outlined" label="Disabled State" disabled value={values.disabled} onChange={onValue('disabled')} />
 			</div>
 		);
