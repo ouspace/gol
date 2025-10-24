@@ -3,7 +3,7 @@ import type { ComponentProps } from 'react';
 import { useCallback, useState, useEffect } from 'react';
 
 import TextFieldComponent from '../text-field';
-import Icon from '../../icon/root'; // ✅ Ruta corregida
+import Icon from '../../icon/root'; 
 
 import styles from './storybook.module.css';
 import {
