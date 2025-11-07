@@ -1,39 +1,32 @@
-.checkbox .input {
-	background-color: transparent;
+/* checked*/
+.checkbox:not(.has-custom-icons) .checkbox__input:checked + .checkbox__box {
+	background-color: var(--checkbox-color);
+	border-color: var(--checkbox-color);
 }
 
-.checkbox .input:checked {
-	background-color: var(--checkbox-color-primary);
-	border-color: var(--checkbox-color-primary);
+/*indeterminate*/
+.checkbox:not(.has-custom-icons) .checkbox__input:indeterminate + .checkbox__box {
+	background-color: var(--checkbox-color);
+	border-color: var(--checkbox-color);
 }
 
-.checkbox .input:checked::after {
-	border-color: white;
+/* Hover*/
+.checkbox:not(.disabled) .checkbox__box:hover {
+  border-color: var(--checkbox-color);
+	transform: scale(1.05);
 }
 
-.checkbox .input:checked {
-	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+/* Active*/
+.checkbox:not(.disabled):not(.has-custom-icons) .checkbox__box:active {
+	box-shadow: 0 0 0 6px color-mix(in srgb, var(--checkbox-color) 20%, transparent);
+	transform: scale(0.95);
 }
 
-.checkbox .input:indeterminate {
-	background-color: var(--checkbox-color-primary);
-	border-color: var(--checkbox-color-primary);
-	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+/* Active whit icon*/
+.checkbox:not(.disabled).has-custom-icons:active {
+	filter: drop-shadow(0 0 8px color-mix(in srgb, var(--checkbox-color) 30%, transparent));
 }
 
-.checkbox .input:indeterminate::after {
-	content: '';
-	position: absolute;
-	left: 50%;
-	top: 50%;
-	width: 8px;
-	height: 2px;
-	background-color: white;
-	border: none;
-	transform: translate(-50%, -50%);
-	transition: background-color var(--checkbox-animation-duration-standard) ease;
-}
-
-.checkbox .label {
-	color: var(--checkbox-color-surface-text);
+.checkbox:not(.disabled).has-custom-icons .checkbox__box:active {
+	transform: scale(0.9);
 }
