@@ -1,17 +1,25 @@
-import React, { useRef, useCallback, useLayoutEffect } from 'react';
+import { useRef, useLayoutEffect, useMemo } from 'react';
+
 import type { Properties } from './types';
 import './styles/index.css';
-import { toDefaults, getContainerClass, getLabelClass } from './helpers';
+import { toDefaults, toClasses, toSize } from './helpers';
+import { Icon } from '../icon/index';
 
 /**
- *
  * @param properties
  * @returns
  */
 export default function Checkbox(properties?: Properties) {
 	const defaults = toDefaults(properties);
-
+	const reference = useRef<HTMLLabelElement>(null);
 	const inputReference = useRef<HTMLInputElement>(null);
+	const size = useMemo(() => toSize(defaults), [defaults.size]);
+
+	useLayoutEffect(() => {
+		if (!reference.current) return;
+		reference.current.style.setProperty('--checkbox-size-inject', `${size}px`);
+		reference.current.style.setProperty('--checkbox-color-inject', defaults.color);
+	}, [defaults.color, size, defaults.value]);
 
 	useLayoutEffect(() => {
 		if (inputReference.current) {
@@ -19,51 +27,37 @@ export default function Checkbox(properties?: Properties) {
 		}
 	}, [defaults.value]);
 
-	const onChangeHandler = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
-		if (!defaults.disabled) {
-			defaults.onChange(event, { ...defaults, value: event.target.checked });
-		}
-	}, [defaults]);
-
-	const onContainerClickHandler = useCallback(() => {
-		if (inputReference.current && !defaults.disabled) {
-			inputReference.current.click();
-		}
-	}, [defaults.disabled]);
-
-	const onLabelClickHandler = useCallback((event: React.MouseEvent) => {
-		if (defaults.disabled) {
-			event.preventDefault();
-		}
-	}, [defaults.disabled]);
-
 	return (
-		<div className={getContainerClass(defaults.variant, defaults.disabled)}>
-			<div
-				className='container'
-				onClick={onContainerClickHandler}
-				role='presentation'
-			>
-				<input
-					ref={inputReference}
-					type='checkbox'
-					className='input'
-					checked={defaults.value === true}
-					onChange={onChangeHandler}
-					id={defaults.id}
-					disabled={defaults.disabled}
-					aria-checked={defaults.value ?? 'mixed'}
-				/>
-			</div>
+		<label ref={reference} className={toClasses(defaults)}>
+			<input
+				ref={inputReference}
+				type="checkbox"
+				className="checkbox__input"
+				checked={defaults.value === true}
+				disabled={defaults.disabled}
+				id={defaults.id}
+				name={defaults.name}
+				onChange={(event) => {
+					if (defaults.disabled) return;
+					defaults.onChange(event, { ...defaults, value: event.target.checked });
+				}}
+				aria-checked={defaults.value ?? 'mixed'}
+			/>
+			<span className="checkbox__box">
+				{defaults.iconName && (
+					<Icon
+						name={defaults.value === null ? 'indeterminate_check_box' : defaults.iconName}
+						size={size}
+						fill={defaults.value === true}
+						color={defaults.value === true ? defaults.color : 'grey'}
+						variant="outlined"
+					/>
+				)}
+			</span>
+
 			{defaults.label && (
-				<label
-					className={getLabelClass(defaults.disabled)}
-					htmlFor={defaults.id}
-					onClick={onLabelClickHandler}
-				>
-					{defaults.label}
-				</label>
+				<span className="checkbox__label">{defaults.label}</span>
 			)}
-		</div>
+		</label>
 	);
 }

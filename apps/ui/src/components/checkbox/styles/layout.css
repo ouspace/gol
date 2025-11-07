@@ -1,52 +1,36 @@
-.checkbox.wrapper {
-	display: flex;
+.checkbox {
+	display: grid;
+	gap: var(--checkbox-gap);
 	align-items: center;
+	width: fit-content;
 }
 
-.checkbox .container {
-	position: relative;
-	display: inline-flex;
-	align-items: center;
-	justify-content: center;
-	width: var(--checkbox-size-checkbox-container);
-	height: var(--checkbox-size-checkbox-container);
+.checkbox {
+	grid-template-areas: "box label";
+	grid-template-columns: auto 1fr;
 }
 
-.checkbox .input {
-	position: absolute;
-	width: var(--checkbox-size-checkbox-input);
-	height: var(--checkbox-size-checkbox-input);
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
+.checkbox.label-left {
+	grid-template-areas: "label box";
+	grid-template-columns: 1fr auto;
 }
 
-.checkbox .container::before {
-	content: '';
-	position: absolute;
-	width: var(--checkbox-size-state-layer);
-	height: var(--checkbox-size-state-layer);
-	border-radius: 50%;
-	background-color: transparent;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	transition: background-color var(--checkbox-animation-duration-standard) ease;
+.checkbox.label-top {
+	grid-template-areas: "label" "box";
+	grid-template-columns: 1fr;
+	justify-items: start;
 }
 
-.checkbox .input::after {
-	content: '';
-	position: absolute;
-	left: 50%;
-	top: 45%;
-	width: 5px;
-	height: 9px;
-	border: solid transparent;
-	border-width: 0 2px 2px 0;
-	transform: translate(-50%, -50%) rotate(45deg);
-	transition: border-color var(--checkbox-animation-duration-standard) ease;
+.checkbox.label-bottom {
+	grid-template-areas: "box" "label";
+	grid-template-columns: 1fr;
+	justify-items: start;
 }
 
-.checkbox .label {
-	margin-left: 8px;
+.checkbox__box {
+	grid-area: box;
+}
+
+.checkbox__label {
+	grid-area: label;
 }

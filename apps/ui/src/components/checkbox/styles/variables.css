@@ -1,31 +1,17 @@
-:root {
-	--checkbox-color-primary: rgb(103, 80, 164);
-	--checkbox-color-primary-container: rgb(234, 221, 255);
-	--checkbox-color-primary-hover: rgba(103, 80, 164, 0.08);
-	--checkbox-color-primary-pressed: rgba(103, 80, 164, 0.12);
-	--checkbox-color-secondary: rgb(26, 115, 232);
-	--checkbox-color-secondary-container: rgb(232, 222, 248);
-	--checkbox-color-secondary-hover: rgba(29, 25, 43, 0.08);
-	--checkbox-color-secondary-pressed: rgba(29, 25, 43, 0.12);
-	--checkbox-color-error: rgb(179, 38, 30);
-	--checkbox-color-error-container: rgb(249, 222, 220);
-	--checkbox-color-error-hover: rgba(179, 38, 30, 0.08);
-	--checkbox-color-error-pressed: rgba(179, 38, 30, 0.12);
-	--checkbox-color-surface-text: rgb(29, 27, 32);
-	--checkbox-color-surface-text-disabled: rgba(29, 27, 32, 0.38);
-	--checkbox-color-outline: rgb(73, 69, 79);
-	--checkbox-color-outline-disabled: rgba(29, 27, 32, 0.12);
-	/* sizes */
-	--checkbox-size-checkbox-container: 48px;
-	--checkbox-size-checkbox-input: 18px;
-	--checkbox-size-border-radius: 2px;
-	--checkbox-size-state-layer: 40px;
-	/* font */
-	--checkbox-typography-font-family: "Roboto", "Helvetica", "Arial", sans-serif;
-	--checkbox-typography-font-size: 14px;
-	--checkbox-typography-line-height: 1.5;
-	--checkbox-typography-letter-spacing: 0.00938em;
+.checkbox {
+	--checkbox-size: var(--checkbox-size-inject, 18px);
+	--checkbox-color: var(--checkbox-color-inject, blue);
 
-	/* animations */
-	--checkbox-animation-duration-standard: 0.2s;
+	--checkbox-radius: 4px;
+
+	--checkbox-color-outline: rgb(120, 120, 120);
+	--checkbox-color-disabled: rgba(0, 0, 0, 0.38);
+
+	--checkbox-gap: 8px;
+
+	--checkbox-transition: 0.15s ease;
+}
+
+.checkbox.circular {
+	--checkbox-radius: 50%;
 }
