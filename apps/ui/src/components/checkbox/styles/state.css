@@ -30,7 +30,7 @@
 	border-color: var(--checkbox-color-disabled);
 }
 
-.checkbox:not(.has-custom-icons) .checkbox__input:checked + .checkbox__box::after {
+.checkbox:not(.has-custom-icon) .checkbox__input:checked + .checkbox__box::after {
   content: '';
   position: absolute;
   left: 50%;
@@ -42,7 +42,7 @@
   transform: translate(-50%, -50%) rotate(45deg);
 }
 
-.checkbox:not(.has-custom-icons) .checkbox__input:indeterminate + .checkbox__box::after {
+.checkbox:not(.has-custom-icon) .checkbox__input:indeterminate + .checkbox__box::after {
   content: '';
   position: absolute;
   left: 50%;
