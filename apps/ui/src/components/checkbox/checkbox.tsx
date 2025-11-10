@@ -1,19 +1,25 @@
-import { useRef, useLayoutEffect, useMemo } from 'react';
+import { useRef, useLayoutEffect, useMemo, isValidElement } from 'react';
 
 import type { Properties } from './types';
 import './styles/index.css';
-import { toDefaults, toClasses, toSize } from './helpers';
-import { Icon } from '../icon/index';
+import { toDefaults, toClasses, toSize, toLabelProperties } from './helpers';
 
 /**
- * @param properties
- * @returns
+ * Checkbox component
+ *
+ * @param {Properties} properties - refers to checkbox properties
+ *
+ * @example
+ * <Checkbox label="Label text" value={true} color="blue" size="normal" />
+ *
+ * @returns {React.JSX.Element} element
  */
 export default function Checkbox(properties?: Properties) {
 	const defaults = toDefaults(properties);
 	const reference = useRef<HTMLLabelElement>(null);
 	const inputReference = useRef<HTMLInputElement>(null);
 	const size = useMemo(() => toSize(defaults), [defaults.size]);
+	const labelProperties = useMemo(() => toLabelProperties(defaults.label), [defaults.label]);
 
 	useLayoutEffect(() => {
 		if (!reference.current) return;
@@ -44,20 +50,19 @@ export default function Checkbox(properties?: Properties) {
 				aria-checked={defaults.value ?? 'mixed'}
 			/>
 			<span className="checkbox__box">
-				{defaults.iconName && (
-					<Icon
-						name={defaults.value === null ? 'indeterminate_check_box' : defaults.iconName}
-						size={size}
-						fill={defaults.value === true}
-						color={defaults.value === true ? defaults.color : 'grey'}
-						variant="outlined"
-					/>
-				)}
+				{defaults.value === true ? defaults.checkedIcon : defaults.icon}
 			</span>
 
-			{defaults.label && (
+			{labelProperties ? (
+				<span
+					className={`checkbox__label ${labelProperties.className ?? ''}`.trim()}
+					style={{ color: labelProperties.color }}
+				>
+					{labelProperties.value}
+				</span>
+			) : defaults.label && isValidElement(defaults.label) ? (
 				<span className="checkbox__label">{defaults.label}</span>
-			)}
+			) : null}
 		</label>
 	);
 }

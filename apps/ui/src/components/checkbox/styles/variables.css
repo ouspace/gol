@@ -7,7 +7,12 @@
 	--checkbox-color-outline: rgb(120, 120, 120);
 	--checkbox-color-disabled: rgba(0, 0, 0, 0.38);
 
-	--checkbox-gap: 8px;
+	--checkbox-gap: calc(var(--checkbox-size) * 0.44);
+
+	--checkbox-font-family: 'Roboto', system-ui, sans-serif;
+	--checkbox-font-weight: 400;
+	--checkbox-line-height: 1.25rem;
+	--checkbox-letter-spacing: 0.00625rem;
 
 	--checkbox-transition: 0.15s ease;
 }
