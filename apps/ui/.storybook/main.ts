@@ -34,6 +34,9 @@ const config: StorybookConfig = {
 					...(config.resolve?.extensions ?? []),
 				],
 			},
+					server: {
+				allowedHosts: ['localhost'],
+			},
 			plugins: [nxViteTsPaths()],
 		}),
 };

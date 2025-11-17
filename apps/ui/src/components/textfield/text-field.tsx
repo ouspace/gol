@@ -194,10 +194,9 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProperties>((
 		}
 	}, [onChange]);
 
-	// ✅ Determinar si el campo está "poblado" (tiene valor)
+	
 	const isPopulated = isFieldPopulated(stringValue);
 
-	// Generate CSS classes based on current state — ✅ incluye `textfield--populated`
 	const classes = useMemo(() => {
 		try {
 			let baseClasses = generateTextFieldClassNames({
@@ -209,7 +208,6 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProperties>((
 				className
 			});
 
-			// ✅ Agregar la clase `textfield--populated` si hay valor
 			if (isPopulated) {
 				baseClasses += ' textfield--populated';
 			}
