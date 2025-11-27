@@ -1,0 +1,24 @@
+.chip {
+  display: inline-flex;
+  align-items: center;
+  box-sizing: border-box;
+  text-decoration: none;
+
+  height: var(--chip-size);
+  padding: calc(var(--chip-size) * 0.1875) calc(var(--chip-size) * 0.5);
+  gap: calc(var(--chip-size) * 0.25);
+
+  border-radius: var(--chip-border-radius-inject, var(--chip-border-radius));
+  border: var(--chip-border-width) solid transparent;
+  
+  font-family: var(--chip-font-family);
+  font-size: calc(var(--chip-size) * 0.4375);
+  font-weight: var(--chip-font-weight);
+  line-height: var(--chip-line-height);
+  letter-spacing: var(--chip-letter-spacing);
+  
+  cursor: pointer;
+  user-select: none;
+  
+  transition: box-shadow var(--chip-transition-duration) ease;
+}

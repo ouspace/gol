@@ -1,0 +1,20 @@
+.chip {
+  --chip-color: var(--chip-color-inject, #6B7280);
+  --chip-size: var(--chip-size-inject, 32px);
+
+  --chip-surface-variant: #e0e0e0;
+  --chip-on-surface-variant: #49454f;
+
+  --chip-font-family: 'Roboto', system-ui, sans-serif;
+  --chip-line-height: 1.25rem;
+  --chip-letter-spacing: 0.00625rem;
+  --chip-font-weight: 400;
+
+  --chip-border-radius: 15px;
+  --chip-border-width: 1px;
+
+  --chip-transition-duration: 0.2s;
+  
+  --chip-elevation-1: 0px 1px 2px rgba(0, 0, 0, 0.3), 0px 1px 3px rgba(0, 0, 0, 0.15);
+  --chip-elevation-2: 0px 2px 6px rgba(0, 0, 0, 0.3), 0px 1px 2px rgba(0, 0, 0, 0.15);
+}

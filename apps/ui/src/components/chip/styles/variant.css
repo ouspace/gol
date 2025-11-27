@@ -1,0 +1,12 @@
+.chip.filled {
+  background-color: var(--chip-color);
+  color: #ffffff;
+  border: var(--chip-border-width) solid transparent;
+}
+
+.chip.outlined {
+  background-color: transparent;
+  border: var(--chip-border-width) solid var(--chip-color);
+  color: var(--chip-color);
+}
+  
