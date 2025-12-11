@@ -29,6 +29,7 @@ export default function Icon(properties?: Properties) {
 		return {
 			xml: dictionary[iconKey],
 			color: defaults.color,
+			fill: defaults.color,
 			height: size,
 			width: size,
 		}
@@ -58,7 +59,14 @@ export default function Icon(properties?: Properties) {
 				defaults.onClick(event, defaults);
 			}}
 		>
-			<SvgXml xml={svg.xml} color={svg.color} height={svg.height} width={svg.width} disabled={defaults.disabled} />
+			<SvgXml
+				xml={svg.xml}
+				color={svg.color}
+				fill={svg.fill}
+				height={svg.height}
+				width={svg.width}
+				disabled={defaults.disabled}
+			/>
 		</i>
 	);
 }
