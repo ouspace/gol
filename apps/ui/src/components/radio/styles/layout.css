@@ -1,0 +1,37 @@
+.radio {
+    position: relative;
+    display: grid;
+    gap: var(--radio-gap);
+    align-items: center;
+    width: fit-content;
+}
+
+.radio {
+    grid-template-areas: "box label";
+    grid-template-columns: auto 1fr;
+}
+
+.radio.label-left {
+    grid-template-areas: "label box";
+    grid-template-columns: 1fr auto;
+}
+
+.radio.label-top {
+    grid-template-areas: "label" "box";
+    grid-template-columns: 1fr;
+    justify-items: start;
+}
+
+.radio.label-bottom {
+    grid-template-areas: "box" "label";
+    grid-template-columns: 1fr;
+    justify-items: start;
+}
+
+.radio__box {
+    grid-area: box;
+}
+
+.radio__label {
+    grid-area: label;
+}
