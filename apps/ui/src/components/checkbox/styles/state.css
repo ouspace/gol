@@ -1,45 +1,54 @@
-/* focus state */
-.checkbox .input:focus-visible {
-	outline: none;
+/* Focus state*/
+.checkbox__input:focus-visible + .checkbox__box {
+	outline: 2px solid var(--checkbox-color);
+	outline-offset: 2px;
 }
 
-.checkbox .input:focus-visible + .container::before {
-	background-color: var(--checkbox-color-primary-pressed);
-}
-
-.checkbox.secondary .input:focus-visible + .container::before {
-	background-color: var(--checkbox-color-secondary-pressed);
-}
-
-.checkbox.error .input:focus-visible + .container::before {
-	background-color: var(--checkbox-color-error-pressed);
-}
-
-/* disabled state */
-.checkbox.disabled .input {
-	border-color: var(--checkbox-color-outline-disabled);
+/* Disabled state*/
+.checkbox.disabled .checkbox__box {
+	border-color: var(--checkbox-color-disabled);
+	background-color: rgba(0, 0, 0, 0.05);
 	cursor: not-allowed;
+	opacity: 0.6;
 }
 
-.checkbox.disabled .input:checked {
-	background-color: var(--checkbox-color-surface-text-disabled);
-	border-color: transparent;
-}
-
-.checkbox.disabled .input:indeterminate {
-	background-color: var(--checkbox-color-surface-text-disabled);
-	border-color: transparent;
-}
-
-.checkbox.disabled .input:indeterminate::after {
-	background-color: white;
-}
-
-.checkbox.disabled .container:hover::before {
-	background-color: transparent;
-}
-
-.checkbox .label-disabled {
-	color: var(--checkbox-color-surface-text-disabled);
+.checkbox.disabled .checkbox__label {
+	color: var(--checkbox-color-disabled);
 	cursor: not-allowed;
+	opacity: 0.6;
+}
+
+/* Disabled + checked/indeterminate */
+.checkbox.disabled .checkbox__input:checked + .checkbox__box,
+.checkbox.disabled .checkbox__input:indeterminate + .checkbox__box {
+	background-color: var(--checkbox-color-disabled);
+	border-color: var(--checkbox-color-disabled);
+}
+
+.checkbox.disabled .checkbox__box:hover {
+	box-shadow: none;
+	border-color: var(--checkbox-color-disabled);
+}
+
+.checkbox:not(.has-custom-icon) .checkbox__input:checked + .checkbox__box::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 45%;
+  width: 25%;
+  height: 50%;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.checkbox:not(.has-custom-icon) .checkbox__input:indeterminate + .checkbox__box::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 60%;
+  height: 2px;
+  background-color: white;
+  transform: translate(-50%, -50%);
 }
