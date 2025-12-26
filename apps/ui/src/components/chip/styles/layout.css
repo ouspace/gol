@@ -1,0 +1,52 @@
+.chip__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: calc(var(--chip-size) * 0.5625);
+  height: calc(var(--chip-size) * 0.5625);
+  flex-shrink: 0;
+}
+
+.chip__avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: calc(var(--chip-size) * 0.75);
+  height: calc(var(--chip-size) * 0.75);
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.chip__avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.chip__content {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex: 1;
+}
+
+.chip__remove {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: calc(var(--chip-size) * 0.5625);
+  height: calc(var(--chip-size) * 0.5625);
+  padding: 0;
+  margin: 0;
+  border: none;
+  border-radius: 50%;
+  background: none;
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 1;
+  color: inherit;
+  flex-shrink: 0;
+  transition: background-color var(--chip-transition-duration) ease;
+}

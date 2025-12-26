@@ -1,23 +1,44 @@
-.checkbox .input {
-	/* input reset */
-	appearance: none;
-	margin: 0;
-	padding: 0;
-	background: transparent;
-	cursor: pointer;
-
-	/* base styles */
-	border: 2px solid var(--checkbox-color-outline);
-	border-radius: var(--checkbox-size-border-radius);
-	transition: all var(--checkbox-animation-duration-standard) ease;
+.checkbox__input {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+    pointer-events: none;
 }
 
-.checkbox .label {
-	/* base font */
-	font-family: var(--checkbox-typography-font-family);
-	font-size: var(--checkbox-typography-font-size);
-	line-height: var(--checkbox-typography-line-height);
-	letter-spacing: var(--checkbox-typography-letter-spacing);
-	cursor: pointer;
+.checkbox__box {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--checkbox-size);
+    height: var(--checkbox-size);
+	box-sizing: border-box;
+    border: 2px solid var(--checkbox-color-outline);
+    border-radius: var(--checkbox-radius);
+    background-color: white;
+    cursor: pointer;
+    overflow: visible;
+    transition: border-color var(--checkbox-transition),
+                background-color var(--checkbox-transition),
+                transform 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Label */
+.checkbox__label {
 	user-select: none;
+	cursor: pointer;
+	font-family: var(--checkbox-font-family);
+	font-size: calc(var(--checkbox-size) * 0.778);
+	font-weight: var(--checkbox-font-weight);
+	line-height: var(--checkbox-line-height);
+	letter-spacing: var(--checkbox-letter-spacing);
+}
+
+.checkbox.has-custom-icon .checkbox__box {
+    width: auto;
+    height: auto;
+    border: none;
+    background: none;
+    padding: 0;
 }
