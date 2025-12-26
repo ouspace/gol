@@ -1,6 +1,7 @@
 {
   "name": "@gol/ui",
   "version": "1.0.0",
+  "type": "module",
   "types": "src/index.ts",
   "exports": {
     ".": {

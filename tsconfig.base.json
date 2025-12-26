@@ -16,7 +16,9 @@
 		"skipDefaultLibCheck": true,
 		"skipLibCheck": true,
 		"strict": true,
-		"lib": ["ESNext"],
+		"lib": [
+			"ESNext"
+		],
 		"module": "NodeNext",
 		"moduleResolution": "NodeNext",
 		"target": "ESNext",
@@ -26,11 +28,22 @@
 		"noImplicitReturns": true,
 		"noUnusedLocals": true,
 		"forceConsistentCasingInFileNames": true,
-		"typeRoots": ["node_modules/@types", "node_modules/@nx/react/typings", "node_modules/@vitejs/plugin-react/dist/index.d.ts"],
+		"typeRoots": [
+			"./node_modules/@types",
+			"./node_modules/@nx/react/typings",
+			"./node_modules/@vitejs/plugin-react/dist/index.d.ts"
+		],
 		"paths": {
-			"@gol/ui-components": ["libs/ui-components/src/index.ts"],
-			"@gol/ui-module": ["libs/ui-module/src/index.ts"]
+			"@gol/ui-components": [
+				"libs/ui-components/src/index.ts"
+			],
+			"@gol/ui-module": [
+				"libs/ui-module/src/index.ts"
+			]
 		}
 	},
-	"exclude": ["node_modules", "tmp"]
+	"exclude": [
+		"node_modules",
+		"tmp"
+	]
 }
