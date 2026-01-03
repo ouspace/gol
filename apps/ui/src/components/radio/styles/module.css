@@ -1,87 +1,54 @@
-/* Checked state - change outline color on visual circle */
-.radio:not(.has-custom-icon) .radio__input:checked + .radio__box::after {
-    outline-color: var(--radio-color);
+.radio:not(.has-custom-icon) .radio__input:checked + .radio__box {
+	&::after {
+		outline-color: var(--radio-color);
+	}
+
+	&::before {
+		content: '';
+		position: absolute;
+		width: calc(var(--radio-size) * 0.6);
+		height: calc(var(--radio-size) * 0.6);
+		border-radius: 50%;
+		background-color: var(--radio-color);
+		z-index: 1;
+	}
 }
 
-/* Checked state - inner circle */
-.radio:not(.has-custom-icon) .radio__input:checked + .radio__box::before {
-    content: '';
-    position: absolute;  
-    width: calc(var(--radio-size) * 0.6);
-    height: calc(var(--radio-size) * 0.6);
-    border-radius: 50%;
-    background-color: var(--radio-color);
-    z-index: 1;  
+.radio:not(.disabled) {
+	&::after {
+		content: '';
+		grid-area: box;
+		justify-self: start;
+		align-self: center;
+		width: var(--radio-touch-area);
+		height: var(--radio-touch-area);
+		border-radius: 50%;
+		background-color: color-mix(in srgb, var(--radio-color) 15%, transparent);
+		transform: scale(0);
+		opacity: 0;
+		transition:
+			transform var(--radio-ripple-transition),
+			opacity var(--radio-ripple-transition);
+		pointer-events: none;
+		z-index: 0;
+	}
+
+	&:hover::after {
+		transform: scale(1);
+		opacity: 1;
+	}
+
+	&:active::after {
+		background-color: color-mix(in srgb, var(--radio-color) 20%, transparent);
+		transform: scale(1);
+		opacity: 1;
+	}
+
+	.radio__box:active {
+		transform: scale(0.95);
+	}
 }
 
-/* Ripple effect background - using .radio wrapper to avoid ::before conflict */
-.radio:not(.disabled):not(.has-custom-icon)::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: calc(var(--radio-touch-area) * 2.5);
-    height: calc(var(--radio-touch-area) * 2.5);
-    border-radius: 50%;
-    background-color: color-mix(in srgb, var(--radio-color) 8%, transparent);
-    transform: translate(-50%, -50%) scale(0);
-    opacity: 0;
-    transition: transform var(--radio-ripple-transition),
-                opacity var(--radio-ripple-transition);
-    pointer-events: none;
-    z-index: 0;
-}
-
-/* Show ripple on hover */
-.radio:not(.disabled):not(.has-custom-icon):hover::after {
-    transform: translate(-50%, -50%) scale(1);
-    opacity: 1;
-}
-
-/* Change outline color on hover */
 .radio:not(.disabled):not(.has-custom-icon) .radio__box:hover::after {
-    outline-color: var(--radio-color);
-}
-
-/* Active state - stronger ripple */
-.radio:not(.disabled):not(.has-custom-icon):active::after {
-    background-color: color-mix(in srgb, var(--radio-color) 12%, transparent);
-    transform: translate(-50%, -50%) scale(1);
-    opacity: 1;
-}
-
-/* Active state - scale down */
-.radio:not(.disabled):not(.has-custom-icon) .radio__box:active {
-    transform: scale(0.95);
-}
-
-/* Custom icon - ripple effect */
-.radio:not(.disabled).has-custom-icon::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: calc(var(--radio-size) * 2.5);
-    height: calc(var(--radio-size) * 2.5);
-    border-radius: 50%;
-    background-color: color-mix(in srgb, var(--radio-color) 8%, transparent);
-    transform: translate(-50%, -50%) scale(0);
-    opacity: 0;
-    transition: transform var(--radio-ripple-transition),
-                opacity var(--radio-ripple-transition);
-    pointer-events: none;
-    z-index: 0;
-}
-
-.radio:not(.disabled).has-custom-icon:hover::after {
-    transform: translate(-50%, -50%) scale(1);
-    opacity: 1;
-}
-
-.radio:not(.disabled).has-custom-icon:active::after {
-    background-color: color-mix(in srgb, var(--radio-color) 12%, transparent);
-}
-
-.radio:not(.disabled).has-custom-icon .radio__box:active {
-    transform: scale(0.92);
+	outline-color: var(--radio-color);
 }
