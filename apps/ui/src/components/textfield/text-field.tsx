@@ -18,39 +18,34 @@
  *   required
  *   leadingIcon={<UserIcon />}
  *   showCounter
- *   maxLength={40}
+ *   max={40}
  * />
  */
 import { forwardRef, useState, useId, useEffect, useCallback, useMemo } from 'react';
 import type { FocusEvent, ChangeEvent } from 'react';
-import { 
-	generateTextFieldClassNames, 
-	generateTextFieldIds, 
-	getTextFieldAriaProperties, 
+import clsx from 'clsx';
+import {
+	generateTextFieldClassNames,
+	generateTextFieldIds,
+	getTextFieldAriaProperties,
 	validateTextFieldProperties,
 	safeStringValue,
 	isFieldPopulated,
-	getRecommendedInputMode,
-	isValidIds,
-	isValidAriaProperties
+	getRecommendedInputMode
 } from './helpers';
-import type { TextFieldProperties, TextFieldIds, TextFieldAriaProperties } from './types';
+import type { TextFieldProperties, TextFieldIds } from './types';
 
 // Import styles following Material Design 3 specifications
 import './styles/core.css';
-import './styles/animations.css';
 import './styles/variables.css';
-import './styles/variants/filled.css';
-import './styles/variants/outlined.css';
-import './styles/variants/error.css';
-import './styles/variants/disabled.css';
-import './styles/variants/focused.css';
-import './styles/variants/hovered.css';
+import './styles/variants.css';
+import './styles/states.css';
 
 export const TextField = forwardRef<HTMLInputElement, TextFieldProperties>((
 	{
 		id,
-		value,
+		value: controlledValue,
+		defaultValue,
 		onChange,
 		label,
 		placeholder,
@@ -68,7 +63,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProperties>((
 		prefixLabel,
 		suffix,
 		suffixLabel,
-		maxLength,
+		max,
 		showCounter = false,
 		className,
 		type = 'text',
@@ -85,177 +80,102 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProperties>((
 	},
 	reference
 ) => {
+	const isControlled = controlledValue !== undefined;
+	const [internalValue, setInternalValue] = useState(defaultValue ?? '');
+
+	const value = isControlled ? controlledValue : internalValue;
+
 	const [focused, setFocused] = useState(false);
 	const [hovered, setHovered] = useState(false);
 	const [touched, setTouched] = useState(false);
 
 	const baseId = useId();
 	const safeId = id ?? baseId;
-	
-	// Convert value to safe string representation
-	const stringValue = safeStringValue(value);
 
-	// Generate consistent IDs for all elements with proper error handling
-	const ids = useMemo((): TextFieldIds => {
-		try {
-			const generatedIds = generateTextFieldIds(safeId);
-			
-			// Type guard to ensure we have valid IDs
-			if (isValidIds(generatedIds)) {
-				return generatedIds;
-			}
-			
-			// Fallback if generated IDs are invalid
-			throw new Error('Invalid IDs generated');
-		} catch (catchError: unknown) {
-			const errorMessage = catchError instanceof Error ? catchError.message : 'Unknown error';
-			console.error('TextField ID generation error:', errorMessage);
-			// Return safe fallback IDs
-			return {
-				input: `${safeId}-input`,
-				label: `${safeId}-label`,
-				supporting: `${safeId}-supporting`,
-				error: `${safeId}-error`,
-				counter: `${safeId}-counter`,
-				prefix: `${safeId}-prefix`,
-				suffix: `${safeId}-suffix`,
-			};
-		}
-	}, [safeId]);
+	// Generate consistent IDs for all elements
+	const ids = useMemo((): TextFieldIds => generateTextFieldIds(safeId), [safeId]);
 
 	// Validate properties in development
 	useEffect(() => {
 		if (process.env.NODE_ENV === 'development') {
 			try {
-				validateTextFieldProperties({
-					value,
-					maxLength,
-					required,
-					pattern,
-					type
-				});
+				validateTextFieldProperties({ value, max, required, pattern, type });
 			} catch (validationError) {
-				const errorMessage = validationError instanceof Error ? validationError.message : 'Unknown validation error';
-				console.warn('TextField validation warning:', errorMessage);
+				console.warn('TextField validation warning:', validationError instanceof Error ? validationError.message : 'Unknown error');
 			}
 		}
-	}, [value, maxLength, required, pattern, type]);
+	}, [value, max, required, pattern, type]);
 
 	// Additional length validation warning
 	useEffect(() => {
-		if (process.env.NODE_ENV === 'development' && maxLength && stringValue.length > maxLength) {
-			console.warn(`TextField: Value length (${stringValue.length}) exceeds maxLength (${maxLength})`);
+		if (process.env.NODE_ENV === 'development' && max && String(value).length > max) {
+			console.warn(`TextField: Value length (${String(value).length}) exceeds max (${max})`);
 		}
-	}, [stringValue, maxLength]);
+	}, [value, max]);
 
-	// Focus event handler with error handling
+	// Focus event handler
 	const handleFocus = useCallback((event: FocusEvent<HTMLInputElement>) => {
-		try {
-			setFocused(true);
-			setTouched(true);
-			onFocus?.(event);
-		} catch (focusError) {
-			const errorMessage = focusError instanceof Error ? focusError.message : 'Unknown focus error';
-			console.error('TextField focus handler error:', errorMessage);
-		}
+		setFocused(true);
+		setTouched(true);
+		onFocus?.(event);
 	}, [onFocus]);
 
-	// Blur event handler with error handling
+	// Blur event handler
 	const handleBlur = useCallback((event: FocusEvent<HTMLInputElement>) => {
-		try {
-			setFocused(false);
-			onBlur?.(event);
-		} catch (blurError) {
-			const errorMessage = blurError instanceof Error ? blurError.message : 'Unknown blur error';
-			console.error('TextField blur handler error:', errorMessage);
-		}
+		setFocused(false);
+		onBlur?.(event);
 	}, [onBlur]);
 
-	// Mouse enter handler
+	// Mouse handlers
 	const handleMouseEnter = useCallback(() => {
-		if (!disabled && !readOnly) {
-			setHovered(true);
-		}
+		if (!disabled && !readOnly) setHovered(true);
 	}, [disabled, readOnly]);
 
-	// Mouse leave handler
-	const handleMouseLeave = useCallback(() => {
-		setHovered(false);
-	}, []);
+	const handleMouseLeave = useCallback(() => setHovered(false), []);
 
-	// Change event handler with error handling
+	// Change event handler
 	const handleChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
-		try {
-			const newValue = event.target.value;
-			onChange?.(newValue);
-		} catch (changeError) {
-			const errorMessage = changeError instanceof Error ? changeError.message : 'Unknown change error';
-			console.error('TextField change handler error:', errorMessage);
+		const newValue = event.target.value;
+		if (!isControlled) {
+			setInternalValue(newValue);
 		}
-	}, [onChange]);
+		onChange?.(newValue);
+	}, [isControlled, onChange]);
 
-	
-	const isPopulated = isFieldPopulated(stringValue);
+	const stringValue = safeStringValue(value);
+	const isPopulated = isFieldPopulated(value);
 
 	const classes = useMemo(() => {
-		try {
-			let baseClasses = generateTextFieldClassNames({
-				variant,
-				error,
-				disabled,
-				focused,
-				hovered,
-				className
-			});
+		const baseClasses = generateTextFieldClassNames({
+			variant,
+			error,
+			disabled,
+			focused,
+			hovered,
+			className
+		});
 
-			if (isPopulated) {
-				baseClasses += ' textfield--populated';
-			}
-
-			return baseClasses;
-		} catch (classError) {
-			const errorMessage = classError instanceof Error ? classError.message : 'Unknown class error';
-			console.error('TextField class generation error:', errorMessage);
-			return `textfield textfield--${variant} ${isPopulated ? 'textfield--populated' : ''} ${className ?? ''}`;
-		}
+		return clsx(baseClasses, { 'populated': isPopulated });
 	}, [variant, error, disabled, focused, hovered, isPopulated, className]);
 
-	// Generate ARIA properties for accessibility with proper type handling
+	// Generate ARIA properties for accessibility
 	const ariaProperties = useMemo(() => {
-		try {
-			const generatedAriaProperties = getTextFieldAriaProperties({
-				label,
-				required,
-				error,
-				disabled,
-				supportingText,
-				errorText,
-				maxLength,
-				value: stringValue
-			});
-			
-			// Type guard to ensure we have valid ARIA properties
-			if (isValidAriaProperties(generatedAriaProperties)) {
-				return generatedAriaProperties;
-			}
-			
-			throw new Error('Invalid ARIA properties generated');
-		} catch (ariaError) {
-			const errorMessage = ariaError instanceof Error ? ariaError.message : 'Unknown ARIA error';
-			console.error('TextField ARIA properties error:', errorMessage);
-			return {
-				'aria-label': 'Text input',
-				'aria-required': required,
-				'aria-invalid': error,
-				'aria-disabled': disabled
-			};
-		}
-	}, [label, required, error, disabled, supportingText, errorText, maxLength, stringValue]);
+		return getTextFieldAriaProperties({
+			label,
+			required,
+			error,
+			disabled,
+			supportingText,
+			errorText,
+			max,
+			value: stringValue
+		});
+	}, [label, required, error, disabled, supportingText, errorText, max, stringValue]);
 
 	// Determine component state
-	const showCharacterCount = showCounter && typeof maxLength === 'number' && maxLength > 0;
+	const showCharacterCount = showCounter && typeof max === 'number' && max > 0;
 	const currentLength = stringValue.length;
-	const isOverLimit = maxLength ? currentLength > maxLength : false;
+	const isOverLimit = max ? currentLength > max : false;
 
 	// Build aria-describedby attribute
 	const ariaDescribedByIds = [
@@ -265,26 +185,21 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProperties>((
 		showCharacterCount ? ids.counter : null
 	].filter(Boolean);
 
-	const ariaDescribedByValue = ariaDescribedByIds.length > 0 
-		? ariaDescribedByIds.join(' ') 
+	const ariaDescribedByValue = ariaDescribedByIds.length > 0
+		? ariaDescribedByIds.join(' ')
 		: undefined;
 
-	// Determine final ARIA attributes
-	const finalAriaLabel = ariaLabel ?? (typeof ariaProperties['aria-label'] === 'string' ? ariaProperties['aria-label'] : undefined);
+	// Determine final attributes
+	const finalAriaLabel = ariaLabel ?? (ariaProperties['aria-label'] as string | undefined);
 	const finalAriaInvalid = error || undefined;
-	
-	// Get recommended inputMode if not provided - with proper type assertion
-	const finalInputMode = inputMode ?? getRecommendedInputMode(type);
-	
-	// Type assertion for inputMode to satisfy React's InputHTMLAttributes
-	const safeInputMode = finalInputMode as 'text' | 'email' | 'tel' | 'url' | 'search' | 'decimal' | 'numeric' | 'none' | undefined;
+	const finalInputMode = (inputMode ?? getRecommendedInputMode(type)) as React.HTMLAttributes<HTMLInputElement>['inputMode'];
 
 	// Safe prefix and suffix extraction
 	const safePrefix = typeof prefix === 'string' || typeof prefix === 'number' ? prefix : null;
 	const safeSuffix = typeof suffix === 'string' || typeof suffix === 'number' ? suffix : null;
 
 	return (
-		<div 
+		<div
 			className={classes}
 			onMouseEnter={handleMouseEnter}
 			onMouseLeave={handleMouseLeave}
@@ -297,17 +212,17 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProperties>((
 		>
 			<div className="textfield__input-wrapper">
 				{leadingIcon && (
-					<span className="textfield__icon textfield__icon--leading" aria-hidden="true">
+					<span className="icon icon--leading" aria-hidden="true">
 						{leadingIcon}
 					</span>
 				)}
-				
+
 				{safePrefix && (
 					<span id={ids.prefix} className="textfield__prefix" aria-label={prefixLabel}>
 						{safePrefix}
 					</span>
 				)}
-				
+
 				{label && (
 					<label htmlFor={ids.input} className="textfield__label">
 						{label}
@@ -318,7 +233,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProperties>((
 						)}
 					</label>
 				)}
-				
+
 				<input
 					{...rest}
 					ref={reference}
@@ -332,28 +247,28 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProperties>((
 					disabled={disabled}
 					readOnly={readOnly}
 					required={required}
-					maxLength={maxLength}
+					maxLength={max}
 					autoComplete={autoComplete}
 					autoFocus={autoFocus}
 					name={name}
 					pattern={pattern}
-					inputMode={safeInputMode}
+					inputMode={finalInputMode}
 					aria-invalid={finalAriaInvalid}
 					aria-label={finalAriaLabel}
 					aria-describedby={ariaDescribedByValue}
 					className="textfield__input"
 					data-testid="textfield-input"
 				/>
-				
+
 				{safeSuffix && (
 					<span id={ids.suffix} className="textfield__suffix" aria-label={suffixLabel}>
 						{safeSuffix}
 					</span>
 				)}
-				
+
 				{trailingIcon && (
-					<span 
-						className="textfield__icon textfield__icon--trailing"
+					<span
+						className="icon icon--trailing"
 						aria-label={trailingIconLabel}
 						{...(trailingIconLabel && { role: 'img', tabIndex: 0 })}
 					>
@@ -361,7 +276,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProperties>((
 					</span>
 				)}
 			</div>
-			
+
 			<div className="textfield__auxiliary">
 				{(supportingText ?? errorText) && (
 					<div className="textfield__text-support">
@@ -377,15 +292,15 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProperties>((
 						)}
 					</div>
 				)}
-				
+
 				{showCharacterCount && (
-					<span 
+					<span
 						id={ids.counter}
 						className={`textfield__counter ${isOverLimit ? 'textfield__counter--error' : ''}`}
-						aria-label={`Character count: ${currentLength} of ${maxLength}`}
+						aria-label={`Character count: ${currentLength} of ${max}`}
 						aria-live="polite"
 					>
-						{currentLength}/{maxLength}
+						{currentLength}/{max}
 					</span>
 				)}
 			</div>

@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import type {
 	TextFieldValidationProperties,
 	TextFieldClassNameProperties,
@@ -11,14 +12,7 @@ import type {
  * @returns Whether the object has valid TextFieldIds structure
  */
 export const isValidIds = (ids: unknown): ids is TextFieldIds => {
-	return typeof ids === 'object' && 
-         ids !== null && 
-         'input' in ids && 
-         'supporting' in ids && 
-         'error' in ids && 
-         'counter' in ids && 
-         'prefix' in ids && 
-         'suffix' in ids;
+	return typeof ids === 'object' && ids !== null;
 };
 
 /**
@@ -36,13 +30,13 @@ export const isValidAriaProperties = (properties: unknown): properties is TextFi
  * @throws Error if validation fails
  */
 export function validateTextFieldProperties(properties: TextFieldValidationProperties): void {
-	const { value, maxLength, required, pattern, type } = properties;
+	const { value, max, required, pattern, type } = properties;
 
-	if (maxLength !== undefined && (!Number.isInteger(maxLength) || maxLength < 0)) {
-		throw new Error('maxLength must be a non-negative integer');
+	if (max !== undefined && (!Number.isInteger(max) || max < 0)) {
+		throw new Error('max must be a non-negative integer');
 	}
 
-	if (typeof required !== 'boolean') {
+	if (required !== undefined && typeof required !== 'boolean') {
 		throw new TypeError('required must be a boolean');
 	}
 
@@ -54,11 +48,11 @@ export function validateTextFieldProperties(properties: TextFieldValidationPrope
 		throw new Error('type must be a valid input type');
 	}
 
-	// Validate value length against maxLength
-	if (value !== null && value !== undefined && maxLength !== undefined) {
+	// Validate value length against max
+	if (value !== null && value !== undefined && max !== undefined) {
 		const stringValue = String(value);
-		if (stringValue.length > maxLength) {
-			throw new Error(`Value length (${stringValue.length}) exceeds maxLength (${maxLength})`);
+		if (stringValue.length > max) {
+			throw new Error(`Value length (${stringValue.length}) exceeds max (${max})`);
 		}
 	}
 }
@@ -86,83 +80,51 @@ export function generateTextFieldIds(baseId: string): TextFieldIds {
 
 /**
  * Generates CSS class names based on TextField state
- * @param properties - Class name generation properties
- * @returns Combined class names string
  */
 export function generateTextFieldClassNames(properties: TextFieldClassNameProperties): string {
-	const { variant, error, disabled, focused, hovered, className } = properties;
+	const { variant = 'filled', error, disabled, focused, hovered, className } = properties;
 
-	if (!variant || !['filled', 'outlined'].includes(variant)) {
-		throw new Error('variant must be either "filled" or "outlined"');
-	}
-
-	const classes = [
-		'textfield',
-		`textfield--${variant}`,
-	];
-
-	// State classes
-	if (error) classes.push('textfield--error');
-	if (disabled) classes.push('textfield--disabled');
-	if (focused) classes.push('textfield--focused');
-	if (hovered && !disabled) classes.push('textfield--hovered');
-
-	// Custom classes
-	if (className) {
-		classes.push(className);
-	}
-
-	return classes.join(' ');
+	return clsx(
+		'field text',
+		variant,
+		{
+			'error': error,
+			'disabled': disabled,
+			'focused': focused,
+			'hovered': hovered && !disabled
+		},
+		className
+	);
 }
 
 /**
  * Generates ARIA properties for accessibility
- * @param properties - ARIA properties configuration
- * @returns ARIA attributes object
  */
-export function getTextFieldAriaProperties(properties: TextFieldAriaProperties): Record<string, string | boolean> {
-	const { 
-		label, 
-		required, 
-		error, 
-		disabled, 
-		maxLength, 
-		value 
+export function getTextFieldAriaProperties(properties: TextFieldAriaProperties): Record<string, string | boolean | undefined> {
+	const {
+		label,
+		required,
+		error,
+		disabled,
+		max,
+		value
 	} = properties;
 
-	const ariaProperties: Record<string, string | boolean> = {};
+	const ariaProperties: Record<string, string | boolean | undefined> = {
+		'aria-invalid': error || undefined,
+		'aria-disabled': disabled || undefined,
+		'aria-required': required || undefined,
+	};
 
 	// Set aria-label if no visible label
 	if (!label) {
 		ariaProperties['aria-label'] = 'Text input';
 	}
 
-	// Required state
-	if (required) {
-		ariaProperties['aria-required'] = true;
-	}
-
-	// Error state
-	if (error) {
-		ariaProperties['aria-invalid'] = true;
-	}
-
-	// Disabled state
-	if (disabled) {
-		ariaProperties['aria-disabled'] = true;
-	}
-
-	// Character count information
-	 
-	if (maxLength) {
-		const currentLength = value.length;
-		// Disable spell checker for ARIA attribute name which is a valid web standard
-		// eslint-disable-next-line @cspell/spellchecker -- aria-valuetext is a valid ARIA attribute
-		ariaProperties['aria-valuetext'] = `${currentLength} of ${maxLength} characters`;
-    
-		if (currentLength > maxLength) {
-			ariaProperties['aria-invalid'] = true;
-		}
+	// Character count information if applicable
+	if (max && value) {
+		const currentLength = String(value).length;
+		ariaProperties['aria-valuetext'] = `${currentLength} of ${max} characters`;
 	}
 
 	return ariaProperties;
@@ -191,29 +153,6 @@ export function isFieldPopulated(value: string | number | null | undefined): boo
 }
 
 /**
- * Creates a debounced version of a function
- * @param function_ - Function to debounce
- * @param wait - Delay in milliseconds
- * @returns Debounced function
- */
-export function debounce<T extends (...arguments_: unknown[]) => unknown>(
-	function_: T,
-	wait: number
-): (...arguments_: Parameters<T>) => void {
-	let timeout: ReturnType<typeof setTimeout> | null = null;
-
-	return (...arguments_: Parameters<T>) => {
-		if (timeout) {
-			clearTimeout(timeout);
-		}
-    
-		timeout = setTimeout(() => {
-			function_(...arguments_);
-		}, wait);
-	};
-}
-
-/**
  * Validates if a string matches a given pattern
  * @param value - String to validate
  * @param pattern - Regex pattern
@@ -221,7 +160,7 @@ export function debounce<T extends (...arguments_: unknown[]) => unknown>(
  */
 export function validatePattern(value: string, pattern?: string): boolean {
 	if (!pattern) return true;
-  
+
 	try {
 		const regex = new RegExp(pattern);
 		return regex.test(value);
@@ -256,6 +195,25 @@ export function getRecommendedInputMode(type?: string): string | undefined {
 		}
 		default: {
 			return undefined;
+		}
+	}
+}
+
+/**
+ * Formats input value based on type
+ */
+export function formatTextFieldValue(value: string, type?: string): string {
+	switch (type) {
+		case 'tel': {
+			// Format phone numbers: (XXX) XXX-XXXX
+			return value.replace(/\D/g, '').replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3');
+		}
+		case 'number': {
+			// Remove non-numeric characters except for decimal and sign
+			return value.replace(/[^\d.-]/g, '');
+		}
+		default: {
+			return value;
 		}
 	}
 }
