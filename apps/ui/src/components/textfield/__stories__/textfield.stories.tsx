@@ -181,20 +181,21 @@ export const NormalState: Story = {
 };
 
 export const FocusedState: Story = {
-	render: (properties) => {
-		const [isFocused, setIsFocused] = useState(false);
-		return (
-			<TextFieldComponent
-				{...properties}
-				variant="outlined"
-				label="Focus State"
-				defaultValue="Click to focus"
-				onFocus={() => setIsFocused(true)}
-				onBlur={() => setIsFocused(false)}
-				supportingText={isFocused ? 'Field is focused!' : 'Click to focus this field'}
-			/>
-		);
-	},
+	args: {
+		variant: 'outlined',
+		label: 'Focus State',
+		defaultValue: 'Focused by default',
+		focused: true,
+	}
+};
+
+export const HoveredState: Story = {
+	args: {
+		variant: 'filled',
+		label: 'Hover State',
+		defaultValue: 'Hovered by default',
+		hovered: true,
+	}
 };
 
 export const ErrorStateManual: Story = {

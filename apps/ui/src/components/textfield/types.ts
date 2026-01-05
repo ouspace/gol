@@ -205,4 +205,10 @@ export interface TextFieldProperties extends Omit<InputHTMLAttributes<HTMLInputE
 
   /** Blur event handler */
   onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
+
+  /** Forced focused state (for testing/Storybook) */
+  focused?: boolean;
+
+  /** Forced hovered state (for testing/Storybook) */
+  hovered?: boolean;
 }

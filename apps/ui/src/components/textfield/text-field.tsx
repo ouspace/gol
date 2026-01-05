@@ -76,6 +76,8 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProperties>((
 		'aria-describedby': ariaDescribedBy,
 		onFocus,
 		onBlur,
+		focused: propsFocused,
+		hovered: propsHovered,
 		...rest
 	},
 	reference
@@ -150,8 +152,8 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProperties>((
 			variant,
 			error,
 			disabled,
-			focused,
-			hovered,
+			focused: focused || propsFocused,
+			hovered: hovered || propsHovered,
 			className
 		});
 
