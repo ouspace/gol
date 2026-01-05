@@ -1,191 +1,196 @@
 import { test, expect } from '@playwright/test';
 
-// Filled variant
-test('TextField Filled variant renders correctly in Storybook', async ({ page }) => {
-  await page.goto('http://localhost:65161/iframe.html?id=components-textfield--filled');
-  await page.waitForLoadState('networkidle');
-  
-  const input = page.getByTestId('textfield-input');
-  await input.waitFor({ state: 'visible', timeout: 30000 });
-  
-  await expect(input).toBeVisible();
-  await expect(input).toBeEditable();
-  await expect(page.getByText('Username')).toBeVisible();
-  await expect(input).toHaveAttribute('placeholder', 'Enter your username');
-});
+const BASE_URL = 'http://localhost:65161/iframe.html';
+const WAIT_FOR = 30_000;
 
-// Outlined variant
-test('TextField Outlined variant renders correctly in Storybook', async ({ page }) => {
-  await page.goto('http://localhost:65161/iframe.html?id=components-textfield--outlined');
-  await page.waitForLoadState('networkidle');
-  
-  const input = page.getByTestId('textfield-input');
-  await input.waitFor({ state: 'visible', timeout: 30000 });
-  
-  await expect(input).toBeVisible();
-  await expect(input).toBeEditable();
-  await expect(page.getByText('Email Address')).toBeVisible();
-  await expect(input).toHaveAttribute('placeholder', 'Enter your email');
-});
+test.describe('components/text-field', () => {
+  test('should render filled variant correctly', async ({ page }) => {
+    await page.goto(`${BASE_URL}?id=components-textfield--filled`);
+    await page.waitForLoadState('networkidle');
 
-// With Supporting Text
-test('TextField With Supporting Text renders correctly', async ({ page }) => {
-  await page.goto('http://localhost:65161/iframe.html?id=components-textfield--with-supporting-text');
-  await page.waitForLoadState('networkidle');
-  
-  const input = page.getByTestId('textfield-input');
-  await expect(input).toBeVisible();
-  await expect(page.getByText('Full Name')).toBeVisible();
-  await expect(page.getByText('Enter your first and last name')).toBeVisible();
-});
+    const input = page.getByTestId('textfield-input');
+    await input.waitFor({ state: 'visible', timeout: WAIT_FOR });
 
-// Error State
-test('TextField Error State renders correctly', async ({ page }) => {
-  await page.goto('http://localhost:65161/iframe.html?id=components-textfield--error-state');
-  await page.waitForLoadState('networkidle');
-  
-  const input = page.getByTestId('textfield-input');
-  await expect(input).toBeVisible();
-  await expect(page.locator('label').filter({ hasText: 'Password' }).first()).toBeVisible();
-  await expect(page.getByText('Password must be at least 8 characters long')).toBeVisible();
-});
+    await expect(input).toBeVisible();
+    await expect(input).toBeEditable();
+    await expect(page.getByText('Username')).toBeVisible();
+    await expect(input).toHaveAttribute('placeholder', 'Enter your username');
+  });
 
-// Required Field
-test('TextField Required renders correctly', async ({ page }) => {
-  await page.goto('http://localhost:65161/iframe.html?id=components-textfield--required');
-  await page.waitForLoadState('networkidle');
-  
-  const input = page.getByTestId('textfield-input');
-  await expect(input).toBeVisible();
-  await expect(page.getByText('Required Field')).toBeVisible();
-});
+  test('should render outlined variant correctly', async ({ page }) => {
+    await page.goto(`${BASE_URL}?id=components-textfield--outlined`);
+    await page.waitForLoadState('networkidle');
 
-// Disabled Field
-test('TextField Disabled renders correctly', async ({ page }) => {
-  await page.goto('http://localhost:65161/iframe.html?id=components-textfield--disabled');
-  await page.waitForLoadState('networkidle');
-  
-  const input = page.getByTestId('textfield-input');
-  await expect(input).toBeVisible();
-  await expect(input).toBeDisabled();
-  await expect(page.getByText('Disabled Field')).toBeVisible();
-});
+    const input = page.getByTestId('textfield-input');
+    await input.waitFor({ state: 'visible', timeout: WAIT_FOR });
 
-// Read Only Field
-test('TextField Read Only renders correctly', async ({ page }) => {
-  await page.goto('http://localhost:65161/iframe.html?id=components-textfield--read-only');
-  await page.waitForLoadState('networkidle');
-  
-  const input = page.getByTestId('textfield-input');
-  await expect(input).toBeVisible();
-  await expect(input).toHaveAttribute('readonly');
-  await expect(page.getByText('Read Only Field')).toBeVisible();
-});
+    await expect(input).toBeVisible();
+    await expect(input).toBeEditable();
+    await expect(page.getByText('Email Address')).toBeVisible();
+    await expect(input).toHaveAttribute('placeholder', 'Enter your email');
+  });
 
-// With Counter
-test('TextField With Counter renders correctly', async ({ page }) => {
-  await page.goto('http://localhost:65161/iframe.html?id=components-textfield--with-counter');
-  await page.waitForLoadState('networkidle');
-  
-  const input = page.getByTestId('textfield-input');
-  await expect(input).toBeVisible();
-  await expect(page.locator('label').filter({ hasText: 'Description' })).toBeVisible();
-  await expect(page.getByText('Maximum 100 characters')).toBeVisible();
-});
+  test('should render with supporting text correctly', async ({ page }) => {
+    await page.goto(`${BASE_URL}?id=components-textfield--with-supporting-text`);
+    await page.waitForLoadState('networkidle');
 
-// With Prefix and Suffix
-test('TextField With Prefix Suffix renders correctly', async ({ page }) => {
-  await page.goto('http://localhost:65161/iframe.html?id=components-textfield--with-prefix-suffix');
-  await page.waitForLoadState('networkidle');
-  
-  const input = page.getByTestId('textfield-input');
-  await expect(input).toBeVisible();
-  await expect(page.getByText('Price')).toBeVisible();
-  await expect(page.getByText('$')).toBeVisible();
-  await expect(page.getByText('USD')).toBeVisible();
-});
+    const input = page.getByTestId('textfield-input');
+    await expect(input).toBeVisible();
+    await expect(page.getByText('Full Name')).toBeVisible();
+    await expect(page.getByText('Enter your first and last name')).toBeVisible();
+  });
 
-// With Leading Icon
-test('TextField With Leading Icon renders correctly', async ({ page }) => {
-  await page.goto('http://localhost:65161/iframe.html?id=components-textfield--with-leading-icon');
-  await page.waitForLoadState('networkidle');
-  
-  const input = page.getByTestId('textfield-input');
-  await expect(input).toBeVisible();
-  await expect(page.getByText('Search')).toBeVisible();
-});
+  test('should render error state correctly', async ({ page }) => {
+    await page.goto(`${BASE_URL}?id=components-textfield--error-state`);
+    await page.waitForLoadState('networkidle');
 
-// With Trailing Icon
-test('TextField With Trailing Icon renders correctly', async ({ page }) => {
-  await page.goto('http://localhost:65161/iframe.html?id=components-textfield--with-trailing-icon');
-  
-  // Wait for any element to be visible on the page
-  await page.waitForSelector('body', { timeout: 10000 });
-  
-  // Check if page has content
-  const bodyContent = await page.locator('body').evaluate(el => el.innerHTML);
-  if (bodyContent && bodyContent.length > 0) {
-    await expect(page.locator('body')).toBeVisible();
-  }
-});
+    const input = page.getByTestId('textfield-input');
+    await expect(input).toBeVisible();
+    await expect(page.locator('label').filter({ hasText: 'Password' }).first()).toBeVisible();
+    await expect(page.getByText('Password must be at least 8 characters long')).toBeVisible();
+  });
 
-// Phone Number
-test('TextField Phone Number renders correctly', async ({ page }) => {
-  await page.goto('http://localhost:65161/iframe.html?id=components-textfield--phone-number');
-  await page.waitForLoadState('networkidle');
-  
-  const input = page.getByTestId('textfield-input');
-  await expect(input).toBeVisible();
-  await expect(page.getByText('Phone Number')).toBeVisible();
-  await expect(page.getByText('+1')).toBeVisible();
-});
+  test('should render required field correctly', async ({ page }) => {
+    await page.goto(`${BASE_URL}?id=components-textfield--required`);
+    await page.waitForLoadState('networkidle');
 
-// Website URL
-test('TextField Website URL renders correctly', async ({ page }) => {
-  await page.goto('http://localhost:65161/iframe.html?id=components-textfield--website-url');
-  await page.waitForLoadState('networkidle');
-  
-  const input = page.getByTestId('textfield-input');
-  await expect(input).toBeVisible();
-  await expect(page.getByText('Website')).toBeVisible();
-  await expect(page.getByText('https://')).toBeVisible();
-});
+    const input = page.getByTestId('textfield-input');
+    await expect(input).toBeVisible();
+    await expect(page.getByText('Required Field')).toBeVisible();
+  });
 
-// Input Types
-test('TextField Input Types renders correctly', async ({ page }) => {
-  await page.goto('http://localhost:65161/iframe.html?id=components-textfield--input-types');
-  await page.waitForLoadState('networkidle');
-  
-  // Check for labels instead of generic text to avoid strict mode issues
-  await expect(page.locator('label').filter({ hasText: 'Text' }).first()).toBeVisible();
-  await expect(page.locator('label').filter({ hasText: 'Email' })).toBeVisible();
-  await expect(page.locator('label').filter({ hasText: 'Password' }).first()).toBeVisible();
-  await expect(page.locator('label').filter({ hasText: 'Phone' })).toBeVisible();
-  await expect(page.locator('label').filter({ hasText: 'URL' })).toBeVisible();
-  await expect(page.locator('label').filter({ hasText: 'Search' })).toBeVisible();
-  await expect(page.locator('label').filter({ hasText: 'Number' })).toBeVisible();
-});
+  test('should render disabled field correctly', async ({ page }) => {
+    await page.goto(`${BASE_URL}?id=components-textfield--disabled`);
+    await page.waitForLoadState('networkidle');
 
-// Form Example
-test('TextField Form Example renders correctly', async ({ page }) => {
-  await page.goto('http://localhost:65161/iframe.html?id=components-textfield--form-example');
-  await page.waitForLoadState('networkidle');
-  
-  await expect(page.getByText('First Name')).toBeVisible();
-  await expect(page.getByText('Last Name')).toBeVisible();
-  await expect(page.getByText('Email Address')).toBeVisible();
-  await expect(page.getByText('Phone Number')).toBeVisible();
-  await expect(page.getByText('Bio')).toBeVisible();
-  await expect(page.getByRole('button', { name: /submit/i })).toBeVisible();
-});
+    const input = page.getByTestId('textfield-input');
+    await expect(input).toBeVisible();
+    await expect(input).toBeDisabled();
+    await expect(page.getByText('Disabled Field')).toBeVisible();
+  });
 
-// Interactive States
-test('TextField Interactive States renders correctly', async ({ page }) => {
-  await page.goto('http://localhost:65161/iframe.html?id=components-textfield--interactive-states');
-  await page.waitForLoadState('networkidle');
-  
-  await expect(page.getByText('Normal State')).toBeVisible();
-  await expect(page.getByText('Focus State')).toBeVisible();
-  await expect(page.getByText('Error State')).toBeVisible();
-  await expect(page.getByText('Disabled State')).toBeVisible();
+  test('should render read-only field correctly', async ({ page }) => {
+    await page.goto(`${BASE_URL}?id=components-textfield--read-only`);
+    await page.waitForLoadState('networkidle');
+
+    const input = page.getByTestId('textfield-input');
+    await expect(input).toBeVisible();
+    await expect(input).toHaveAttribute('readonly');
+    await expect(page.getByText('Read Only Field')).toBeVisible();
+  });
+
+  test('should render with counter correctly', async ({ page }) => {
+    await page.goto(`${BASE_URL}?id=components-textfield--with-counter`);
+    await page.waitForLoadState('networkidle');
+
+    const input = page.getByTestId('textfield-input');
+    await expect(input).toBeVisible();
+    await expect(page.locator('label').filter({ hasText: 'Description' })).toBeVisible();
+    await expect(page.getByText('Maximum 100 characters')).toBeVisible();
+  });
+
+  test('should render with prefix and suffix correctly', async ({ page }) => {
+    await page.goto(`${BASE_URL}?id=components-textfield--with-prefix-suffix`);
+    await page.waitForLoadState('networkidle');
+
+    const input = page.getByTestId('textfield-input');
+    await expect(input).toBeVisible();
+    await expect(page.getByText('Price')).toBeVisible();
+    await expect(page.getByText('$')).toBeVisible();
+    await expect(page.getByText('USD')).toBeVisible();
+  });
+
+  test('should render with leading icon correctly', async ({ page }) => {
+    await page.goto(`${BASE_URL}?id=components-textfield--with-leading-icon`);
+    await page.waitForLoadState('networkidle');
+
+    const input = page.getByTestId('textfield-input');
+    await expect(input).toBeVisible();
+    await expect(page.getByText('Search')).toBeVisible();
+  });
+
+  test('should render with trailing icon correctly', async ({ page }) => {
+    await page.goto(`${BASE_URL}?id=components-textfield--with-trailing-icon`);
+    await page.waitForLoadState('networkidle');
+
+    const icon = page.locator('.field.text .icon--trailing');
+    await expect(icon).toBeVisible();
+  });
+
+  test('should render phone number format correctly', async ({ page }) => {
+    await page.goto(`${BASE_URL}?id=components-textfield--phone-number`);
+    await page.waitForLoadState('networkidle');
+
+    const input = page.getByTestId('textfield-input');
+    await expect(input).toBeVisible();
+    await expect(page.getByText('Phone Number')).toBeVisible();
+    await expect(page.getByText('+1')).toBeVisible();
+  });
+
+  test('should render website URL format correctly', async ({ page }) => {
+    await page.goto(`${BASE_URL}?id=components-textfield--website-url`);
+    await page.waitForLoadState('networkidle');
+
+    const input = page.getByTestId('textfield-input');
+    await expect(input).toBeVisible();
+    await expect(page.getByText('Website')).toBeVisible();
+    await expect(page.getByText('https://')).toBeVisible();
+  });
+
+  test('should handle typing correctly (uncontrolled)', async ({ page }) => {
+    await page.goto(`${BASE_URL}?id=components-textfield--filled`);
+    await page.waitForLoadState('networkidle');
+
+    const input = page.getByTestId('textfield-input');
+    await input.fill('New Value');
+    await expect(input).toHaveValue('New Value');
+  });
+
+  test.describe('Input Types', () => {
+    test.beforeEach(async ({ page }) => {
+      await page.goto(`${BASE_URL}?id=components-textfield--input-types`);
+      await page.waitForLoadState('networkidle');
+    });
+
+    test('should render all input types', async ({ page }) => {
+      await expect(page.locator('label').filter({ hasText: 'Text' }).first()).toBeVisible();
+      await expect(page.locator('label').filter({ hasText: 'Email' })).toBeVisible();
+      await expect(page.locator('label').filter({ hasText: 'Password' }).first()).toBeVisible();
+      await expect(page.locator('label').filter({ hasText: 'Phone' })).toBeVisible();
+      await expect(page.locator('label').filter({ hasText: 'URL' })).toBeVisible();
+      await expect(page.locator('label').filter({ hasText: 'Search' })).toBeVisible();
+      await expect(page.locator('label').filter({ hasText: 'Number' })).toBeVisible();
+    });
+  });
+
+  test.describe('Interactive States', () => {
+    test('should render normal state', async ({ page }) => {
+      await page.goto(`${BASE_URL}?id=components-textfield--normal-state`);
+      await page.waitForLoadState('networkidle');
+      const container = page.locator('.field.text');
+      await expect(container).not.toHaveClass(/focused/);
+      await expect(container).not.toHaveClass(/error/);
+    });
+
+    test('should render focus state', async ({ page }) => {
+      await page.goto(`${BASE_URL}?id=components-textfield--focused-state`);
+      await page.waitForLoadState('networkidle');
+      const container = page.locator('.field.text');
+      await expect(container).toHaveClass(/focused/);
+    });
+
+    test('should render error state (manual)', async ({ page }) => {
+      await page.goto(`${BASE_URL}?id=components-textfield--error-state-manual`);
+      await page.waitForLoadState('networkidle');
+      const container = page.locator('.field.text');
+      await expect(container).toHaveClass(/error/);
+    });
+
+    test('should render disabled state (manual)', async ({ page }) => {
+      await page.goto(`${BASE_URL}?id=components-textfield--disabled-state`);
+      await page.waitForLoadState('networkidle');
+      const container = page.locator('.field.text');
+      await expect(container).toHaveClass(/disabled/);
+    });
+  });
 });

@@ -5,7 +5,7 @@
   "sourceRoot": "apps/ui-tests/src",
   "targets": {
     "e2e": {
-      "executor": "@nx/workspace:run-commands",
+      "executor": "nx:run-commands",
       "options": {
         "command": "npx playwright test",
         "cwd": "apps/ui-tests"

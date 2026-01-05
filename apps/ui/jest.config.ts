@@ -12,17 +12,17 @@ const config: Config = {
 	setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
 	transformIgnorePatterns: [
 		'node_modules/(?!((jest-)?react-native' +
-			'|@react-native(-community)?' +
-			'|expo(nent)?' +
-			'|@expo(nent)?/.*' +
-			'|@expo-google-fonts/.*' +
-			'|react-navigation' +
-			'|@react-navigation/.*' +
-			'|@unimodules/.*' +
-			'|unimodules' +
-			'|sentry-expo' +
-			'|native-base' +
-			'|react-native-svg))',
+		'|@react-native(-community)?' +
+		'|expo(nent)?' +
+		'|@expo(nent)?/.*' +
+		'|@expo-google-fonts/.*' +
+		'|react-navigation' +
+		'|@react-navigation/.*' +
+		'|@unimodules/.*' +
+		'|unimodules' +
+		'|sentry-expo' +
+		'|native-base' +
+		'|react-native-svg))',
 	],
 	moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'html'],
 	moduleNameMapper: {
@@ -30,7 +30,7 @@ const config: Config = {
 	},
 	coverageDirectory: '../../coverage/apps/ui',
 	transform: {
-		'^.+\\.[jt]sx?$': ['babel-jest', { configFile: path.join(process.cwd(), '.babelrc.js') }],
+		'^.+\\.[jt]sx?$': ['babel-jest', { configFile: path.join(__dirname, '.babelrc.js') }],
 		'^.+\\.(bmp|gif|jpg|jpeg|mp4|png|psd|svg|webp|ttf|otf|m4v|mov|mp4|mpeg|mpg|webm|aac|aiff|caf|m4a|mp3|wav|html|pdf|obj)$': 'jest-expo/src/preset/assetFileTransformer.js',
 	},
 };
