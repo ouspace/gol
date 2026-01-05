@@ -1,0 +1,65 @@
+/* states.css */
+
+.field.text {
+
+    /* Focus state */
+    &.focused {
+        .textfield__input {
+            caret-color: var(--md-sys-color-primary);
+        }
+
+        &.error .textfield__input {
+            caret-color: var(--md-sys-color-error);
+        }
+    }
+
+    /* Disabled state */
+    &.disabled {
+        pointer-events: none;
+        opacity: var(--md-textfield-disabled-opacity);
+
+        .textfield__label,
+        .textfield__input,
+        .icon,
+        .textfield__supporting-text {
+            color: var(--md-textfield-label-disabled);
+        }
+
+        &.filled .textfield__input-wrapper {
+            background-color: var(--md-textfield-container-bg-filled);
+            border-bottom: 1px solid var(--md-textfield-container-outline);
+            opacity: 0.12;
+        }
+
+        &.outlined .textfield__input-wrapper {
+            border-color: var(--md-textfield-container-outline);
+            opacity: 0.12;
+        }
+    }
+
+    /* Error state */
+    &.error {
+        .textfield__label {
+            color: var(--md-textfield-label-error);
+        }
+
+        .icon--trailing {
+            color: var(--md-textfield-icon-error);
+        }
+
+        .textfield__supporting-text,
+        .textfield__error-text {
+            color: var(--md-textfield-error-color);
+        }
+    }
+
+    /* Hover state */
+    &.hovered {
+        cursor: text;
+
+        .textfield__label,
+        .icon--trailing {
+            color: var(--md-sys-color-on-surface-variant);
+        }
+    }
+}

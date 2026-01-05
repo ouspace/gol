@@ -1,0 +1,72 @@
+/* variants.css */
+
+.field.text {
+
+  /* Variante filled: fondo sólido con línea activa en el borde inferior */
+  &.filled {
+    .textfield__input-wrapper {
+      background-color: var(--md-textfield-container-bg-filled);
+      border-bottom: 1px solid var(--md-textfield-active-indicator);
+      border-radius: var(--md-textfield-container-radius);
+      transition: border-color var(--md-textfield-transition),
+        background-color var(--md-textfield-transition);
+    }
+
+    &.hovered .textfield__input-wrapper {
+      background-color: var(--md-textfield-hover-state-layer);
+    }
+
+    &.focused .textfield__input-wrapper {
+      border-bottom: 2px solid var(--md-textfield-active-indicator-focused);
+    }
+
+    &.error {
+      .textfield__input-wrapper {
+        border-bottom: 2px solid var(--md-textfield-active-indicator-error);
+      }
+
+      .textfield__label {
+        color: var(--md-textfield-label-error);
+      }
+    }
+  }
+
+  /* Variant outlined: edge visible at rest */
+  &.outlined {
+    .textfield__input-wrapper {
+      border: 1px solid var(--md-textfield-container-outline);
+      border-radius: var(--md-textfield-container-radius);
+      background-color: var(--md-textfield-container-bg-outlined);
+      transition: border-color var(--md-textfield-transition),
+        border-width var(--md-textfield-transition);
+    }
+
+    &.hovered .textfield__input-wrapper {
+      border-color: var(--md-textfield-label-color);
+    }
+
+    &.focused .textfield__input-wrapper {
+      border-color: var(--md-textfield-active-indicator-focused);
+      border-width: 2px;
+    }
+
+    &.error {
+      .textfield__input-wrapper {
+        border-color: var(--md-textfield-active-indicator-error);
+        border-width: 2px;
+      }
+
+      .textfield__label {
+        color: var(--md-textfield-label-error);
+      }
+    }
+
+    &.focused,
+    &.populated {
+      .textfield__label {
+        background-color: var(--md-textfield-container-bg-outlined);
+        padding: 0 4px;
+      }
+    }
+  }
+}

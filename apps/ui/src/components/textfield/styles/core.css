@@ -1,104 +1,106 @@
 /* core.css */
 
-.textfield {
+.field.text {
   position: relative;
   display: inline-flex;
   flex-direction: column;
   min-width: 200px;
   font-family: var(--md-textfield-label-font);
-}
 
-.textfield__input-wrapper {
-  position: relative;
-  display: flex;
-  align-items: center;
-  width: 100%;
-  height: var(--md-textfield-container-height);
-}
+  .textfield__input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: var(--md-textfield-container-height);
+  }
 
-.textfield__label {
-  position: absolute;
-  left: 16px;
-  top: 0;
-  transform: translateY(-50%);
-  transform-origin: left top;
-  color: var(--md-textfield-label-color);
-  font-size: var(--md-textfield-label-size);
-  line-height: var(--md-textfield-label-line-height);
-  letter-spacing: var(--md-textfield-label-tracking);
-  transition: transform var(--md-textfield-transition),
-              color var(--md-textfield-transition);
-  pointer-events: none;
-  will-change: transform;
-}
+  .textfield__label {
+    position: absolute;
+    left: 16px;
+    top: 0;
+    transform: translateY(-50%);
+    transform-origin: left top;
+    color: var(--md-textfield-label-color);
+    font-size: var(--md-textfield-label-size);
+    line-height: var(--md-textfield-label-line-height);
+    letter-spacing: var(--md-textfield-label-tracking);
+    transition: transform var(--md-textfield-transition),
+      color var(--md-textfield-transition);
+    pointer-events: none;
+    will-change: transform;
+  }
 
-.textfield--focused .textfield__label,
-.textfield--populated .textfield__label {
-  transform: translateY(-24px) scale(0.75);
-  color: var(--md-textfield-label-focused);
-}
+  &.focused,
+  &.populated {
+    .textfield__label {
+      transform: translateY(-24px) scale(0.75);
+      color: var(--md-textfield-label-focused);
+    }
+  }
 
-.textfield__input {
-  width: 100%;
-  height: 100%;
-  border: none;
-  background: none;
-  padding: 20px 16px 6px 16px; 
-  color: var(--md-textfield-input-color);
-  font-size: var(--md-textfield-label-size);
-  line-height: var(--md-textfield-label-line-height);
-  font-family: inherit;
-}
+  .textfield__input {
+    width: 100%;
+    height: 100%;
+    border: none;
+    background: none;
+    padding: 20px 16px 6px 16px;
+    color: var(--md-textfield-input-color);
+    font-size: var(--md-textfield-label-size);
+    line-height: var(--md-textfield-label-line-height);
+    font-family: inherit;
 
-.textfield__input:focus {
-  outline: none;
-}
+    &:focus {
+      outline: none;
+    }
+  }
 
-/* Iconos */
-.textfield__icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 24px;
-  height: 24px;
-  color: var(--md-textfield-icon-color);
-}
+  /* Iconos */
+  .icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    color: var(--md-textfield-icon-color);
 
-.textfield__icon--leading {
-  margin-left: 12px;
-}
+    &--leading {
+      margin-left: 12px;
+    }
 
-.textfield__icon--trailing {
-  margin-right: 12px;
-  cursor: pointer;
-  background: none;
-  border: none;
-  padding: 0;
-}
+    &--trailing {
+      margin-right: 12px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 0;
+    }
+  }
 
-.textfield__supporting {
-  margin-top: 4px;
-  font-size: 12px;
-  line-height: 16px;
-  letter-spacing: 0.4px;
-  color: var(--md-textfield-supporting-color);
-}
+  .textfield__supporting {
+    margin-top: 4px;
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: 0.4px;
+    color: var(--md-textfield-supporting-color);
+  }
 
-.textfield__error-text {
-  color: var(--md-textfield-error-color);
-}
+  .textfield__error-text {
+    color: var(--md-textfield-error-color);
+  }
 
-.textfield__counter {
-  position: absolute;
-  right: 0;
-  bottom: -20px;
-  font-size: 12px;
-  color: var(--md-textfield-supporting-color);
-}
+  .textfield__counter {
+    position: absolute;
+    right: 0;
+    bottom: -20px;
+    font-size: 12px;
+    color: var(--md-textfield-supporting-color);
+  }
 
-.textfield__prefix,
-.textfield__suffix {
-  color: var(--md-textfield-supporting-color);
-  font-size: var(--md-textfield-label-size);
-  padding: 0 4px;
+  .textfield__prefix,
+  .textfield__suffix {
+    color: var(--md-textfield-supporting-color);
+    font-size: var(--md-textfield-label-size);
+    padding: 0 4px;
+  }
 }
