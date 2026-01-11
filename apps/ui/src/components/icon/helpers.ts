@@ -16,6 +16,8 @@ export function toDefaults(properties?: Properties): Required<Properties> {
 		size: 'normal',
 		fill: false,
 		disabled: false,
+		// INFO: This viewBox value applies to Google Icons only
+		viewBox: '120 -840 720 720',
 		onClick: _.noop,
 	}) as Required<Properties>;
 }
@@ -36,16 +38,10 @@ export function toFill(properties: Required<Properties>): string {
  * @param properties
  * @returns
  */
-export function toSize(properties: Required<Properties>): number {
+export function toSize(properties: Required<Properties>): string | number {
 	return match({ size: properties.size })
-		.with({ size: 'smallest' }, () => 8)
-		.with({ size: 'small' }, () => 12)
-		.with({ size: 'smallless' }, () => 16)
-		.with({ size: 'normal' }, () => 20)
-		.with({ size: 'bigless' }, () => 24)
-		.with({ size: 'big' }, () => 28)
-		.with({ size: 'biggest' }, () => 32)
-		.otherwise(() => properties.size as number);
+		.with({ size: P.number }, () => properties.size)
+		.otherwise(() => '100%');
 }
 
 /**

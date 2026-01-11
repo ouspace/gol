@@ -232,3 +232,4 @@ web-build/
 cache/
 
 storybook-static
+test-output

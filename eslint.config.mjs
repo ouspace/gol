@@ -10,6 +10,7 @@ import pluginUnicorn from 'eslint-plugin-unicorn';
 import eslintConfigPrettier from 'eslint-config-prettier';
 import tsEslint from 'typescript-eslint';
 import pluginJest from 'eslint-plugin-jest';
+import pluginStorybook from "eslint-plugin-storybook";
 
 const tsConfigs = tsEslint.config(
 	tsEslint.configs.recommendedTypeChecked,
@@ -78,25 +79,6 @@ export default [
 	},
 	eslintConfigPrettier,
 	{
-		ignores: [
-			'jest.config.ts',
-			'**/.vscode',
-			'**/.idea',
-			'**/.nx',
-			'**/node_modules',
-			'**/dist',
-			'**/.custom',
-			'**/.babelrc.js',
-			'**/eslint.config.cjs',
-			'**/postcss.config.cjs',
-			'**/rollup.config.cjs',
-			'**/webpack.config.cjs',
-			'**/vite.config.*.timestamp*',
-			'**/vitest.config.*.timestamp*',
-			'**/metro.config.js',
-		],
-	},
-	{
 		files: ['**/*.ts', '**/*.tsx', '**/*.js', '**/*.jsx'],
 		rules: {
 			'@nx/enforce-module-boundaries': [
@@ -162,5 +144,26 @@ export default [
 		rules: {
 			...pluginJest.configs.recommended.rules,
 		},
-	}
+	},
+	...pluginStorybook.configs["flat/recommended"],
+	{
+		ignores: [
+			'jest.config.ts',
+			'**/.vscode',
+			'**/.idea',
+			'**/.nx',
+			'**/node_modules',
+			'**/dist',
+			'**/.custom',
+			'**/.babelrc.js',
+			'**/eslint.config.cjs',
+			'**/postcss.config.cjs',
+			'**/rollup.config.cjs',
+			'**/webpack.config.cjs',
+			'**/vite.config.*.timestamp*',
+			'**/vitest.config.*.timestamp*',
+			'**/metro.config.js',
+			'**/*.snippet.tsx',
+		],
+	},
 ];

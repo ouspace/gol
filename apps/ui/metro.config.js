@@ -13,7 +13,7 @@ const { assetExts, sourceExts } = defaultConfig.resolver;
  */
 const customConfig = {
 	cacheVersion: 'ui',
-	isCSSEnabled: true,
+	// isCSSEnabled: true,
 	transformer: {
 		babelTransformerPath: require.resolve('react-native-svg-transformer'),
 	},

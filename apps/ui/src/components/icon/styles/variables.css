@@ -2,4 +2,6 @@
 	--icon-color: var(--icon-color-inject, black);
 	--icon-weight: var(--icon-weight-inject, 400);
 	--icon-rotate: var(--icon-rotate-inject, 0deg);
+	--icon-size: var(--icon-size-inject, 1.5rem);
+	--icon-size-step: var(--icon-size-step-inject, 0.25rem);
 }

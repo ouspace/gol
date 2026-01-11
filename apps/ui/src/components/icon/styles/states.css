@@ -1,0 +1,15 @@
+@import url('./variables.css');
+
+.icon {
+	&.disabled {
+		opacity: 0.37;
+	}
+
+	&.inverted {
+		filter: invert(1);
+	}
+
+	&.rotated {
+		rotate: var(--icon-rotate, 0deg);
+	}
+}

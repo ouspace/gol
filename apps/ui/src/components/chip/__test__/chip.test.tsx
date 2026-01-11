@@ -1,4 +1,4 @@
-import '@testing-library/jest-dom';
+// import '@testing-library/jest-dom';
 import { render, screen, fireEvent } from '@testing-library/react';
 import Chip from '../chip';
 
@@ -203,7 +203,7 @@ describe('components/chip', () => {
 					Test
 				</Chip>
 			);
-			
+
   			expect(container.firstChild).toHaveClass('chip', 'my-custom-class');
   		});
 	});

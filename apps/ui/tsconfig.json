@@ -15,6 +15,10 @@
 		"declaration": true
 	},
 	"files": [],
+	"exclude": [
+		"**/*.snippet.ts",
+		"**/*.snippet.tsx"
+	],
 	"include": [
 		"**/*.ts",
 		"**/*.tsx",

@@ -18,17 +18,18 @@
 		"**/*.spec.js",
 		"**/*.test.jsx",
 		"**/*.spec.jsx",
-		"src/test-setup.ts",
 		"**/*.stories.ts",
 		"**/*.stories.js",
 		"**/*.stories.jsx",
-		"**/*.stories.tsx"
+		"**/*.stories.tsx",
+		"**/*.stories.mdx",
+		"src/test-setup.ts",
+		"postcss.config.js"
 	],
 	"include": [
 		"**/*.ts",
 		"**/*.tsx",
 		"**/*.js",
-		"**/*.jsx",
-		"postcss.config.js"
+		"**/*.jsx"
 	]
 }

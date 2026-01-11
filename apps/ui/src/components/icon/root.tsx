@@ -5,7 +5,7 @@ import _ from 'lodash';
 
 import icons from './icon.list.lfs';
 import type { Properties } from './types';
-import { toDefaults, toFill, toSize, toWeight, toRotate } from './helpers';
+import { toDefaults, toFill, toWeight, toRotate, toSize } from './helpers';
 import './styles/index.css';
 
 /**
@@ -30,6 +30,7 @@ export default function Icon(properties?: Properties) {
 			xml: dictionary[iconKey],
 			color: defaults.color,
 			fill: defaults.color,
+			viewBox: defaults.viewBox,
 			height: size,
 			width: size,
 		}
@@ -39,6 +40,7 @@ export default function Icon(properties?: Properties) {
 		if (!reference.current) return;
 		if (defaults.weight) { reference.current.style.setProperty('--icon-weight-inject', `${toWeight(defaults)}`); }
 		if (!_.isUndefined(defaults.rotated)) { reference.current.style.setProperty('--icon-rotate-inject', toRotate(defaults)); }
+		if (_.isNumber(defaults.size)) { reference.current.style.setProperty('--icon-size-inject', 'fit-content'); }
 
 		reference.current.style.setProperty('--icon-color-inject', defaults.color);
 	}, [reference.current]);
@@ -46,7 +48,8 @@ export default function Icon(properties?: Properties) {
 	return (
 		<i ref={reference}
 			key={defaults.key}
-			className={clsx({
+			role='icon'
+			className={clsx(defaults.size, {
 				circular: defaults.circular,
 				bordered: defaults.bordered,
 				disabled: defaults.disabled,
@@ -56,11 +59,12 @@ export default function Icon(properties?: Properties) {
 			onClick={(event) => {
 				if (defaults.disabled) return;
 
-				defaults.onClick(event, defaults);
+				defaults.onClick(event, _.omit(defaults, ['onClick']));
 			}}
 		>
 			<SvgXml
 				xml={svg.xml}
+				viewBox={svg.viewBox}
 				color={svg.color}
 				fill={svg.fill}
 				height={svg.height}
