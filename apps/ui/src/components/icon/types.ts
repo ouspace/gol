@@ -123,6 +123,11 @@ export type Properties = RefAttributes<HTMLElement> & {
 
 	/**
 	 *
+	 */
+	viewBox?: string;
+
+	/**
+	 *
 	 * @param event
 	 * @returns
 	 */

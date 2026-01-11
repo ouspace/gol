@@ -1,17 +1,33 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
+
 import Icon from '../root';
 
-const meta: Meta<typeof Icon> = {
-	title: 'Components/Icon',
+export default {
+	title: 'components/Icon',
 	component: Icon,
-	tags: ['autodocs'],
-};
+	parameters: {
+		layout: 'centered',
+		docs: {
+			codePanel: true,
+		}
+	},
+	tags: ['autodocs', 'typescript', '!dev'],
+	argTypes: {
+		size: {
+			options: ['smallest', 'small', 'smallless', 'normal', 'bigless', 'big', 'biggest'],
+			control: { type: 'select' },
+			table: {
+				type: { summary: 'enum | number' },
+			},
+		}
+	}
+} as Meta<typeof Icon>;
 
-export default meta;
 type Story = StoryObj<typeof Icon>;
 
 // Default
 export const Default: Story = {
-	render: () => <Icon name='10k' />,
-	args: { },
+	args: {
+		name: '10k'
+	}
 };

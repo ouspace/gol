@@ -1,10 +1,7 @@
 {
 	"$schema": "./node_modules/nx/schemas/nx-schema.json",
 	"namedInputs": {
-		"default": [
-			"{projectRoot}/**/*",
-			"sharedGlobals"
-		],
+		"default": ["{projectRoot}/**/*", "sharedGlobals"],
 		"production": [
 			"default",
 			"!{projectRoot}/**/?(*.)+(spec|test).[jt]s?(x)?(.snap)",
@@ -54,9 +51,7 @@
 			"options": {
 				"targetName": "test"
 			},
-			"exclude": [
-				"apps/api-e2e/**/*"
-			]
+			"exclude": ["apps/api-e2e/**/*"]
 		},
 		{
 			"plugin": "@nx/playwright/plugin",
@@ -164,9 +159,10 @@
 	},
 	"targetDefaults": {
 		"e2e-ci--**/*": {
-			"dependsOn": [
-				"^build"
-			]
+			"dependsOn": ["^build"]
+		},
+		"test": {
+			"dependsOn": ["^build"]
 		}
 	}
 }
