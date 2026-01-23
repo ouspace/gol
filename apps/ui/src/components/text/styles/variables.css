@@ -1,0 +1,22 @@
+/* variables.css */
+.text {
+	--text-base-size: 1rem;
+	--text-base-weight: 400;
+	--text-base-line-height: 1.5;
+	--text-base-letter-spacing: 0.05em;
+	--text-base-transform: uppercase;
+
+	--text-size: var(--text-size-inject);
+	--text-weight: var(--text-weight-inject);
+	--text-color: var(--text-color-inject);
+	--text-line-height: var(--text-line-height-inject);
+	--text-align: var(--text-align-inject);
+	--text-letter-spacing: var(--text-letter-spacing-inject);
+	--text-decoration: var(--text-decoration-inject);
+	--text-font-style: var(--text-font-style-inject);
+	--text-transform: var(--text-transform-inject);
+	--text-white-space: var(--text-white-space-inject);
+	--text-user-select: var(--text-user-select-inject);
+	--text-opacity: var(--text-opacity-inject);
+	--text-cursor: var(--text-cursor-inject);
+}
