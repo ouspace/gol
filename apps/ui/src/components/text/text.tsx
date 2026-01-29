@@ -2,6 +2,7 @@ import type { Properties } from './types';
 import { toDefaults, toClasses, toSize } from './helpers';
 import './styles/index.css';
 import { useLayoutEffect, useRef, useMemo } from 'react';
+import _ from 'lodash';
 
 /**
  * Text component
@@ -21,26 +22,29 @@ export default function Text(properties?: Properties) {
 
 	useLayoutEffect(() => {
 		if (!reference.current) return;
+
 		if (size) {
 			reference.current.style.setProperty('--text-size-inject', size);
 		}
-		if (defaults.weight) {
+		if (defaults.weight !== null) {
 			reference.current.style.setProperty('--text-weight-inject', `${defaults.weight}`);
 		}
-		if (defaults.lineHeight) {
+		if (defaults.lineHeight !== null) {
 			reference.current.style.setProperty('--text-line-height-inject', `${defaults.lineHeight}`);
 		}
-		reference.current.style.setProperty('--text-letter-spacing-inject', defaults.letterSpacing);
-		reference.current.style.setProperty('--text-color-inject', defaults.color);
-		reference.current.style.setProperty('--text-align-inject', defaults.align);
-		reference.current.style.setProperty('--text-decoration-inject', defaults.decoration);
-		reference.current.style.setProperty('--text-font-style-inject', defaults.italic ? 'italic' : 'normal');
-		reference.current.style.setProperty('--text-transform-inject', defaults.transform);
-		reference.current.style.setProperty('--text-white-space-inject', defaults.noWrap ? 'nowrap' : 'normal');
-		reference.current.style.setProperty('--text-user-select-inject', defaults.unselectable ? 'none' : 'auto');
-		reference.current.style.setProperty('--text-opacity-inject', defaults.disabled ? '0.5' : '1');
-		reference.current.style.setProperty('--text-cursor-inject', defaults.disabled ? 'not-allowed' : 'inherit');
-	}, [reference.current]);
+		if (defaults.letterSpacing !== null) {
+			reference.current.style.setProperty('--text-letter-spacing-inject', defaults.letterSpacing);
+		}
+		if (defaults.color !== 'black') {
+			reference.current.style.setProperty('--text-color-inject', defaults.color);
+		}
+		if (defaults.align !== 'left') {
+			reference.current.style.setProperty('--text-align-inject', defaults.align);
+		}
+		if (defaults.decoration !== 'none') {
+			reference.current.style.setProperty('--text-decoration-inject', defaults.decoration);
+		}
+	}, [defaults]);
 
 	return (
 		<Element
@@ -48,8 +52,7 @@ export default function Text(properties?: Properties) {
 			ref={reference}
 			onClick={(event: React.MouseEvent<HTMLElement>) => {
 				if (defaults.disabled) return;
-
-				defaults.onClick(event, defaults);
+				defaults.onClick(event, _.omit(defaults, ['onClick']));
 			}}>
 			{defaults.children ?? defaults.content}
 		</Element>

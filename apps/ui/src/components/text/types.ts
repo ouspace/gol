@@ -1,4 +1,4 @@
-import { ReactNode, ElementType, RefAttributes, SyntheticEvent } from 'react';
+import type { ReactNode, ElementType, RefAttributes, SyntheticEvent } from 'react';
 
 type RGB = `rgb(${string})`;
 type RGBA = `rgba(${string})`;
@@ -13,7 +13,7 @@ type PERCENT = `${number}%`;
 type VW = `${number}vw`;
 type VH = `${number}vh`;
 
-type NameColor =
+type ColorName =
 	| 'orange'
 	| 'yellow'
 	| 'olive'
@@ -27,21 +27,23 @@ type NameColor =
 	| 'green'
 	| 'blue'
 	| 'black';
-type NameVariant =
-	| 'body1'
-	| 'body2'
-	| 'button'
-	| 'caption'
-	| 'h1'
-	| 'h2'
-	| 'h3'
-	| 'h4'
-	| 'h5'
-	| 'h6'
-	| 'inherit'
-	| 'overline'
-	| 'subtitle1'
-	| 'subtitle2';
+
+type ScaleName =
+	| 'display-large'
+	| 'display-medium'
+	| 'display-small'
+	| 'headline-large'
+	| 'headline-medium'
+	| 'headline-small'
+	| 'title-large'
+	| 'title-medium'
+	| 'title-small'
+	| 'label-large'
+	| 'label-medium'
+	| 'label-small'
+	| 'body-large'
+	| 'body-medium'
+	| 'body-small';
 
 type Color<TValue extends string> = TValue | RGB | RGBA | HEX | HSL | HSLA;
 type As<TValue extends string> = TValue | ElementType;
@@ -63,13 +65,24 @@ export type Properties = RefAttributes<HTMLElement> & {
 	children?: ReactNode;
 
 	/**
-	 * Defines the text content as a string.
-	 * Use `children` for ReactNode content.
+	 * Defines the text content.
+	 * Alternative to `children` properties.
 	 *
 	 * @example
 	 * content="Hello World"
+	 * content={<strong>Bold</strong>}
 	 */
-	content?: string;
+	content?: ReactNode;
+
+	/**
+	 * Defines a preset type scale configuration.
+	 * Sets `size`, `weight`, and `line-height`.
+	 *
+	 * @example
+	 * scale="title-medium"
+	 * scale="body-large"
+	 */
+	scale?: ScaleName;
 
 	/**
 	 * Defines the HTML element to render.
@@ -80,17 +93,6 @@ export type Properties = RefAttributes<HTMLElement> & {
 	 * as="h1"
 	 */
 	as?: As<'p' | 'span' | 'div' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'label'>;
-
-	/**
-	 * Defines the typography variant.
-	 * Each variant applies predefined font-size, weight, and line-height.
-	 *
-	 * @example
-	 * variant="h1"
-	 * variant="body1"
-	 * variant="caption"
-	 */
-	variant?: NameVariant;
 
 	/**
 	 * Defines the font size of the text.
@@ -112,7 +114,7 @@ export type Properties = RefAttributes<HTMLElement> & {
 	 * weight="bold"
 	 * weight={600}
 	 */
-	weight?: number | 'normal' | 'bold' | 'lighter' | 'bolder' | 'inherit' | 'initial' | 'revert';
+	weight?: number | 'normal' | 'bold' | 'lighter' | 'bolder' | 'inherit' | 'initial' | 'revert' | null;
 
 	/**
 	 * Defines the text color.
@@ -124,7 +126,7 @@ export type Properties = RefAttributes<HTMLElement> & {
 	 * color="#ff0000"
 	 * color="rgb(255, 0, 0)"
 	 */
-	color?: Color<NameColor>;
+	color?: Color<ColorName>;
 
 	/**
 	 * Defines the line height of the text.
@@ -135,7 +137,7 @@ export type Properties = RefAttributes<HTMLElement> & {
 	 * lineHeight={1.5}
 	 * lineHeight="2rem"
 	 */
-	lineHeight?: LineHeight<'normal' | 'inherit'>;
+	lineHeight?: LineHeight<'normal' | 'inherit'> | null;
 
 	/**
 	 * Defines the text alignment.
@@ -155,7 +157,7 @@ export type Properties = RefAttributes<HTMLElement> & {
 	 * letterSpacing="normal"
 	 * letterSpacing="0.1em"
 	 */
-	letterSpacing?: LetterSpacing<'normal'>;
+	letterSpacing?: LetterSpacing<'normal'> | null;
 
 	/**
 	 * Defines the text decoration.
@@ -187,13 +189,13 @@ export type Properties = RefAttributes<HTMLElement> & {
 	transform?: 'uppercase' | 'capitalize' | 'lowercase' | 'math-auto' | 'none';
 
 	/**
-	 * If `true`, prevents text from wrapping to the next line.
+	 * If `true`, allows text to wrap to the next line.
 	 *
-	 * @default false
+	 * @default true
 	 * @example
-	 * noWrap={true}
+	 * noWrap={false}
 	 */
-	noWrap?: boolean;
+	wrap?: boolean;
 
 	/**
 	 * If `true`, prevents text selection.

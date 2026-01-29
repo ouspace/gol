@@ -1,0 +1,33 @@
+import { Canvas, Meta, Controls, ArgTypes } from '@storybook/addon-docs/blocks';
+import { Playground } from 'storybook-addon-code-editor';
+
+import * as Components from '../index';
+import * as Stories from './text.stories';
+import DefaultSnippet from './default.snippet?raw';
+
+<Meta of={Stories} />
+
+# Text
+
+<Canvas of={Stories.Default} layout='centered' />
+
+## Controls
+
+<Controls of={Stories.Default} />
+
+## Playground
+
+<Playground
+	code={DefaultSnippet}
+	availableImports={{ '@gol/ui': Components }}
+	defaultEditorOptions={{
+		minimap: { enabled: false },
+		scrollBeyondLastLine: false,
+		automaticLayout: false,
+	}}
+	modifyEditor={(monaco, editor) => {
+		monaco.languages.typescript.typescriptDefaults.setDiagnosticsOptions({
+			noSemanticValidation: true,
+		});
+	}}
+/>

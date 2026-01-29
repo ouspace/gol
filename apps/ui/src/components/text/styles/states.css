@@ -1,0 +1,19 @@
+.text {
+	&.disabled {
+		opacity: 0.5;
+		cursor: not-allowed;
+		pointer-events: none;
+	}
+
+	&.italic {
+		font-style: italic;
+	}
+
+	&.nowrap {
+		white-space: nowrap;
+	}
+
+	&.unselectable {
+		user-select: none;
+	}
+}
