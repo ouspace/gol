@@ -6,9 +6,9 @@ import { match, P } from 'ts-pattern';
 export function toDefaults(properties?: Properties): Required<Properties> {
 	return _.defaults({}, properties, {
 		children: null,
-		content: '',
+		content: null,
+		scale: null,
 		as: 'span',
-		variant: null,
 		size: 'normal',
 		weight: null,
 		color: 'black',
@@ -18,7 +18,7 @@ export function toDefaults(properties?: Properties): Required<Properties> {
 		decoration: 'none',
 		italic: false,
 		transform: 'none',
-		noWrap: false,
+		wrap: true,
 		unselectable: false,
 		disabled: false,
 		className: '',
@@ -27,7 +27,12 @@ export function toDefaults(properties?: Properties): Required<Properties> {
 }
 
 export function toClasses(properties: Required<Properties>): string {
-	return clsx('text', properties.variant, properties.className);
+	return clsx('text', properties.scale, properties.className, {
+		disabled: properties.disabled,
+		italic: properties.italic,
+		nowrap: !properties.wrap,
+		unselectable: properties.unselectable,
+	});
 }
 
 export function toSize(properties: Required<Properties>): string | null {
