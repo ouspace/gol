@@ -1,0 +1,35 @@
+.radio__input:focus-visible + .radio__box::after {
+	outline-color: var(--radio-color);
+	outline-width: calc(var(--radio-border-width) + 1px);
+	box-shadow:
+		0 0 0 2px var(--radio-color-background),
+		0 0 0 4px var(--radio-color);
+}
+
+.radio.disabled {
+	.radio__box {
+		cursor: not-allowed;
+
+		&::after {
+			outline-color: var(--radio-color-disabled);
+			background-color: rgba(0, 0, 0, 0.05);
+			opacity: 0.6;
+		}
+	}
+
+	.radio__label {
+		color: var(--radio-color-disabled);
+		cursor: not-allowed;
+		opacity: 0.6;
+	}
+
+	.radio__input:checked + .radio__box {
+		&::after {
+			outline-color: var(--radio-color-disabled);
+		}
+
+		&::before {
+			background-color: var(--radio-color-disabled);
+		}
+	}
+}
