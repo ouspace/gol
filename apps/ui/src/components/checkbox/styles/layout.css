@@ -3,28 +3,25 @@
 	gap: var(--checkbox-gap);
 	align-items: center;
 	width: fit-content;
-}
-
-.checkbox {
-	grid-template-areas: "box label";
+	grid-template-areas: 'box label';
 	grid-template-columns: auto 1fr;
-}
 
-.checkbox.label-left {
-	grid-template-areas: "label box";
-	grid-template-columns: 1fr auto;
-}
+	&.label-left {
+		grid-template-areas: 'label box';
+		grid-template-columns: 1fr auto;
+	}
 
-.checkbox.label-top {
-	grid-template-areas: "label" "box";
-	grid-template-columns: 1fr;
-	justify-items: start;
-}
+	&.label-top {
+		grid-template-areas: 'label' 'box';
+		grid-template-columns: 1fr;
+		justify-items: start;
+	}
 
-.checkbox.label-bottom {
-	grid-template-areas: "box" "label";
-	grid-template-columns: 1fr;
-	justify-items: start;
+	&.label-bottom {
+		grid-template-areas: 'box' 'label';
+		grid-template-columns: 1fr;
+		justify-items: start;
+	}
 }
 
 .checkbox__box {
