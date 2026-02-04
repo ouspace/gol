@@ -1,8 +1,9 @@
-import { useRef, useLayoutEffect, useMemo, isValidElement } from 'react';
+import { useRef, useLayoutEffect, useMemo } from 'react';
 
 import type { Properties } from './types';
-import { toDefaults, toNativeProperties, toClasses, toSize, toLabelProperties } from './helpers';
+import { toDefaults, toNativeProperties, toClasses, toSize } from './helpers';
 import './styles/index.css';
+import { Text } from '../text/index';
 
 /**
  * Radio component
@@ -26,7 +27,6 @@ export default function Radio(properties?: Properties) {
 	const reference = useRef<HTMLLabelElement>(null);
 
 	const size = useMemo(() => toSize(defaults.size), [defaults.size]);
-	const label = useMemo(() => toLabelProperties(defaults.label), [defaults.label]);
 
 	useLayoutEffect(() => {
 		if (!reference.current) return;
@@ -34,17 +34,13 @@ export default function Radio(properties?: Properties) {
 		reference.current.style.setProperty('--radio-size-inject', `${size}px`);
 		reference.current.style.setProperty('--radio-color-inject', defaults.color);
 
-		if (label?.color) {
-			reference.current.style.setProperty('--radio-label-color-inject', label.color);
-		}
-
 		if (defaults.disabled) {
 			reference.current.setAttribute('aria-disabled', 'true');
 		}
-	}, [defaults.color, size, defaults.disabled, label?.color]);
+	}, [defaults.color, size, defaults.disabled]);
 
 	return (
-		<label ref={reference} className={toClasses(defaults, label)}>
+		<label ref={reference} className={toClasses(defaults)}>
 			<input
 				type='radio'
 				id={defaults.id}
@@ -66,15 +62,12 @@ export default function Radio(properties?: Properties) {
 
 			<span className='radio__box'>{defaults.checked ? defaults.checkedIcon : defaults.icon}</span>
 
-			{defaults.children ? (
-				<span className='radio__label'>{defaults.children}</span>
-			) : label ? (
-				<span className={`radio__label ${label.className ?? ''}`.trim()} style={{ color: label.color }}>
-					{label.value}
+			{(defaults.children ?? defaults.label) && (
+				<span className='radio__label'>
+					{defaults.children ??
+						(typeof defaults.label === 'string' ? <Text>{defaults.label}</Text> : <Text {...defaults.label} />)}
 				</span>
-			) : defaults.label && isValidElement(defaults.label) ? (
-				<span className='radio__label'>{defaults.label}</span>
-			) : null}
+			)}
 		</label>
 	);
 }

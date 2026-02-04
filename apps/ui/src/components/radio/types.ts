@@ -1,4 +1,5 @@
 import type { ReactNode, RefAttributes, SyntheticEvent } from 'react';
+import type { Properties as TextProperties } from '../text/types';
 
 type Size<TValue extends string> = TValue | number;
 
@@ -25,46 +26,7 @@ type NameColor =
 	| 'blue'
 	| 'black';
 
-/**
- * Label text properties
- */
-export type TextProperties = {
-	/**
-	 * Defines the label text.
-	 *
-	 * @example
-	 * value: "label test"
-	 */
-	value?: string;
-
-	/**
-	 * Defines the position of the label relative to the radio button.
-	 *
-	 * @default "right"
-	 * @example
-	 * position: "left"
-	 */
-	position?: 'top' | 'right' | 'bottom' | 'left';
-
-	/**
-	 * Defines the text color of the label.
-	 *
-	 * @example
-	 * color: "red"
-	 * color: "#ff0000"
-	 */
-	color?: Color<NameColor>;
-
-	/**
-	 * Defines the CSS class name for the label text.
-	 *
-	 * @example
-	 * className: "custom-label"
-	 */
-	className?: string;
-};
-
-type CustomProperties = {
+type CustomProperties = RefAttributes<HTMLElement> & {
 	/**
 	 * Defines the custom content for the label.
 	 * Overrides the `label` properties if provided.
@@ -94,14 +56,22 @@ type CustomProperties = {
 
 	/**
 	 * Defines the label for the radio button.
-	 * Supports string, TextProperties, or ReactNode.
+	 * Supports string or TextProperties.
 	 *
 	 * @example
 	 * label="label test"
 	 * label={{ value: "label test", position: "left", color: "red" }}
-	 * label={<strong>label test</strong>}
 	 */
-	label?: string | TextProperties | ReactNode;
+	label?: string | TextProperties;
+
+	/**
+	 * Defines the position of the label relative to the radio button.
+	 *
+	 * @default "right"
+	 * @example
+	 * labelPosition="left"
+	 */
+	labelPosition?: 'top' | 'right' | 'bottom' | 'left';
 
 	/**
 	 * Defines the value of the radio button

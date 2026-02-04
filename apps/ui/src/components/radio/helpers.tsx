@@ -1,8 +1,7 @@
 import _ from 'lodash';
 import clsx from 'clsx';
-import { match, P } from 'ts-pattern';
-import { isValidElement, type ReactNode } from 'react';
-import type { Properties, TextProperties } from './types';
+import { match } from 'ts-pattern';
+import type { Properties } from './types';
 
 export const generateId = (): string => {
 	return `radio-${Math.random().toString(36).slice(2, 9)}`;
@@ -13,6 +12,7 @@ export function toDefaults(properties?: Properties): Required<Properties> {
 		id: generateId(),
 		name: '',
 		label: null,
+		labelPosition: 'right',
 		value: '',
 		checked: false,
 		disabled: false,
@@ -52,28 +52,6 @@ export function toNativeProperties(properties?: Properties): Omit<React.InputHTM
 	return _.omit(properties, keysToOmit);
 }
 
-export function toLabelProperties(label?: string | TextProperties | ReactNode): TextProperties | null {
-	return match(label)
-		.with(P.string, (value) => ({
-			value,
-			position: 'right' as const,
-			color: undefined,
-			className: undefined,
-		}))
-		.with(P.nullish, () => null)
-		.with(
-			P.when((value) => typeof value === 'object' && !isValidElement(value)),
-			(textProperties) =>
-				_.defaults({}, textProperties as TextProperties, {
-					value: '',
-					position: 'right',
-					color: undefined,
-					className: undefined,
-				})
-		)
-		.otherwise(() => null);
-}
-
 export function toSize(size: Required<Properties>['size']): number {
 	return match({ size })
 		.with({ size: 'small' }, () => 16)
@@ -82,14 +60,9 @@ export function toSize(size: Required<Properties>['size']): number {
 		.otherwise(() => size as number);
 }
 
-export function toClasses(
-	properties: Required<Properties>,
-	labelProperties: TextProperties | null | undefined
-): string {
+export function toClasses(properties: Required<Properties>): string {
 	const hasCustomIcon = properties.icon !== null || properties.checkedIcon !== null;
-	const labelPosition = labelProperties?.position ?? 'right';
-
-	return clsx('radio', properties.size, `label-${labelPosition}`, properties.className, {
+	return clsx('radio', properties.size, `label-${properties.labelPosition}`, properties.className, {
 		checked: properties.checked,
 		disabled: properties.disabled,
 		'has-custom-icon': hasCustomIcon,

@@ -33,11 +33,6 @@
 .radio__label {
 	user-select: none;
 	cursor: pointer;
-	font-family: var(--radio-font-family, 'Roboto', system-ui, sans-serif);
-	font-size: calc(var(--radio-size) * 0.778);
-	font-weight: var(--radio-font-weight, 400);
-	line-height: var(--radio-line-height, 1.5);
-	letter-spacing: var(--radio-letter-spacing, normal);
 }
 
 .radio.has-custom-icon {
