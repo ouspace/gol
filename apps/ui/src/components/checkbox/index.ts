@@ -1,2 +1,2 @@
-export { default } from './checkbox';
+export { default as Checkbox } from './checkbox';
 export type { Properties } from './types';

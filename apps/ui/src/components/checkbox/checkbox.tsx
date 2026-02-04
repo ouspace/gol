@@ -1,8 +1,9 @@
-import { useRef, useLayoutEffect, useMemo, isValidElement } from 'react';
+import { useRef, useLayoutEffect, useMemo } from 'react';
 
 import type { Properties } from './types';
 import './styles/index.css';
-import { toDefaults, toClasses, toSize, toLabelProperties } from './helpers';
+import { toDefaults, toClasses, toSize } from './helpers';
+import { Text } from '../text/index';
 
 /**
  * Checkbox component
@@ -19,7 +20,6 @@ export default function Checkbox(properties?: Properties) {
 	const reference = useRef<HTMLLabelElement>(null);
 	const inputReference = useRef<HTMLInputElement>(null);
 	const size = useMemo(() => toSize(defaults), [defaults.size]);
-	const labelProperties = useMemo(() => toLabelProperties(defaults.label), [defaults.label]);
 
 	useLayoutEffect(() => {
 		if (!reference.current) return;
@@ -37,8 +37,8 @@ export default function Checkbox(properties?: Properties) {
 		<label ref={reference} className={toClasses(defaults)}>
 			<input
 				ref={inputReference}
-				type="checkbox"
-				className="checkbox__input"
+				type='checkbox'
+				className='checkbox__input'
 				checked={defaults.value === true}
 				disabled={defaults.disabled}
 				id={defaults.id}
@@ -49,20 +49,14 @@ export default function Checkbox(properties?: Properties) {
 				}}
 				aria-checked={defaults.value ?? 'mixed'}
 			/>
-			<span className="checkbox__box">
-				{defaults.value === true ? defaults.checkedIcon : defaults.icon}
-			</span>
+			<span className='checkbox__box'>{defaults.value === true ? defaults.checkedIcon : defaults.icon}</span>
 
-			{labelProperties ? (
-				<span
-					className={`checkbox__label ${labelProperties.className ?? ''}`.trim()}
-					style={{ color: labelProperties.color }}
-				>
-					{labelProperties.value}
+			{(defaults.children ?? defaults.label) && (
+				<span className='checkbox__label'>
+					{defaults.children ??
+						(typeof defaults.label === 'string' ? <Text>{defaults.label}</Text> : <Text {...defaults.label} />)}
 				</span>
-			) : defaults.label && isValidElement(defaults.label) ? (
-				<span className="checkbox__label">{defaults.label}</span>
-			) : null}
+			)}
 		</label>
 	);
 }

@@ -1,51 +1,41 @@
 import type { ReactNode, RefAttributes, SyntheticEvent } from 'react';
+import type { Properties as TextProperties } from '../text/types';
 
 type Size<TValue extends string> = TValue | number;
-type Color<TValue extends string> = TValue | `rgb(${string})` | `rgba(${string})` | `hsl(${string})` | `hsla(${string})` | `#${string}`;
-type NameColor = 'orange' | 'yellow' | 'olive' | 'teal' | 'violet' | 'purple' | 'pink' | 'brown' | 'grey' | 'red' | 'green' | 'blue' | 'black';
-
-/**
- * Label properties 
- */
-export type TextProperties = {
-	/**
-	 * Label text content
-	 *
-	 * @example
-	 * value: "label test"
-	 */
-	value?: string;
-
-	/**
-	 * Position of the label relative to the checkbox
-	 *
-	 * @default "right"
-	 * @example
-	 * position: "left"
-	 */
-	position?: 'top' | 'right' | 'bottom' | 'left';
-
-	/**
-	 * Color of the label text
-	 *
-	 * @example
-	 * color: "red"
-	 * color: "#ff0000"
-	 */
-	color?: Color<NameColor>;
-
-	/**
-	 * Additional CSS class names for the label
-	 *
-	 * @example
-	 * className: "custom-label"
-	 */
-	className?: string;
-};
+type Color<TValue extends string> =
+	| TValue
+	| `rgb(${string})`
+	| `rgba(${string})`
+	| `hsl(${string})`
+	| `hsla(${string})`
+	| `#${string}`;
+type NameColor =
+	| 'orange'
+	| 'yellow'
+	| 'olive'
+	| 'teal'
+	| 'violet'
+	| 'purple'
+	| 'pink'
+	| 'brown'
+	| 'grey'
+	| 'red'
+	| 'green'
+	| 'blue'
+	| 'black';
 
 export type Properties = RefAttributes<HTMLElement> & {
 	/**
-	 * Unique identifier for the checkbox input element
+	 * Defines the custom content for the label.
+	 * Overrides the `label` prop if provided.
+	 *
+	 * @example
+	 * <Checkbox>Label children</Checkbox>
+	 */
+	children?: ReactNode;
+
+	/**
+	 * Defines the id of the input element.
 	 *
 	 * @example
 	 * id="test-checkbox"
@@ -53,7 +43,7 @@ export type Properties = RefAttributes<HTMLElement> & {
 	id?: string;
 
 	/**
-	 * Name attribute for the checkbox input
+	 * Defines the name attribute of the input element.
 	 *
 	 * @example
 	 * name="test-checkbox"
@@ -61,22 +51,27 @@ export type Properties = RefAttributes<HTMLElement> & {
 	name?: string;
 
 	/**
-	 * Label for the checkbox
+	 * Defines the label for the checkbox.
+	 * Supports string or TextProperties for styling.
 	 *
 	 * @example
-	 * // String
 	 * label="label test"
-	 *
-	 * //TextProperties
-	 * label={{ value: "label test", position: "left", color: "red" }}
-	 *
-	 * //ReactNode
-	 * label={<span>content</span>}
+	 * label={{ content: "label test", color: "red" }}
 	 */
-	label?: string | TextProperties | ReactNode;
+	label?: string | TextProperties;
 
 	/**
-	 * Current state of the checkbox
+	 * Defines the position of the label relative to the checkbox.
+	 *
+	 * @default "right"
+	 * @example
+	 * labelPosition="left"
+	 * labelPosition="top"
+	 */
+	labelPosition?: 'top' | 'right' | 'bottom' | 'left';
+
+	/**
+	 * Defines the current state of the checkbox.
 	 * - true: checked
 	 * - false: unchecked
 	 * - null: indeterminate
@@ -88,7 +83,7 @@ export type Properties = RefAttributes<HTMLElement> & {
 	value?: boolean | null;
 
 	/**
-	 * Disables the checkbox interaction
+	 * If `true`, the checkbox is disabled.
 	 *
 	 * @default false
 	 * @example
@@ -97,7 +92,7 @@ export type Properties = RefAttributes<HTMLElement> & {
 	disabled?: boolean;
 
 	/**
-	 * Icon displayed when checkbox is unchecked
+	 * Defines the icon displayed when checkbox is unchecked.
 	 *
 	 * @example
 	 * icon={<Icon name="favorite"/>}
@@ -105,7 +100,7 @@ export type Properties = RefAttributes<HTMLElement> & {
 	icon?: ReactNode;
 
 	/**
-	 * Icon displayed when checkbox is checked
+	 * Defines the icon displayed when checkbox is checked.
 	 *
 	 * @example
 	 * checkedIcon={<Icon name="favorite" fill />}
@@ -113,7 +108,7 @@ export type Properties = RefAttributes<HTMLElement> & {
 	checkedIcon?: ReactNode;
 
 	/**
-	 * Size of the checkbox
+	 * Defines the checkbox size.
 	 *
 	 * @default "normal"
 	 * @example
@@ -124,7 +119,8 @@ export type Properties = RefAttributes<HTMLElement> & {
 	size?: Size<'normal' | 'small' | 'big'>;
 
 	/**
-	 * Defines the checkbox color, and supports `rgb` | `rgba` | `hsl` | `hsla` | `hex` | `named colors`
+	 * Defines the checkbox color.
+	 * Supports `rgb`, `rgba`, `hsl`, `hsla`, `hex`, and named colors.
 	 *
 	 * @default "blue"
 	 * @example
@@ -135,7 +131,7 @@ export type Properties = RefAttributes<HTMLElement> & {
 	color?: Color<NameColor>;
 
 	/**
-	 * Applies circular styling to the checkbox
+	 * If `true`, renders the checkbox with a circular border.
 	 *
 	 * @default false
 	 * @example
@@ -144,7 +140,7 @@ export type Properties = RefAttributes<HTMLElement> & {
 	circular?: boolean;
 
 	/**
-	 * Additional CSS class names to apply
+	 * Defines the CSS class name for the checkbox.
 	 *
 	 * @example
 	 * className="custom-checkbox"
@@ -152,7 +148,7 @@ export type Properties = RefAttributes<HTMLElement> & {
 	className?: string;
 
 	/**
-	 * Callback fired when the checkbox state changes
+	 * Callback fired when the checkbox state changes.
 	 *
 	 * @param event - The change event
 	 * @param properties - Updated properties including the new value
@@ -161,4 +157,4 @@ export type Properties = RefAttributes<HTMLElement> & {
 	 * onChange={(event, props) => console.log(props.value)}
 	 */
 	onChange?: (event: SyntheticEvent, properties: Properties) => void;
-}
+};
