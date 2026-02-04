@@ -80,15 +80,8 @@ describe('Components/radio', () => {
 			expect(text).toBeInTheDocument();
 		});
 
-		test('should render label as ReactNode', () => {
-			render(<Radio label={<strong>label-test</strong>} />);
-			const text = screen.getByText('label-test');
-
-			expect(text).toBeInTheDocument();
-		});
-
 		test('should render label as TextProperties object', () => {
-			render(<Radio label={{ value: 'label-test', position: 'left', color: 'blue' }} />);
+			render(<Radio label={{ content: 'label-test', color: 'blue' }} labelPosition='left' />);
 
 			expect(screen.getByText('label-test')).toBeInTheDocument();
 		});
