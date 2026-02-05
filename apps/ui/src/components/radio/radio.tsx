@@ -63,10 +63,7 @@ export default function Radio(properties?: Properties) {
 			<span className='radio__box'>{defaults.checked ? defaults.checkedIcon : defaults.icon}</span>
 
 			{(defaults.children ?? defaults.label) && (
-				<span className='radio__label'>
-					{defaults.children ??
-						(typeof defaults.label === 'string' ? <Text>{defaults.label}</Text> : <Text {...defaults.label} />)}
-				</span>
+				<span className='radio__label'>{defaults.children ?? Text.createFrom(defaults.label)}</span>
 			)}
 		</label>
 	);
