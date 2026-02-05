@@ -56,13 +56,14 @@ type CustomProperties = RefAttributes<HTMLElement> & {
 
 	/**
 	 * Defines the label for the radio button.
-	 * Supports string or TextProperties.
+	 * Supports ReactNode or TextProperties.
 	 *
 	 * @example
 	 * label="label test"
-	 * label={{ value: "label test", position: "left", color: "red" }}
+	 * label={<strong>Bold label</strong>}
+	 * label={{ content: "label test", color: "red" }}
 	 */
-	label?: string | TextProperties;
+	label?: ReactNode | TextProperties;
 
 	/**
 	 * Defines the position of the label relative to the radio button.

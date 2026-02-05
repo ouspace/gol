@@ -52,10 +52,7 @@ export default function Checkbox(properties?: Properties) {
 			<span className='checkbox__box'>{defaults.value === true ? defaults.checkedIcon : defaults.icon}</span>
 
 			{(defaults.children ?? defaults.label) && (
-				<span className='checkbox__label'>
-					{defaults.children ??
-						(typeof defaults.label === 'string' ? <Text>{defaults.label}</Text> : <Text {...defaults.label} />)}
-				</span>
+				<span className='checkbox__label'>{defaults.children ?? Text.createFrom(defaults.label)}</span>
 			)}
 		</label>
 	);
