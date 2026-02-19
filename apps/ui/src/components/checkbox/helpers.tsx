@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import clsx from 'clsx';
 import { match } from 'ts-pattern';
+import { isValidElement } from 'react';
 import type { Properties } from './types';
 
 /**
@@ -48,6 +49,14 @@ export function toSize(properties: Required<Properties>): number {
 		.otherwise(() => properties.size as number);
 }
 
+export function toLabelPosition(label: Properties['label']): 'top' | 'right' | 'bottom' | 'left' {
+	const currentLabel = typeof label === 'function' ? label() : label;
+	if (currentLabel && typeof currentLabel === 'object' && !isValidElement(currentLabel) && 'position' in currentLabel) {
+		return currentLabel.position ?? 'right';
+	}
+	return 'right';
+}
+
 /**
  *
  * @param properties
@@ -55,7 +64,7 @@ export function toSize(properties: Required<Properties>): number {
  */
 export function toClasses(properties: Required<Properties>): string {
 	const hasCustomIcon = properties.icon !== null || properties.checkedIcon !== null;
-
+	const labelPosition = toLabelPosition(properties.label);
 	return clsx(
 		{
 			disabled: properties.disabled,
@@ -64,7 +73,7 @@ export function toClasses(properties: Required<Properties>): string {
 		},
 		'checkbox',
 		properties.size,
-		`label-${properties.labelPosition}`,
+		`label-${labelPosition}`,
 		properties.className
 	);
 }

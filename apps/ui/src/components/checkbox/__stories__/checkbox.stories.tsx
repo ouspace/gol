@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import Checkbox from '../checkbox';
-import { Icon } from '../../icon/index';
-import { Text } from '../../text/index';
+import { Icon } from '../../icon';
+import { Text } from '../../text';
 
 const meta: Meta<typeof Checkbox> = {
 	title: 'Components/Checkbox',
@@ -24,10 +24,6 @@ const meta: Meta<typeof Checkbox> = {
 		},
 		color: {
 			control: 'color',
-		},
-		labelPosition: {
-			control: 'select',
-			options: ['top', 'right', 'bottom', 'left'],
 		},
 	},
 };
@@ -97,14 +93,16 @@ export const Colors: Story = {
 	),
 };
 
-// Label Positions
-export const LabelPositions: Story = {
+// Label
+export const Labels: Story = {
 	render: () => (
 		<div style={{ display: 'flex', gap: '24px', alignItems: 'center' }}>
-			<Checkbox label='Top' labelPosition='top' value={true} />
-			<Checkbox label='Right' labelPosition='right' value={true} />
-			<Checkbox label='Bottom' labelPosition='bottom' value={true} />
-			<Checkbox label='Left' labelPosition='left' value={true} />
+			<Checkbox label={{ content: 'Right position', position: 'right' }} value={true} />
+			<Checkbox label={{ content: 'Left position', position: 'left' }} value={true} />
+			<Checkbox label={{ content: 'Top position', position: 'top' }} value={true} />
+			<Checkbox label={{ content: 'Bottom position', position: 'bottom' }} value={true} />
+			<Checkbox label={{ content: 'Colored label', color: 'red' }} value={true} />
+			<Checkbox label={{ content: <strong>Bold label</strong> }} value={true} />
 		</div>
 	),
 };

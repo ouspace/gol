@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import clsx from 'clsx';
 import { match } from 'ts-pattern';
+import { isValidElement } from 'react';
 import type { Properties } from './types';
 
 export const generateId = (): string => {
@@ -12,7 +13,6 @@ export function toDefaults(properties?: Properties): Required<Properties> {
 		id: generateId(),
 		name: '',
 		label: null,
-		labelPosition: 'right',
 		value: '',
 		checked: false,
 		disabled: false,
@@ -60,9 +60,18 @@ export function toSize(size: Required<Properties>['size']): number {
 		.otherwise(() => size as number);
 }
 
+export function toLabelPosition(label: Properties['label']): 'top' | 'right' | 'bottom' | 'left' {
+	const currentLabel = typeof label === 'function' ? label() : label;
+	if (currentLabel && typeof currentLabel === 'object' && !isValidElement(currentLabel) && 'position' in currentLabel) {
+		return currentLabel.position ?? 'right';
+	}
+	return 'right';
+}
+
 export function toClasses(properties: Required<Properties>): string {
 	const hasCustomIcon = properties.icon !== null || properties.checkedIcon !== null;
-	return clsx('radio', properties.size, `label-${properties.labelPosition}`, properties.className, {
+	const labelPosition = toLabelPosition(properties.label);
+	return clsx('radio', properties.size, `label-${labelPosition}`, properties.className, {
 		checked: properties.checked,
 		disabled: properties.disabled,
 		'has-custom-icon': hasCustomIcon,

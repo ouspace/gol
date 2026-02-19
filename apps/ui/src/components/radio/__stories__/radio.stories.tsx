@@ -1,7 +1,7 @@
 import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import Radio from '../radio';
-import { Icon } from '../../icon/index';
+import { Icon } from '../../icon';
 
 const meta: Meta<typeof Radio> = {
 	title: 'Components/Radio',
@@ -10,7 +10,7 @@ const meta: Meta<typeof Radio> = {
 	argTypes: {
 		size: {
 			control: 'select',
-			options: ['small', 'normal', 'big', 14, 18, 22, 26],
+			options: ['small', 'normal', 'big'],
 		},
 		color: {
 			control: 'select',
@@ -27,9 +27,6 @@ const meta: Meta<typeof Radio> = {
 				'brown',
 				'grey',
 				'black',
-				'#ff0000',
-				'rgb(0,255,0)',
-				'hsl(240,100%,50%)',
 			],
 		},
 	},
@@ -83,10 +80,10 @@ export const Colors: Story = {
 export const Labels: Story = {
 	render: () => (
 		<div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-			<Radio label='Right position' labelPosition='right' checked />
-			<Radio label='Left position' labelPosition='left' checked />
-			<Radio label='Top position' labelPosition='top' checked />
-			<Radio label='Bottom position' labelPosition='bottom' checked />
+			<Radio label={{ content: 'Right position', position: 'right' }} checked />
+			<Radio label={{ content: 'Left position', position: 'left' }} checked />
+			<Radio label={{ content: 'Top position', position: 'top' }} checked />
+			<Radio label={{ content: 'Bottom position', position: 'bottom' }} checked />
 			<Radio label={{ content: 'Colored label', color: 'red' }} checked color='red' />
 			<Radio checked>
 				<strong>Bold label</strong>
