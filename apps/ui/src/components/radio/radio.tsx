@@ -1,9 +1,11 @@
-import { useRef, useLayoutEffect, useMemo } from 'react';
+import { useRef, useLayoutEffect, useMemo, isValidElement } from 'react';
+import _ from 'lodash';
+import clsx from 'clsx';
 
 import type { Properties } from './types';
 import { toDefaults, toNativeProperties, toClasses, toSize } from './helpers';
 import './styles/index.css';
-import { Text } from '../text/index';
+import { Text, type TextProperties } from '../text';
 
 /**
  * Radio component
@@ -62,9 +64,21 @@ export default function Radio(properties?: Properties) {
 
 			<span className='radio__box'>{defaults.checked ? defaults.checkedIcon : defaults.icon}</span>
 
-			{(defaults.children ?? defaults.label) && (
-				<span className='radio__label'>{defaults.children ?? Text.createFrom(defaults.label)}</span>
-			)}
+			{!_.isEmpty(defaults.children) && defaults.children}
+			{_.isEmpty(defaults.children) && isValidElement(defaults.label) && defaults.label}
+			{_.isEmpty(defaults.children) &&
+				!isValidElement(defaults.label) &&
+				defaults.label !== null &&
+				Text.createFrom(
+					typeof defaults.label === 'function'
+						? defaults.label
+						: typeof defaults.label === 'string'
+							? { content: defaults.label, className: 'radio__label' }
+							: _.defaults(
+									{ className: clsx('radio__label', (defaults.label as TextProperties).className) },
+									defaults.label
+								)
+				)}
 		</label>
 	);
 }

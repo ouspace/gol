@@ -1,9 +1,11 @@
-import { useRef, useLayoutEffect, useMemo } from 'react';
+import { useRef, useLayoutEffect, useMemo, isValidElement } from 'react';
+import _ from 'lodash';
+import clsx from 'clsx';
 
 import type { Properties } from './types';
 import './styles/index.css';
 import { toDefaults, toClasses, toSize } from './helpers';
-import { Text } from '../text/index';
+import { Text, type TextProperties } from '../text';
 
 /**
  * Checkbox component
@@ -51,9 +53,21 @@ export default function Checkbox(properties?: Properties) {
 			/>
 			<span className='checkbox__box'>{defaults.value === true ? defaults.checkedIcon : defaults.icon}</span>
 
-			{(defaults.children ?? defaults.label) && (
-				<span className='checkbox__label'>{defaults.children ?? Text.createFrom(defaults.label)}</span>
-			)}
+			{!_.isEmpty(defaults.children) && defaults.children}
+			{_.isEmpty(defaults.children) && isValidElement(defaults.label) && defaults.label}
+			{_.isEmpty(defaults.children) &&
+				!isValidElement(defaults.label) &&
+				defaults.label !== null &&
+				Text.createFrom(
+					typeof defaults.label === 'function'
+						? defaults.label
+						: typeof defaults.label === 'string'
+							? { content: defaults.label, className: 'checkbox__label' }
+							: _.defaults(
+									{ className: clsx('checkbox__label', (defaults.label as TextProperties).className) },
+									defaults.label
+								)
+				)}
 		</label>
 	);
 }

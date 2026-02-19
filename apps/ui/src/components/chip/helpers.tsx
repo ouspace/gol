@@ -32,11 +32,10 @@ export function toDefaults(properties?: Properties): Required<Properties> {
 }
 
 export function toClasses(properties: Required<Properties>): string {
-	const { role, variant, disabled, selected, icon, className } = properties;
+	const { role, variant, disabled, selected, className } = properties;
 	return clsx('chip', role, variant, className, {
 		selected: selected,
 		disabled: disabled,
-		icon: icon,
 	});
 }
 

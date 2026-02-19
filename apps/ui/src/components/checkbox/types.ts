@@ -1,5 +1,5 @@
 import type { ReactNode, RefAttributes, SyntheticEvent } from 'react';
-import type { Properties as TextProperties } from '../text/types';
+import type { TextProperties as BaseTextProperties } from '../text';
 
 type Size<TValue extends string> = TValue | number;
 type Color<TValue extends string> =
@@ -9,7 +9,7 @@ type Color<TValue extends string> =
 	| `hsl(${string})`
 	| `hsla(${string})`
 	| `#${string}`;
-type NameColor =
+type ColorName =
 	| 'orange'
 	| 'yellow'
 	| 'olive'
@@ -23,6 +23,17 @@ type NameColor =
 	| 'green'
 	| 'blue'
 	| 'black';
+
+export type TextProperties = BaseTextProperties & {
+	/**
+	 * Defines the position of the label relative to the radio button.
+	 *
+	 * @default "right"
+	 * @example
+	 * labelPosition="left"
+	 */
+	position?: 'top' | 'right' | 'bottom' | 'left';
+};
 
 export type Properties = RefAttributes<HTMLElement> & {
 	/**
@@ -59,17 +70,7 @@ export type Properties = RefAttributes<HTMLElement> & {
 	 * label={<strong>Bold label</strong>}
 	 * label={{ content: "label test", color: "red" }}
 	 */
-	label?: ReactNode | TextProperties;
-
-	/**
-	 * Defines the position of the label relative to the checkbox.
-	 *
-	 * @default "right"
-	 * @example
-	 * labelPosition="left"
-	 * labelPosition="top"
-	 */
-	labelPosition?: 'top' | 'right' | 'bottom' | 'left';
+	label?: ReactNode | TextProperties | (() => TextProperties | React.ReactNode);
 
 	/**
 	 * Defines the current state of the checkbox.
@@ -129,7 +130,7 @@ export type Properties = RefAttributes<HTMLElement> & {
 	 * color="#f00"
 	 * color="rgb(255, 0, 0)"
 	 */
-	color?: Color<NameColor>;
+	color?: Color<ColorName>;
 
 	/**
 	 * If `true`, renders the checkbox with a circular border.

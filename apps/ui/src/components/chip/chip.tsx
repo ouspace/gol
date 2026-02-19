@@ -1,10 +1,10 @@
-import { useRef, useLayoutEffect, useMemo } from 'react';
+import { useRef, useLayoutEffect, useMemo, isValidElement } from 'react';
 import _ from 'lodash';
 
 import type { ChipsProperties } from './types';
 import { toDefaults, toClasses, toRadius, toColor, toSize } from './helpers';
-import { Icon } from '../icon/index';
-import { Text } from '../text/index';
+import { Icon } from '../icon';
+import { Text } from '../text';
 import './styles/index.css';
 
 /**
@@ -69,7 +69,14 @@ export default function Chip(properties?: ChipsProperties) {
 				<span className='chip__icon'>{defaults.icon}</span>
 			)}
 
-			<span className='chip__content'>{defaults.children ?? Text.createFrom(defaults.label)}</span>
+			<span className='chip__content'>
+				{!_.isEmpty(defaults.children) && defaults.children}
+				{_.isEmpty(defaults.children) && isValidElement(defaults.label) && defaults.label}
+				{_.isEmpty(defaults.children) &&
+					!isValidElement(defaults.label) &&
+					defaults.label !== null &&
+					Text.createFrom(defaults.label)}
+			</span>
 
 			{defaults.role === 'input' && defaults.onRemove !== _.noop && (
 				<button

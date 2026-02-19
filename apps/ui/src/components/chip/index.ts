@@ -1,2 +1,2 @@
 export type { Properties } from './types';
-export { default } from './chip';
+export { default as Chip } from './chip';

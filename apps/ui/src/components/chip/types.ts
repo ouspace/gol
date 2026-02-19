@@ -1,5 +1,5 @@
 import type { ReactNode, RefAttributes, SyntheticEvent } from 'react';
-import type { Properties as TextProperties } from '../text/types';
+import type { TextProperties } from '../text';
 
 type Size<TValue extends string> = TValue | number;
 type Color<TValue extends string> =
@@ -28,16 +28,16 @@ export type Properties = RefAttributes<HTMLElement> & {
 	 * - suggestion: onClick, href, target
 	 *
 	 * @example
-	 * // Assist chips - for actions and help
+	 * Assist chips - for actions and help
 	 * <Chip role="assist" onClick={handler}>Content</Chip>
 	 *
-	 * // Filter chips - for selectable filters
+	 * Filter chips - for selectable filters
 	 * <Chip role="filter" selected={true} onToggle={handler}>Content</Chip>
 	 *
-	 * // Input chips - for removable tags
+	 * Input chips - for removable tags
 	 * <Chip role="input" onRemove={handler} avatar={<UserIcon/>}>Content</Chip>
 	 *
-	 * // Suggestion chips - for clickable suggestions
+	 * Suggestion chips - for clickable suggestions
 	 * <Chip role="suggestion" onClick={handler}>Content</Chip>
 	 *
 	 * @remarks
@@ -52,7 +52,7 @@ export type Properties = RefAttributes<HTMLElement> & {
 	 * children="Primary Chip"
 	 * children={<chip>Custom Content</chip>}
 	 */
-	children: ReactNode;
+	children?: ReactNode;
 
 	/**
 	 * Defines the label for the chip.
@@ -65,7 +65,7 @@ export type Properties = RefAttributes<HTMLElement> & {
 	 * label={<strong>Bold</strong>}
 	 * label={{ content: "Label text", color: "red", weight: "bold" }}
 	 */
-	label?: ReactNode | TextProperties;
+	label?: ReactNode | TextProperties | (() => TextProperties | React.ReactNode);
 
 	/**
 	 * Defines the chip color, and supports `rgb` | `rgba` | `hsl` | `hsla` | `hex` | `named colors`

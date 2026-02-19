@@ -1,5 +1,5 @@
 import type { ReactNode, RefAttributes, SyntheticEvent } from 'react';
-import type { Properties as TextProperties } from '../text/types';
+import type { TextProperties as BaseTextProperties } from '../text';
 
 type Size<TValue extends string> = TValue | number;
 
@@ -11,7 +11,7 @@ type Color<TValue extends string> =
 	| `hsla(${string})`
 	| `#${string}`;
 
-type NameColor =
+type ColorName =
 	| 'orange'
 	| 'yellow'
 	| 'olive'
@@ -25,6 +25,17 @@ type NameColor =
 	| 'green'
 	| 'blue'
 	| 'black';
+
+export type TextProperties = BaseTextProperties & {
+	/**
+	 * Defines the position of the label relative to the radio button.
+	 *
+	 * @default "right"
+	 * @example
+	 * labelPosition="left"
+	 */
+	position?: 'top' | 'right' | 'bottom' | 'left';
+};
 
 type CustomProperties = RefAttributes<HTMLElement> & {
 	/**
@@ -63,16 +74,7 @@ type CustomProperties = RefAttributes<HTMLElement> & {
 	 * label={<strong>Bold label</strong>}
 	 * label={{ content: "label test", color: "red" }}
 	 */
-	label?: ReactNode | TextProperties;
-
-	/**
-	 * Defines the position of the label relative to the radio button.
-	 *
-	 * @default "right"
-	 * @example
-	 * labelPosition="left"
-	 */
-	labelPosition?: 'top' | 'right' | 'bottom' | 'left';
+	label?: ReactNode | TextProperties | (() => TextProperties | React.ReactNode);
 
 	/**
 	 * Defines the value of the radio button
@@ -146,7 +148,7 @@ type CustomProperties = RefAttributes<HTMLElement> & {
 	 * color="#f00"
 	 * color="rgb(255, 0, 0)"
 	 */
-	color?: Color<NameColor>;
+	color?: Color<ColorName>;
 
 	/**
 	 * Defines the CSS class for the radio button
