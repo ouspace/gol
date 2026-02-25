@@ -4,8 +4,8 @@ import { SvgXml } from 'react-native-svg';
 import _ from 'lodash';
 
 import icons from './icon.list.lfs';
-import type { Properties } from './types';
-import { toDefaults, toFill, toWeight, toRotate, toSize } from './helpers';
+import { type Properties, Mode } from './types';
+import { toDefaults, toFill, toWeight, toRotate, toSize, isSizeEnum } from './helpers';
 import './styles/index.css';
 
 /**
@@ -20,11 +20,17 @@ import './styles/index.css';
  */
 export default function Icon(properties?: Properties) {
 	const defaults = toDefaults(properties);
-	const iconKey = `${defaults.name}__${defaults.variant}_${toFill(defaults)}_${defaults.weight}`;
+	const size = toSize(defaults);
+	const weight = toWeight(defaults, { mode: Mode.Init });
+	const rotate = toRotate(defaults);
+
+	const iconKey = `${defaults.name}__${defaults.variant}_${toFill(defaults)}_${weight}`;
+
+	console.log('::iconKey::', iconKey);
+
 	const reference = (defaults.ref ?? useRef<HTMLElement>(null)) as RefObject<HTMLElement | null>;
+	const dictionary = useMemo(() => icons as Record<string, string>, []);
 	const svg = useMemo(() => {
-		const dictionary = icons as Record<string, string>;
-		const size = toSize(defaults);
 
 		return {
 			xml: dictionary[iconKey],
@@ -34,22 +40,26 @@ export default function Icon(properties?: Properties) {
 			height: size,
 			width: size,
 		}
-	}, [iconKey, defaults.color]);
-
-	useLayoutEffect(() => {
-		if (!reference.current) return;
-		if (defaults.weight) { reference.current.style.setProperty('--icon-weight-inject', `${toWeight(defaults)}`); }
-		if (!_.isUndefined(defaults.rotated)) { reference.current.style.setProperty('--icon-rotate-inject', toRotate(defaults)); }
-		if (_.isNumber(defaults.size)) { reference.current.style.setProperty('--icon-size-inject', 'fit-content'); }
-
-		reference.current.style.setProperty('--icon-color-inject', defaults.color);
-	}, [reference.current]);
+	}, [iconKey, defaults]);
+	const style = useMemo(() => {
+		return {
+			'--icon-size-inject': size,
+			'--icon-rotate-inject': rotate,
+			'--icon-weight-inject': toWeight(defaults),
+			'--icon-color-inject': defaults.color,
+		}
+	}, [defaults]);
 
 	return (
 		<i ref={reference}
 			key={defaults.key}
+			// // @ts-expect-error unsupported `name` attribute for <i> element.
+			name={defaults.name}
 			role='icon'
-			className={clsx(defaults.size, {
+			// @ts-expect-error unsupported `style` attribute for <i> element.
+			style={style}
+			className={clsx({
+				[defaults.size as string]: isSizeEnum(defaults),
 				circular: defaults.circular,
 				bordered: defaults.bordered,
 				disabled: defaults.disabled,
