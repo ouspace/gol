@@ -2,6 +2,8 @@ import type { RefAttributes, SyntheticEvent } from 'react';
 import type { IconKeys } from './icon.list.lfs';
 
 // TODO: Implement a `custom type` to extend `Name` keys along side `IconKeys`.
+type SizeUnit = 'px' | 'rem' | 'em' | 'vw' | 'vh';
+type RotateUnit = 'deg' | 'rad' | 'turn';
 type Name = IconKeys;
 type RGB = `rgb(${string})`
 type RGBA = `rgba(${string})`
@@ -9,13 +11,23 @@ type HSL = `hsl(${string})`
 type HSLA = `hsla(${string})`
 type HEX = `#${string}`
 type Color<TValue extends string> = TValue | RGB | RGBA | HEX | HSL | HSLA;
-type Size<TValue extends string> = TValue | number;
+type Size<TValue extends string> = TValue | number | { value?: number, unit?: SizeUnit };
 type Weight<TValue extends string> = TValue | number;
 type Rotate<TValue extends string> = TValue | boolean | {
 	value?: number,
-	unit?: 'deg' | 'rad' | 'turn';
+	unit?: RotateUnit,
 	direction?: 'clockwise' | 'counter-clockwise';
 };
+
+export enum Mode {
+	Init = 'init',
+	Default = 'default',
+	Custom = 'custom',
+}
+
+export type Options = {
+	mode: Mode;
+}
 
 /**
  *
@@ -58,6 +70,8 @@ export type Properties = RefAttributes<HTMLElement> & {
 	 * @example
 	 * weight="normal"
 	 * weight={400}
+	 * 
+	 * TODO: Unsupported icon that has `extra light` | `extra bold` weights.
 	 */
 	weight?: Weight<'lightest' | 'light' | 'lightless' | 'normal' | 'boldless' | 'bold' | 'boldest'>;
 
