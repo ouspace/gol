@@ -1,0 +1,108 @@
+.text {
+	font-family: inherit;
+	margin: 0;
+	padding: 0;
+	color: var(--text-color);
+	font-size: var(--text-size, --text-base-size);
+	font-weight: var(--text-weight, --text-base-weight);
+	line-height: var(--text-line-height, var(--text-base-line-height));
+	letter-spacing: var(--text-letter-spacing, --text-base-letter-spacing);
+	text-align: var(--text-align);
+	text-decoration: var(--text-decoration, none);
+	font-style: normal;
+	text-transform: var(--text-transform, none);
+	white-space: normal;
+	user-select: auto;
+	opacity: 1;
+	cursor: inherit;
+
+	&.display-large {
+		font-size: var(--text-size, calc(var(--text-base-size) * 3.5625));
+		font-weight: var(--text-weight, var(--text-base-weight));
+		line-height: var(--text-line-height, calc(var(--text-base-line-height) * 4));
+	}
+
+	&.display-medium {
+		font-size: var(--text-size, calc(var(--text-base-size) * 2.8125));
+		font-weight: var(--text-weight, var(--text-base-weight));
+		line-height: var(--text-line-height, calc(var(--text-base-line-height) * 3.25));
+	}
+
+	&.display-small {
+		font-size: var(--text-size, calc(var(--text-base-size) * 2.25));
+		font-weight: var(--text-weight, var(--text-base-weight));
+		line-height: var(--text-line-height, calc(var(--text-base-line-height) * 2.75));
+	}
+
+	&.headline-large {
+		font-size: var(--text-size, calc(var(--text-base-size) * 2));
+		font-weight: var(--text-weight, var(--text-base-weight));
+		line-height: var(--text-line-height, calc(var(--text-base-line-height) * 2.5));
+	}
+
+	&.headline-medium {
+		font-size: var(--text-size, calc(var(--text-base-size) * 1.75));
+		font-weight: var(--text-weight, var(--text-base-weight));
+		line-height: var(--text-line-height, calc(var(--text-base-line-height) * 2.25));
+	}
+
+	&.headline-small {
+		font-size: var(--text-size, calc(var(--text-base-size) * 1.5));
+		font-weight: var(--text-weight, var(--text-base-weight));
+		line-height: var(--text-line-height, calc(var(--text-base-line-height) * 2));
+	}
+
+	&.title-large {
+		font-size: var(--text-size, calc(var(--text-base-size) * 1.375));
+		font-weight: var(--text-weight, var(--text-base-weight));
+		line-height: var(--text-line-height, calc(var(--text-base-line-height) * 1.75));
+	}
+
+	&.title-medium {
+		font-size: var(--text-size, var(--text-base-size));
+		font-weight: var(--text-weight, calc(var(--text-base-weight) * 1.25));
+		line-height: var(--text-line-height, calc(var(--text-base-line-height) * 1.5));
+	}
+
+	&.title-small {
+		font-size: var(--text-size, calc(var(--text-base-size) * 0.875));
+		font-weight: var(--text-weight, calc(var(--text-base-weight) * 1.25));
+		line-height: var(--text-line-height, calc(var(--text-base-line-height) * 1.25));
+	}
+
+	&.label-large {
+		font-size: var(--text-size, calc(var(--text-base-size) * 0.875));
+		font-weight: var(--text-weight, calc(var(--text-base-weight) * 1.25));
+		line-height: var(--text-line-height, 1.25rem);
+	}
+
+	&.label-medium {
+		font-size: var(--text-size, calc(var(--text-base-size) * 0.75));
+		font-weight: var(--text-weight, calc(var(--text-base-weight) * 1.25));
+		line-height: var(--text-line-height, calc(var(--text-base-line-height) * 1));
+	}
+
+	&.label-small {
+		font-size: var(--text-size, calc(var(--text-base-size) * 0.6875));
+		font-weight: var(--text-weight, calc(var(--text-base-weight) * 1.25));
+		line-height: var(--text-line-height, 1rem);
+	}
+
+	&.body-large {
+		font-size: var(--text-size, var(--text-base-size));
+		font-weight: var(--text-weight, var(--text-base-weight));
+		line-height: var(--text-line-height, calc(var(--text-base-line-height) * 1.5));
+	}
+
+	&.body-medium {
+		font-size: var(--text-size, calc(var(--text-base-size) * 0.875));
+		font-weight: var(--text-weight, var(--text-base-weight));
+		line-height: var(--text-line-height, calc(var(--text-base-line-height) * 1.25));
+	}
+
+	&.body-small {
+		font-size: var(--text-size, calc(var(--text-base-size) * 0.75));
+		font-weight: var(--text-weight, var(--text-base-weight));
+		line-height: var(--text-line-height, calc(var(--text-base-line-height) * 1));
+	}
+}
