@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import Checkbox from '../checkbox';
 import { Icon } from '../../icon';
+import { Text } from '../../text';
 
 const meta: Meta<typeof Checkbox> = {
 	title: 'Components/Checkbox',
@@ -24,13 +25,13 @@ const meta: Meta<typeof Checkbox> = {
 		color: {
 			control: 'color',
 		},
-	}
+	},
 };
 
 export default meta;
 type Story = StoryObj<typeof Checkbox>;
 
-// Basic checkbox
+// Basic
 export const Default: Story = {
 	args: {
 		label: 'Default Checkbox',
@@ -38,44 +39,43 @@ export const Default: Story = {
 	},
 };
 
-export const Checked: Story = {
-	args: {
-		label: 'Checked Checkbox',
-		value: true,
-	},
-};
-
-export const Indeterminate: Story = {
-	args: {
-		label: 'Indeterminate Checkbox',
-		value: null,
-	},
-};
-
 // States
-export const Disabled: Story = {
-	args: {
-		label: 'Disabled Checkbox',
-		disabled: true,
-		value: false,
-	},
+export const States: Story = {
+	render: () => (
+		<div style={{ display: 'flex', gap: '24px', alignItems: 'center' }}>
+			<Checkbox label='Unchecked' value={false} />
+			<Checkbox label='Checked' value={true} />
+			<Checkbox label='Indeterminate' value={null} />
+		</div>
+	),
 };
 
-export const DisabledChecked: Story = {
-	args: {
-		label: 'Disabled Checked',
-		disabled: true,
-		value: true,
-	},
+// Disabled
+export const Disabled: Story = {
+	render: () => (
+		<div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+			<Checkbox label='Unchecked' disabled value={false} />
+			<Checkbox label='Checked' disabled value={true} />
+			<Checkbox label='Indeterminate' disabled value={null} />
+			<Checkbox
+				label='With Icon'
+				disabled
+				value={true}
+				icon={<Icon name='favorite' size={18} variant='outlined' />}
+				checkedIcon={<Icon name='favorite' size={18} fill variant='outlined' />}
+				color='red'
+			/>
+		</div>
+	),
 };
 
 // Sizes
 export const Sizes: Story = {
 	render: () => (
 		<div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
-			<Checkbox label="Small" size="small" value={true} />
-			<Checkbox label="Normal" size="normal" value={true} />
-			<Checkbox label="Big" size="big" value={true} />
+			<Checkbox label='Small' size='small' value={true} />
+			<Checkbox label='Normal' size='normal' value={true} />
+			<Checkbox label='Big' size='big' value={true} />
 		</div>
 	),
 };
@@ -84,34 +84,27 @@ export const Sizes: Story = {
 export const Colors: Story = {
 	render: () => (
 		<div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
-			<Checkbox label="Blue" color="blue" value={true} />
-			<Checkbox label="Red" color="red" value={true} />
-			<Checkbox label="Green" color="green" value={true} />
-			<Checkbox label="Purple" color="purple" value={true} />
-			<Checkbox label="Custom" color="#ff6b35" value={true} />
+			<Checkbox label={{ content: 'Blue', color: 'blue' }} color='blue' value={true} />
+			<Checkbox label={{ content: 'Red', color: 'red' }} color='red' value={true} />
+			<Checkbox label={{ content: 'Green', color: 'green' }} color='green' value={true} />
+			<Checkbox label={{ content: 'Purple', color: 'purple' }} color='purple' value={true} />
+			<Checkbox label={{ content: 'Custom', color: '#ff6b35' }} color='#ff6b35' value={true} />
 		</div>
 	),
 };
 
-// Label Positions
-export const LabelPositions: Story = {
+// Label
+export const Labels: Story = {
 	render: () => (
 		<div style={{ display: 'flex', gap: '24px', alignItems: 'center' }}>
-			<Checkbox label={{ value: "Top", position: "top" }} value={true} />
-			<Checkbox label={{ value: "Right", position: "right" }} value={true} />
-			<Checkbox label={{ value: "Bottom", position: "bottom" }} value={true} />
-			<Checkbox label={{ value: "Left", position: "left" }} value={true} />
+			<Checkbox label={{ content: 'Right position', position: 'right' }} value={true} />
+			<Checkbox label={{ content: 'Left position', position: 'left' }} value={true} />
+			<Checkbox label={{ content: 'Top position', position: 'top' }} value={true} />
+			<Checkbox label={{ content: 'Bottom position', position: 'bottom' }} value={true} />
+			<Checkbox label={{ content: 'Colored label', color: 'red' }} value={true} />
+			<Checkbox label={{ content: <strong>Bold label</strong> }} value={true} />
 		</div>
 	),
-};
-
-// Circular
-export const Circular: Story = {
-	args: {
-		label: 'Circular Checkbox',
-		circular: true,
-		value: true,
-	},
 };
 
 // Custom Icons
@@ -119,91 +112,57 @@ export const CustomIcons: Story = {
 	render: () => (
 		<div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap', alignItems: 'center' }}>
 			<Checkbox
-				label="Favorite"
+				label='Favorite'
 				value={false}
-				icon={<Icon name="favorite" size={18} variant="outlined" />}
-				checkedIcon={<Icon name="favorite" size={18} fill variant="outlined" />}
-				color="red"
+				icon={<Icon name='favorite' size={18} variant='outlined' color='red' />}
+				checkedIcon={<Icon name='favorite' size={18} fill variant='outlined' color='red' />}
+				color='red'
 			/>
 			<Checkbox
-				label="Favorite"
+				label='Favorite'
 				value={true}
-				icon={<Icon name="favorite" size={18} variant="outlined" />}
-				checkedIcon={<Icon name="favorite" size={18} fill variant="outlined" />}
-				color="red"
+				icon={<Icon name='favorite' size={18} variant='outlined' color='red' />}
+				checkedIcon={<Icon name='favorite' size={18} fill variant='outlined' color='red' />}
+				color='red'
 			/>
 			<Checkbox
-				label="Star"
+				label='Star'
 				value={false}
-				icon={<Icon name="star" size={20} variant="outlined" />}
-				checkedIcon={<Icon name="star" size={20} fill variant="outlined" />}
-				color="orange"
+				icon={<Icon name='star' size={20} variant='outlined' color='orange' />}
+				checkedIcon={<Icon name='star' size={20} fill variant='outlined' color='orange' />}
+				color='orange'
 			/>
 			<Checkbox
-				label="Star"
+				label='Star'
 				value={true}
-				icon={<Icon name="star" size={20} variant="outlined" />}
-				checkedIcon={<Icon name="star" size={20} fill variant="outlined" />}
-				color="orange"
+				icon={<Icon name='star' size={20} variant='outlined' color='orange' />}
+				checkedIcon={<Icon name='star' size={20} fill variant='outlined' color='orange' />}
+				color='orange'
 			/>
 			<Checkbox
-				label="Bookmark"
 				value={false}
-				icon={<Icon name="bookmark" size={18} variant="outlined" />}
-				checkedIcon={<Icon name="bookmark" size={18} fill variant="outlined" />}
-				color="blue"
-			/>
+				icon={<Icon name='bookmark' size={18} variant='outlined' color='blue' />}
+				checkedIcon={<Icon name='bookmark' size={18} fill variant='outlined' color='blue' />}
+				color='blue'>
+				<Text size='small'>Bookmark</Text>
+			</Checkbox>
 			<Checkbox
-				label="Bookmark"
 				value={true}
-				icon={<Icon name="bookmark" size={18} variant="outlined" />}
-				checkedIcon={<Icon name="bookmark" size={18} fill variant="outlined" />}
-				color="blue"
-			/>
+				icon={<Icon name='bookmark' size={18} variant='outlined' color='blue' />}
+				checkedIcon={<Icon name='bookmark' size={18} fill variant='outlined' color='blue' />}
+				color='blue'>
+				<Text size='small'>Bookmark</Text>
+			</Checkbox>
 		</div>
 	),
 };
 
-// Advanced Label with TextProperties
-export const AdvancedLabel: Story = {
+// Circular
+export const Circular: Story = {
 	render: () => (
-		<div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-			<Checkbox
-				label={{ value: "Simple string label", position: "right" }}
-				value={true}
-			/>
-			<Checkbox
-				label={{ value: "Red colored label", position: "right", color: "red" }}
-				value={true}
-			/>
-			<Checkbox
-				label={{ value: "Label with custom class", position: "left", className: "custom-label" }}
-				value={true}
-			/>
-			<Checkbox
-				label={{ value: "Purple label on top", position: "top", color: "#9c27b0" }}
-				value={true}
-			/>
-		</div>
-	),
-};
-
-// ReactNode Label
-export const ReactNodeLabel: Story = {
-	render: () => (
-		<div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-			<Checkbox
-				label={<span>I agree to the <a href="/terms" style={{ color: 'blue' }}>terms and conditions</a></span>}
-				value={false}
-			/>
-			<Checkbox
-				label={<strong>Bold label text</strong>}
-				value={true}
-			/>
-			<Checkbox
-				label={<em style={{ color: 'green' }}>Italic green label</em>}
-				value={true}
-			/>
+		<div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
+			<Checkbox label='Unchecked' circular value={false} />
+			<Checkbox label='Checked' circular value={true} />
 		</div>
 	),
 };

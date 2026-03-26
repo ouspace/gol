@@ -1,2 +1,2 @@
-export { default } from './radio';
-export type { Properties, TextProperties } from './types';
+export { default as Radio } from './radio';
+export type { Properties } from './types';

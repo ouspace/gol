@@ -1,4 +1,5 @@
 import type { ReactNode, RefAttributes, SyntheticEvent } from 'react';
+import type { TextProperties as BaseTextProperties } from '../text';
 
 type Size<TValue extends string> = TValue | number;
 
@@ -10,7 +11,7 @@ type Color<TValue extends string> =
 	| `hsla(${string})`
 	| `#${string}`;
 
-type NameColor =
+type ColorName =
 	| 'orange'
 	| 'yellow'
 	| 'olive'
@@ -25,46 +26,18 @@ type NameColor =
 	| 'blue'
 	| 'black';
 
-/**
- * Label text properties
- */
-export type TextProperties = {
-	/**
-	 * Defines the label text.
-	 *
-	 * @example
-	 * value: "label test"
-	 */
-	value?: string;
-
+export type TextProperties = BaseTextProperties & {
 	/**
 	 * Defines the position of the label relative to the radio button.
 	 *
 	 * @default "right"
 	 * @example
-	 * position: "left"
+	 * labelPosition="left"
 	 */
 	position?: 'top' | 'right' | 'bottom' | 'left';
-
-	/**
-	 * Defines the text color of the label.
-	 *
-	 * @example
-	 * color: "red"
-	 * color: "#ff0000"
-	 */
-	color?: Color<NameColor>;
-
-	/**
-	 * Defines the CSS class name for the label text.
-	 *
-	 * @example
-	 * className: "custom-label"
-	 */
-	className?: string;
 };
 
-type CustomProperties = {
+type CustomProperties = RefAttributes<HTMLElement> & {
 	/**
 	 * Defines the custom content for the label.
 	 * Overrides the `label` properties if provided.
@@ -94,14 +67,14 @@ type CustomProperties = {
 
 	/**
 	 * Defines the label for the radio button.
-	 * Supports string, TextProperties, or ReactNode.
+	 * Supports ReactNode or TextProperties.
 	 *
 	 * @example
 	 * label="label test"
-	 * label={{ value: "label test", position: "left", color: "red" }}
-	 * label={<strong>label test</strong>}
+	 * label={<strong>Bold label</strong>}
+	 * label={{ content: "label test", color: "red" }}
 	 */
-	label?: string | TextProperties | ReactNode;
+	label?: ReactNode | TextProperties | (() => TextProperties | React.ReactNode);
 
 	/**
 	 * Defines the value of the radio button
@@ -175,7 +148,7 @@ type CustomProperties = {
 	 * color="#f00"
 	 * color="rgb(255, 0, 0)"
 	 */
-	color?: Color<NameColor>;
+	color?: Color<ColorName>;
 
 	/**
 	 * Defines the CSS class for the radio button

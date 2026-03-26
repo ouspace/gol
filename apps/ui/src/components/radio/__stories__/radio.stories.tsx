@@ -1,7 +1,7 @@
 import React from 'react';
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import Radio from '../radio';
-import { Icon } from '../../icon/index';
+import { Icon } from '../../icon';
 
 const meta: Meta<typeof Radio> = {
 	title: 'Components/Radio',
@@ -10,7 +10,7 @@ const meta: Meta<typeof Radio> = {
 	argTypes: {
 		size: {
 			control: 'select',
-			options: ['small', 'normal', 'big', 14, 18, 22, 26],
+			options: ['small', 'normal', 'big'],
 		},
 		color: {
 			control: 'select',
@@ -27,9 +27,6 @@ const meta: Meta<typeof Radio> = {
 				'brown',
 				'grey',
 				'black',
-				'#ff0000',
-				'rgb(0,255,0)',
-				'hsl(240,100%,50%)',
 			],
 		},
 	},
@@ -70,12 +67,12 @@ export const Sizes: Story = {
 export const Colors: Story = {
 	render: () => (
 		<div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap' }}>
-			<Radio label='Blue' color='blue' checked />
-			<Radio label='Red' color='red' checked />
-			<Radio label='Green' color='green' checked />
-			<Radio label='Purple' color='purple' checked />
-			<Radio label='Orange' color='orange' checked />
-			<Radio label='Custom (#ff1744)' color='#ff1744' checked />
+			<Radio label={{ content: 'Blue', color: 'blue' }} color='blue' checked />
+			<Radio label={{ content: 'Red', color: 'red' }} color='red' checked />
+			<Radio label={{ content: 'Green', color: 'green' }} color='green' checked />
+			<Radio label={{ content: 'Purple', color: 'purple' }} color='purple' checked />
+			<Radio label={{ content: 'Orange', color: 'orange' }} color='orange' checked />
+			<Radio label={{ content: 'Custom (#ff1744)', color: '#ff1744' }} color='#ff1744' checked />
 		</div>
 	),
 };
@@ -83,12 +80,14 @@ export const Colors: Story = {
 export const Labels: Story = {
 	render: () => (
 		<div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-			<Radio label={{ value: 'Right position', position: 'right' }} checked />
-			<Radio label={{ value: 'Left position', position: 'left' }} checked />
-			<Radio label={{ value: 'Top position', position: 'top' }} checked />
-			<Radio label={{ value: 'Bottom position', position: 'bottom' }} checked />
-			<Radio label={{ value: 'Colored label', color: 'red' }} checked color='red' />
-			<Radio label={<strong>Bold label</strong>} checked />
+			<Radio label={{ content: 'Right position', position: 'right' }} checked />
+			<Radio label={{ content: 'Left position', position: 'left' }} checked />
+			<Radio label={{ content: 'Top position', position: 'top' }} checked />
+			<Radio label={{ content: 'Bottom position', position: 'bottom' }} checked />
+			<Radio label={{ content: 'Colored label', color: 'red' }} checked color='red' />
+			<Radio checked>
+				<strong>Bold label</strong>
+			</Radio>
 		</div>
 	),
 };
@@ -97,25 +96,25 @@ export const Icons: Story = {
 	render: () => (
 		<div style={{ display: 'flex', gap: '24px', flexWrap: 'wrap' }}>
 			<Radio
-				label='Custom icon unchecked'
-				icon={<Icon name='radio_button_unchecked' size='normal' color='purple' />}
-				checkedIcon={<Icon name='radio_button_checked' size='normal' color='purple' />}
+				label={{ content: 'Custom icon unchecked', color: 'purple' }}
+				icon={<Icon name='radio_button_unchecked' size={24} color='purple' />}
+				checkedIcon={<Icon name='radio_button_checked' size={24} color='purple' />}
 				color='purple'
 			/>
 			<Radio
-				label='Custom icon checked'
-				icon={<Icon name='radio_button_unchecked' size='normal' color='purple' />}
-				checkedIcon={<Icon name='radio_button_checked' size='normal' color='purple' />}
+				label={{ content: 'Custom icon checked', color: 'purple' }}
+				icon={<Icon name='radio_button_unchecked' size={24} color='purple' />}
+				checkedIcon={<Icon name='radio_button_checked' size={24} color='purple' />}
 				checked
 			/>
 			<Radio
-				label='Custom icon unchecked'
+				label={{ content: 'Custom icon unchecked', color: 'red' }}
 				icon={<Icon name='favorite' size={18} color='red' />}
 				checkedIcon={<Icon name='favorite' size={18} fill color='red' />}
 				color='red'
 			/>
 			<Radio
-				label='Custom icon checked'
+				label={{ content: 'Custom icon checked', color: 'red' }}
 				icon={<Icon name='favorite' size={18} color='red' />}
 				checkedIcon={<Icon name='favorite' size={18} fill color='red' />}
 				color='red'

@@ -10,11 +10,6 @@
 
 	--radio-gap: calc(var(--radio-size) * 0.44);
 
-	--radio-font-family: inherit;
-	--radio-font-weight: inherit;
-	--radio-line-height: inherit;
-	--radio-letter-spacing: inherit;
-
 	--radio-transition: 0.15s ease;
 	--radio-ripple-transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
