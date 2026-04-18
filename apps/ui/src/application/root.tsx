@@ -1,5 +1,6 @@
 import { ScrollView, View, Text } from 'react-native';
 import { SafeAreaView, SafeAreaProvider } from 'react-native-safe-area-context';
+
 import { Icon } from '../components/icon/index';
 
 export default function Application() {

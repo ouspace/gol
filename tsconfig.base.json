@@ -16,7 +16,9 @@
 		"skipDefaultLibCheck": true,
 		"skipLibCheck": true,
 		"strict": true,
-		"lib": ["ESNext"],
+		"lib": [
+			"ESNext"
+		],
 		"module": "NodeNext",
 		"moduleResolution": "NodeNext",
 		"target": "ESNext",
@@ -26,15 +28,31 @@
 		"noImplicitReturns": true,
 		"noUnusedLocals": true,
 		"forceConsistentCasingInFileNames": true,
+		"ignoreDeprecations": "6.0",
 		"typeRoots": [
 			"node_modules/@types",
-			"node_modules/@nx/react/typings",
-			"node_modules/@vitejs/plugin-react/dist/index.d.ts"
+			"node_modules/@nx/react/typings"
 		],
 		"paths": {
-			"@gol/ui-components": ["libs/ui-components/src/index.ts"],
-			"@gol/ui-module": ["libs/ui-module/src/index.ts"]
+			"@gol/api.client": ["libs/api.client/src/index.ts"],
+			"@gol/core.domain": ["libs/core.domain/src/index.ts"],
+			"@gol/core.domain.events": ["libs/core.domain.events/src/index.ts"],
+			"@gol/core.domain.reporting": ["libs/core.domain.reporting/src/index.ts"],
+			"@gol/core.entities": ["libs/core.entities/src/index.ts"],
+			"@gol/core.orm": ["libs/core.orm/src/index.ts"],
+			"@gol/core.orm.typeorm": ["libs/core.orm.typeorm/src/index.ts"],
+			"@gol/nest.domain": ["libs/nest.domain/src/index.ts"],
+			"@gol/nest.mapper": ["libs/nest.mapper/src/index.ts"],
+			"@gol/nest.openapi": ["libs/nest.openapi/src/index.ts"],
+			"@gol/nest.orm": ["libs/nest.orm/src/index.ts"],
+			"@gol/nest.validator": ["libs/nest.validator/src/index.ts"],
+			"@gol/ui.auth": ["libs/ui.auth/src/index.ts"],
+			"@gol/ui.components": ["libs/ui.components/src/index.ts"],
+			"@gol/ui.module.iam": ["libs/ui.module.iam/src/index.ts"]
 		}
 	},
-	"exclude": ["node_modules", "tmp"]
+	"exclude": [
+		"node_modules",
+		"tmp"
+	]
 }

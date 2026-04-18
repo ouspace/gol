@@ -35,7 +35,7 @@ export function toFill(properties: Required<Properties>): string {
 
 export function isSizeEnum(properties: Required<Properties>): boolean {
 	return match(properties.size)
-		.with(P.union('small', 'smallless', 'bigless', 'big'), () => true)
+		.with(P.union('smallest', 'small', 'smallless', 'normal', 'bigless', 'big', 'biggest'), () => true)
 		.otherwise(() => false);
 }
 
@@ -50,7 +50,7 @@ export function toSize(properties: Required<Properties>): string | undefined {
 	return match(criteria)
 		.with({ size: { value: P.number, unit: P.union('px', 'rem', 'em', 'vw', 'vh') } }, ({ size }) => `${size.value}${size.unit}`)
 		.with({ size: { value: P.number } }, ({ size }) => `${size.value}px`)
-		.with({ size: P.number }, () => `${properties.size}px`)
+		.with({ size: P.number }, ({ size }) => `${size}px`)
 		.otherwise(() => undefined);
 }
 
@@ -60,35 +60,29 @@ export function toSize(properties: Required<Properties>): string | undefined {
  * @returns
  */
 export function toWeight(properties: Required<Properties>, options?: Options): Properties['weight'] {
-	// if (_.isUndefined(properties.weight)) return undefined;
-
 	const criteria = {
 		weight: properties.weight,
 		mode: options?.mode,
 	};
 
 	return match(criteria)
-		// .with({ mode: Mode.Init, weight: 100 }, () => 'extra light')
-		.with({ mode: Mode.Init, weight: 200 }, () => 'lightest')
-		.with({ mode: Mode.Init, weight: 300 }, () => 'light')
-		.with({ mode: Mode.Init, weight: 400 }, () => 'lightless')
-		.with({ mode: Mode.Init, weight: 500 }, () => 'normal')
-		.with({ mode: Mode.Init, weight: 600 }, () => 'boldless')
-		.with({ mode: Mode.Init, weight: 700 }, () => 'bold')
-		.with({ mode: Mode.Init, weight: 800 }, () => 'boldest')
-		// .with({ mode: Mode.Init, weight: 900 }, () => 'extra bold')
+		.with({ mode: Mode.Init, weight: 100 }, () => 'lightest')
+		.with({ mode: Mode.Init, weight: 200 }, () => 'light')
+		.with({ mode: Mode.Init, weight: 300 }, () => 'lightless')
+		.with({ mode: Mode.Init, weight: 400 }, () => 'normal')
+		.with({ mode: Mode.Init, weight: 500 }, () => 'boldless')
+		.with({ mode: Mode.Init, weight: 600 }, () => 'bold')
+		.with({ mode: Mode.Init, weight: 700 }, () => 'boldest')
 		.with({ mode: Mode.Init, weight: P.union('lightest', 'light', 'lightless', 'normal', 'boldless', 'bold', 'boldest') }, ({ weight }) => weight)
 		.with({ mode: Mode.Init, weight: P.union(P.string, P.number, P.nullish) }, () => 'normal')
-		// .with({ weight: 'extra light' }, () => 100)
-		.with({ weight: 'lightest' }, () => 200)
-		.with({ weight: 'light' }, () => 300)
-		.with({ weight: 'lightless' }, () => 400)
-		.with({ weight: 'normal' }, () => 500)
-		.with({ weight: 'boldless' }, () => 600)
-		.with({ weight: 'bold' }, () => 700)
-		.with({ weight: 'boldest' }, () => 800)
-		// .with({ weight: 'extra bold' }, () => 900)
-		.with({ weight: P.union(200, 300, 400, 500, 600, 700, 800) }, ({ weight }) => weight)
+		.with({ weight: 'lightest' }, () => 100)
+		.with({ weight: 'light' }, () => 200)
+		.with({ weight: 'lightless' }, () => 300)
+		.with({ weight: 'normal' }, () => 400)
+		.with({ weight: 'boldless' }, () => 500)
+		.with({ weight: 'bold' }, () => 600)
+		.with({ weight: 'boldest' }, () => 700)
+		.with({ weight: P.union(100, 200, 300, 400, 500, 600, 700) }, ({ weight }) => weight)
 		.otherwise(() => undefined) as Properties['weight'];
 }
 

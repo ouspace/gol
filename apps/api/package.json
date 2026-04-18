@@ -1,0 +1,110 @@
+{
+	"name": "@gol/api",
+	"version": "0.0.1",
+	"private": true,
+	"nx": {
+		"name": "api",
+		"targets": {
+			"build": {
+				"executor": "@nx/webpack:webpack",
+				"outputs": [
+					"{workspaceRoot}/apps/api/dist"
+				],
+				"options": {
+					"target": "node",
+					"compiler": "tsc",
+					"outputPath": "apps/api/dist",
+					"main": "apps/api/src/main.ts",
+					"tsConfig": "apps/api/tsconfig.app.json",
+					"webpackConfig": "apps/api/webpack.config.js",
+					"assets": [
+						"apps/api/src/assets"
+					],
+					"generatePackageJson": true
+				},
+				"configurations": {
+					"production": {
+						"optimization": true,
+						"sourceMap": false,
+						"extractLicenses": true,
+						"inspect": false
+					},
+					"development": {
+						"optimization": false,
+						"sourceMap": true
+					}
+				}
+			},
+			"prune-lockfile": {
+				"dependsOn": [
+					"build"
+				],
+				"cache": true,
+				"executor": "@nx/js:prune-lockfile",
+				"outputs": [
+					"{workspaceRoot}/apps/api/dist/package.json",
+					"{workspaceRoot}/apps/api/dist/package-lock.json"
+				],
+				"options": {
+					"buildTarget": "build"
+				}
+			},
+			"copy-workspace-modules": {
+				"dependsOn": [
+					"build"
+				],
+				"cache": true,
+				"outputs": [
+					"{workspaceRoot}/apps/api/dist/workspace_modules"
+				],
+				"executor": "@nx/js:copy-workspace-modules",
+				"options": {
+					"buildTarget": "build"
+				}
+			},
+			"prune": {
+				"dependsOn": [
+					"prune-lockfile",
+					"copy-workspace-modules"
+				],
+				"executor": "nx:noop"
+			},
+			"serve": {
+				"continuous": true,
+				"executor": "@nx/js:node",
+				"defaultConfiguration": "development",
+				"dependsOn": [
+					"build"
+				],
+				"options": {
+					"buildTarget": "api:build",
+					"runBuildTargetDependencies": false
+				},
+				"configurations": {
+					"development": {
+						"buildTarget": "api:build:development"
+					},
+					"production": {
+						"buildTarget": "api:build:production"
+					}
+				}
+			},
+			"test": {
+				"options": {
+					"passWithNoTests": true
+				}
+			}
+		}
+	},
+	"dependencies": {
+		"@nestjs/common": "~11.1.19",
+		"@nestjs/core": "~11.1.19",
+		"@nestjs/platform-express": "~11.1.19",
+		"reflect-metadata": "~0.2.2",
+		"rxjs": "~7.8.2",
+		"tslib": "~2.8.1"
+	},
+	"devDependencies": {
+		"@nestjs/testing": "^11.0.0"
+	}
+}
