@@ -1,5 +1,6 @@
 import { createRequire } from "node:module";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 
 import type { StorybookConfig } from '@storybook/react-vite';
 import { nxViteTsPaths } from '@nx/vite/plugins/nx-tsconfig-paths.plugin';
@@ -7,6 +8,7 @@ import { mergeConfig } from 'vite';
 import { getCodeEditorStaticDirs } from 'storybook-addon-code-editor/getStaticDirs';
 
 const require = createRequire(import.meta.url);
+const __filename = fileURLToPath(import.meta.url);
 
 const config: StorybookConfig = {
 	stories: ['../src/**/*.@(mdx|stories.@(js|jsx|ts|tsx))'],

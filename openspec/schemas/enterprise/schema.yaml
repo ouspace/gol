@@ -1,0 +1,60 @@
+name: enterprise
+version: 1
+description: Axiomatic Enterprise workflow with multi-artifact support
+artifacts:
+  - id: proposal
+    generates: proposal.md
+    description: Initial proposal document with Context Bounds
+    template: proposal.md
+    instruction: |
+      Create a proposal that explains WHY this change is needed.
+      Define context_bounds and invariants in the frontmatter.
+    requires: []
+
+  - id: specs
+    generates: specs/**/*.md
+    description: Delta specifications
+    template: spec.md
+    instruction: |
+      Create delta specs for the affected domains.
+      Use Given/When/Then format for scenarios.
+    requires: [proposal]
+
+  - id: audit
+    generates: audit.md
+    description: The Censor's audit and veto check
+    template: audit.md
+    instruction: |
+      Perform a critical audit of the proposal and specs.
+      Veto if ambiguity or scope creep is detected.
+    requires: [proposal, specs]
+
+  - id: tests
+    generates: tests.md
+    description: The Justice's failing tests (RED)
+    template: tests.md
+    instruction: |
+      Create failing tests that satisfy the specifications.
+      Verify that tests fail before implementation.
+    requires: [audit]
+
+  - id: design
+    generates: design.md
+    description: Technical design document
+    template: design.md
+    instruction: |
+      Create a design document explaining the technical approach.
+    requires: [proposal]
+
+  - id: tasks
+    generates: tasks.md
+    description: Implementation checklist with Ledger
+    template: tasks.md
+    instruction: |
+      Create a task list for implementation.
+      Maintain the Ledger table for execution state.
+    requires: [tests, design]
+
+apply:
+  requires: [tasks]
+  tracks: tasks.md

@@ -1,0 +1,27 @@
+schema: enterprise
+
+context: |
+  Workspace: Game of Life (gol)
+  Tech Stack: Nx, TypeScript, HTML/CSS
+  Testing: Jest
+  Axiomatic SDD Mode: Enabled (Strict boundary control and TDD)
+
+rules:
+  proposal:
+    - Define 'context_bounds' as an array of files/globs.
+    - Define 'invariants' as system-wide non-negotiable rules.
+  specs:
+    - Use Given/When/Then format for scenarios.
+    - Explicitly list assumptions and open questions as risks.
+  audit:
+    - As The Censor, search for ambiguity and "vibe coding" (e.g., "seamless", "intuitive").
+    - If found, set status to VETO and provide reasoning.
+  tests:
+    - As The Justice, ensure tests fail (RED) before allowing implementation.
+    - Document the failure status in the tests artifact.
+  tasks:
+    - Maintain The Ledger table at all times.
+    - Every agent action must be logged with status and hash/detail.
+  apply:
+    - MANDATORY: If 'verify' fails, execute 'git checkout .' to rollback all changes.
+    - DO NOT leave the codebase in a broken state.

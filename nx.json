@@ -1,5 +1,6 @@
 {
 	"$schema": "./node_modules/nx/schemas/nx-schema.json",
+	"defaultBase": "main",
 	"namedInputs": {
 		"default": ["{projectRoot}/**/*", "sharedGlobals"],
 		"production": [
@@ -51,7 +52,7 @@
 			"options": {
 				"targetName": "test"
 			},
-			"exclude": ["apps/api-e2e/**/*"]
+			"exclude": []
 		},
 		{
 			"plugin": "@nx/playwright/plugin",
@@ -164,5 +165,6 @@
 		"test": {
 			"dependsOn": ["^build"]
 		}
-	}
+	},
+	"analytics": true
 }

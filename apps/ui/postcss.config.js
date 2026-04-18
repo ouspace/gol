@@ -3,6 +3,8 @@ import atRulesVariables from 'postcss-at-rules-variables';
 
 export default {
 	plugins: {
+		'postcss-import': {},
+		'@tailwindcss/postcss': {},
 		'postcss-each': {
 			plugins: {
 				beforeEach: [customProperties],
@@ -10,7 +12,6 @@ export default {
 			},
 		},
 		'postcss-normalize': {},
-		'postcss-import': { path: ['src/themes'] },
 		'postcss-preset-env': {
 			stage: 2,
 			features: {
@@ -19,7 +20,6 @@ export default {
 		},
 		'postcss-custom-media': { preserve: true },
 		'postcss-url': [{ filter: '**/*.svg', url: 'inline' }],
-		'@tailwindcss/postcss': {},
 		'postcss-svgo': {},
 		cssnano: { preset: 'default' },
 	},

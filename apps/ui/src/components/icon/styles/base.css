@@ -20,6 +20,11 @@
 
 	/* &.custom {} */
 
+	&.smallest {
+		width: calc(var(--icon-size) - calc(var(--icon-size-step)) * 3);
+		height: calc(var(--icon-size) - calc(var(--icon-size-step)) * 3);
+	}
+
 	&.small {
 		width: calc(var(--icon-size) - calc(var(--icon-size-step)) * 2);
 		height: calc(var(--icon-size) - calc(var(--icon-size-step)) * 2);
@@ -38,5 +43,10 @@
 	&.big {
 		width: calc(var(--icon-size) + calc(var(--icon-size-step)) * 2);
 		height: calc(var(--icon-size) + calc(var(--icon-size-step)) * 2);
+	}
+
+	&.biggest {
+		width: calc(var(--icon-size) + calc(var(--icon-size-step)) * 3);
+		height: calc(var(--icon-size) + calc(var(--icon-size-step)) * 3);
 	}
 }
