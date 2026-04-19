@@ -1,0 +1,180 @@
+/* filled */
+.text-field.filled {
+	.text-field__container {
+		background-color: var(--text-field-container-color);
+		border-radius: var(--text-field-shape-filled);
+		transition:
+			padding-top var(--text-field-transition),
+			padding-bottom var(--text-field-transition);
+
+		/* bottom indicator */
+		&::after {
+			content: '';
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			height: var(--text-field-indicator-thickness);
+			background-color: var(--text-field-indicator-color);
+			transition:
+				height var(--text-field-transition),
+				background-color var(--text-field-transition);
+		}
+
+		&:has(.text-field__label):focus-within,
+		&:has(.text-field__label):has(.text-field__input:not(:placeholder-shown)) {
+			padding-top: 24px;
+			padding-bottom: 4px;
+		}
+	}
+
+	.text-field__label {
+		top: 50%;
+		transform: translateY(-50%);
+	}
+
+	/* label floats on focus or when populated */
+	&:focus-within .text-field__label,
+	.text-field__input:not(:placeholder-shown) ~ .text-field__label {
+		top: 8px;
+		left: 16px;
+		transform: translateY(0);
+		font-size: var(--text-field-label-floating-size);
+	}
+
+	/* floating label stays aligned with input when there's a leading icon */
+	&:focus-within .text-field__container:has(.text-field__leading-icon) .text-field__label,
+	.text-field__container:has(.text-field__leading-icon) .text-field__input:not(:placeholder-shown) ~ .text-field__label {
+		left: 52px;
+	}
+
+	/* icon is pinned absolutely so it does not shift when padding-top animates */
+	.text-field__container:has(.text-field__leading-icon):has(.text-field__label) {
+		padding-left: 52px;
+
+		.text-field__leading-icon {
+			position: absolute;
+			left: 16px;
+			top: 50%;
+			transform: translateY(-50%);
+		}
+	}
+}
+
+/* small */
+.text-field.small {
+	--text-field-height: 48px;
+
+	.text-field__container {
+		padding: 6px 12px;
+
+		/* make room for the floating label only when it is actually floating */
+		&:has(.text-field__label):focus-within,
+		&:has(.text-field__label):has(.text-field__input:not(:placeholder-shown)) {
+			padding-top: 18px;
+			padding-bottom: 2px;
+		}
+	}
+
+	.text-field__label {
+		left: 12px;
+	}
+
+	.text-field__container:has(.text-field__leading-icon) .text-field__label {
+		left: 44px;
+	}
+
+	&.filled {
+		&:focus-within .text-field__label,
+		.text-field__input:not(:placeholder-shown) ~ .text-field__label {
+			top: 4px;
+			left: 12px;
+		}
+
+		/* floating label with leading icon */
+		&:focus-within .text-field__container:has(.text-field__leading-icon) .text-field__label,
+		.text-field__container:has(.text-field__leading-icon) .text-field__input:not(:placeholder-shown) ~ .text-field__label {
+			left: 44px;
+		}
+
+		/* adjust icon pin position for small size */
+		.text-field__container:has(.text-field__leading-icon):has(.text-field__label) {
+			padding-left: 44px;
+
+			.text-field__leading-icon {
+				left: 12px;
+			}
+		}
+	}
+
+	&.outlined {
+		&:focus-within .text-field__label,
+		.text-field__input:not(:placeholder-shown) ~ .text-field__label {
+			left: 12px;
+		}
+	}
+}
+
+/* large */
+.text-field.large {
+	--text-field-height: 64px;
+
+	.text-field__container {
+		padding: 12px 16px;
+
+		/* make room for the floating label only when it is actually floating */
+		&:has(.text-field__label):focus-within,
+		&:has(.text-field__label):has(.text-field__input:not(:placeholder-shown)) {
+			padding-top: 28px;
+			padding-bottom: 6px;
+		}
+	}
+
+	&.filled {
+		&:focus-within .text-field__label,
+		.text-field__input:not(:placeholder-shown) ~ .text-field__label {
+			top: 10px;
+		}
+
+		/* floating label with leading icon */
+		&:focus-within .text-field__container:has(.text-field__leading-icon) .text-field__label,
+		.text-field__container:has(.text-field__leading-icon) .text-field__input:not(:placeholder-shown) ~ .text-field__label {
+			left: 52px;
+		}
+	}
+}
+
+/* outlined */
+.text-field.outlined {
+	.text-field__container {
+		background-color: transparent;
+		border-radius: var(--text-field-shape-outlined);
+		border: var(--text-field-outline-width) solid var(--text-field-outline-color);
+		transition:
+			border-color var(--text-field-transition),
+			border-width var(--text-field-transition);
+	}
+
+	.text-field__label {
+		top: 50%;
+		transform: translateY(-50%);
+		padding: 0 4px;
+		margin-left: -4px;
+		background-color: var(--text-field-label-background);
+	}
+
+	/* label floats on focus or when populated */
+	&:focus-within .text-field__label,
+	.text-field__input:not(:placeholder-shown) ~ .text-field__label {
+		top: 0;
+		left: 16px;
+		transform: translateY(-50%);
+		font-size: var(--text-field-label-floating-size);
+	}
+
+	/* floating label stays aligned with input when there's a leading icon */
+	&:focus-within .text-field__container:has(.text-field__leading-icon) .text-field__label,
+	.text-field__container:has(.text-field__leading-icon) .text-field__input:not(:placeholder-shown) ~ .text-field__label {
+		left: 52px;
+	}
+}
