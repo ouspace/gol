@@ -1,0 +1,118 @@
+/* root */
+.text-field {
+	position: relative;
+	display: inline-flex;
+	flex-direction: column;
+	min-width: var(--text-field-min-width);
+	font-family: inherit;
+}
+
+.text-field.full-width {
+	width: 100%;
+}
+
+/* container */
+.text-field__container {
+	position: relative;
+	display: flex;
+	align-items: center;
+	min-height: var(--text-field-height);
+	padding: 8px 16px;
+	box-sizing: border-box;
+	cursor: text;
+}
+
+/* input */
+.text-field__input {
+	all: unset;
+	flex: 1;
+	min-width: 0;
+	color: var(--text-field-on-container-color);
+	font-size: 1rem;
+	line-height: 1.5;
+	caret-color: var(--text-field-primary-color);
+
+	&::placeholder {
+		transition: opacity var(--text-field-transition);
+	}
+}
+
+/* icons */
+.text-field__leading-icon,
+.text-field__trailing-icon {
+	display: flex;
+	align-items: center;
+	flex-shrink: 0;
+	color: var(--text-field-on-container-color);
+}
+
+.text-field__leading-icon {
+	padding-right: 8px;
+}
+
+.text-field__trailing-icon {
+	padding-left: 8px;
+}
+
+button.text-field__trailing-icon {
+	all: unset;
+	display: flex;
+	align-items: center;
+	cursor: pointer;
+}
+
+/* prefix & suffix */
+.text-field__prefix,
+.text-field__suffix {
+	color: var(--text-field-on-container-color);
+	font-size: 1rem;
+	line-height: 1.5;
+	white-space: nowrap;
+	user-select: none;
+}
+
+.text-field__prefix {
+	padding-right: 2px;
+}
+
+.text-field__suffix {
+	padding-left: 2px;
+}
+
+/* label */
+.text-field__label {
+	position: absolute;
+	left: 16px;
+	pointer-events: none;
+	user-select: none;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	color: var(--text-field-label-color);
+	font-size: 1rem;
+	line-height: 1.5;
+	transform-origin: left top;
+	transition:
+		top var(--text-field-transition),
+		left var(--text-field-transition),
+		font-size var(--text-field-transition),
+		color var(--text-field-transition),
+		transform var(--text-field-transition);
+}
+
+/* shifts right when there is a leading icon */
+.text-field__container:has(.text-field__leading-icon) .text-field__label {
+	left: 52px;
+}
+
+.text-field__asterisk {
+	color: var(--text-field-error-color);
+}
+
+/* supporting text */
+.text-field__supporting-text {
+	padding: 4px 16px 0;
+	font-size: 0.75rem;
+	line-height: 1.333;
+	color: var(--text-field-supporting-text-color);
+}
