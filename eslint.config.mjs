@@ -17,13 +17,6 @@ const tsConfigs = tsEslint.config(
 	tsEslint.configs.strictTypeChecked,
 	tsEslint.configs.stylisticTypeChecked,
 	{
-		languageOptions: {
-			parserOptions: {
-				projectService: true,
-			},
-		},
-	},
-	{
 		files: ['**/*.ts', '**/*.tsx'],
 		rules: {
 			'@typescript-eslint/consistent-type-imports': ['error', { prefer: 'type-imports' }],
@@ -58,9 +51,14 @@ export default [
 	pluginImportX.flatConfigs.recommended,
 	pluginImportX.flatConfigs.typescript,
 	{
+		files: ['**/*.{js,mjs,cjs,jsx,ts,mts,cts,tsx}'],
 		plugins: {
 			'eslint-comments': pluginComments,
 		},
+		/*
+		// NOTE: eslint-plugin-eslint-comments v3.2.0 is incompatible with ESLint 10.
+		// It causes "TypeError: context.getSourceCode is not a function".
+		// Consider upgrading to @eslint-community/eslint-plugin-eslint-comments.
 		rules: {
 			// Recommended rules
 			'eslint-comments/disable-enable-pair': 'error',
@@ -76,6 +74,7 @@ export default [
 				},
 			],
 		},
+		*/
 	},
 	eslintConfigPrettier,
 	{
@@ -85,7 +84,7 @@ export default [
 				'error',
 				{
 					enforceBuildableLibDependency: true,
-					allow: ['^.*/eslint(\\.base)?\\.config\\.[cm]?js$'],
+					allow: [String.raw`^.*/eslint(\.base)?\.config\.[cm]?js$`],
 					depConstraints: [
 						{
 							sourceTag: '*',
@@ -128,6 +127,7 @@ export default [
 			'unicorn/prefer-top-level-await': ['warn'],
 			'unicorn/no-null': ['off'],
 			'unicorn/consistent-function-scoping': ['warn'],
+			'unicorn/no-useless-undefined': ["warn", { "checkArguments": true }],
 		},
 	},
 	{
@@ -164,6 +164,16 @@ export default [
 			'**/vitest.config.*.timestamp*',
 			'**/metro.config.js',
 			'**/*.snippet.tsx',
+			'**/.expo',
 		],
+	},
+	{
+		files: ['**/*.ts', '**/*.tsx', '**/*.mts', '**/*.cts'],
+		languageOptions: {
+			parserOptions: {
+				project: './tsconfig.eslint.json',
+				tsconfigRootDir: import.meta.dirname,
+			},
+		},
 	},
 ];

@@ -143,7 +143,7 @@ describe('components/icon', () => {
 
 			// assert(s)
 			expect(screen.getByRole('icon')).toBeDefined();
-			expect(screen.getByRole('icon')).toHaveStyle('--icon-weight-inject: 500;');
+			expect(screen.getByRole('icon')).toHaveStyle('--icon-weight-inject: 400;');
 		});
 
 		test('should be render a weighted icon as lightest', () => {
@@ -155,7 +155,7 @@ describe('components/icon', () => {
 
 			// assert(s)
 			expect(screen.getByRole('icon')).toBeDefined();
-			expect(screen.getByRole('icon')).toHaveStyle('--icon-weight-inject: 200;');
+			expect(screen.getByRole('icon')).toHaveStyle('--icon-weight-inject: 100;');
 		});
 
 		test('should be render a weighted icon as light', () => {
@@ -167,7 +167,7 @@ describe('components/icon', () => {
 
 			// assert(s)
 			expect(screen.getByRole('icon')).toBeDefined();
-			expect(screen.getByRole('icon')).toHaveStyle('--icon-weight-inject: 300;');
+			expect(screen.getByRole('icon')).toHaveStyle('--icon-weight-inject: 200;');
 		});
 
 		test('should be render a weighted icon as lightless', () => {
@@ -179,7 +179,7 @@ describe('components/icon', () => {
 
 			// assert(s)
 			expect(screen.getByRole('icon')).toBeDefined();
-			expect(screen.getByRole('icon')).toHaveStyle('--icon-weight-inject: 400;');
+			expect(screen.getByRole('icon')).toHaveStyle('--icon-weight-inject: 300;');
 		});
 
 		test('should be render a weighted icon as boldless', () => {
@@ -191,7 +191,7 @@ describe('components/icon', () => {
 
 			// assert(s)
 			expect(screen.getByRole('icon')).toBeDefined();
-			expect(screen.getByRole('icon')).toHaveStyle('--icon-weight-inject: 600;');
+			expect(screen.getByRole('icon')).toHaveStyle('--icon-weight-inject: 500;');
 		});
 
 		test('should be render a weighted icon as bold', () => {
@@ -203,7 +203,7 @@ describe('components/icon', () => {
 
 			// assert(s)
 			expect(screen.getByRole('icon')).toBeDefined();
-			expect(screen.getByRole('icon')).toHaveStyle('--icon-weight-inject: 700;');
+			expect(screen.getByRole('icon')).toHaveStyle('--icon-weight-inject: 600;');
 		});
 
 		test('should be render a weighted icon as boldest', () => {
@@ -215,7 +215,29 @@ describe('components/icon', () => {
 
 			// assert(s)
 			expect(screen.getByRole('icon')).toBeDefined();
-			expect(screen.getByRole('icon')).toHaveStyle('--icon-weight-inject: 800;');
+			expect(screen.getByRole('icon')).toHaveStyle('--icon-weight-inject: 700;');
+		});
+
+		test('should be render as smallest size', () => {
+			// arrange(s)
+			const component = <Icon size='smallest' />;
+
+			// act(s)
+			render(component);
+
+			// assert(s)
+			expect(screen.getByRole('icon')).toHaveClass('smallest');
+		});
+
+		test('should be render as biggest size', () => {
+			// arrange(s)
+			const component = <Icon size='biggest' />;
+
+			// act(s)
+			render(component);
+
+			// assert(s)
+			expect(screen.getByRole('icon')).toHaveClass('biggest');
 		});
 
 		test('should be render a weighted icon by positive number', () => {

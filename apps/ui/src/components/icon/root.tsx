@@ -1,4 +1,4 @@
-import { useRef, useLayoutEffect, useMemo, type RefObject } from 'react';
+import React, { useRef, useMemo, type RefObject } from 'react';
 import clsx from 'clsx';
 import { SvgXml } from 'react-native-svg';
 import _ from 'lodash';
@@ -23,24 +23,17 @@ export default function Icon(properties?: Properties) {
 	const size = toSize(defaults);
 	const weight = toWeight(defaults, { mode: Mode.Init });
 	const rotate = toRotate(defaults);
-
 	const iconKey = `${defaults.name}__${defaults.variant}_${toFill(defaults)}_${weight}`;
-
-	console.log('::iconKey::', iconKey);
-
-	const reference = (defaults.ref ?? useRef<HTMLElement>(null)) as RefObject<HTMLElement | null>;
 	const dictionary = useMemo(() => icons as Record<string, string>, []);
 	const svg = useMemo(() => {
-
 		return {
 			xml: dictionary[iconKey],
 			color: defaults.color,
 			fill: defaults.color,
 			viewBox: defaults.viewBox,
-			height: size,
-			width: size,
 		}
-	}, [iconKey, defaults]);
+	}, [iconKey, defaults, dictionary]);
+
 	const style = useMemo(() => {
 		return {
 			'--icon-size-inject': size,
@@ -48,15 +41,13 @@ export default function Icon(properties?: Properties) {
 			'--icon-weight-inject': toWeight(defaults),
 			'--icon-color-inject': defaults.color,
 		}
-	}, [defaults]);
+	}, [defaults, size, rotate]);
 
 	return (
-		<i ref={reference}
+		<span ref={defaults.ref}
 			key={defaults.key}
-			// // @ts-expect-error unsupported `name` attribute for <i> element.
 			name={defaults.name}
 			role='icon'
-			// @ts-expect-error unsupported `style` attribute for <i> element.
 			style={style}
 			className={clsx({
 				[defaults.size as string]: isSizeEnum(defaults),
@@ -77,10 +68,10 @@ export default function Icon(properties?: Properties) {
 				viewBox={svg.viewBox}
 				color={svg.color}
 				fill={svg.fill}
-				height={svg.height}
-				width={svg.width}
+				height={'100%'}
+				width={'100%'}
 				disabled={defaults.disabled}
 			/>
-		</i>
+		</span>
 	);
 }

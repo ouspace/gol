@@ -25,7 +25,7 @@ export enum Mode {
 	Custom = 'custom',
 }
 
-export type Options = {
+export interface Options {
 	mode: Mode;
 }
 
