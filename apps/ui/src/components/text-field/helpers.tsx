@@ -1,12 +1,10 @@
 import _ from 'lodash';
 import { match } from 'ts-pattern';
 import clsx from 'clsx';
-import { isValidElement, type ReactNode } from 'react';
+import { isValidElement } from 'react';
 
-import type { Properties as IconProperties } from '../icon/types';
-import type { Properties as TextProperties } from '../text/types';
+import type { TextProperties } from '../text';
 import type { Properties, NativeProperties } from './types';
-import { Icon } from '../icon';
 
 const BASE_PROPERTY_KEYS = [
 	'variant',
@@ -23,8 +21,7 @@ const BASE_PROPERTY_KEYS = [
 	'value',
 	'defaultValue',
 	'readOnly',
-	'leadingIcon',
-	'trailingIcon',
+	'icon',
 	'spinner',
 	'textDirection',
 	'onChange',
@@ -51,7 +48,6 @@ export function toDefaults(properties?: Properties): DefaultedProperties {
 		type: 'text',
 		variant: 'filled',
 		size: 'normal',
-		color: '#6750a4',
 		fullWidth: false,
 		onChange: _.noop,
 		spinner: true,
@@ -80,16 +76,7 @@ export function toLabelContent(label: NonNullable<Properties['label']>) {
 	if (typeof label === 'function' || typeof label === 'string' || isValidElement(label)) {
 		return label;
 	}
-	return _.defaults({ className: clsx('text-field__label-text', (label as TextProperties).className) }, label);
-}
-
-export function toIcon(value?: IconProperties | ReactNode): ReactNode {
-	if (value == null) return null;
-	if (isValidElement(value)) return value;
-	if (typeof value === 'object' && !Array.isArray(value) && 'name' in value) {
-		return <Icon {...value} />;
-	}
-	return value as ReactNode;
+	return _.defaults({ className: clsx('label-text', (label as TextProperties).className) }, label);
 }
 
 export function toClasses(properties: DefaultedProperties): string {

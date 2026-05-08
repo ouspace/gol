@@ -2,15 +2,8 @@ import { useId, useLayoutEffect, useRef, type ChangeEvent } from 'react';
 import type { Properties } from './types';
 
 import { Text } from '../text';
-import {
-	toDefaults,
-	toNativeProperties,
-	toInputTypeProperties,
-	toClasses,
-	toElement,
-	toIcon,
-	toLabelContent,
-} from './helpers';
+import { Icon } from '../icon';
+import { toDefaults, toNativeProperties, toInputTypeProperties, toClasses, toElement, toLabelContent } from './helpers';
 
 export default function TextField(properties?: Properties) {
 	const defaults = toDefaults(properties);
@@ -22,31 +15,34 @@ export default function TextField(properties?: Properties) {
 	const description = defaults.error && defaults.errorText != null ? defaults.errorText : defaults.supportingText;
 	const reference = useRef<HTMLDivElement>(null);
 
+	const icons = Array.isArray(defaults.icon) ? defaults.icon : defaults.icon ? [defaults.icon] : [];
+
 	useLayoutEffect(() => {
-		const element = reference.current;
-		if (element == null) return;
-		if (defaults.color != null && defaults.color !== '#6750a4') {
-			element.style.setProperty('--text-field-inject', defaults.color);
-		}
+		if (reference.current == null || defaults.color == null) return;
+		reference.current.style.setProperty('--text-color-inject', defaults.color);
 	}, [defaults.color]);
 
 	return (
 		<div ref={reference} className={toClasses(defaults)}>
-			<div className='text-field__container'>
-				{defaults.leadingIcon && <span className='text-field__leading-icon'>{toIcon(defaults.leadingIcon)}</span>}
+			<div className='container'>
+				{icons.map((icon) => (
+					<span key={icon.position ?? 'left'} className={`icon ${icon.position ?? 'left'}`}>
+						{Icon.createFrom(icon)}
+					</span>
+				))}
 				{defaults.prefixText && (
-					<span className='text-field__prefix' aria-hidden='true'>
+					<span className='prefix' aria-hidden='true'>
 						{defaults.prefixText}
 					</span>
 				)}
 				<Element
-					className='text-field__input'
+					className='input'
 					id={inputId}
 					aria-describedby={hasDescription ? descId : undefined}
 					aria-invalid={defaults.error ?? undefined}
-					ref={defaults.ref}
+					ref={defaults.ref as React.Ref<HTMLInputElement & HTMLTextAreaElement>}
 					dir={defaults.textDirection}
-					{...toNativeProperties(properties)}
+					{...toNativeProperties(properties) as React.InputHTMLAttributes<HTMLInputElement> & React.TextareaHTMLAttributes<HTMLTextAreaElement>}
 					{...toInputTypeProperties(defaults)}
 					type={defaults.type === 'textarea' ? undefined : defaults.type}
 					placeholder={defaults.label != null && defaults.placeholder == null ? ' ' : defaults.placeholder}
@@ -58,24 +54,23 @@ export default function TextField(properties?: Properties) {
 					}}
 				/>
 				{defaults.label != null && (
-					<label className='text-field__label' htmlFor={inputId}>
+					<label className='label' htmlFor={inputId}>
 						{Text.createFrom(toLabelContent(defaults.label))}
 						{defaults.required && defaults.asterisk && (
-							<span className='text-field__asterisk' aria-hidden='true'>
+							<span className='asterisk' aria-hidden='true'>
 								*
 							</span>
 						)}
 					</label>
 				)}
 				{defaults.suffixText && (
-					<span className='text-field__suffix' aria-hidden='true'>
+					<span className='suffix' aria-hidden='true'>
 						{defaults.suffixText}
 					</span>
 				)}
-				{defaults.trailingIcon && <span className='text-field__trailing-icon'>{toIcon(defaults.trailingIcon)}</span>}
 			</div>
 			{hasDescription && (
-				<div id={descId} className='text-field__supporting-text'>
+				<div id={descId} className='supporting-text'>
 					{Text.createFrom(description as Parameters<typeof Text.createFrom>[0])}
 				</div>
 			)}
