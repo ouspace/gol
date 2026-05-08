@@ -1,64 +1,64 @@
 .text-field {
 	/* hover */
-	&.filled:not(.disabled):not(.error):not(:focus-within) .text-field__container:hover {
+	&.filled:not(.disabled):not(.error):not(:focus-within) .container:hover {
 		background-color: var(--text-field-container-hover-color);
 	}
 
-	&.filled:not(.disabled):not(.error):not(:focus-within) .text-field__container:hover::after {
+	&.filled:not(.disabled):not(.error):not(:focus-within) .container:hover::after {
 		height: 2px;
 	}
 
-	&.outlined:not(.disabled):not(.error):not(:focus-within) .text-field__container:hover {
+	&.outlined:not(.disabled):not(.error):not(:focus-within) .container:hover {
 		border-color: var(--text-field-on-container-color);
 	}
 
 	/* focus */
-	.text-field__container:focus-within .text-field__label {
+	.container:focus-within .label {
 		color: var(--text-field-primary-color);
 	}
 
-	&.filled:focus-within .text-field__container::after {
+	&.filled:focus-within .container::after {
 		height: 2px;
 		background-color: var(--text-field-primary-color);
 	}
 
-	&.outlined:focus-within .text-field__container {
+	&.outlined:focus-within .container {
 		border-width: 2px;
 		border-color: var(--text-field-primary-color);
 	}
 
 	/* error */
 	&.error {
-		.text-field__label,
-		.text-field__container:focus-within .text-field__label {
+		.label,
+		.container:focus-within .label {
 			color: var(--text-field-error-color);
 		}
 
-		.text-field__supporting-text {
+		.supporting-text {
 			color: var(--text-field-error-color);
 		}
 
-		&.filled .text-field__container::after,
-		&.filled:focus-within .text-field__container::after {
+		&.filled .container::after,
+		&.filled:focus-within .container::after {
 			background-color: var(--text-field-error-color);
 		}
 
 		/* filled hover on error */
-		&.filled:not(.disabled):not(:focus-within) .text-field__container:hover {
+		&.filled:not(.disabled):not(:focus-within) .container:hover {
 			background-color: var(--text-field-container-hover-color);
 		}
 
-		&.filled:not(.disabled):not(:focus-within) .text-field__container:hover::after {
+		&.filled:not(.disabled):not(:focus-within) .container:hover::after {
 			height: 2px;
 		}
 
-		&.outlined .text-field__container,
-		&.outlined:focus-within .text-field__container {
+		&.outlined .container,
+		&.outlined:focus-within .container {
 			border-color: var(--text-field-error-color);
 		}
 
 		/* outlined hover on error */
-		&.outlined:not(.disabled):not(:focus-within) .text-field__container:hover {
+		&.outlined:not(.disabled):not(:focus-within) .container:hover {
 			border-width: 2px;
 			border-color: var(--text-field-error-color);
 		}
@@ -73,17 +73,17 @@
 
 	/* read only */
 	&.read-only {
-		.text-field__container {
+		.container {
 			cursor: default;
 		}
 
-		.text-field__input {
+		.input {
 			cursor: text;
 		}
 	}
 
 	/* textarea */
-	textarea.text-field__input {
+	textarea.input {
 		resize: vertical;
 		align-self: stretch;
 		padding-top: 4px;
@@ -93,20 +93,20 @@
 
 	/* spinner */
 	&.no-spinner {
-		.text-field__input::-webkit-outer-spin-button,
-		.text-field__input::-webkit-inner-spin-button {
+		.input::-webkit-outer-spin-button,
+		.input::-webkit-inner-spin-button {
 			-webkit-appearance: none;
 			margin: 0;
 		}
 
-		.text-field__input[type='number'] {
+		.input[type='number'] {
 			-moz-appearance: textfield;
 			appearance: textfield;
 		}
 	}
-}
 
-/* placeholder */
-.text-field__container:has(.text-field__label) .text-field__input:not(:focus)::placeholder {
-	opacity: 0;
+	/* placeholder */
+	.container:has(.label) .input:not(:focus)::placeholder {
+		opacity: 0;
+	}
 }

@@ -1,6 +1,6 @@
 import type { ChangeEvent, InputHTMLAttributes, ReactNode, RefAttributes } from 'react';
-import type { Properties as IconProperties } from '../icon/types';
-import type { Properties as TextProperties } from '../text/types';
+import type { IconProperties } from '../icon';
+import type { TextProperties } from '../text';
 
 type TextLike = ReactNode | TextProperties | (() => TextProperties | ReactNode);
 type TextFieldInputMode = 'none' | 'text' | 'decimal' | 'numeric' | 'tel' | 'search' | 'email' | 'url';
@@ -27,6 +27,22 @@ type TextFieldColor =
 	| `hsl(${string})`
 	| `hsla(${string})`
 	| `#${string}`;
+
+/**
+ * Icon with position for TextField.
+ * Allows specifying where the icon should be rendered.
+ */
+export type TextFieldIcon = IconProperties & {
+	/**
+	 * Defines the position of the icon within the text field.
+	 *
+	 * @default "left"
+	 * @example
+	 * position="left"
+	 * position="right"
+	 */
+	position?: 'left' | 'right';
+};
 
 type LengthConstrained = {
 	/**
@@ -239,24 +255,18 @@ type BaseProperties = RefAttributes<HTMLInputElement | HTMLTextAreaElement> & {
 	textDirection?: 'rtl' | 'ltr' | 'auto';
 
 	/**
-	 * Defines an icon rendered at the start of the text field.
-	 * Supports IconProperties or any ReactNode.
+	 * Defines one or more icons rendered around the text field.
+	 * Supports IconProperties with position, ReactNode, or mixed array.
 	 *
 	 * @example
-	 * leadingIcon={{ name: "search" }}
-	 * leadingIcon={<Icon name="search"/>}
+	 * icon={{ name: "search" }}
+	 * icon={{ name: "visibility", position: "right" }}
+	 * icon={[
+	 *   { name: "search", position: "left" },
+	 *   { name: "close", position: "right" }
+	 * ]}
 	 */
-	leadingIcon?: IconProperties | ReactNode;
-
-	/**
-	 * Defines an icon rendered at the end of the text field.
-	 * Supports IconProperties or any ReactNode.
-	 *
-	 * @example
-	 * trailingIcon={{ name: "close" }}
-	 * trailingIcon={<Icon name="visibility"/>}
-	 */
-	trailingIcon?: IconProperties | ReactNode;
+	icon?: TextFieldIcon | TextFieldIcon[];
 
 	/**
 	 * Callback fired when the input value changes.
