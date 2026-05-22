@@ -1,0 +1,27 @@
+/* global-dark.css - Global Design Tokens (Dark Theme Override) */
+
+[data-theme="dark"] {
+    /* 
+     * Core Project Tokens (Inverted)
+     */
+     
+    /* Colors */
+    --color-primary: #d0bcff;
+    --color-on-primary: #381e72;
+    
+    --color-surface: #211f26;
+    --color-on-surface: #e6e1e5;
+    --color-on-surface-muted: #cac4d0;
+    
+    --color-outline: #49454f;
+    --color-error: #f2b8b5;
+    
+    /* Elevation / Shadows */
+    --shadow-raised: 0 1px 3px rgb(0 0 0 / 0.5);
+    --shadow-active: 0 2px 6px rgb(0 0 0 / 0.6);
+}
+
+/* 
+ * Note: Spacing and Typography are inherited from global-light.css :root definitions.
+ * Only override here if dark mode requires different sizes/spacing.
+ */

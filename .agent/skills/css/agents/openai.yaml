@@ -1,0 +1,7 @@
+interface:
+  display_name: "Fluent CSS"
+  short_description: "Semantic CSS for CMS theming"
+  default_prompt: "Use $fluent-css to style this UI with English-grammar selectors, responsibility-based files, and stable component variables for CMS themes."
+
+policy:
+  allow_implicit_invocation: true

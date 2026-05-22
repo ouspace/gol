@@ -1,0 +1,49 @@
+/* global-light.css - Global Design Tokens (Default Theme) */
+
+:root {
+    /* 
+     * Core Project Tokens 
+     * Following a Mobile-First approach with minimalist naming.
+     */
+     
+    /* Colors */
+    --color-primary: #6750a4;
+    --color-on-primary: #ffffff;
+    
+    --color-surface: #ffffff;
+    --color-on-surface: #1d1b20;
+    --color-on-surface-muted: #49454f;
+    
+    --color-outline: #cac4d0;
+    --color-error: #b3261e;
+    
+    /* Typography */
+    --font-family: system-ui, -apple-system, sans-serif;
+    --font-size: 1rem; /* Mobile Base */
+    
+    /* Spacing */
+    --spacing: 1rem; /* Mobile Base */
+    
+    /* Elevation / Shadows */
+    --shadow-raised: 0 1px 3px rgb(0 0 0 / 0.18);
+    --shadow-active: 0 2px 6px rgb(0 0 0 / 0.2);
+    
+    /* Shapes */
+    --shape-corner-small: 4px;
+    --shape-corner-medium: 8px;
+    --shape-corner-large: 12px;
+}
+
+@media (min-width: 768px) {
+    :root {
+        --spacing: 1.5rem; /* Tablet Override */
+        --font-size: 1.125rem;
+    }
+}
+
+@media (min-width: 1200px) {
+    :root {
+        --spacing: 2rem; /* Desktop Override */
+        --font-size: 1.25rem;
+    }
+}

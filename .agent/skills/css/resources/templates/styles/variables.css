@@ -1,0 +1,12 @@
+/* variables.css - Component Contracts */
+
+:root {
+    /* 
+     * Component Variables (Descriptive) 
+     * These map to the Tier 2 Global Tokens defined in global-light.css
+     */
+    --card-background-color: var(--color-surface);
+    --card-border-radius: var(--shape-corner-medium, 12px);
+    --button-font-size: var(--font-size, 1rem);
+    --card-padding-block: var(--spacing, 1rem);
+}

@@ -1,0 +1,19 @@
+/* animations.css - Verbs, adverbs, keyframes, and motion timing */
+
+.card {
+    &.fade {
+        animation-duration: var(--card-animation-duration, 0.3s);
+        animation-fill-mode: forwards;
+        animation-name: fade-in;
+        animation-timing-function: var(--card-animation-timing-function, ease);
+    }
+
+    &.fade.slowly {
+        animation-duration: var(--card-animation-duration-slowly, 1s);
+    }
+}
+
+@keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}

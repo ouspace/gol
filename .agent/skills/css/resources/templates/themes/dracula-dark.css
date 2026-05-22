@@ -1,0 +1,21 @@
+/* themes/dracula-dark.css - External CMS theme values */
+
+[data-theme="dracula-dark"] {
+    --color-primary: #bd93f9;
+    --color-surface: #282a36;
+    --color-on-surface: #f8f8f2;
+
+    --card-background-color: #282a36;
+    --card-border-color: #44475a;
+    --card-box-shadow: 0 2px 8px rgb(0 0 0 / 0.3);
+
+    --button-background-color: #bd93f9;
+    --button-color: #282a36;
+
+    --icon-background-color: #44475a;
+    --icon-background-image: none;
+    --icon-background-position: center;
+    --icon-background-repeat: no-repeat;
+    --icon-background-size: contain;
+    --icon-color: #ff79c6;
+}
