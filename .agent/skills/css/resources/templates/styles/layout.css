@@ -1,0 +1,11 @@
+/* layout.css - Structural nouns and page-level arrangement */
+
+.main {
+    min-height: 100vh;
+}
+
+.section {
+    margin-inline: auto;
+    max-width: var(--section-width, 72rem);
+    padding-inline: var(--section-padding-inline, 1rem);
+}

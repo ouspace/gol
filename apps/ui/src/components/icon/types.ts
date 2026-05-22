@@ -1,5 +1,12 @@
-import type { RefAttributes, SyntheticEvent } from 'react';
+import type { Ref, SyntheticEvent, CSSProperties, HTMLAttributes } from 'react';
 import type { IconKeys } from './icon.list.lfs';
+
+export interface IconStyle extends CSSProperties {
+	'--icon-size'?: string;
+	'--icon-rotate'?: string;
+	'--icon-weight'?: string | number;
+	'--icon-color'?: string;
+}
 
 // TODO: Implement a `custom type` to extend `Name` keys along side `IconKeys`.
 type SizeUnit = 'px' | 'rem' | 'em' | 'vw' | 'vh';
@@ -32,7 +39,21 @@ export interface Options {
 /**
  *
  */
-export type Properties = RefAttributes<HTMLElement> & {
+export interface Properties extends Omit<HTMLAttributes<HTMLElement>, 'onClick'> {
+	/**
+	 * custom SVG xml content to render directly instead of fetching from the material symbols dictionary
+	 */
+	svg?: string;
+
+	/**
+	 * React 19 ref property.
+	 */
+	ref?: Ref<HTMLElement>;
+
+	/**
+	 * React key
+	 */
+	key?: string;
 	/**
 	 * defines a material symbols' name
 	 * see more information at {@link https://fonts.google.com/icons}
@@ -70,7 +91,7 @@ export type Properties = RefAttributes<HTMLElement> & {
 	 * @example
 	 * weight="normal"
 	 * weight={400}
-	 * 
+	 *
 	 * TODO: Unsupported icon that has `extra light` | `extra bold` weights.
 	 */
 	weight?: Weight<'lightest' | 'light' | 'lightless' | 'normal' | 'boldless' | 'bold' | 'boldest'>;

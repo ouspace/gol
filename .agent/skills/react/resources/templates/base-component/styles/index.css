@@ -1,0 +1,9 @@
+.ui-component {
+  /* Map internal variables to MD3 tokens */
+  --ui-comp-bg: var(--md-sys-color-surface);
+  --ui-comp-text: var(--md-sys-color-on-surface);
+
+  display: block;
+  background-color: var(--ui-comp-bg);
+  color: var(--ui-comp-text);
+}

@@ -1,14 +1,34 @@
 {
-	"plugins": ["stylelint-prettier"],
-	"extends": ["stylelint-config-standard", "stylelint-prettier/recommended"],
+	"plugins": [
+		"stylelint-prettier"
+	],
+	"extends": [
+		"stylelint-config-standard",
+		"stylelint-prettier/recommended"
+	],
 	"rules": {
 		"prettier/prettier": true,
-		"at-rule-no-unknown": null
+		"at-rule-no-unknown": null,
+		"custom-property-pattern": "^_?[a-z][a-z0-9]*(-[a-z0-9]+)*$",
+		"declaration-block-no-redundant-longhand-properties": [
+			true,
+			{
+				"ignoreShorthands": [
+					"/padding/",
+					"/margin/",
+					"/border/"
+				]
+			}
+		]
 	},
-	"ignoreFiles": ["**/*.{ts,tsx,js,jsx,json,md,sass,svg,png,jpeg,html}"],
+	"ignoreFiles": [
+		"**/*.{ts,tsx,js,jsx,json,md,sass,svg,png,jpeg,html}"
+	],
 	"overrides": [
 		{
-			"files": ["*.css"]
+			"files": [
+				"*.css"
+			]
 		}
 	]
 }

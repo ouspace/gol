@@ -1,10 +1,37 @@
 @import url('./variables.css');
 
 .icon {
-	width: var(--icon-size);
-	height: var(--icon-size);
+	width: var(--_icon-size);
+	height: var(--_icon-size);
 	line-height: 0;
 	display: inline-block;
+
+	/* padding definitions */
+	padding-block-start: var(--_icon-padding-top);
+	padding-block-end: var(--_icon-padding-bottom);
+	padding-inline-start: var(--_icon-padding-left);
+	padding-inline-end: var(--_icon-padding-right);
+
+	/* margin definitions */
+	margin-block-start: var(--_icon-margin-top);
+	margin-block-end: var(--_icon-margin-bottom);
+	margin-inline-start: var(--_icon-margin-left);
+	margin-inline-end: var(--_icon-margin-right);
+
+	/* color definitions */
+	color: var(--_icon-color);
+
+	/* background definitions */
+	background-color: var(--_icon-background-color);
+	background-image: var(--_icon-background-image);
+	background-size: var(--_icon-background-size);
+
+	/* border definitions */
+	border-block-start: var(--_icon-border-top);
+	border-block-end: var(--_icon-border-bottom);
+	border-inline-start: var(--_icon-border-left);
+	border-inline-end: var(--_icon-border-right);
+	border-radius: var(--_icon-border-radius);
 
 	&.circular {
 		border-radius: 100%;
@@ -12,41 +39,39 @@
 
 	&.bordered {
 		border-style: solid;
-		border-width: calc(calc(var(--icon-weight) * 1px) / 100);
-		border-color: var(--icon-color);
+		border-width: calc(calc(var(--_icon-weight) * 1px) / 100);
+		border-color: var(--_icon-color);
 	}
 
 	/* Sizing definitions */
 
-	/* &.custom {} */
-
 	&.smallest {
-		width: calc(var(--icon-size) - calc(var(--icon-size-step)) * 3);
-		height: calc(var(--icon-size) - calc(var(--icon-size-step)) * 3);
+		width: calc(var(--_icon-size) - calc(var(--_icon-size-step)) * 3);
+		height: calc(var(--_icon-size) - calc(var(--_icon-size-step)) * 3);
 	}
 
 	&.small {
-		width: calc(var(--icon-size) - calc(var(--icon-size-step)) * 2);
-		height: calc(var(--icon-size) - calc(var(--icon-size-step)) * 2);
+		width: calc(var(--_icon-size) - calc(var(--_icon-size-step)) * 2);
+		height: calc(var(--_icon-size) - calc(var(--_icon-size-step)) * 2);
 	}
 
 	&.smallless {
-		width: calc(var(--icon-size) - calc(var(--icon-size-step)) * 1);
-		height: calc(var(--icon-size) - calc(var(--icon-size-step)) * 1);
+		width: calc(var(--_icon-size) - calc(var(--_icon-size-step)) * 1);
+		height: calc(var(--_icon-size) - calc(var(--_icon-size-step)) * 1);
 	}
 
 	&.bigless {
-		width: calc(var(--icon-size) + calc(var(--icon-size-step)) * 1);
-		height: calc(var(--icon-size) + calc(var(--icon-size-step)) * 1);
+		width: calc(var(--_icon-size) + calc(var(--_icon-size-step)) * 1);
+		height: calc(var(--_icon-size) + calc(var(--_icon-size-step)) * 1);
 	}
 
 	&.big {
-		width: calc(var(--icon-size) + calc(var(--icon-size-step)) * 2);
-		height: calc(var(--icon-size) + calc(var(--icon-size-step)) * 2);
+		width: calc(var(--_icon-size) + calc(var(--_icon-size-step)) * 2);
+		height: calc(var(--_icon-size) + calc(var(--_icon-size-step)) * 2);
 	}
 
 	&.biggest {
-		width: calc(var(--icon-size) + calc(var(--icon-size-step)) * 3);
-		height: calc(var(--icon-size) + calc(var(--icon-size-step)) * 3);
+		width: calc(var(--_icon-size) + calc(var(--_icon-size-step)) * 3);
+		height: calc(var(--_icon-size) + calc(var(--_icon-size-step)) * 3);
 	}
 }

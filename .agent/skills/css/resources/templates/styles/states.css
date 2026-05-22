@@ -1,0 +1,15 @@
+/* states.css - Adjectives and stateful variants */
+
+/* Adjectives (States/Variants) */
+.card {
+    &.active {
+        /* active state */
+    }
+}
+
+.field {
+    &.readonly,
+    &[readonly] {
+        pointer-events: none;
+    }
+}
