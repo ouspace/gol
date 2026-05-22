@@ -18,8 +18,13 @@
 		"**/*.stories.jsx",
 		"**/*.stories.tsx",
 		"**/*.stories.mdx",
+		"**/*.snippet.ts",
+		"**/*.snippet.tsx",
+		"**/__tests__/**",
+		"**/__test__/**",
 		"src/test-setup.ts",
-		"postcss.config.js"
+		"postcss.config.js",
+		"storybook-static"
 	],
 	"include": [
 		"**/*.ts",
