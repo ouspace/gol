@@ -1,11 +1,11 @@
-import React, { useRef, useMemo, type RefObject } from 'react';
+import { useMemo } from 'react';
 import clsx from 'clsx';
 import { SvgXml } from 'react-native-svg';
 import _ from 'lodash';
 
 import icons from './icon.list.lfs';
-import { type Properties, Mode } from './types';
-import { toDefaults, toFill, toWeight, toRotate, toSize, isSizeEnum } from './helpers';
+import { type Properties, type IconStyle } from './types';
+import { toDefaults, toWeight, toRotate, toSize, isSizeEnum, toKey } from './helpers';
 import './styles/index.css';
 
 /**
@@ -20,34 +20,89 @@ import './styles/index.css';
  */
 export default function Icon(properties?: Properties) {
 	const defaults = toDefaults(properties);
-	const size = toSize(defaults);
-	const weight = toWeight(defaults, { mode: Mode.Init });
-	const rotate = toRotate(defaults);
-	const iconKey = `${defaults.name}__${defaults.variant}_${toFill(defaults)}_${weight}`;
+	const iconKey = toKey(defaults);
 	const dictionary = useMemo(() => icons as Record<string, string>, []);
 	const svg = useMemo(() => {
 		return {
-			xml: dictionary[iconKey],
-			color: defaults.color,
-			fill: defaults.color,
+			xml: defaults.svg || dictionary[iconKey],
+			color: 'currentColor',
+			fill: 'currentColor',
 			viewBox: defaults.viewBox,
 		}
-	}, [iconKey, defaults, dictionary]);
+	}, [iconKey, defaults.svg, defaults.viewBox, dictionary]);
 
-	const style = useMemo(() => {
-		return {
-			'--icon-size-inject': size,
-			'--icon-rotate-inject': rotate,
-			'--icon-weight-inject': toWeight(defaults),
-			'--icon-color-inject': defaults.color,
+	const style = useMemo<IconStyle>(() => {
+		const rules: IconStyle = {};
+		if (properties?.size) {
+			const sizeValue = toSize(defaults);
+			if (sizeValue) {
+				rules['--icon-size'] = sizeValue;
+			}
 		}
-	}, [defaults, size, rotate]);
+		if (properties?.rotated) {
+			const rotateValue = toRotate(defaults);
+			if (rotateValue) {
+				rules['--icon-rotate'] = rotateValue;
+			}
+		}
+		if (properties?.weight) {
+			rules['--icon-weight'] = toWeight(defaults);
+		}
+		if (properties?.color) {
+			rules['--icon-color'] = defaults.color;
+		}
+
+		return _.defaults({}, defaults.style, rules);
+	}, [properties?.size, properties?.rotated, properties?.weight, properties?.color, defaults]);
+
+	const isClickable = defaults.onClick !== _.noop || defaults.role === 'button';
+	const role = isClickable ? 'button' : 'img';
+	const tabIndex = isClickable ? (defaults.disabled ? -1 : 0) : undefined;
+	const ariaHidden = isClickable ? undefined : 'true';
+	const ariaDisabled = defaults.disabled ? 'true' : undefined;
+
+	const handleKeyDown = (event: React.KeyboardEvent<HTMLElement>) => {
+		if (defaults.disabled) {
+			event.preventDefault();
+			return;
+		}
+		if (event.key === 'Enter' || event.key === ' ') {
+			event.preventDefault();
+			defaults.onClick(event as unknown as React.SyntheticEvent, _.omit(defaults, ['onClick']));
+		}
+		properties?.onKeyDown?.(event);
+	};
+
+	const omit = [
+		'svg',
+		'size',
+		'color',
+		'weight',
+		'fill',
+		'variant',
+		'disabled',
+		'bordered',
+		'flipped',
+		'inverted',
+		'rotated',
+		'circular',
+		'viewBox',
+		'onClick',
+		'ref',
+		'key',
+		'className',
+	];
 
 	return (
-		<span ref={defaults.ref}
+		<span
+			{..._.omit(defaults, omit)}
+			ref={defaults.ref}
 			key={defaults.key}
-			name={defaults.name}
-			role='icon'
+			// name={defaults.name}
+			role={role}
+			tabIndex={tabIndex}
+			aria-hidden={ariaHidden}
+			aria-disabled={ariaDisabled}
 			style={style}
 			className={clsx({
 				[defaults.size as string]: isSizeEnum(defaults),
@@ -62,6 +117,7 @@ export default function Icon(properties?: Properties) {
 
 				defaults.onClick(event, _.omit(defaults, ['onClick']));
 			}}
+			onKeyDown={isClickable ? handleKeyDown : properties?.onKeyDown}
 		>
 			<SvgXml
 				xml={svg.xml}
@@ -75,3 +131,4 @@ export default function Icon(properties?: Properties) {
 		</span>
 	);
 }
+

@@ -233,3 +233,7 @@ test-output
 
 .claude/worktrees
 .claude/settings.local.json
+
+# Generated TypeScript declarations
+*.d.ts
+*.d.ts.map

@@ -1,0 +1,38 @@
+.icon {
+	/* Dimensions */
+	--_icon-size: var(--icon-size, 1.5rem);
+	--_icon-size-step: var(--icon-size-step, 0.25rem);
+
+	/* Weight & Rotation */
+	--_icon-weight: var(--icon-weight, 400);
+	--_icon-rotate: var(--icon-rotate, 0deg);
+
+	/* Spacing (Padding) */
+	--_icon-padding-top: var(--icon-padding-top, 0);
+	--_icon-padding-bottom: var(--icon-padding-bottom, 0);
+	--_icon-padding-left: var(--icon-padding-left, 0);
+	--_icon-padding-right: var(--icon-padding-right, 0);
+
+	/* Spacing (Margin) */
+	--_icon-margin-top: var(--icon-margin-top, 0);
+	--_icon-margin-bottom: var(--icon-margin-bottom, 0);
+	--_icon-margin-left: var(--icon-margin-left, 0);
+	--_icon-margin-right: var(--icon-margin-right, 0);
+
+	/* Decoration */
+	--_icon-color: var(--icon-color, currentColor);
+	--_icon-background-color: var(--icon-background-color, transparent);
+	--_icon-background-image: var(--icon-background-image, none);
+	--_icon-background-size: var(--icon-background-size, contain);
+
+	/* Borders */
+	--_icon-border-top: var(--icon-border-top, none);
+	--_icon-border-bottom: var(--icon-border-bottom, none);
+	--_icon-border-left: var(--icon-border-left, none);
+	--_icon-border-right: var(--icon-border-right, none);
+	--_icon-border-radius: var(--icon-border-radius, 0);
+
+	/* Motion */
+	--_icon-transition-duration: var(--icon-transition-duration, 0.2s);
+	--_icon-transition-timing-function: var(--icon-transition-timing-function, ease);
+}

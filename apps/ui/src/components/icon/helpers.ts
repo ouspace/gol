@@ -112,3 +112,15 @@ export function toRotate(properties: Required<Properties>): string | undefined {
 
 	return `${value * direction}${unit}`;
 }
+
+/**
+ * Resolves the string key to fetch the icon from the dictionary
+ *
+ * @param properties
+ * @returns {string} iconKey
+ */
+export function toKey(properties: Required<Properties>): string {
+	const weight = toWeight(properties, { mode: Mode.Init });
+	return `${properties.name}__${properties.variant}_${toFill(properties)}_${weight}`;
+}
+
