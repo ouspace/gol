@@ -15,23 +15,16 @@
 		"declaration": true
 	},
 	"files": [],
-	"exclude": [
-		"**/*.snippet.ts",
-		"**/*.snippet.tsx"
-	],
-	"include": [
-		"**/*.ts",
-		"**/*.tsx",
-		"**/*.js",
-		"**/*.jsx",
-		"postcss.config.js"
-	],
+	"include": [],
 	"references": [
 		{
 			"path": "./tsconfig.app.json"
 		},
 		{
 			"path": "./tsconfig.storybook.json"
+		},
+		{
+			"path": "./tsconfig.spec.json"
 		}
 	]
 }

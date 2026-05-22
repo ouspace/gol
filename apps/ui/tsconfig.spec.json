@@ -21,6 +21,15 @@
 		"src/**/*.spec.js",
 		"src/**/*.test.jsx",
 		"src/**/*.spec.jsx",
+		"src/**/__tests__/**/*.ts",
+		"src/**/__tests__/**/*.tsx",
+		"src/**/__test__/**/*.ts",
+		"src/**/__test__/**/*.tsx",
 		"src/**/*.d.ts"
+	],
+	"references": [
+		{
+			"path": "./tsconfig.app.json"
+		}
 	]
 }

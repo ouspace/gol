@@ -28,6 +28,7 @@ const Button = React.forwardRef<HTMLElement, ButtonProperties>(({
 }, reference) => {
 	const isLink = typeof href === 'string';
 	const Tag = (as ?? (isLink ? 'a' : 'button')) as ElementTag;
+	const TagComponent = Tag as any;
 
 	const classes = clsx(
 		'button',
@@ -58,13 +59,13 @@ const Button = React.forwardRef<HTMLElement, ButtonProperties>(({
 	}
 
 	return (
-		<Tag ref={reference} {...elementProperties}>
+		<TagComponent ref={reference} {...elementProperties}>
 			{icon && <span className='button__icon'>{icon}</span>}
 			{children && <span className='button__label'>{children}</span>}
 			{!icon && !children && (
 				<span className='button__label'>Button</span>
 			)}
-		</Tag>
+		</TagComponent>
 	);
 });
 

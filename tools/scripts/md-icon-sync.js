@@ -75,7 +75,7 @@ async function toExport(directory, file) {
 
 	const keys = [...names.values()].join('').replace(/\s\|\s$/, '');
 	const types = `export type IconKeys = ${keys}`;
-	const content = `${types}\nexport default {\n${pair}} as Record<IconKeys, string>;\n`;
+	const content = `${types}\nexport default {\n${pair}} as Record<string, string>;\n`;
 
 	await fs.writeFile(filePath, content);
 }
