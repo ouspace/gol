@@ -19,6 +19,7 @@
 		"node_modules",
 		"dist",
 		".expo",
-		".next"
+		".next",
+		"**/*.list.lfs.ts"
 	]
 }
