@@ -698,14 +698,14 @@ Naming convention:
 
 This directory is intentionally minimal.
 
-The canonical agent framework lives at repository root under `.agents`:
+The canonical agent framework lives at repository root:
 
-- Roles: `.agents/roles/*`
-- Workflows: `.agents/workflows/*`
-- Templates: `.agents/templates/*`
-- Examples: `.agents/examples/*`
+- Roles: `openspec/roles/*`
+- Workflows: `.agent/workflows/*`
+- Templates: `openspec/schemas/enterprise/templates/*`
+- Examples: `openspec/examples/*`
 
-Use this UI spec path for UI-specific SDD artifacts only (`.agents/specs/ui/*`).
+Use this UI spec path for UI-specific SDD artifacts only (`openspec/specs/ui/*`).
 
 ## Why
 
@@ -716,7 +716,7 @@ Keeping one canonical framework avoids drift and makes behavior predictable acro
 If you temporarily create mirrors for portability, validate sync with:
 
 ```bash
-.agents/scripts/check-agents-sync.sh
+openspec/scripts/check-agents-sync.sh
 ```
 
 

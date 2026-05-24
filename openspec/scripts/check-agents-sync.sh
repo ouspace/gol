@@ -3,19 +3,19 @@ set -euo pipefail
 
 ROOT_DIR="$(cd "$(dirname "$0")/../.." && pwd)"
 
-CANON_ROLES="$ROOT_DIR/.agents/roles"
-CANON_WORKFLOWS="$ROOT_DIR/.agents/workflows"
-CANON_TEMPLATES="$ROOT_DIR/.agents/templates"
-CANON_EXAMPLES="$ROOT_DIR/.agents/examples"
+CANON_ROLES="$ROOT_DIR/openspec/roles"
+CANON_WORKFLOWS="$ROOT_DIR/.agent/workflows"
+CANON_TEMPLATES="$ROOT_DIR/openspec/schemas/enterprise/templates"
+CANON_EXAMPLES="$ROOT_DIR/openspec/examples"
 
 print_usage() {
   cat <<USAGE
 Usage:
-  .agents/scripts/check-agents-sync.sh [--domain <name>] [--all]
+  openspec/scripts/check-agents-sync.sh [--domain <name>] [--all]
 
 Options:
-  --domain <name>  Check one domain mirror at .agents/specs/<name>/09-ai-agents
-  --all            Check all domains found under .agents/specs/*/09-ai-agents
+  --domain <name>  Check one domain mirror at openspec/specs/<name>/09-ai-agents
+  --all            Check all domains found under openspec/specs/*/09-ai-agents
 
 Default:
   --domain ui
@@ -82,7 +82,7 @@ check_pair() {
 
 check_domain() {
   local domain="$1"
-  local spec_base="$ROOT_DIR/.agents/specs/$domain/09-ai-agents"
+  local spec_base="$ROOT_DIR/openspec/specs/$domain/09-ai-agents"
   local spec_roles="$spec_base/roles"
   local spec_workflows="$spec_base/workflows"
   local spec_templates="$spec_base/templates"
@@ -103,11 +103,11 @@ else
     domains_found=1
     check_domain "$domain"
   done <<EOF_DOMAINS
-$(find "$ROOT_DIR/.agents/specs" -mindepth 1 -maxdepth 1 -type d -exec basename {} \; | sort)
+$(find "$ROOT_DIR/openspec/specs" -mindepth 1 -maxdepth 1 -type d -exec basename {} \; | sort)
 EOF_DOMAINS
 
   if [[ "$domains_found" -eq 0 ]]; then
-    echo "[ERROR] No domains found under .agents/specs" >&2
+    echo "[ERROR] No domains found under openspec/specs" >&2
     exit 1
   fi
 fi

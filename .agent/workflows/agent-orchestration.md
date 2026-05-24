@@ -11,8 +11,8 @@
 
 ## Spec Root Convention
 
-- Default spec root for UI work: `.agents/specs/ui`
-- For other domains, replace with `.agents/specs/<domain>` and keep the same stage model.
+- Default spec root for UI work: `openspec/specs/ui`
+- For other domains, replace with `openspec/specs/<domain>` and keep the same stage model.
 
 ## Ownership Map
 
@@ -36,7 +36,7 @@ Each agent must produce:
 - Risks and mitigations
 - Next agent action required
 
-Use: `.agents/templates/handoff-template.md`.
+Use: `openspec/schemas/enterprise/templates/handoff-template.md`.
 
 ## Escalation Rules
 

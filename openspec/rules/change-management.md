@@ -4,10 +4,10 @@
 
 A governance change includes modifications to:
 
-- `.agents/roles/*`
-- `.agents/workflows/*`
-- `.agents/templates/*`
-- `.agents/rules/*`
+- `openspec/roles/*`
+- `.agent/workflows/*`
+- `openspec/schemas/enterprise/templates/*`
+- `openspec/rules/*`
 
 ## Required Actions
 
