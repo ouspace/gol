@@ -165,6 +165,10 @@ export default [
 			'**/metro.config.js',
 			'**/*.snippet.tsx',
 			'**/.expo',
+			'**/*.list.lfs.ts',
+			'**/storybook-static',
+			'**/coverage',
+			'**/test-results',
 		],
 	},
 	{
