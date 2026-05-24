@@ -6,14 +6,14 @@ Plan and control iteration execution using approved artifacts and quality gates.
 
 ## Spec Root
 
-- Default: `.agents/specs/ui`
-- Replace with `.agents/specs/<domain>` for other domains.
+- Default: `openspec/specs/ui`
+- Replace with `openspec/specs/<domain>` for other domains.
 
 ## Inputs
 
 - `<spec-root>/06-quality/*`
 - `<spec-root>/07-delivery/*`
-- `.agents/workflows/stage-gates.md`
+- `.agent/workflows/stage-gates.md`
 
 ## Outputs
 
