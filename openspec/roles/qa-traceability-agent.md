@@ -6,8 +6,8 @@ Ensure end-to-end traceability and verification readiness before implementation 
 
 ## Spec Root
 
-- Default: `.agents/specs/ui`
-- Replace with `.agents/specs/<domain>` for other domains.
+- Default: `openspec/specs/ui`
+- Replace with `openspec/specs/<domain>` for other domains.
 
 ## Inputs
 

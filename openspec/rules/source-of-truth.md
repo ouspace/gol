@@ -7,10 +7,10 @@ Prevent drift between duplicated role/workflow/template documents.
 ## Canonical Ownership
 
 - Canonical framework files live in:
-  - `.agents/roles`
-  - `.agents/workflows`
-  - `.agents/templates`
-  - `.agents/examples`
+  - `openspec/roles`
+  - `.agent/workflows`
+  - `openspec/schemas/enterprise/templates`
+  - `openspec/examples`
 
 ## Spec-Level References
 

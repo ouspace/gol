@@ -6,8 +6,8 @@ Specify component behavior, interaction states, and accessibility expectations.
 
 ## Spec Root
 
-- Default: `.agents/specs/ui`
-- Replace with `.agents/specs/<domain>` for other domains.
+- Default: `openspec/specs/ui`
+- Replace with `openspec/specs/<domain>` for other domains.
 
 ## Inputs
 

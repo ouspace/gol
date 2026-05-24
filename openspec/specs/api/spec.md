@@ -308,11 +308,11 @@ Store ADR files under `adrs/`.
 
 Canonical agent framework:
 
-- `.agents/roles/*`
-- `.agents/workflows/*`
-- `.agents/templates/*`
-- `.agents/examples/*`
+- `openspec/roles/*`
+- `.agent/workflows/*`
+- `openspec/schemas/enterprise/templates/*`
+- `openspec/examples/*`
 
-Use `.agents/specs/api/*` for API-specific SDD artifacts.
+Use `openspec/specs/api/*` for API-specific SDD artifacts.
 
 
