@@ -1,0 +1,46 @@
+.chip {
+	&.disabled {
+		opacity: 0.38;
+		cursor: not-allowed;
+	}
+
+	&.selected.filled {
+		filter: brightness(0.75) saturate(1.3);
+	}
+
+	&.selected.outlined {
+		background-color: color-mix(in srgb, currentColor 30%, transparent);
+	}
+
+	&:hover:not(.disabled) {
+		box-shadow: var(--chip-elevation-2);
+		filter: brightness(1.05);
+		transform: translateY(-1px);
+	}
+
+	&:active:not(.disabled) {
+		box-shadow: var(--chip-elevation-1);
+		filter: brightness(0.98);
+		transform: translateY(0);
+	}
+
+	&:focus-visible:not(.disabled) {
+		outline: 2px solid var(--chip-color);
+		outline-offset: 2px;
+	}
+
+	.remove {
+		&:hover:not(:disabled) {
+			background-color: color-mix(in srgb, currentColor 8%, transparent);
+		}
+
+		&:active:not(:disabled) {
+			background-color: color-mix(in srgb, currentColor 12%, transparent);
+		}
+
+		&:focus-visible {
+			outline: 1px solid currentColor;
+			outline-offset: 1px;
+		}
+	}
+}

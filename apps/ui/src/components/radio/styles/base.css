@@ -1,47 +1,75 @@
-.radio__input {
-	position: absolute;
-	opacity: 0;
-	width: 0;
-	height: 0;
-	pointer-events: none;
-}
-
-.radio__box {
+.radio {
 	position: relative;
-	display: flex;
+	display: grid;
+	gap: var(--radio-gap);
 	align-items: center;
-	justify-content: center;
-	width: var(--radio-touch-area);
-	height: var(--radio-touch-area);
-	box-sizing: border-box;
-	cursor: pointer;
+	width: fit-content;
+	cursor: var(--radio-cursor);
+	grid-template-areas: 'box label';
+	grid-template-columns: auto 1fr;
 
-	&::after {
-		content: '';
-		width: var(--radio-size);
-		height: var(--radio-size);
-		outline: var(--radio-border-width) solid var(--radio-color-border);
-		outline-offset: calc(var(--radio-border-width) * -1);
-		border-radius: 50%;
-		background-color: var(--radio-color-background);
-		transition:
-			outline-color var(--radio-transition),
-			background-color var(--radio-transition);
-	}
-}
-
-.radio__label {
-	user-select: none;
-	cursor: pointer;
-}
-
-.radio.has-custom-icon {
-	.radio__box::after {
-		display: none;
+	&.left {
+		grid-template-areas: 'label box';
+		grid-template-columns: 1fr auto;
 	}
 
-	.radio__box {
+	&.top {
+		grid-template-areas: 'label' 'box';
+		grid-template-columns: 1fr;
+		justify-items: start;
+	}
+
+	&.bottom {
+		grid-template-areas: 'box' 'label';
+		grid-template-columns: 1fr;
+		justify-items: start;
+	}
+
+	.input {
+		position: absolute;
+		opacity: 0;
+		width: 0;
+		height: 0;
+		pointer-events: none;
+	}
+
+	.box {
+		grid-area: box;
+		position: relative;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: var(--radio-touch-area);
+		height: var(--radio-touch-area);
+		box-sizing: border-box;
+		cursor: var(--radio-cursor);
+
+		&::after {
+			content: '';
+			width: var(--radio-size);
+			height: var(--radio-size);
+			outline: var(--radio-border-width) solid var(--radio-outline-color);
+			outline-offset: calc(var(--radio-border-width) * -1);
+			border-radius: 50%;
+			background-color: var(--radio-box-background-color);
+			transition:
+				outline-color var(--radio-transition-duration) var(--radio-transition-timing-function),
+				background-color var(--radio-transition-duration) var(--radio-transition-timing-function);
+		}
+	}
+
+	&.iconified .box {
 		min-width: var(--radio-touch-area);
 		min-height: var(--radio-touch-area);
+
+		&::after {
+			display: none;
+		}
+	}
+
+	.label {
+		grid-area: label;
+		user-select: none;
+		cursor: var(--radio-cursor);
 	}
 }

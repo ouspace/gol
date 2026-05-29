@@ -1,32 +1,12 @@
-import type { ChangeEvent, InputHTMLAttributes, ReactNode, RefAttributes } from 'react';
+import type { ChangeEvent, HTMLAttributes, ReactNode, RefAttributes } from 'react';
 import type { IconProperties } from '../icon';
 import type { TextProperties } from '../text';
+import type { Size, CssColor } from '../../types/tokens';
 
 type TextLike = ReactNode | TextProperties | (() => TextProperties | ReactNode);
 type TextFieldInputMode = 'none' | 'text' | 'decimal' | 'numeric' | 'tel' | 'search' | 'email' | 'url';
-type TextFieldSize = 'small' | 'normal' | 'large';
-type ColorName =
-	| 'orange'
-	| 'yellow'
-	| 'olive'
-	| 'teal'
-	| 'violet'
-	| 'purple'
-	| 'pink'
-	| 'brown'
-	| 'grey'
-	| 'red'
-	| 'green'
-	| 'blue'
-	| 'black';
 
-type TextFieldColor =
-	| ColorName
-	| `rgb(${string})`
-	| `rgba(${string})`
-	| `hsl(${string})`
-	| `hsla(${string})`
-	| `#${string}`;
+type TextFieldOnChange = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, properties: Properties) => void;
 
 /**
  * Icon with position for TextField.
@@ -62,7 +42,7 @@ type LengthConstrained = {
 	minLength?: number;
 };
 
-type BaseProperties = RefAttributes<HTMLInputElement | HTMLTextAreaElement> & {
+export type CustomProperties = RefAttributes<HTMLInputElement | HTMLTextAreaElement> & {
 	/**
 	 * Defines the visual style of the text field.
 	 *
@@ -80,7 +60,7 @@ type BaseProperties = RefAttributes<HTMLInputElement | HTMLTextAreaElement> & {
 	 * size="small"
 	 * size="large"
 	 */
-	size?: TextFieldSize;
+	size?: Size<'small' | 'normal' | 'large'>;
 
 	/**
 	 * Defines the accent color used on focus (indicator, border, floating label).
@@ -91,7 +71,7 @@ type BaseProperties = RefAttributes<HTMLInputElement | HTMLTextAreaElement> & {
 	 * color="#ff0000"
 	 * color="rgb(255, 0, 0)"
 	 */
-	color?: TextFieldColor;
+	color?: CssColor;
 
 	/**
 	 * If `true`, the text field stretches to fill its container width.
@@ -273,12 +253,12 @@ type BaseProperties = RefAttributes<HTMLInputElement | HTMLTextAreaElement> & {
 	 * Not fired when the text field is disabled.
 	 *
 	 * @param event - The native change event
-	 * @param properties - The component properties
+	 * @param properties - The component properties (with the new `value` merged in)
 	 *
 	 * @example
-	 * onChange={(event, props) => console.log(event.target.value)}
+	 * onChange={(event, props) => console.log(props.value)}
 	 */
-	onChange?: (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, properties: Properties) => void;
+	onChange?: TextFieldOnChange;
 
 	/**
 	 * Defines the CSS class name applied to the root element.
@@ -413,31 +393,9 @@ type TextFieldTypeProperties = TextTypeProperties | EmailTypeProperties | Number
  * Native HTML input attributes (aria-*, data-*, onFocus, onBlur, tabIndex, etc.)
  * excluding those already handled by the component's own API.
  */
-export type NativeProperties = Omit<
-	InputHTMLAttributes<HTMLInputElement>,
-	| 'type'
-	| 'onChange'
-	| 'value'
-	| 'defaultValue'
-	| 'prefix'
-	| 'size'
-	| 'maxLength'
-	| 'minLength'
-	| 'max'
-	| 'min'
-	| 'step'
-	| 'pattern'
-	| 'multiple'
-	| 'required'
-	| 'readOnly'
-	| 'placeholder'
-	| 'autoComplete'
-	| 'disabled'
-	| 'name'
-	| 'inputMode'
->;
+export type NativeProperties = HTMLAttributes<HTMLElement>;
 
 /**
  * TextField component properties
  */
-export type Properties = NativeProperties & BaseProperties & TextFieldTypeProperties;
+export type Properties = NativeProperties & CustomProperties & TextFieldTypeProperties;

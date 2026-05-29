@@ -1,11 +1,24 @@
+import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import Radio from '../radio';
-import { Icon } from '../../icon';
+import { expect, userEvent, within } from '@storybook/test';
+
+import Radio from '../root';
 
 const meta: Meta<typeof Radio> = {
 	title: 'Components/Radio',
 	component: Radio,
 	tags: ['autodocs'],
+	parameters: {
+		a11y: {
+			disable: false,
+		},
+		docs: {
+			description: {
+				component:
+					'Radio buttons allow users to select a single option from a set. Supports custom sizes, colors, icons, and label positioning.',
+			},
+		},
+	},
 	argTypes: {
 		size: {
 			control: 'select',
@@ -28,12 +41,16 @@ const meta: Meta<typeof Radio> = {
 				'black',
 			],
 		},
+		checked: { control: 'boolean' },
+		disabled: { control: 'boolean' },
+		required: { control: 'boolean' },
 	},
 };
 
 export default meta;
 type Story = StoryObj<typeof Radio>;
 
+// Basic
 export const Default: Story = {
 	args: {
 		label: 'Default radio button',
@@ -41,37 +58,68 @@ export const Default: Story = {
 	},
 };
 
+// States
 export const States: Story = {
 	render: () => (
-		<div style={{ display: 'flex', gap: '24px', flexWrap: 'wrap' }}>
+		<div style={{ display: 'flex', gap: '24px', flexWrap: 'wrap', alignItems: 'center' }}>
 			<Radio label='Unchecked' />
 			<Radio label='Checked' checked />
 			<Radio label='Disabled' disabled />
 			<Radio label='Disabled Checked' disabled checked />
+			<Radio label='Required' required />
+			<Radio label='Required Checked' required checked />
 		</div>
 	),
+	play: async ({ canvasElement, step }) => {
+		const canvas = within(canvasElement);
+		const radios = canvas.getAllByRole('radio');
+
+		await step('Unchecked radio is not checked', async () => {
+			await expect(radios[0]).not.toBeChecked();
+		});
+
+		await step('Checked radio is checked', async () => {
+			await expect(radios[1]).toBeChecked();
+		});
+
+		await step('Disabled radios are disabled', async () => {
+			await expect(radios[2]).toBeDisabled();
+			await expect(radios[3]).toBeDisabled();
+			await expect(radios[3]).toBeChecked();
+		});
+
+		await step('Required radios are marked required', async () => {
+			await expect(radios[4]).toBeRequired();
+			await expect(radios[5]).toBeRequired();
+			await expect(radios[5]).toBeChecked();
+		});
+	},
 };
 
 export const Sizes: Story = {
 	render: () => (
-		<div style={{ display: 'flex', gap: '24px', alignItems: 'center' }}>
+		<div style={{ display: 'flex', gap: '24px', flexWrap: 'wrap', alignItems: 'center' }}>
 			<Radio label='Small' size='small' checked />
 			<Radio label='Normal' size='normal' checked />
 			<Radio label='Big' size='big' checked />
 			<Radio label='Custom (26px)' size={26} checked />
+			<Radio label='Custom (2rem)' size='2rem' checked />
 		</div>
 	),
 };
 
 export const Colors: Story = {
 	render: () => (
-		<div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap' }}>
-			<Radio label={{ content: 'Blue', color: 'blue' }} color='blue' checked />
-			<Radio label={{ content: 'Red', color: 'red' }} color='red' checked />
-			<Radio label={{ content: 'Green', color: 'green' }} color='green' checked />
-			<Radio label={{ content: 'Purple', color: 'purple' }} color='purple' checked />
-			<Radio label={{ content: 'Orange', color: 'orange' }} color='orange' checked />
-			<Radio label={{ content: 'Custom (#ff1744)', color: '#ff1744' }} color='#ff1744' checked />
+		<div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+			{(['blue', 'red', 'green', 'purple', 'orange', 'yellow', 'teal', 'violet', 'pink', 'brown', 'grey', 'black'] as const).map(
+				(color) => (
+					<div key={color} style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
+						<span style={{ width: '64px', fontSize: '12px', textTransform: 'capitalize', color: '#666' }}>{color}</span>
+						<Radio color={color} label={{ content: `Unchecked`, position: 'right' }} />
+						<Radio color={color} label={`Checked`} checked />
+					</div>
+				)
+			)}
 		</div>
 	),
 };
@@ -87,38 +135,155 @@ export const Labels: Story = {
 			<Radio checked>
 				<strong>Bold label</strong>
 			</Radio>
+			<Radio label={<>With <em>JSX</em> content</>} checked />
 		</div>
 	),
 };
 
 export const Icons: Story = {
 	render: () => (
-		<div style={{ display: 'flex', gap: '24px', flexWrap: 'wrap' }}>
-			<Radio
-				label={{ content: 'Custom icon unchecked', color: 'purple' }}
-				icon={<Icon name='radio_button_unchecked' size={24} color='purple' />}
-				checkedIcon={<Icon name='radio_button_checked' size={24} color='purple' />}
-				color='purple'
-			/>
-			<Radio
-				label={{ content: 'Custom icon checked', color: 'purple' }}
-				icon={<Icon name='radio_button_unchecked' size={24} color='purple' />}
-				checkedIcon={<Icon name='radio_button_checked' size={24} color='purple' />}
-				checked
-			/>
-			<Radio
-				label={{ content: 'Custom icon unchecked', color: 'red' }}
-				icon={<Icon name='favorite' size={18} color='red' />}
-				checkedIcon={<Icon name='favorite' size={18} fill color='red' />}
-				color='red'
-			/>
-			<Radio
-				label={{ content: 'Custom icon checked', color: 'red' }}
-				icon={<Icon name='favorite' size={18} color='red' />}
-				checkedIcon={<Icon name='favorite' size={18} fill color='red' />}
-				color='red'
-				checked
-			/>
+		<div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+			<div style={{ display: 'flex', gap: '24px', flexWrap: 'wrap', alignItems: 'center' }}>
+				<Radio
+					label={{ content: 'Default unchecked', color: 'purple' }}
+					icon={{ name: 'radio_button_unchecked', size: 24, color: 'purple' }}
+					checkedIcon={{ name: 'radio_button_checked', size: 24, color: 'purple' }}
+					color='purple'
+				/>
+				<Radio
+					label={{ content: 'Default checked', color: 'purple' }}
+					icon={{ name: 'radio_button_unchecked', size: 24, color: 'purple' }}
+					checkedIcon={{ name: 'radio_button_checked', size: 24, color: 'purple' }}
+					color='purple'
+					checked
+				/>
+			</div>
+			<div style={{ display: 'flex', gap: '24px', flexWrap: 'wrap', alignItems: 'center' }}>
+				<Radio
+					label={{ content: 'Custom unchecked (favorite)', color: 'red' }}
+					icon={{ name: 'favorite', size: 18, color: 'red' }}
+					checkedIcon={{ name: 'favorite', size: 18, fill: true, color: 'red' }}
+					color='red'
+				/>
+				<Radio
+					label={{ content: 'Custom checked (favorite)', color: 'red' }}
+					icon={{ name: 'favorite', size: 18, color: 'red' }}
+					checkedIcon={{ name: 'favorite', size: 18, fill: true, color: 'red' }}
+					color='red'
+					checked
+				/>
+			</div>
 		</div>
 	),
+};
+
+// Interactions
+export const Interactions: Story = {
+	render: () => {
+		const [value, setValue] = useState('option1');
+		return (
+			<div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+				<Radio
+					name='group'
+					value='option1'
+					label='Option 1'
+					checked={value === 'option1'}
+					onChange={() => {
+						setValue('option1');
+					}}
+				/>
+				<Radio
+					name='group'
+					value='option2'
+					label='Option 2'
+					checked={value === 'option2'}
+					onChange={() => {
+						setValue('option2');
+					}}
+				/>
+				<Radio name='group' value='option3' label='Option 3 (disabled)' disabled />
+			</div>
+		);
+	},
+	play: async ({ canvasElement, step }) => {
+		const canvas = within(canvasElement);
+		const radios = canvas.getAllByRole('radio');
+
+		await step('Option 1 is initially checked', async () => {
+			await expect(radios[0]).toBeChecked();
+		});
+
+		await step('Clicking Option 2 selects it and deselects Option 1', async () => {
+			await userEvent.click(canvas.getByText('Option 2'));
+			await expect(radios[1]).toBeChecked();
+			await expect(radios[0]).not.toBeChecked();
+		});
+
+		await step('Option 3 is disabled and cannot be selected', async () => {
+			await expect(radios[2]).toBeDisabled();
+		});
+
+		await step('Clicking back on Option 1 re-selects it', async () => {
+			await userEvent.click(canvas.getByText('Option 1'));
+			await expect(radios[0]).toBeChecked();
+			await expect(radios[1]).not.toBeChecked();
+		});
+	},
+};
+
+export const InteractionsKeyboard: Story = {
+	render: () => {
+		const [value, setValue] = useState('option1');
+		return (
+			<div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+				<Radio
+					name='keyboard-group'
+					value='option1'
+					label='Option 1'
+					checked={value === 'option1'}
+					onChange={() => {
+						setValue('option1');
+					}}
+				/>
+				<Radio
+					name='keyboard-group'
+					value='option2'
+					label='Option 2'
+					checked={value === 'option2'}
+					onChange={() => {
+						setValue('option2');
+					}}
+				/>
+				<Radio
+					name='keyboard-group'
+					value='option3'
+					label='Option 3'
+					checked={value === 'option3'}
+					onChange={() => {
+						setValue('option3');
+					}}
+				/>
+			</div>
+		);
+	},
+	play: async ({ canvasElement, step }) => {
+		const canvas = within(canvasElement);
+		const radios = canvas.getAllByRole('radio');
+		const opt1 = radios[0];
+
+		await step('Tab focuses the first radio in the group', async () => {
+			await userEvent.tab();
+			await expect(opt1).toHaveFocus();
+		});
+
+		await step('ArrowDown moves focus and checks Option 2', async () => {
+			await userEvent.keyboard('{ArrowDown}');
+			await expect(radios[1]).toBeChecked();
+		});
+
+		await step('ArrowDown again moves to Option 3', async () => {
+			await userEvent.keyboard('{ArrowDown}');
+			await expect(radios[2]).toBeChecked();
+		});
+	},
 };

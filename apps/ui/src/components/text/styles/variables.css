@@ -1,16 +1,25 @@
 .text {
-	--text-base-size: 1rem;
-	--text-base-weight: 400;
-	--text-base-line-height: 1rem;
-	--text-base-letter-spacing: 0.05em;
-	--text-base-transform: uppercase;
+	/* Typography */
+	--text-font-family: var(--text-font-family-inject, inherit);
+	--text-size: var(--text-size-inject, 1rem);
+	--text-weight: var(--text-weight-inject, 400);
+	--text-line-height: var(--text-line-height-inject, normal);
+	--text-letter-spacing: var(--text-letter-spacing-inject, normal);
+	--text-font-style: var(--text-font-style-inject, normal);
 
-	--text-size: var(--text-size-inject);
-	--text-weight: var(--text-weight-inject);
+	/* Color */
 	--text-color: var(--text-color-inject, black);
-	--text-line-height: var(--text-line-height-inject);
+
+	/* Layout */
 	--text-align: var(--text-align-inject, left);
-	--text-letter-spacing: var(--text-letter-spacing-inject);
-	--text-decoration: var(--text-decoration-inject);
-	--text-transform: var(--text-transform-inject);
+	--text-white-space: var(--text-white-space-inject, normal);
+	--text-user-select: var(--text-user-select-inject, auto);
+
+	/* Decoration */
+	--text-decoration: var(--text-decoration-inject, none);
+	--text-transform: var(--text-transform-inject, none);
+
+	/* Disabled state */
+	--text-disabled-opacity: var(--text-disabled-opacity-inject, 0.5);
+	--text-disabled-cursor: var(--text-disabled-cursor-inject, not-allowed);
 }

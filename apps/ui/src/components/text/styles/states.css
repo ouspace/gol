@@ -1,19 +1,19 @@
 .text {
 	&.disabled {
-		opacity: 0.5;
-		cursor: not-allowed;
+		opacity: var(--text-disabled-opacity);
+		cursor: var(--text-disabled-cursor);
 		pointer-events: none;
 	}
 
 	&.italic {
-		font-style: italic;
+		--text-font-style: italic;
 	}
 
 	&.nowrap {
-		white-space: nowrap;
+		--text-white-space: nowrap;
 	}
 
 	&.unselectable {
-		user-select: none;
+		--text-user-select: none;
 	}
 }

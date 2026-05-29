@@ -1,30 +1,7 @@
 import type { ReactNode, RefAttributes, SyntheticEvent } from 'react';
 import type { TextProperties as BaseTextProperties } from '../text';
-
-type Size<TValue extends string> = TValue | number;
-
-type Color<TValue extends string> =
-	| TValue
-	| `rgb(${string})`
-	| `rgba(${string})`
-	| `hsl(${string})`
-	| `hsla(${string})`
-	| `#${string}`;
-
-type ColorName =
-	| 'orange'
-	| 'yellow'
-	| 'olive'
-	| 'teal'
-	| 'violet'
-	| 'purple'
-	| 'pink'
-	| 'brown'
-	| 'grey'
-	| 'red'
-	| 'green'
-	| 'blue'
-	| 'black';
+import type { IconProperties } from '../icon';
+import type { CssColor, Size } from '../../types/tokens';
 
 export type TextProperties = BaseTextProperties & {
 	/**
@@ -37,7 +14,7 @@ export type TextProperties = BaseTextProperties & {
 	position?: 'top' | 'right' | 'bottom' | 'left';
 };
 
-type CustomProperties = RefAttributes<HTMLElement> & {
+export type BaseProperties = RefAttributes<HTMLElement> & {
 	/**
 	 * Defines the custom content for the label.
 	 * Overrides the `label` properties if provided.
@@ -115,17 +92,17 @@ type CustomProperties = RefAttributes<HTMLElement> & {
 	 * Defines the icon displayed when the radio button is unchecked.
 	 *
 	 * @example
-	 * icon={<Icon name="radio_button_unchecked"/>}
+	 * icon={{ name: "radio_button_unchecked" }}
 	 */
-	icon?: ReactNode;
+	icon?: IconProperties;
 
 	/**
 	 * Defines the icon displayed when the radio button is checked.
 	 *
 	 * @example
-	 * checkedIcon={<Icon name="radio_button_checked"/>}
+	 * checkedIcon={{ name: "radio_button_checked" }}
 	 */
-	checkedIcon?: ReactNode;
+	checkedIcon?: IconProperties;
 
 	/**
 	 * Defines the size of the radio button.
@@ -148,7 +125,7 @@ type CustomProperties = RefAttributes<HTMLElement> & {
 	 * color="#f00"
 	 * color="rgb(255, 0, 0)"
 	 */
-	color?: Color<ColorName>;
+	color?: CssColor;
 
 	/**
 	 * Defines the CSS class for the radio button
@@ -173,6 +150,6 @@ type CustomProperties = RefAttributes<HTMLElement> & {
 /**
  * Native HTML input attributes (aria-*, data-*, onFocus, onBlur, tabIndex, etc.)
  */
-type NativeProperties = Omit<React.InputHTMLAttributes<HTMLInputElement>, 'type' | 'onChange' | 'size'>;
+export type NativeProperties = Omit<React.InputHTMLAttributes<HTMLInputElement>, 'type' | 'onChange' | 'size'>;
 
-export type Properties = CustomProperties & NativeProperties & RefAttributes<HTMLLabelElement>;
+export type Properties = BaseProperties & NativeProperties & RefAttributes<HTMLLabelElement>;

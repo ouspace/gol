@@ -1,4 +1,3 @@
-@import url('./variables.css');
-@import url('./base.css');
-@import url('./module.css');
-@import url('./state.css');
+@import './variables.css';
+@import './base.css';
+@import './states.css';

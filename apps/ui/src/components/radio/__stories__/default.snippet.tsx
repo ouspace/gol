@@ -1,5 +1,5 @@
 import { Radio } from '@gol/ui';
 
 export default function Layout() {
-	return <Radio>Default radio</Radio>;
+	return <Radio label='Default radio' />;
 }

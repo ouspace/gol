@@ -1,31 +1,45 @@
-import { useId, useLayoutEffect, useRef, type ChangeEvent } from 'react';
+import { useId, type ChangeEvent } from 'react';
 import type { Properties } from './types';
-
 import { Text } from '../text';
 import { Icon } from '../icon';
 import { toDefaults, toNativeProperties, toInputTypeProperties, toClasses, toElement, toLabelContent } from './helpers';
 
+/**
+ * TextField component
+ *
+ * @param {Properties} properties - refers to text field properties
+ *
+ * @description
+ * Supports custom properties and native input attributes.
+ *
+ * @example
+ * <TextField label="Email" type="email" placeholder="name@example.com" color="teal" />
+ * <TextField {...properties} />
+ * <TextField label="Native props" aria-label="input" data-testid="text-field" onFocus={fn} />
+ *
+ * @returns {React.JSX.Element} element
+ */
 export default function TextField(properties?: Properties) {
 	const defaults = toDefaults(properties);
 	const Element = toElement(defaults.type);
 	const generatedId = useId();
 	const inputId = properties?.id ?? generatedId;
 	const descId = `${inputId}-desc`;
-	const hasDescription = defaults.supportingText != null || defaults.errorText != null;
-	const description = defaults.error && defaults.errorText != null ? defaults.errorText : defaults.supportingText;
-	const reference = useRef<HTMLDivElement>(null);
 
-	const icons = Array.isArray(defaults.icon) ? defaults.icon : defaults.icon ? [defaults.icon] : [];
+	const style = {
+		...properties?.style,
+		...(defaults.color != null && { '--text-color-inject': defaults.color }),
+	} as React.CSSProperties;
 
-	useLayoutEffect(() => {
-		if (reference.current == null || defaults.color == null) return;
-		reference.current.style.setProperty('--text-color-inject', defaults.color);
-	}, [defaults.color]);
+	const handleChange = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+		if (defaults.disabled) return;
+		defaults.onChange(event, { ...properties, value: event.target.value });
+	};
 
 	return (
-		<div ref={reference} className={toClasses(defaults)}>
+		<div className={toClasses(defaults)} style={style}>
 			<div className='container'>
-				{icons.map((icon) => (
+				{(Array.isArray(defaults.icon) ? defaults.icon : defaults.icon ? [defaults.icon] : []).map((icon) => (
 					<span key={icon.position ?? 'left'} className={`icon ${icon.position ?? 'left'}`}>
 						{Icon.createFrom(icon)}
 					</span>
@@ -38,20 +52,18 @@ export default function TextField(properties?: Properties) {
 				<Element
 					className='input'
 					id={inputId}
-					aria-describedby={hasDescription ? descId : undefined}
+					aria-describedby={defaults.supportingText != null || defaults.errorText != null ? descId : undefined}
 					aria-invalid={defaults.error ?? undefined}
 					ref={defaults.ref as React.Ref<HTMLInputElement & HTMLTextAreaElement>}
 					dir={defaults.textDirection}
-					{...toNativeProperties(properties) as React.InputHTMLAttributes<HTMLInputElement> & React.TextareaHTMLAttributes<HTMLTextAreaElement>}
+					{...toNativeProperties(properties)}
 					{...toInputTypeProperties(defaults)}
 					type={defaults.type === 'textarea' ? undefined : defaults.type}
 					placeholder={defaults.label != null && defaults.placeholder == null ? ' ' : defaults.placeholder}
 					value={defaults.value}
 					defaultValue={defaults.defaultValue}
 					readOnly={defaults.readOnly}
-					onChange={(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-						defaults.onChange(event, properties ?? {});
-					}}
+					onChange={handleChange}
 				/>
 				{defaults.label != null && (
 					<label className='label' htmlFor={inputId}>
@@ -69,9 +81,13 @@ export default function TextField(properties?: Properties) {
 					</span>
 				)}
 			</div>
-			{hasDescription && (
+			{(defaults.supportingText != null || defaults.errorText != null) && (
 				<div id={descId} className='supporting-text'>
-					{Text.createFrom(description as Parameters<typeof Text.createFrom>[0])}
+					{Text.createFrom(
+						(defaults.error && defaults.errorText != null
+							? defaults.errorText
+							: defaults.supportingText) as Parameters<typeof Text.createFrom>[0]
+					)}
 				</div>
 			)}
 		</div>

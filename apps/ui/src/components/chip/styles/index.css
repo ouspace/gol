@@ -1,5 +1,5 @@
-@import './variables.css';
-@import './base.css';
-@import './layout.css';
-@import './variant.css';
-@import './state.css';
+@import url('./variables.css');
+@import url('./base.css');
+@import url('./variants.css');
+@import url('./states.css');
+@import url('./animations.css');

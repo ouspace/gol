@@ -1,74 +1,64 @@
-import '@testing-library/jest-dom';
 import { render, screen, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { createRef } from 'react';
 
-import Checkbox from '../checkbox';
+import { Checkbox } from '../index';
 
-jest.mock('../../text/text');
+jest.mock('../../text/root');
+jest.mock('../../icon/root');
 
-const MockIcon = ({ fill }: { fill?: boolean }) => <i>{fill ? '✅' : '☐'}</i>;
+const getCheckbox = () => screen.getByRole<HTMLInputElement>('checkbox');
 
-describe('components/checkbox', () => {
-	describe('Layout', () => {
+describe('apps/ui/src/components/checkbox', () => {
+	describe('layouts', () => {
 		test('should be render by default', () => {
-			// arrange(s)
-			const component = <Checkbox />;
+			const target = <Checkbox />;
 
-			// act(s)
-			render(component);
+			render(target);
+			const checkbox = getCheckbox();
 
-			// assert(s)
-			expect(screen.getByRole('checkbox')).toBeDefined();
-			expect(screen.getByRole('checkbox')).not.toBeChecked();
-			expect(screen.getByRole('checkbox')).not.toBeDisabled();
+			expect(checkbox).toBeDefined();
+			expect(checkbox).not.toBeChecked();
+			expect(checkbox).not.toBeDisabled();
 		});
 
 		test('should render with aria-checked attribute as false by default', () => {
-			// arrange(s)
-			const component = <Checkbox />;
+			const target = <Checkbox />;
 
-			// act(s)
-			render(component);
+			render(target);
+			const checkbox = getCheckbox();
 
-			// assert(s)
-			expect(screen.getByRole('checkbox')).toBeDefined();
-			expect(screen.getByRole('checkbox')).toHaveAttribute('aria-checked', 'false');
+			expect(checkbox).toBeDefined();
+			expect(checkbox).toHaveAttribute('aria-checked', 'false');
 		});
 
 		test('should render the label text', () => {
-			// arrange(s)
-			const component = <Checkbox label='label test' />;
+			const target = <Checkbox label='label test' />;
 
-			// act(s)
-			render(component);
+			render(target);
+			const label = screen.getByText('label test');
 
-			// assert(s)
-			expect(screen.getByText('label test')).toBeDefined();
-			expect(screen.getByText('label test')).toBeInTheDocument();
+			expect(label).toBeDefined();
+			expect(label).toBeInTheDocument();
 		});
 
 		test('should render as checked when value is true', () => {
-			// arrange(s)
-			const component = <Checkbox value={true} />;
+			const target = <Checkbox value={true} />;
 
-			// act(s)
-			render(component);
+			render(target);
+			const checkbox = getCheckbox();
 
-			// assert(s)
-			expect(screen.getByRole('checkbox')).toBeDefined();
-			expect(screen.getByRole('checkbox')).toBeChecked();
-			expect(screen.getByRole('checkbox')).toHaveAttribute('aria-checked', 'true');
+			expect(checkbox).toBeDefined();
+			expect(checkbox).toBeChecked();
+			expect(checkbox).toHaveAttribute('aria-checked', 'true');
 		});
 
 		test('should render with indeterminate state when value is null', () => {
-			// arrange(s)
-			const component = <Checkbox value={null} />;
+			const target = <Checkbox value={null} />;
 
-			// act(s)
-			render(component);
-			const checkbox = screen.getByRole<HTMLInputElement>('checkbox');
+			render(target);
+			const checkbox = getCheckbox();
 
-			// assert(s)
 			expect(checkbox).toBeDefined();
 			expect(checkbox.indeterminate).toBe(true);
 			expect(checkbox).toHaveAttribute('aria-checked', 'mixed');
@@ -76,304 +66,323 @@ describe('components/checkbox', () => {
 		});
 
 		test('should render as disabled', () => {
-			// arrange(s)
-			const component = <Checkbox disabled />;
+			const target = <Checkbox disabled />;
 
-			// act(s)
-			render(component);
+			render(target);
+			const checkbox = getCheckbox();
 
-			// assert(s)
-			expect(screen.getByRole('checkbox')).toBeDefined();
-			expect(screen.getByRole('checkbox')).toBeDisabled();
+			expect(checkbox).toBeDefined();
+			expect(checkbox).toBeDisabled();
 		});
 
 		test('should render with small size', () => {
-			// arrange(s)
-			const component = <Checkbox size='small' />;
+			const target = <Checkbox size='small' />;
 
-			// act(s)
-			const { container } = render(component);
-			const labelElement = container.querySelector('label');
+			const { container } = render(target);
 
-			// assert(s)
-			expect(screen.getByRole('checkbox')).toBeDefined();
-			expect(labelElement).toHaveClass('small');
+			expect(getCheckbox()).toBeDefined();
+			expect(container.firstChild).toHaveClass('small');
 		});
 
 		test('should render with normal size', () => {
-			// arrange(s)
-			const component = <Checkbox size='normal' />;
+			const target = <Checkbox size='normal' />;
 
-			// act(s)
-			const { container } = render(component);
-			const labelElement = container.querySelector('label');
+			const { container } = render(target);
 
-			// assert(s)
-			expect(screen.getByRole('checkbox')).toBeDefined();
-			expect(labelElement).toHaveClass('normal');
+			expect(getCheckbox()).toBeDefined();
+			expect(container.firstChild).toHaveClass('normal');
 		});
 
 		test('should render with big size', () => {
-			// arrange(s)
-			const component = <Checkbox size='big' />;
+			const target = <Checkbox size='big' />;
 
-			// act(s)
-			const { container } = render(component);
-			const labelElement = container.querySelector('label');
+			const { container } = render(target);
 
-			// assert(s)
-			expect(screen.getByRole('checkbox')).toBeDefined();
-			expect(labelElement).toHaveClass('big');
+			expect(getCheckbox()).toBeDefined();
+			expect(container.firstChild).toHaveClass('big');
 		});
 
 		test('should render with circular styling', () => {
-			// arrange(s)
-			const component = <Checkbox circular />;
+			const target = <Checkbox circular />;
 
-			// act(s)
-			const { container } = render(component);
-			const labelElement = container.querySelector('label');
+			const { container } = render(target);
 
-			// assert(s)
-			expect(screen.getByRole('checkbox')).toBeDefined();
-			expect(labelElement).toHaveClass('circular');
+			expect(getCheckbox()).toBeDefined();
+			expect(container.firstChild).toHaveClass('circular');
 		});
 
 		test('should render with label on top', () => {
-			// arrange(s)
-			const component = <Checkbox label={{ content: 'label test', position: 'top' }} />;
+			const target = <Checkbox label={{ content: 'label test', position: 'top' }} />;
 
-			// act(s)
-			const { container } = render(component);
-			const labelElement = container.querySelector('label');
+			const { container } = render(target);
 
-			// assert(s)
-			expect(screen.getByRole('checkbox')).toBeDefined();
-			expect(labelElement).toHaveClass('label-top');
+			expect(getCheckbox()).toBeDefined();
+			expect(container.firstChild).toHaveClass('top');
 		});
 
 		test('should render with label on right', () => {
-			// arrange(s)
-			const component = <Checkbox label={{ content: 'label test', position: 'right' }} />;
+			const target = <Checkbox label={{ content: 'label test', position: 'right' }} />;
 
-			// act(s)
-			const { container } = render(component);
-			const labelElement = container.querySelector('label');
+			const { container } = render(target);
 
-			// assert(s)
-			expect(screen.getByRole('checkbox')).toBeDefined();
-			expect(labelElement).toHaveClass('label-right');
+			expect(getCheckbox()).toBeDefined();
+			expect(container.firstChild).toHaveClass('right');
 		});
 
 		test('should render with label on bottom', () => {
-			// arrange(s)
-			const component = <Checkbox label={{ content: 'label test', position: 'bottom' }} />;
+			const target = <Checkbox label={{ content: 'label test', position: 'bottom' }} />;
 
-			// act(s)
-			const { container } = render(component);
-			const labelElement = container.querySelector('label');
+			const { container } = render(target);
 
-			// assert(s)
-			expect(screen.getByRole('checkbox')).toBeDefined();
-			expect(labelElement).toHaveClass('label-bottom');
+			expect(getCheckbox()).toBeDefined();
+			expect(container.firstChild).toHaveClass('bottom');
 		});
 
 		test('should render with label on left', () => {
-			// arrange(s)
-			const component = <Checkbox label={{ content: 'label test', position: 'left' }} />;
+			const target = <Checkbox label={{ content: 'label test', position: 'left' }} />;
 
-			// act(s)
-			const { container } = render(component);
-			const labelElement = container.querySelector('label');
+			const { container } = render(target);
 
-			// assert(s)
-			expect(screen.getByRole('checkbox')).toBeDefined();
-			expect(labelElement).toHaveClass('label-left');
+			expect(getCheckbox()).toBeDefined();
+			expect(container.firstChild).toHaveClass('left');
 		});
 
 		test('should render with custom icons', () => {
-			// arrange(s)
-			const component = <Checkbox icon={<MockIcon />} checkedIcon={<MockIcon fill />} value={true} />;
+			const target = (
+				<Checkbox icon={{ name: 'favorite' }} checkedIcon={{ name: 'favorite', fill: true }} value={true} />
+			);
 
-			// act(s)
-			render(component);
+			render(target);
+			const checkbox = getCheckbox();
 
-			// assert(s)
-			expect(screen.getByRole('checkbox')).toBeDefined();
-			expect(screen.getByRole('checkbox')).toBeChecked();
+			expect(checkbox).toBeDefined();
+			expect(checkbox).toBeChecked();
 		});
 
 		test('should render indeterminate when value is null and icons are provided', () => {
-			// arrange(s)
-			const component = <Checkbox icon={<MockIcon />} checkedIcon={<MockIcon fill />} value={null} />;
+			const target = (
+				<Checkbox icon={{ name: 'favorite' }} checkedIcon={{ name: 'favorite', fill: true }} value={null} />
+			);
 
-			// act(s)
-			render(component);
-			const checkbox = screen.getByRole<HTMLInputElement>('checkbox');
+			render(target);
+			const checkbox = getCheckbox();
 
-			// assert(s)
 			expect(checkbox).toBeDefined();
 			expect(checkbox.indeterminate).toBe(true);
 		});
 
 		test('should have proper id attribute when provided', () => {
-			// arrange(s)
-			const component = <Checkbox id='custom-id' />;
+			const target = <Checkbox id='custom-id' />;
 
-			// act(s)
-			render(component);
+			render(target);
+			const checkbox = getCheckbox();
 
-			// assert(s)
-			expect(screen.getByRole('checkbox')).toBeDefined();
-			expect(screen.getByRole('checkbox')).toHaveAttribute('id', 'custom-id');
+			expect(checkbox).toBeDefined();
+			expect(checkbox).toHaveAttribute('id', 'custom-id');
 		});
 
 		test('should have proper name attribute when provided', () => {
-			// arrange(s)
-			const component = <Checkbox name='test' />;
+			const target = <Checkbox name='test' />;
 
-			// act(s)
-			render(component);
+			render(target);
+			const checkbox = getCheckbox();
 
-			// assert(s)
-			expect(screen.getByRole('checkbox')).toBeDefined();
-			expect(screen.getByRole('checkbox')).toHaveAttribute('name', 'test');
+			expect(checkbox).toBeDefined();
+			expect(checkbox).toHaveAttribute('name', 'test');
 		});
 
 		test('should render label as TextProperties object', () => {
-			// arrange(s)
-			const component = <Checkbox label={{ content: 'styled label', color: 'red' }} />;
+			const target = <Checkbox label={{ content: 'styled label', color: 'red' }} />;
 
-			// act(s)
-			render(component);
+			render(target);
+			const label = screen.getByText('styled label');
 
-			// assert(s)
-			expect(screen.getByText('styled label')).toBeDefined();
-			expect(screen.getByText('styled label')).toBeInTheDocument();
+			expect(label).toBeDefined();
+			expect(label).toBeInTheDocument();
 		});
 
 		test('should render label as ReactElement', () => {
-			// arrange(s)
 			const MockLabel = () => <em>React Element label</em>;
-			const component = <Checkbox label={<MockLabel />} />;
+			const target = <Checkbox label={<MockLabel />} />;
 
-			// act(s)
-			render(component);
+			render(target);
+			const label = screen.getByText('React Element label');
 
-			// assert(s)
-			expect(screen.getByText('React Element label')).toBeDefined();
-			expect(screen.getByText('React Element label')).toBeInTheDocument();
+			expect(label).toBeDefined();
+			expect(label).toBeInTheDocument();
 		});
 
 		test('should render label as function returning ReactElement', () => {
-			// arrange(s)
-			const component = <Checkbox label={() => <em>Function Element</em>} />;
+			const target = <Checkbox label={() => <em>Function Element</em>} />;
 
-			// act(s)
-			render(component);
+			render(target);
+			const label = screen.getByText('Function Element');
 
-			// assert(s)
-			expect(screen.getByText('Function Element')).toBeDefined();
-			expect(screen.getByText('Function Element')).toBeInTheDocument();
+			expect(label).toBeDefined();
+			expect(label).toBeInTheDocument();
 		});
 
 		test('should render children as custom label content', () => {
-			// arrange(s)
-			const component = (
+			const target = (
 				<Checkbox value={true}>
 					<strong>Label text</strong>
 				</Checkbox>
 			);
 
-			// act(s)
-			render(component);
+			render(target);
+			const label = screen.getByText('Label text');
 
-			// assert(s)
-			expect(screen.getByText('Label text')).toBeDefined();
-			expect(screen.getByText('Label text')).toBeInTheDocument();
+			expect(label).toBeDefined();
+			expect(label).toBeInTheDocument();
 		});
 
 		test('should not render label slot when no label or children', () => {
-			// arrange(s)
-			const component = <Checkbox />;
+			const target = <Checkbox />;
 
-			// act(s)
-			const { container } = render(component);
+			const { container } = render(target);
 
-			// assert(s)
-			expect(screen.getByRole('checkbox')).toBeDefined();
-			expect(container.querySelector('.checkbox__label')).not.toBeInTheDocument();
+			expect(getCheckbox()).toBeDefined();
+			expect(container.querySelector('.label')).not.toBeInTheDocument();
+		});
+
+		test('should inject CSS variables via inline style when size and color are provided', () => {
+			const target = <Checkbox size='big' color='red' />;
+
+			const { container } = render(target);
+
+			expect(container.firstChild).toHaveStyle({
+				'--checkbox-size-inject': '22px',
+				'--checkbox-color-inject': 'red',
+			});
+		});
+
+		test('should merge consumer style with CSS variables', () => {
+			const target = <Checkbox size='normal' color='blue' style={{ margin: '10px' }} />;
+
+			const { container } = render(target);
+
+			expect(container.firstChild).toHaveStyle({
+				'--checkbox-size-inject': '18px',
+				'--checkbox-color-inject': 'blue',
+				margin: '10px',
+			});
+		});
+
+		test('should auto-generate ID when no id prop provided', () => {
+			const target = <Checkbox />;
+
+			render(target);
+			const checkbox = getCheckbox();
+
+			expect(checkbox).toBeDefined();
+			expect(checkbox.id).toBeTruthy();
+		});
+
+		test('should use explicit id prop over generated ID', () => {
+			const target = <Checkbox id='explicit-id' />;
+
+			render(target);
+			const checkbox = getCheckbox();
+
+			expect(checkbox).toBeDefined();
+			expect(checkbox).toHaveAttribute('id', 'explicit-id');
+		});
+
+		test('should have aria-label fallback when no label provided', () => {
+			const target = <Checkbox />;
+
+			render(target);
+			const checkbox = getCheckbox();
+
+			expect(checkbox).toBeDefined();
+			expect(checkbox).toHaveAttribute('aria-label', 'Checkbox');
+		});
+
+		test('should not have aria-label when label is provided', () => {
+			const target = <Checkbox label='Visible label' />;
+
+			render(target);
+			const checkbox = getCheckbox();
+
+			expect(checkbox).toBeDefined();
+			expect(checkbox).not.toHaveAttribute('aria-label');
+		});
+
+		test('should attach ref to root label element', () => {
+			const reference = createRef<HTMLLabelElement>();
+			const target = <Checkbox ref={reference} />;
+
+			render(target);
+
+			expect(reference.current).toBeDefined();
+			expect(reference.current).toBeInstanceOf(HTMLLabelElement);
+			expect(reference.current?.tagName).toBe('LABEL');
+		});
+
+		test('should render as disabled when disabled is explicitly true', () => {
+			const target = <Checkbox disabled={true} aria-label='test' />;
+
+			render(target);
+			const checkbox = getCheckbox();
+
+			expect(checkbox).toBeDefined();
+			expect(checkbox).toBeDisabled();
 		});
 	});
 
-	describe('Events', () => {
+	describe('events', () => {
 		test('should execute onChange handler when clicked', () => {
-			// arrange(s)
 			const handleChange = jest.fn();
-			const component = <Checkbox onChange={handleChange} />;
+			const target = <Checkbox onChange={handleChange} />;
 
-			// act(s)
-			render(component);
-			fireEvent.click(screen.getByRole('checkbox'));
+			render(target);
+			fireEvent.click(getCheckbox());
 
-			// assert(s)
-			expect(screen.getByRole('checkbox')).toBeDefined();
+			expect(getCheckbox()).toBeDefined();
 			expect(handleChange).toHaveBeenCalledTimes(1);
 		});
 
 		test('should toggle when label is clicked', () => {
-			// arrange(s)
 			const handleChange = jest.fn();
-			const component = <Checkbox label='label test' onChange={handleChange} />;
+			const target = <Checkbox label='label test' onChange={handleChange} />;
 
-			// act(s)
-			render(component);
+			render(target);
 			fireEvent.click(screen.getByText('label test'));
 
-			// assert(s)
 			expect(screen.getByText('label test')).toBeDefined();
 			expect(handleChange).toHaveBeenCalledTimes(1);
 		});
 
 		test('should toggle to unchecked when clicked and currently checked', () => {
-			// arrange(s)
 			const handleChange = jest.fn();
-			const component = <Checkbox value={true} onChange={handleChange} />;
+			const target = <Checkbox value={true} onChange={handleChange} />;
 
-			// act(s)
-			render(component);
-			fireEvent.click(screen.getByRole('checkbox'));
+			render(target);
+			fireEvent.click(getCheckbox());
 
-			// assert(s)
-			expect(screen.getByRole('checkbox')).toBeDefined();
+			expect(getCheckbox()).toBeDefined();
 			expect(handleChange).toHaveBeenCalledWith(expect.any(Object), expect.objectContaining({ value: false }));
 		});
 
 		test('should toggle to checked when clicked and currently unchecked', () => {
-			// arrange(s)
 			const handleChange = jest.fn();
-			const component = <Checkbox value={false} onChange={handleChange} />;
+			const target = <Checkbox value={false} onChange={handleChange} />;
 
-			// act(s)
-			render(component);
-			fireEvent.click(screen.getByRole('checkbox'));
+			render(target);
+			fireEvent.click(getCheckbox());
 
-			// assert(s)
-			expect(screen.getByRole('checkbox')).toBeDefined();
+			expect(getCheckbox()).toBeDefined();
 			expect(handleChange).toHaveBeenCalledWith(expect.any(Object), expect.objectContaining({ value: true }));
 		});
 
 		test('should pass event and properties to onChange handler', () => {
-			// arrange(s)
 			const handleChange = jest.fn();
-			const component = <Checkbox label='label test' onChange={handleChange} />;
+			const target = <Checkbox label='label test' onChange={handleChange} />;
 
-			// act(s)
-			render(component);
-			fireEvent.click(screen.getByRole('checkbox'));
+			render(target);
+			fireEvent.click(getCheckbox());
 
-			// assert(s)
-			expect(screen.getByRole('checkbox')).toBeDefined();
+			expect(getCheckbox()).toBeDefined();
 			expect(handleChange).toHaveBeenCalledWith(
 				expect.any(Object),
 				expect.objectContaining({
@@ -384,46 +393,39 @@ describe('components/checkbox', () => {
 		});
 
 		test('should not execute onChange handler when disabled and clicked', async () => {
-			// arrange(s)
 			const handleChange = jest.fn();
 			const user = userEvent.setup();
-			const component = <Checkbox disabled onChange={handleChange} />;
+			const target = <Checkbox disabled onChange={handleChange} />;
 
-			// act(s)
-			render(component);
-			await user.click(screen.getByRole('checkbox'));
+			render(target);
+			await user.click(getCheckbox());
 
-			// assert(s)
-			expect(screen.getByRole('checkbox')).toBeDefined();
+			expect(getCheckbox()).toBeDefined();
 			expect(handleChange).not.toHaveBeenCalled();
 		});
 
 		test('should not execute onChange handler when disabled and label is clicked', async () => {
-			// arrange(s)
 			const handleChange = jest.fn();
 			const user = userEvent.setup();
-			const component = <Checkbox disabled label='label test' onChange={handleChange} />;
+			const target = <Checkbox disabled label='label test' onChange={handleChange} />;
 
-			// act(s)
-			render(component);
+			render(target);
 			await user.click(screen.getByText('label test'));
 
-			// assert(s)
 			expect(screen.getByText('label test')).toBeDefined();
 			expect(handleChange).not.toHaveBeenCalled();
 		});
 
 		test('should execute onChange handler when has custom icons and is clicked', () => {
-			// arrange(s)
 			const handleChange = jest.fn();
-			const component = <Checkbox icon={<MockIcon />} checkedIcon={<MockIcon fill />} onChange={handleChange} />;
+			const target = (
+				<Checkbox icon={{ name: 'favorite' }} checkedIcon={{ name: 'favorite', fill: true }} onChange={handleChange} />
+			);
 
-			// act(s)
-			render(component);
-			fireEvent.click(screen.getByRole('checkbox'));
+			render(target);
+			fireEvent.click(getCheckbox());
 
-			// assert(s)
-			expect(screen.getByRole('checkbox')).toBeDefined();
+			expect(getCheckbox()).toBeDefined();
 			expect(handleChange).toHaveBeenCalledTimes(1);
 			expect(handleChange).toHaveBeenCalledWith(expect.any(Object), expect.objectContaining({ value: true }));
 		});

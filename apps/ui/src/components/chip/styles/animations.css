@@ -1,0 +1,9 @@
+.chip {
+	transition: box-shadow var(--chip-transition-duration) ease, filter var(--chip-transition-duration) ease,
+		transform var(--chip-transition-duration) ease, background-color var(--chip-transition-duration) ease,
+		color var(--chip-transition-duration) ease, border-color var(--chip-transition-duration) ease;
+
+	.remove {
+		transition: background-color var(--chip-transition-duration) ease;
+	}
+}
