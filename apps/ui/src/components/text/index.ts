@@ -1,4 +1,4 @@
-import TextComponent from './text';
+import TextComponent from './root';
 import { createFrom } from './factory';
 
 export const Text = Object.assign(TextComponent, { createFrom });

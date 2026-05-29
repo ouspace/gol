@@ -1,10 +1,24 @@
+import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { TextField } from '../index';
+import { expect, userEvent, within } from '@storybook/test';
+
+import TextField from '../root';
 
 const meta: Meta<typeof TextField> = {
 	title: 'Components/TextField',
 	component: TextField,
 	tags: ['autodocs'],
+	parameters: {
+		a11y: {
+			disable: false,
+		},
+		docs: {
+			description: {
+				component:
+					'TextField is a single-line or multi-line input with a floating label, supporting filled and outlined variants, prefix/suffix text, leading and trailing icons, helper and error messages, and full keyboard navigation.',
+			},
+		},
+	},
 	args: {
 		variant: 'filled',
 		placeholder: 'Placeholder',
@@ -191,4 +205,86 @@ export const Size: Story = {
 			</div>
 		</div>
 	),
+};
+
+export const Interactions: Story = {
+	render: () => {
+		const [name, setName] = useState('');
+		return (
+			<div style={{ display: 'flex', flexDirection: 'column', gap: '16px', width: '320px' }}>
+				<TextField
+					label='Name (controlled)'
+					placeholder='Type your name'
+					value={name}
+					onChange={(_event, properties) => setName(properties.value)}
+				/>
+				<TextField label='Disabled' placeholder='Cannot type here' disabled defaultValue='Read only' />
+				<TextField label='Required' placeholder='With asterisk' required />
+				<TextField label='With error' placeholder='Error state' error errorText='Invalid value' defaultValue='bad' />
+			</div>
+		);
+	},
+	play: async ({ canvasElement, step }) => {
+		const canvas = within(canvasElement);
+		const nameField = canvas.getByLabelText('Name (controlled)');
+		const disabledField = canvas.getByLabelText('Disabled');
+		const requiredField = canvas.getByLabelText('Required');
+		const errorField = canvas.getByLabelText('With error');
+
+		await step('Typing into controlled field updates the value', async () => {
+			await userEvent.type(nameField, 'John');
+			await expect(nameField).toHaveValue('John');
+		});
+
+		await step('Disabled field stays disabled', async () => {
+			await expect(disabledField).toBeDisabled();
+		});
+
+		await step('Required field renders the asterisk', async () => {
+			await expect(requiredField).toBeRequired();
+			await expect(canvas.getByText('*')).toBeInTheDocument();
+		});
+
+		await step('Error field renders the error message', async () => {
+			await expect(errorField).toHaveAttribute('aria-invalid', 'true');
+			await expect(canvas.getByText('Invalid value')).toBeInTheDocument();
+		});
+	},
+};
+
+export const InteractionsKeyboard: Story = {
+	render: () => {
+		const [value, setValue] = useState('');
+		return (
+			<div style={{ display: 'flex', flexDirection: 'column', gap: '16px', width: '320px' }}>
+				<TextField
+					label='First'
+					placeholder='Tab in'
+					value={value}
+					onChange={(_event, properties) => setValue(properties.value)}
+				/>
+				<TextField label='Second' placeholder='Tab to here' />
+			</div>
+		);
+	},
+	play: async ({ canvasElement, step }) => {
+		const canvas = within(canvasElement);
+		const firstField = canvas.getByLabelText('First');
+		const secondField = canvas.getByLabelText('Second');
+
+		await step('Tab focuses the first field', async () => {
+			await userEvent.tab();
+			await expect(firstField).toHaveFocus();
+		});
+
+		await step('Typing fills the focused field', async () => {
+			await userEvent.keyboard('hello');
+			await expect(firstField).toHaveValue('hello');
+		});
+
+		await step('Tab moves focus to the second field', async () => {
+			await userEvent.tab();
+			await expect(secondField).toHaveFocus();
+		});
+	},
 };

@@ -1,15 +1,42 @@
 .radio {
 	--radio-size: var(--radio-size-inject, 20px);
-	--radio-border-width: 2px;
-	--radio-touch-area: 40px;
+	--radio-color: var(--radio-color-inject, currentColor);
 
-	--radio-color: var(--radio-color-inject, blue);
-	--radio-color-border: rgb(120, 120, 120);
-	--radio-color-disabled: rgba(0, 0, 0, 0.38);
-	--radio-color-background: inherit;
+	--radio-border-width: var(--radio-border-width-inject, 2px);
+	--radio-touch-area: var(--radio-touch-area-inject, 40px);
 
-	--radio-gap: calc(var(--radio-size) * 0.44);
+	--radio-box-background-color: var(--radio-box-background-color-inject, transparent);
+	--radio-outline-color: var(--radio-outline-color-inject, rgb(120, 120, 120));
 
-	--radio-transition: 0.15s ease;
-	--radio-ripple-transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+	--radio-dot-color: var(--radio-dot-color-inject, var(--radio-color));
+	--radio-dot-size: var(--radio-dot-size-inject, 0.6);
+
+	--radio-disabled-color: var(--radio-disabled-color-inject, rgba(0, 0, 0, 0.38));
+	--radio-disabled-opacity: var(--radio-disabled-opacity-inject, 0.6);
+	--radio-disabled-background-color: var(--radio-disabled-background-color-inject, rgba(0, 0, 0, 0.05));
+
+	--radio-gap: var(--radio-gap-inject, calc(var(--radio-size) * 0.44));
+
+	--radio-transition-duration: var(--radio-transition-duration-inject, 0.15s);
+	--radio-transition-timing-function: var(--radio-transition-timing-function-inject, ease);
+	--radio-ripple-transition-duration: var(--radio-ripple-transition-duration-inject, 0.3s);
+	--radio-ripple-transition-timing-function: var(--radio-ripple-transition-timing-function-inject, cubic-bezier(0.4, 0, 0.2, 1));
+
+	--radio-hover-background-opacity: var(--radio-hover-background-opacity-inject, 0.15);
+	--radio-active-background-opacity: var(--radio-active-background-opacity-inject, 0.2);
+	--radio-active-scale: var(--radio-active-scale-inject, 0.95);
+
+	--radio-focus-ring-width: var(--radio-focus-ring-width-inject, 2px);
+	--radio-focus-ring-offset: var(--radio-focus-ring-offset-inject, 2px);
+
+	--radio-cursor: var(--radio-cursor-inject, pointer);
+	--radio-disabled-cursor: var(--radio-disabled-cursor-inject, not-allowed);
+
+	&.small {
+		--radio-size: 16px;
+	}
+
+	&.big {
+		--radio-size: 24px;
+	}
 }

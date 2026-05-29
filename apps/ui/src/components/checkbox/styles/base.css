@@ -1,39 +1,68 @@
-.checkbox__input {
-	position: absolute;
-	opacity: 0;
-	width: 0;
-	height: 0;
-	pointer-events: none;
-}
-
-.checkbox__box {
-	position: relative;
-	display: flex;
+.checkbox {
+	display: grid;
+	gap: var(--checkbox-gap);
 	align-items: center;
-	justify-content: center;
-	width: var(--checkbox-size);
-	height: var(--checkbox-size);
-	box-sizing: border-box;
-	border: 2px solid var(--checkbox-color-outline);
-	border-radius: var(--checkbox-radius);
-	background-color: white;
-	cursor: pointer;
-	overflow: visible;
-	transition:
-		border-color var(--checkbox-transition),
-		background-color var(--checkbox-transition),
-		transform 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+	width: fit-content;
+	cursor: var(--checkbox-cursor);
+	grid-template-areas: 'box label';
+	grid-template-columns: auto 1fr;
 
-	.checkbox.has-custom-icon & {
+	&.left {
+		grid-template-areas: 'label box';
+		grid-template-columns: 1fr auto;
+	}
+
+	&.top {
+		grid-template-areas: 'label' 'box';
+		grid-template-columns: 1fr;
+		justify-items: start;
+	}
+
+	&.bottom {
+		grid-template-areas: 'box' 'label';
+		grid-template-columns: 1fr;
+		justify-items: start;
+	}
+
+	.input {
+		grid-area: none;
+		position: absolute;
+		opacity: 0;
+		width: 0;
+		height: 0;
+		pointer-events: none;
+	}
+
+	.box {
+		grid-area: box;
+		position: relative;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: var(--checkbox-size);
+		height: var(--checkbox-size);
+		box-sizing: border-box;
+		border: var(--checkbox-box-border-width) solid var(--checkbox-outline-color);
+		border-radius: var(--checkbox-border-radius);
+		background-color: var(--checkbox-box-background-color);
+		overflow: visible;
+		transition:
+			border-color var(--checkbox-transition-duration) var(--checkbox-transition-timing-function),
+			background-color var(--checkbox-transition-duration) var(--checkbox-transition-timing-function),
+			transform 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+	}
+
+	&.iconified .box {
 		width: auto;
 		height: auto;
 		border: none;
 		background: none;
 		padding: 0;
 	}
-}
 
-.checkbox__label {
-	user-select: none;
-	cursor: pointer;
+	.label {
+		grid-area: label;
+		user-select: none;
+		cursor: var(--checkbox-cursor);
+	}
 }

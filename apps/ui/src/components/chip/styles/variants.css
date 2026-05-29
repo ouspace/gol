@@ -1,0 +1,15 @@
+.chip.filled {
+	background-color: var(--chip-color);
+	color: var(--chip-on-color);
+	border-color: transparent;
+
+	--text-color-inject: var(--chip-on-color);
+}
+
+.chip.outlined {
+	background-color: transparent;
+	color: var(--chip-color);
+	border-color: var(--chip-color);
+
+	--text-color-inject: var(--chip-color);
+}

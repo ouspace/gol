@@ -134,6 +134,27 @@ Without a clear specification baseline, component implementation can drift from 
 | FR-ICON-002 | The Icon component must support all 7 levels of sizing enums (smallest to biggest). | Must | Implemented |
 | FR-ICON-003 | The SVG element in Icon must always fill its container (100% width/height). | Must | Implemented |
 | FR-ICON-004 | The Icon component must correctly handle the ref prop (React 19 standard). | Must | Implemented |
+| FR-CHIP-STRUCT-01 | The Chip component must be authored as a default-exported pure function in `root.tsx` (not `chip.tsx`). | Must | Pending |
+| FR-CHIP-STRUCT-02 | Helper functions must live in `helpers.ts` (not `helpers.tsx`). | Must | Pending |
+| FR-CHIP-STRUCT-03 | The `index.ts` barrel must re-export the default from `./root` and the `Properties` type from `./types`. | Must | Pending |
+| FR-CHIP-STRUCT-04 | Tests must live in `__tests__/chip.test.tsx` (plural), not `__test__/chip.test.tsx`. | Must | Pending |
+| FR-CHIP-STRUCT-05 | The test file must import the component from `../index` (the public barrel), not `../chip` (the internal file). | Must | Pending |
+| FR-CHIP-STRUCT-06 | The `styles/state.css` file must be renamed to `styles/states.css` (plural), and the `@import` in `styles/index.css` must be updated accordingly. | Must | Pending |
+| FR-CHIP-TYPES-01 | A single `Properties` interface must be the only exported properties type. The `ChipsProperties` union and per-role variants (`AssistProperties`, `FilterProperties`, `InputProperties`, `SuggestionProperties`) must not exist. | Must | Pending |
+| FR-CHIP-TYPES-02 | The helper `ExcludedProperties` type aliases must be removed. | Must | Pending |
+| FR-CHIP-TYPES-03 | Props that are only meaningful for specific roles (`avatar` for `role="input"`, `onRemove` for `role="input"`, `onToggle` for `role="filter"`, `icon` for `role="suggestion"`) must carry a `@remarks` JSDoc tag documenting that they are silent no-ops for other roles. | Must | Pending |
+| FR-CHIP-IMPL-01 | The component must not use `useLayoutEffect` to inject CSS variables or ARIA attributes. | Must | Pending |
+| FR-CHIP-IMPL-02 | CSS custom properties (`--chip-size-inject`, `--chip-color-inject`, `--chip-border-radius-inject`) must be passed to the rendered element via the `style` prop as a single object, merged with any consumer-provided `style`. | Must | Pending |
+| FR-CHIP-IMPL-03 | `aria-disabled` and `aria-pressed` must be passed as React props on the rendered element, not set via `setAttribute` in an effect. `aria-pressed` must be `undefined` when `selected` is falsy (so the attribute is omitted from the DOM). | Must | Pending |
+| FR-CHIP-IMPL-04 | The component must not use `useMemo` for `size`/`color`/`radius` derivation. These values must be computed directly in the function body. | Must | Pending |
+| FR-CHIP-IMPL-05 | The `ref` must be acquired as `properties?.ref ?? useRef<HTMLElement | null>(null)` and passed as a prop to the element, supporting React 19's ref-as-prop pattern. | Must | Pending |
+| FR-CHIP-IMPL-06 | When `defaults.href` is present, the element rendered must be `<a>`; otherwise `<span>`. This is unchanged behavior. | Must | Pending |
+| FR-CHIP-IMPL-07 | When rendering an `<a>`, only valid anchor HTML attributes may be spread onto it. A `toNativeAnchorProps` helper must be added to `helpers.ts` to filter out chip-specific keys. | Must | Pending |
+| FR-CHIP-PARITY-01 | All 28 existing test cases in `chip.test.tsx` must pass without modification of their assertions. | Must | Pending |
+| FR-CHIP-PARITY-02 | The CSS custom property names (`--chip-color-inject`, `--chip-size-inject`, `--chip-border-radius-inject`) must be preserved verbatim in the `style` object. | Must | Pending |
+| FR-CHIP-PARITY-03 | The role-based behavior (which props are honored, which are silently ignored) must remain identical to the pre-refactor component. | Must | Pending |
+| FR-GL-001 | The system must centralize all duplicate design token typings (color, size, CSS unit types) across Text, Chip, Radio, Checkbox, and TextField into a shared `tokens.ts` module. | Must | Pending |
+| FR-GL-002 | The system must enforce Interface Segregation Principle on property definitions, strictly decoupling custom component settings from native HTML attributes and removing unsafe type casts (`as`) from TextField, Radio, and Checkbox rendering. | Must | Pending |
 
 
 ### non-functional-requirements
@@ -342,7 +363,14 @@ All component style modules should progressively migrate to shared MD3 tokens to
 | Checkbox | indeterminate | prop `value=null` | renders mixed state (`aria-checked=mixed`) |
 | Radio | unchecked/checked | click input/label | sets checked state and emits `onChange` |
 | Chip (filter) | selected toggle | click chip | calls `onToggle` with next selected state |
+| Chip (filter selected) | `selected={true}` | render | exposes `aria-pressed="true"` |
+| Chip (filter unselected) | `selected={false}` | render | `aria-pressed` is omitted from DOM |
 | Chip (input) | removable | click remove icon | calls `onRemove` and stops propagation |
+| Chip (input with avatar) | `avatar={...}` and `role="input"` | render | renders `<span class="chip__avatar">` with avatar content |
+| Chip (disabled) | `disabled` | render | exposes `aria-disabled="true"` and `class="chip ... disabled"` |
+| Chip (with href) | `href="/x"` | render | renders `<a>` with only valid anchor HTML attributes; chip-specific keys filtered by `toNativeAnchorProps` |
+| Chip (without href) | no `href` | render | renders `<span>` |
+| Chip (role-specific prop ignored) | `avatar={...}` with `role="suggestion"` | render | avatar is silently ignored (no `<span class="chip__avatar">`) |
 | Icon | interactive | click icon | calls `onClick` when not disabled |
 
 ## Error and Guard Behavior
@@ -487,7 +515,7 @@ If training content or user progress is persisted, define:
 | Button | variants (`filled/elevated/tonal/outlined/text`), icon, `fullWidth`, `selected`, `layout`, `href` | Implemented + tested |
 | Checkbox | `value: boolean|null`, custom label modes, size/color/circular, custom icons, `onChange` payload | Implemented + tested |
 | Radio | checked/disabled/required, label modes, native input attrs, custom icons, `onChange` payload | Implemented + tested |
-| Chip | roles (`assist/filter/input/suggestion`), variant/color/radius/size, icon/avatar, role-specific actions | Implemented + tested |
+| Chip | roles (`assist/filter/input/suggestion`), variant/color/radius/size, icon/avatar, role-specific actions; authored as default-exported pure function in `root.tsx`, types in `types.ts`, helpers in `helpers.ts`, styles in `styles/`; CSS variables injected via `style` prop (not `useLayoutEffect`); `aria-disabled`/`aria-pressed` as React props; ref-as-prop (React 19); `toNativeAnchorProps` helper for anchor rendering | Implemented + tested |
 
 ## Contract Rules
 
@@ -547,6 +575,90 @@ Then each chip must trigger only role-appropriate actions (`onClick`, `onToggle`
 Given an implemented component in `src/components`
 When the feature is considered complete
 Then it must include at least one story and one automated test suite
+
+### Scenario AC-GL-001-1 - Centralized Design Token Imports
+
+Given the core components `Text`, `Chip`, `Radio`, `Checkbox`, `TextField`
+When typings for CSS colors, units, or sizes are evaluated
+Then they are strictly imported from `tokens.ts` without local duplicates.
+
+### Scenario AC-GL-001-2 - TS Compilation Safety
+
+Given the centralized type module
+When executing `pnpm nx typecheck ui`
+Then the compiler yields zero errors.
+
+### Scenario AC-GL-002-1 - Strict Decoupled Types
+
+Given helper utilities `toNativeProperties`
+When called by components
+Then it returns a strictly-typed `NativeProperties` object without manual type assertions.
+
+### Scenario AC-GL-002-2 - Zero Unsafe Type Casts
+
+Given components' JSX blocks
+When destructuring native attributes (e.g. `{...nativeProperties}`)
+Then no type casts (such as `as React.InputHTMLAttributes...`) are performed.
+
+### Scenario AC-CHIP-STRUCT-01 - File Structure Alignment
+
+Given the refactor is complete
+When I list the contents of `apps/ui/src/components/chip/`
+Then I see `root.tsx` and `helpers.ts` (no `chip.tsx`, no `helpers.tsx`)
+And the `index.ts` barrel re-exports the default from `./root` and the `Properties` type from `./types`
+And tests are located in `__tests__/chip.test.tsx` (plural), not `__test__/chip.test.tsx`
+And the test file imports from `../index` (the public barrel), not `../chip`
+
+### Scenario AC-CHIP-TYPES-01 - Single Properties Interface
+
+Given the refactor is complete
+When I grep `apps/ui/src/components/chip/types.ts` for `ChipsProperties`, `AssistProperties`, `FilterProperties`, `InputProperties`, `SuggestionProperties`, or `ExcludedProperties`
+Then no matches are found
+And role-specific props carry `@remarks` JSDoc tags documenting silent-no-op behavior for non-matching roles
+
+### Scenario AC-CHIP-IMPL-01 - No useLayoutEffect or useMemo
+
+Given the refactor is complete
+When I grep `apps/ui/src/components/chip/root.tsx` for `useLayoutEffect` or `useMemo`
+Then no matches are found
+
+### Scenario AC-CHIP-IMPL-02 - CSS Custom Properties via style Prop
+
+Given the refactor is complete
+When I render `<Chip size="big" color="primary" />` and inspect the root element's inline style
+Then I see `--chip-size-inject: 40px` and `--chip-color-inject: #3B82F6`
+
+### Scenario AC-CHIP-IMPL-03 - ARIA Attributes as React Props
+
+Given the refactor is complete
+When I render `<Chip role="filter" selected={true} />` and inspect the root element
+Then it has `aria-pressed="true"`
+And when I render `<Chip role="filter" selected={false} />`
+Then it does NOT have an `aria-pressed` attribute at all
+
+### Scenario AC-CHIP-IMPL-04 - Ref as Prop (React 19)
+
+Given the refactor is complete
+When I render `<Chip ref={someRef} />`
+Then `someRef.current` is the rendered element
+And when I render `<Chip />` without a ref
+Then the component still works (no crash from undefined ref)
+
+### Scenario AC-CHIP-IMPL-05 - Anchor vs Span Rendering
+
+Given the refactor is complete
+When I render `<Chip href="/x" />`
+Then the root element is an `<a>` with valid anchor HTML attributes only (chip-specific keys filtered out by `toNativeAnchorProps`)
+And when I render `<Chip />` without href
+Then the root element is a `<span>`
+
+### Scenario AC-CHIP-PARITY-01 - Full Test Parity
+
+Given the refactor is complete
+When I run `nx test ui --testPathPattern=chip`
+Then all 28 existing test cases pass with no assertion modifications
+And the CSS custom property names are preserved verbatim
+And role-based behavior remains identical to the pre-refactor component
 
 
 ### risk-register
@@ -616,6 +728,27 @@ Then it must include at least one story and one automated test suite
 | FR-ICON-002 | acceptance-criteria.md | component-contracts.md (Icon) | TC-001 | Implemented |
 | FR-ICON-003 | interaction-spec.md | component-contracts.md (Icon) | TC-001 | Implemented |
 | FR-ICON-004 | interaction-spec.md | component-contracts.md (Icon) | TC-001 | Implemented |
+| FR-CHIP-STRUCT-01 | chip-component.md (delta) | component-contracts.md (Chip) | n/a | Pending |
+| FR-CHIP-STRUCT-02 | chip-component.md (delta) | component-contracts.md (Chip) | n/a | Pending |
+| FR-CHIP-STRUCT-03 | chip-component.md (delta) | component-contracts.md (Chip) | n/a | Pending |
+| FR-CHIP-STRUCT-04 | chip-component.md (delta) | component-contracts.md (Chip) | n/a | Pending |
+| FR-CHIP-STRUCT-05 | chip-component.md (delta) | component-contracts.md (Chip) | n/a | Pending |
+| FR-CHIP-STRUCT-06 | chip-component.md (delta) | component-contracts.md (Chip) | n/a | Pending |
+| FR-CHIP-TYPES-01 | chip-component.md (delta) | component-contracts.md (Chip) | n/a | Pending |
+| FR-CHIP-TYPES-02 | chip-component.md (delta) | component-contracts.md (Chip) | n/a | Pending |
+| FR-CHIP-TYPES-03 | chip-component.md (delta) | component-contracts.md (Chip) | n/a | Pending |
+| FR-CHIP-IMPL-01 | chip-component.md (delta) | component-contracts.md (Chip) | n/a | Pending |
+| FR-CHIP-IMPL-02 | chip-component.md (delta) | component-contracts.md (Chip) | n/a | Pending |
+| FR-CHIP-IMPL-03 | chip-component.md (delta) | component-contracts.md (Chip) | n/a | Pending |
+| FR-CHIP-IMPL-04 | chip-component.md (delta) | component-contracts.md (Chip) | n/a | Pending |
+| FR-CHIP-IMPL-05 | chip-component.md (delta) | component-contracts.md (Chip) | n/a | Pending |
+| FR-CHIP-IMPL-06 | chip-component.md (delta) | component-contracts.md (Chip) | n/a | Pending |
+| FR-CHIP-IMPL-07 | chip-component.md (delta) | component-contracts.md (Chip) | n/a | Pending |
+| FR-CHIP-PARITY-01 | chip-component.md (delta) | component-contracts.md (Chip) | n/a | Pending |
+| FR-CHIP-PARITY-02 | chip-component.md (delta) | component-contracts.md (Chip) | n/a | Pending |
+| FR-CHIP-PARITY-03 | chip-component.md (delta) | component-contracts.md (Chip) | n/a | Pending |
+| FR-GL-001 | design-tokens-spec.md | tokens.ts (types) | n/a | Pending |
+| FR-GL-002 | component-contracts.md | component helpers / native properties | n/a | Pending |
 
 
 ## delivery
@@ -627,6 +760,8 @@ Then it must include at least one story and one automated test suite
 | --- | --- | --- | --- |
 | 2026-04-25 | `.agents/specs/ui/*` | Replaced generic templates with implementation-aligned SDD for current UI component baseline | Codex |
 | 2026-04-26 | `openspec/specs/ui/spec.md` | Formalized Icon component refinements (weight mapping, size support, SVG scaling, forwardRef) | Antigravity |
+| 2026-05-29 | `openspec/specs/ui/spec.md` | Synced FR-GL-001 (unified token typings) and FR-GL-002 (ISP property normalization) from global-ui-refinement delta spec | Antigravity |
+| 2026-06-10 | `openspec/specs/ui/spec.md` | Synced FR-CHIP-STRUCT-01..FR-CHIP-PARITY-03 (file structure, types, implementation, parity) from refactor-chip-component delta spec | Antigravity |
 
 
 ### definition-of-done

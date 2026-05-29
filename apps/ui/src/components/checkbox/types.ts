@@ -1,28 +1,7 @@
 import type { ReactNode, RefAttributes, SyntheticEvent } from 'react';
 import type { TextProperties as BaseTextProperties } from '../text';
-
-type Size<TValue extends string> = TValue | number;
-type Color<TValue extends string> =
-	| TValue
-	| `rgb(${string})`
-	| `rgba(${string})`
-	| `hsl(${string})`
-	| `hsla(${string})`
-	| `#${string}`;
-type ColorName =
-	| 'orange'
-	| 'yellow'
-	| 'olive'
-	| 'teal'
-	| 'violet'
-	| 'purple'
-	| 'pink'
-	| 'brown'
-	| 'grey'
-	| 'red'
-	| 'green'
-	| 'blue'
-	| 'black';
+import type { IconProperties } from '../icon';
+import type { CssColor, Size } from '../../types/tokens';
 
 export type TextProperties = BaseTextProperties & {
 	/**
@@ -35,7 +14,7 @@ export type TextProperties = BaseTextProperties & {
 	position?: 'top' | 'right' | 'bottom' | 'left';
 };
 
-export type Properties = RefAttributes<HTMLElement> & {
+export type BaseProperties = RefAttributes<HTMLElement> & {
 	/**
 	 * Defines the custom content for the label.
 	 * Overrides the `label` prop if provided.
@@ -97,17 +76,17 @@ export type Properties = RefAttributes<HTMLElement> & {
 	 * Defines the icon displayed when checkbox is unchecked.
 	 *
 	 * @example
-	 * icon={<Icon name="favorite"/>}
+	 * icon={{ name: "favorite" }}
 	 */
-	icon?: ReactNode;
+	icon?: IconProperties;
 
 	/**
 	 * Defines the icon displayed when checkbox is checked.
 	 *
 	 * @example
-	 * checkedIcon={<Icon name="favorite" fill />}
+	 * checkedIcon={{ name: "favorite", fill: true }}
 	 */
-	checkedIcon?: ReactNode;
+	checkedIcon?: IconProperties;
 
 	/**
 	 * Defines the checkbox size.
@@ -130,7 +109,7 @@ export type Properties = RefAttributes<HTMLElement> & {
 	 * color="#f00"
 	 * color="rgb(255, 0, 0)"
 	 */
-	color?: Color<ColorName>;
+	color?: CssColor;
 
 	/**
 	 * If `true`, renders the checkbox with a circular border.
@@ -160,3 +139,7 @@ export type Properties = RefAttributes<HTMLElement> & {
 	 */
 	onChange?: (event: SyntheticEvent, properties: Properties) => void;
 };
+
+export type ElementProperties = Omit<React.InputHTMLAttributes<HTMLInputElement>, 'type' | 'onChange' | 'size' | 'value'>;
+
+export type Properties = BaseProperties & ElementProperties & RefAttributes<HTMLLabelElement>;

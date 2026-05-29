@@ -1,32 +1,5 @@
-import type { ReactNode, ElementType, RefAttributes, SyntheticEvent } from 'react';
-
-type RGB = `rgb(${string})`;
-type RGBA = `rgba(${string})`;
-type HEX = `#${string}`;
-type HSL = `hsl(${string})`;
-type HSLA = `hsla(${string})`;
-
-type EM = `${number}em`;
-type REM = `${number}rem`;
-type PX = `${number}px`;
-type PERCENT = `${number}%`;
-type VW = `${number}vw`;
-type VH = `${number}vh`;
-
-type ColorName =
-	| 'orange'
-	| 'yellow'
-	| 'olive'
-	| 'teal'
-	| 'violet'
-	| 'purple'
-	| 'pink'
-	| 'brown'
-	| 'grey'
-	| 'red'
-	| 'green'
-	| 'blue'
-	| 'black';
+import type { ReactNode, ElementType, RefAttributes, SyntheticEvent, CSSProperties } from 'react';
+import type { CssColor, LineHeight, LetterSpacing, Size } from '../../types/tokens';
 
 type ScaleName =
 	| 'display-large'
@@ -45,11 +18,7 @@ type ScaleName =
 	| 'body-medium'
 	| 'body-small';
 
-type Color<TValue extends string> = TValue | RGB | RGBA | HEX | HSL | HSLA;
 type As<TValue extends string> = TValue | ElementType;
-type Size<TValue extends string> = TValue | number | EM | REM | PX | PERCENT | VW | VH;
-type LineHeight<TValue extends string> = TValue | number | EM | REM | PX | PERCENT | VW | VH;
-type LetterSpacing<TValue extends string> = TValue | EM | REM | PX | PERCENT | VW | VH;
 
 /**
  * Text component properties
@@ -126,7 +95,7 @@ export type Properties = RefAttributes<HTMLElement> & {
 	 * color="#ff0000"
 	 * color="rgb(255, 0, 0)"
 	 */
-	color?: Color<ColorName>;
+	color?: CssColor;
 
 	/**
 	 * Defines the line height of the text.
@@ -233,4 +202,10 @@ export type Properties = RefAttributes<HTMLElement> & {
 	 * className="custom-text"
 	 */
 	className?: string;
+
+	/**
+	 * Inline style applied to the text element. Spread into the rendered element
+	 * before text-specific CSS custom properties are injected.
+	 */
+	style?: CSSProperties;
 };
