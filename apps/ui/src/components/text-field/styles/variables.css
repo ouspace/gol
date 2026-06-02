@@ -1,0 +1,40 @@
+.text-field {
+	/* dimensions */
+	--text-field-height: 56px;
+	--text-field-min-width: 210px;
+
+	/* filled colors */
+	--text-field-container-color: #e6e0e9;
+	--text-field-on-container-color: #1c1b1f;
+	--text-field-indicator-color: #49454f;
+	--text-field-indicator-thickness: 1px;
+	--text-field-container-hover-color: #ddd8e0;
+
+	/* outlined colors */
+	--text-field-outline-color: #79747e;
+	--text-field-outline-width: 1px;
+
+	/* focus color */
+	--text-field-primary-color: var(--text-color-inject, #6750a4);
+
+	/* shape */
+	--text-field-shape-filled: 4px 4px 0 0;
+	--text-field-shape-outlined: 4px;
+
+	/* textarea */
+	--text-field-textarea-min-height: 80px;
+
+	/* label */
+	--text-field-label-color: #49454f;
+	--text-field-label-floating-size: 0.75rem;
+	--text-field-label-background: Canvas;
+
+	/* error */
+	--text-field-error-color: #b3261e;
+
+	/* supporting text */
+	--text-field-supporting-text-color: #49454f;
+
+	/* transition */
+	--text-field-transition: 0.15s ease;
+}

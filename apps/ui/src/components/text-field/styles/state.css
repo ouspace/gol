@@ -1,0 +1,112 @@
+.text-field {
+	/* hover */
+	&.filled:not(.disabled):not(.error):not(:focus-within) .container:hover {
+		background-color: var(--text-field-container-hover-color);
+	}
+
+	&.filled:not(.disabled):not(.error):not(:focus-within) .container:hover::after {
+		height: 2px;
+	}
+
+	&.outlined:not(.disabled):not(.error):not(:focus-within) .container:hover {
+		border-color: var(--text-field-on-container-color);
+	}
+
+	/* focus */
+	.container:focus-within .label {
+		color: var(--text-field-primary-color);
+	}
+
+	&.filled:focus-within .container::after {
+		height: 2px;
+		background-color: var(--text-field-primary-color);
+	}
+
+	&.outlined:focus-within .container {
+		border-width: 2px;
+		border-color: var(--text-field-primary-color);
+	}
+
+	/* error */
+	&.error {
+		.label,
+		.container:focus-within .label {
+			color: var(--text-field-error-color);
+		}
+
+		.supporting-text {
+			color: var(--text-field-error-color);
+		}
+
+		&.filled .container::after,
+		&.filled:focus-within .container::after {
+			background-color: var(--text-field-error-color);
+		}
+
+		/* filled hover on error */
+		&.filled:not(.disabled):not(:focus-within) .container:hover {
+			background-color: var(--text-field-container-hover-color);
+		}
+
+		&.filled:not(.disabled):not(:focus-within) .container:hover::after {
+			height: 2px;
+		}
+
+		&.outlined .container,
+		&.outlined:focus-within .container {
+			border-color: var(--text-field-error-color);
+		}
+
+		/* outlined hover on error */
+		&.outlined:not(.disabled):not(:focus-within) .container:hover {
+			border-width: 2px;
+			border-color: var(--text-field-error-color);
+		}
+	}
+
+	/* disabled */
+	&.disabled {
+		opacity: 0.38;
+		pointer-events: none;
+		cursor: default;
+	}
+
+	/* read only */
+	&.read-only {
+		.container {
+			cursor: default;
+		}
+
+		.input {
+			cursor: text;
+		}
+	}
+
+	/* textarea */
+	textarea.input {
+		resize: vertical;
+		align-self: stretch;
+		padding-top: 4px;
+		padding-bottom: 4px;
+		min-height: var(--text-field-textarea-min-height);
+	}
+
+	/* spinner */
+	&.no-spinner {
+		.input::-webkit-outer-spin-button,
+		.input::-webkit-inner-spin-button {
+			-webkit-appearance: none;
+			margin: 0;
+		}
+
+		.input[type='number'] {
+			-moz-appearance: textfield;
+			appearance: textfield;
+		}
+	}
+
+	/* placeholder */
+	.container:has(.label) .input:not(:focus)::placeholder {
+		opacity: 0;
+	}
+}

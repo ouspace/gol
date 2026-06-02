@@ -1,4 +1,4 @@
-import _ from 'lodash'
+import _ from 'lodash';
 import { match, P } from 'ts-pattern';
 
 import { type Properties, type Options, Mode } from './types';
@@ -48,7 +48,10 @@ export function toSize(properties: Required<Properties>): string | undefined {
 	const criteria = { size: properties.size };
 
 	return match(criteria)
-		.with({ size: { value: P.number, unit: P.union('px', 'rem', 'em', 'vw', 'vh') } }, ({ size }) => `${size.value}${size.unit}`)
+		.with(
+			{ size: { value: P.number, unit: P.union('px', 'rem', 'em', 'vw', 'vh') } },
+			({ size }) => `${size.value}${size.unit}`
+		)
 		.with({ size: { value: P.number } }, ({ size }) => `${size.value}px`)
 		.with({ size: P.number }, ({ size }) => `${size}px`)
 		.otherwise(() => undefined);
