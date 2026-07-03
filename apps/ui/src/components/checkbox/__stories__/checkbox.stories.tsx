@@ -1,6 +1,7 @@
+import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import Checkbox from '../checkbox';
-import { Icon } from '../../icon';
+import { expect, userEvent, within } from '@storybook/test';
+import Checkbox from '../root';
 import { Text } from '../../text';
 
 const meta: Meta<typeof Checkbox> = {
@@ -61,8 +62,8 @@ export const Disabled: Story = {
 				label='With Icon'
 				disabled
 				value={true}
-				icon={<Icon name='favorite' size={18} variant='outlined' />}
-				checkedIcon={<Icon name='favorite' size={18} fill variant='outlined' />}
+				icon={{ name: 'favorite', size: 24, variant: 'outlined', viewBox: '0 -960 960 960' }}
+				checkedIcon={{ name: 'favorite', size: 24, fill: true, variant: 'outlined', viewBox: '0 -960 960 960' }}
 				color='red'
 			/>
 		</div>
@@ -114,42 +115,84 @@ export const CustomIcons: Story = {
 			<Checkbox
 				label='Favorite'
 				value={false}
-				icon={<Icon name='favorite' size={18} variant='outlined' color='red' />}
-				checkedIcon={<Icon name='favorite' size={18} fill variant='outlined' color='red' />}
+				icon={{ name: 'favorite', size: 24, variant: 'outlined', viewBox: '0 -960 960 960', color: 'red' }}
+				checkedIcon={{
+					name: 'favorite',
+					size: 24,
+					fill: true,
+					variant: 'outlined',
+					viewBox: '0 -960 960 960',
+					color: 'red',
+				}}
 				color='red'
 			/>
 			<Checkbox
 				label='Favorite'
 				value={true}
-				icon={<Icon name='favorite' size={18} variant='outlined' color='red' />}
-				checkedIcon={<Icon name='favorite' size={18} fill variant='outlined' color='red' />}
+				icon={{ name: 'favorite', size: 24, variant: 'outlined', viewBox: '0 -960 960 960', color: 'red' }}
+				checkedIcon={{
+					name: 'favorite',
+					size: 24,
+					fill: true,
+					variant: 'outlined',
+					viewBox: '0 -960 960 960',
+					color: 'red',
+				}}
 				color='red'
 			/>
 			<Checkbox
 				label='Star'
 				value={false}
-				icon={<Icon name='star' size={20} variant='outlined' color='orange' />}
-				checkedIcon={<Icon name='star' size={20} fill variant='outlined' color='orange' />}
+				icon={{ name: 'star', size: 24, variant: 'outlined', viewBox: '0 -960 960 960', color: 'orange' }}
+				checkedIcon={{
+					name: 'star',
+					size: 24,
+					fill: true,
+					variant: 'outlined',
+					viewBox: '0 -960 960 960',
+					color: 'orange',
+				}}
 				color='orange'
 			/>
 			<Checkbox
 				label='Star'
 				value={true}
-				icon={<Icon name='star' size={20} variant='outlined' color='orange' />}
-				checkedIcon={<Icon name='star' size={20} fill variant='outlined' color='orange' />}
+				icon={{ name: 'star', size: 24, variant: 'outlined', viewBox: '0 -960 960 960', color: 'orange' }}
+				checkedIcon={{
+					name: 'star',
+					size: 24,
+					fill: true,
+					variant: 'outlined',
+					viewBox: '0 -960 960 960',
+					color: 'orange',
+				}}
 				color='orange'
 			/>
 			<Checkbox
 				value={false}
-				icon={<Icon name='bookmark' size={18} variant='outlined' color='blue' />}
-				checkedIcon={<Icon name='bookmark' size={18} fill variant='outlined' color='blue' />}
+				icon={{ name: 'bookmark', size: 24, variant: 'outlined', viewBox: '0 -960 960 960', color: 'blue' }}
+				checkedIcon={{
+					name: 'bookmark',
+					size: 24,
+					fill: true,
+					variant: 'outlined',
+					viewBox: '0 -960 960 960',
+					color: 'blue',
+				}}
 				color='blue'>
 				<Text size='small'>Bookmark</Text>
 			</Checkbox>
 			<Checkbox
 				value={true}
-				icon={<Icon name='bookmark' size={18} variant='outlined' color='blue' />}
-				checkedIcon={<Icon name='bookmark' size={18} fill variant='outlined' color='blue' />}
+				icon={{ name: 'bookmark', size: 24, variant: 'outlined', viewBox: '0 -960 960 960', color: 'blue' }}
+				checkedIcon={{
+					name: 'bookmark',
+					size: 24,
+					fill: true,
+					variant: 'outlined',
+					viewBox: '0 -960 960 960',
+					color: 'blue',
+				}}
 				color='blue'>
 				<Text size='small'>Bookmark</Text>
 			</Checkbox>
@@ -165,4 +208,73 @@ export const Circular: Story = {
 			<Checkbox label='Checked' circular value={true} />
 		</div>
 	),
+};
+
+export const InteractionsToggle: Story = {
+	render: () => {
+		const [checked, setChecked] = React.useState(false);
+		return <Checkbox label='Toggle me' value={checked} onChange={(e, v) => setChecked(v.value!)} />;
+	},
+	play: async ({ canvasElement, step }) => {
+		const canvas = within(canvasElement);
+		const checkbox = canvas.getByRole('checkbox');
+
+		await step('Click checkbox to check', async () => {
+			await userEvent.click(canvas.getByText('Toggle me'));
+			await expect(checkbox).toBeChecked();
+		});
+	},
+};
+
+export const InteractionsKeyboard: Story = {
+	render: () => {
+		const [checked, setChecked] = React.useState(false);
+		return <Checkbox label='Keyboard toggle' value={checked} onChange={(e, v) => setChecked(v.value!)} />;
+	},
+	play: async ({ canvasElement, step }) => {
+		const canvas = within(canvasElement);
+		const checkbox = canvas.getByRole('checkbox');
+
+		await step('Tab to focus checkbox', async () => {
+			await userEvent.tab();
+			await expect(checkbox).toHaveFocus();
+		});
+
+		await step('Press Space to toggle', async () => {
+			await userEvent.keyboard(' ');
+			await expect(checkbox).toBeChecked();
+		});
+	},
+};
+
+export const InteractionsLabelClick: Story = {
+	render: () => {
+		const [checked, setChecked] = React.useState(false);
+		return <Checkbox label='Click my label' value={checked} onChange={(e, v) => setChecked(v.value!)} />;
+	},
+	play: async ({ canvasElement, step }) => {
+		const canvas = within(canvasElement);
+		const checkbox = canvas.getByRole('checkbox');
+
+		await step('Click label triggers onChange', async () => {
+			await userEvent.click(canvas.getByText('Click my label'));
+			await expect(checkbox).toBeChecked();
+		});
+	},
+};
+
+export const InteractionsDisabled: Story = {
+	render: () => {
+		return <Checkbox label='Disabled checkbox' value={false} disabled />;
+	},
+	play: async ({ canvasElement, step }) => {
+		const canvas = within(canvasElement);
+		const checkbox = canvas.getByRole('checkbox');
+
+		await step('Click disabled checkbox has no effect', async () => {
+			await userEvent.click(canvas.getByText('Disabled checkbox'));
+			await expect(checkbox).not.toBeChecked();
+			await expect(checkbox).toBeDisabled();
+		});
+	},
 };

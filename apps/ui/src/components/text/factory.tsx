@@ -1,6 +1,6 @@
 import { isValidElement } from 'react';
 import { match, P } from 'ts-pattern';
-import Text from './text';
+import Text from './root';
 import type { Properties as TextProperties } from './types';
 
 /**

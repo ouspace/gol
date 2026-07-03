@@ -1,15 +1,55 @@
 .chip {
-	--chip-color: var(--chip-color-inject, #6b7280);
-	--chip-size: var(--chip-size-inject, 32px);
-
-	--chip-surface-variant: #e0e0e0;
-	--chip-on-surface-variant: #49454f;
-
-	--chip-border-radius: 15px;
+	--chip-color: var(--md-sys-color-primary, #6750a4);
+	--chip-on-color: var(--md-sys-color-on-primary, #ffffff);
+	--chip-size: 32px;
+	--chip-padding-block: calc(var(--chip-size) * 0.1875);
+	--chip-padding-inline: calc(var(--chip-size) * 0.5);
+	--chip-gap: calc(var(--chip-size) * 0.25);
 	--chip-border-width: 1px;
+	--chip-border-radius: 15px;
+	--chip-transition-duration: var(--md-transition-base, 0.2s);
+	--chip-elevation-1: var(--md-elevation-1, 0 1px 3px rgba(0, 0, 0, 0.2));
+	--chip-elevation-2: var(--md-elevation-2, 0 3px 6px rgba(0, 0, 0, 0.3));
 
-	--chip-transition-duration: 0.2s;
+	&.default {
+		--chip-color: var(--md-sys-color-on-surface-variant, #49454f);
+		--chip-on-color: var(--md-sys-color-on-primary, #ffffff);
+	}
 
-	--chip-elevation-1: 0px 1px 2px rgba(0, 0, 0, 0.3), 0px 1px 3px rgba(0, 0, 0, 0.15);
-	--chip-elevation-2: 0px 2px 6px rgba(0, 0, 0, 0.3), 0px 1px 2px rgba(0, 0, 0, 0.15);
+	&.primary {
+		--chip-color: var(--md-sys-color-primary, #6750a4);
+		--chip-on-color: var(--md-sys-color-on-primary, #ffffff);
+	}
+
+	&.secondary {
+		--chip-color: var(--md-sys-color-secondary, #6366f1);
+		--chip-on-color: var(--md-sys-color-on-secondary, #ffffff);
+	}
+
+	&.error {
+		--chip-color: var(--md-sys-color-error, #ef4444);
+		--chip-on-color: var(--md-sys-color-on-error, #ffffff);
+	}
+
+	&.success {
+		--chip-color: var(--md-sys-color-success, #10b981);
+		--chip-on-color: var(--md-sys-color-on-success, #ffffff);
+	}
+
+	&.warning {
+		--chip-color: var(--md-sys-color-warning, #f59e0b);
+		--chip-on-color: var(--md-sys-color-on-warning, #ffffff);
+	}
+
+	&.small {
+		--chip-size: 24px;
+	}
+
+	&.big {
+		--chip-size: 40px;
+	}
+
+	&.square {
+		--chip-border-radius: 0px;
+	}
 }

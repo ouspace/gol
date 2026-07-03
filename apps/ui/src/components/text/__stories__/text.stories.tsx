@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
-import Text from '../text';
+import Text from '../root';
 
 const meta: Meta<typeof Text> = {
 	title: 'Components/Text',
@@ -134,6 +134,45 @@ export const TypeScale: Story = {
 			<Text as='p' scale='body-small'>
 				body-small
 			</Text>
+		</div>
+	),
+};
+
+export const States: Story = {
+	render: () => (
+		<div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+			<Text content='Default' />
+			<Text content='Disabled' disabled />
+			<Text content='Italic' italic />
+			<Text
+				content='No wrap — this long text will not wrap no matter how wide or narrow the container is'
+				wrap={false}
+			/>
+			<Text content='Unselectable — try to select this text' unselectable />
+		</div>
+	),
+};
+
+const colorTokens = ['black', 'red', 'green', 'blue', 'orange', 'purple', 'teal', 'pink', 'brown', 'grey'] as const;
+
+export const Colors: Story = {
+	render: () => (
+		<div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+			{colorTokens.map((color) => (
+				<Text key={color} content={color} color={color} />
+			))}
+		</div>
+	),
+};
+
+export const Weights: Story = {
+	render: () => (
+		<div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+			<Text content='weight: 300 (light)' weight={300} />
+			<Text content='weight: 400 (normal)' weight={400} />
+			<Text content='weight: 600 (semibold)' weight={600} />
+			<Text content='weight: 700 (bold)' weight={700} />
+			<Text content='weight: bold (keyword)' weight='bold' />
 		</div>
 	),
 };

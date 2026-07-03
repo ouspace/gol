@@ -1,0 +1,94 @@
+.radio {
+	&:not(.iconified) .input:checked + .box {
+		&::after {
+			outline-color: var(--radio-color);
+		}
+
+		&::before {
+			content: '';
+			position: absolute;
+			width: calc(var(--radio-size) * var(--radio-dot-size));
+			height: calc(var(--radio-size) * var(--radio-dot-size));
+			border-radius: 50%;
+			background-color: var(--radio-dot-color);
+			z-index: 1;
+		}
+	}
+
+	&:not(.disabled) {
+		&::after {
+			content: '';
+			grid-area: box;
+			justify-self: start;
+			align-self: center;
+			width: var(--radio-touch-area);
+			height: var(--radio-touch-area);
+			border-radius: 50%;
+			background-color: color-mix(in srgb, var(--radio-color) calc(var(--radio-hover-background-opacity) * 100), transparent);
+			transform: scale(0);
+			opacity: 0;
+			transition:
+				transform var(--radio-ripple-transition-duration) var(--radio-ripple-transition-timing-function),
+				opacity var(--radio-ripple-transition-duration) var(--radio-ripple-transition-timing-function);
+			pointer-events: none;
+			z-index: 0;
+		}
+
+		&:hover::after {
+			transform: scale(1);
+			opacity: 1;
+		}
+
+		&:active::after {
+			background-color: color-mix(in srgb, var(--radio-color) calc(var(--radio-active-background-opacity) * 100), transparent);
+			transform: scale(1);
+			opacity: 1;
+		}
+
+		&:not(.iconified) .box:hover::after {
+			outline-color: var(--radio-color);
+		}
+
+		.box:active {
+			transform: scale(var(--radio-active-scale));
+		}
+	}
+
+	.input:focus-visible + .box::after {
+		outline-color: var(--radio-color);
+		outline-width: calc(var(--radio-border-width) + 1px);
+		box-shadow:
+			0 0 0 var(--radio-focus-ring-width) var(--radio-box-background-color),
+			0 0 0 calc(var(--radio-focus-ring-width) + var(--radio-focus-ring-offset)) var(--radio-color);
+	}
+
+	&.disabled {
+		cursor: var(--radio-disabled-cursor);
+
+		.box {
+			cursor: var(--radio-disabled-cursor);
+
+			&::after {
+				outline-color: var(--radio-disabled-color);
+				background-color: var(--radio-disabled-background-color);
+				opacity: var(--radio-disabled-opacity);
+			}
+		}
+
+		.label {
+			color: var(--radio-disabled-color);
+			cursor: var(--radio-disabled-cursor);
+			opacity: var(--radio-disabled-opacity);
+		}
+
+&:not(.iconified) .input:checked + .box {
+			&::after {
+				outline-color: var(--radio-disabled-color);
+			}
+
+			&::before {
+				background-color: var(--radio-disabled-color);
+			}
+		}
+	}
+}

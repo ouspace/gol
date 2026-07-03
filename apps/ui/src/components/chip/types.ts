@@ -1,21 +1,16 @@
-import type { ReactNode, RefAttributes, SyntheticEvent } from 'react';
+import type { CSSProperties, ReactNode, RefAttributes, SyntheticEvent } from 'react';
 import type { TextProperties } from '../text';
-
-type Size<TValue extends string> = TValue | number;
-type Color<TValue extends string> =
-	| TValue
-	| `rgb(${string})`
-	| `rgba(${string})`
-	| `hsl(${string})`
-	| `hsla(${string})`
-	| `#${string}`;
-
-type AssistExcludedProperties = 'selected' | 'onToggle' | 'onRemove' | 'avatar';
-type FilterExcludedProperties = 'onRemove' | 'avatar';
-type InputExcludedProperties = 'onToggle';
-type SuggestionExcludedProperties = 'selected' | 'onToggle' | 'onRemove' | 'avatar' | 'icon';
+import type { Color, Size } from '../../types/tokens';
 
 export type Properties = RefAttributes<HTMLElement> & {
+	/**
+	 * Inline style applied to the chip's root element.
+	 *
+	 * The chip injects the following public CSS variables for theming
+	 * (overridable from the consumer):
+	 * `--chip-color`, `--chip-size`, `--chip-border-radius`.
+	 */
+	style?: CSSProperties;
 	/**
 	 * Defines the chip role/type.
 	 *
@@ -41,7 +36,8 @@ export type Properties = RefAttributes<HTMLElement> & {
 	 * <Chip role="suggestion" onClick={handler}>Content</Chip>
 	 *
 	 * @remarks
-	 * All roles support: children, color, variant, radius, disabled
+	 * All roles support: children, color, variant, radius, disabled.
+	 * All chips respond to Space and Enter when not disabled.
 	 */
 	role?: 'assist' | 'filter' | 'input' | 'suggestion';
 
@@ -50,7 +46,7 @@ export type Properties = RefAttributes<HTMLElement> & {
 	 *
 	 * @example
 	 * children="Primary Chip"
-	 * children={<chip>Custom Content</chip>}
+	 * children={<strong>Custom Content</strong>}
 	 */
 	children?: ReactNode;
 
@@ -118,6 +114,9 @@ export type Properties = RefAttributes<HTMLElement> & {
 	 *
 	 * @example
 	 * icon={<CustomIcon />}
+	 *
+	 * @remarks
+	 * Silently ignored when `role="suggestion"`.
 	 */
 	icon?: ReactNode;
 
@@ -126,11 +125,15 @@ export type Properties = RefAttributes<HTMLElement> & {
 	 *
 	 * @example
 	 * avatar={<img src="/user.jpg"/>}
+	 *
+	 * @remarks
+	 * Only rendered when `role="input"`. Silently ignored for other roles.
 	 */
 	avatar?: ReactNode;
 
 	/**
-	 * URL to make the chip a clickable link
+	 * URL to make the chip a clickable link. When provided, the chip
+	 * renders as an `<a>` element; otherwise it renders as a `<button>`.
 	 *
 	 * @example
 	 * href="https://example.com"
@@ -169,6 +172,7 @@ export type Properties = RefAttributes<HTMLElement> & {
 	 * Click event
 	 *
 	 * @param event
+	 * @param properties - the chip properties after defaults
 	 * @returns
 	 */
 	onClick?: (event: SyntheticEvent, properties: Properties) => void;
@@ -177,7 +181,11 @@ export type Properties = RefAttributes<HTMLElement> & {
 	 * Remove event handler for input chips (shows X button)
 	 *
 	 * @param event
+	 * @param properties
 	 * @returns
+	 *
+	 * @remarks
+	 * Only fired when `role="input"`. Silently ignored for other roles.
 	 */
 	onRemove?: (event: SyntheticEvent, properties: Properties) => void;
 
@@ -185,41 +193,12 @@ export type Properties = RefAttributes<HTMLElement> & {
 	 * Toggle event handler for filter chips
 	 *
 	 * @param event
-	 * @param selected
+	 * @param selected - the new (next) selected state
+	 * @param properties
 	 * @returns
+	 *
+	 * @remarks
+	 * Only fired when `role="filter"`. Silently ignored for other roles.
 	 */
 	onToggle?: (event: SyntheticEvent, selected: boolean, properties: Properties) => void;
 };
-
-/**
- * Properties specific to assist chips
- */
-export type AssistProperties = Omit<Properties, AssistExcludedProperties> & {
-	role: 'assist';
-};
-
-/**
- * Properties specific to filter chips
- */
-export type FilterProperties = Omit<Properties, FilterExcludedProperties> & {
-	role: 'filter';
-};
-
-/**
- * Properties specific to input chips
- */
-export type InputProperties = Omit<Properties, InputExcludedProperties> & {
-	role: 'input';
-};
-
-/**
- * Properties specific to suggestion chips
- */
-export type SuggestionProperties = Omit<Properties, SuggestionExcludedProperties> & {
-	role: 'suggestion';
-};
-
-/**
- * Union type for all chip variants
- */
-export type ChipsProperties = Properties | AssistProperties | FilterProperties | InputProperties | SuggestionProperties;

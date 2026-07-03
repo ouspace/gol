@@ -2,16 +2,37 @@
 	--checkbox-size: var(--checkbox-size-inject, 18px);
 	--checkbox-color: var(--checkbox-color-inject, blue);
 
-	--checkbox-radius: 4px;
+	--checkbox-border-radius: var(--checkbox-border-radius-inject, 4px);
+	--checkbox-outline-color: var(--checkbox-outline-color-inject, rgb(120, 120, 120));
+	--checkbox-disabled-color: var(--checkbox-disabled-color-inject, rgba(0, 0, 0, 0.38));
+	--checkbox-disabled-opacity: var(--checkbox-disabled-opacity-inject, 0.6);
+	--checkbox-disabled-background-color: var(--checkbox-disabled-background-color-inject, rgba(0, 0, 0, 0.05));
 
-	--checkbox-color-outline: rgb(120, 120, 120);
-	--checkbox-color-disabled: rgba(0, 0, 0, 0.38);
+	--checkbox-gap: var(--checkbox-gap-inject, calc(var(--checkbox-size) * 0.44));
 
-	--checkbox-gap: calc(var(--checkbox-size) * 0.44);
+	--checkbox-transition-duration: var(--checkbox-transition-duration-inject, 0.15s);
+	--checkbox-transition-timing-function: var(--checkbox-transition-timing-function-inject, ease);
 
-	--checkbox-transition: 0.15s ease;
+	--checkbox-hover-background-opacity: var(--checkbox-hover-background-opacity-inject, 0.08);
+	--checkbox-active-background-opacity: var(--checkbox-active-background-opacity-inject, 0.12);
+	--checkbox-active-scale: var(--checkbox-active-scale-inject, 0.95);
+	--checkbox-active-scale-custom: var(--checkbox-active-scale-custom-inject, 0.92);
+
+	--checkbox-focus-outline-offset: var(--checkbox-focus-outline-offset-inject, 2px);
+
+	--checkbox-checkmark-color: var(--checkbox-checkmark-color-inject, white);
+	--checkbox-checkmark-border-width: var(--checkbox-checkmark-border-width-inject, 2px);
+
+	--checkbox-indeterminate-bar-color: var(--checkbox-indeterminate-bar-color-inject, white);
+	--checkbox-indeterminate-bar-height: var(--checkbox-indeterminate-bar-height-inject, 2px);
+
+	--checkbox-cursor: var(--checkbox-cursor-inject, pointer);
+	--checkbox-disabled-cursor: var(--checkbox-disabled-cursor-inject, not-allowed);
+
+	--checkbox-box-background-color: var(--checkbox-box-background-color-inject, white);
+	--checkbox-box-border-width: var(--checkbox-box-border-width-inject, 2px);
 
 	&.circular {
-		--checkbox-radius: 50%;
+		--checkbox-border-radius: 50%;
 	}
 }
