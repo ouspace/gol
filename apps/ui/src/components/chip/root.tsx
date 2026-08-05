@@ -20,11 +20,12 @@ import './styles/index.css';
  * Renders an anchor when `href` is provided, otherwise a semantic `<button>`.
  * Inherits keyboard activation (Space/Enter) from the native element.
  *
- * @param {Properties} properties - refers to chip properties
+ * @summary compact tag for input/attribute/action; polymorphic anchor|button in 4 roles
  *
  * @example
  * <Chip role="assist" color="primary" variant="outlined" onClick={handler}>Content</Chip>
  *
+ * @param {Properties} properties - refers to chip properties
  * @returns {React.JSX.Element} element
  */
 export default function Chip(properties?: Properties) {

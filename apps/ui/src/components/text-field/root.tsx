@@ -7,16 +7,19 @@ import { toDefaults, toNativeProperties, toInputTypeProperties, toClasses, toEle
 /**
  * TextField component
  *
- * @param {Properties} properties - refers to text field properties
+ * Single-line or multi-line input with floating label, filled/outlined
+ * variants, prefix/suffix text, leading/trailing icons, helper and error
+ * messages, and full keyboard navigation. Supports custom properties and
+ * native input attributes.
  *
- * @description
- * Supports custom properties and native input attributes.
+ * @summary floating-label input (filled/outlined) with icons, helper & error text
  *
  * @example
  * <TextField label="Email" type="email" placeholder="name@example.com" color="teal" />
  * <TextField {...properties} />
  * <TextField label="Native props" aria-label="input" data-testid="text-field" onFocus={fn} />
  *
+ * @param {Properties} properties - refers to text field properties
  * @returns {React.JSX.Element} element
  */
 export default function TextField(properties?: Properties) {

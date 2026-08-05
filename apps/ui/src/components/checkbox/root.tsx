@@ -11,11 +11,16 @@ import { Icon } from '../icon';
 /**
  * Checkbox component
  *
- * @param {Properties} properties - refers to checkbox properties
+ * Selectable control with three states (unchecked, checked, indeterminate),
+ * custom icons, sizes, colors, and label positioning. Used for toggling single
+ * options or representing mixed/partial selection state.
+ *
+ * @summary tri-state selectable control for toggling options or mixed state
  *
  * @example
  * <Checkbox label="Label text" value={true} color="blue" size="normal" />
  *
+ * @param {Properties} properties - refers to checkbox properties
  * @returns {React.JSX.Element} element
  */
 export default function Checkbox(properties?: Properties) {

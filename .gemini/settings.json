@@ -4,6 +4,9 @@
 			"type": "stdio",
 			"command": "npx",
 			"args": ["nx", "mcp"]
+		},
+		"mcp-storybook": {
+			"httpUrl": "http://localhost:6006/mcp"
 		}
 	},
 	"contextFileName": "AGENTS.md"

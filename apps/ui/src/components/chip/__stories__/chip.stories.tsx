@@ -47,14 +47,18 @@ const meta: Meta<typeof Chip> = {
 export default meta;
 type Story = StoryObj<typeof Chip>;
 
-// Basic
+/**
+ * @summary the default assist chip with a label — the simplest starting point
+ */
 export const Default: Story = {
 	args: {
 		label: 'Default Chip',
 	},
 };
 
-// Roles
+/**
+ * @summary the four chip roles (assist, filter, input, suggestion) — each has a distinct interaction semantics
+ */
 export const Roles: Story = {
 	render: () => (
 		<div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
@@ -66,7 +70,9 @@ export const Roles: Story = {
 	),
 };
 
-// Variants
+/**
+ * @summary the visual states (default, disabled, selected, outlined) across variants
+ */
 export const States: Story = {
 	render: () => (
 		<div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', alignItems: 'center' }}>
@@ -79,6 +85,9 @@ export const States: Story = {
 	),
 };
 
+/**
+ * @summary preset semantic colors shown in both filled and outlined variants
+ */
 export const Colors: Story = {
 	render: () => (
 		<div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
@@ -93,6 +102,9 @@ export const Colors: Story = {
 	),
 };
 
+/**
+ * @summary the filled vs outlined variants side by side for visual comparison
+ */
 export const Variants: Story = {
 	render: () => (
 		<div style={{ display: 'flex', gap: '24px', alignItems: 'center', flexWrap: 'wrap' }}>
@@ -106,6 +118,9 @@ export const Variants: Story = {
 	),
 };
 
+/**
+ * @summary the three sizes (small, normal, big) for matching surrounding UI density
+ */
 export const Sizes: Story = {
 	render: () => (
 		<div style={{ display: 'flex', gap: '8px', alignItems: 'center', flexWrap: 'wrap' }}>
@@ -116,7 +131,9 @@ export const Sizes: Story = {
 	),
 };
 
-// Customization
+/**
+ * @summary customizing corner radius and arbitrary color values (hex/rgb/hsl) for brand alignment
+ */
 export const Customization: Story = {
 	render: () => (
 		<div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
@@ -135,7 +152,9 @@ export const Customization: Story = {
 	),
 };
 
-// Polymorphism
+/**
+ * @summary polymorphism — render as a button, an internal link, or an external link
+ */
 export const AsLink: Story = {
 	render: () => (
 		<div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
@@ -151,7 +170,9 @@ export const AsLink: Story = {
 	),
 };
 
-// Interactions
+/**
+ * @summary live interactions — assist chips count clicks, filter chips toggle selection, input chips are removable
+ */
 export const Interactions: Story = {
 	render: () => {
 		const [count, setCount] = React.useState(0);
@@ -204,6 +225,9 @@ export const Interactions: Story = {
 	},
 };
 
+/**
+ * @summary keyboard users can Tab to focus an assist chip and press Enter to trigger onClick
+ */
 export const InteractionsKeyboard: Story = {
 	render: () => {
 		const [pressed, setPressed] = React.useState(false);
