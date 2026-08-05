@@ -50,7 +50,9 @@ const meta: Meta<typeof Radio> = {
 export default meta;
 type Story = StoryObj<typeof Radio>;
 
-// Basic
+/**
+ * @summary the default checked radio — the simplest single-choice control
+ */
 export const Default: Story = {
 	args: {
 		label: 'Default radio button',
@@ -58,7 +60,9 @@ export const Default: Story = {
 	},
 };
 
-// States
+/**
+ * @summary the key states (unchecked, checked, disabled, disabled+checked, required) shown together
+ */
 export const States: Story = {
 	render: () => (
 		<div style={{ display: 'flex', gap: '24px', flexWrap: 'wrap', alignItems: 'center' }}>
@@ -96,6 +100,9 @@ export const States: Story = {
 	},
 };
 
+/**
+ * @summary the three preset sizes plus numeric (px) and string (rem) custom sizes
+ */
 export const Sizes: Story = {
 	render: () => (
 		<div style={{ display: 'flex', gap: '24px', flexWrap: 'wrap', alignItems: 'center' }}>
@@ -108,6 +115,9 @@ export const Sizes: Story = {
 	),
 };
 
+/**
+ * @summary the full preset color palette with checked and unchecked examples for each
+ */
 export const Colors: Story = {
 	render: () => (
 		<div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
@@ -124,6 +134,9 @@ export const Colors: Story = {
 	),
 };
 
+/**
+ * @summary label positioning (right/left/top/bottom), colored labels, and JSX content for rich labels
+ */
 export const Labels: Story = {
 	render: () => (
 		<div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
@@ -140,6 +153,9 @@ export const Labels: Story = {
 	),
 };
 
+/**
+ * @summary replacing the default radio dot with custom unchecked/checked icons (e.g. favorite, star)
+ */
 export const Icons: Story = {
 	render: () => (
 		<div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
@@ -177,7 +193,9 @@ export const Icons: Story = {
 	),
 };
 
-// Interactions
+/**
+ * @summary interactive single-selection — grouping radios by `name` lets only one stay checked at a time
+ */
 export const Interactions: Story = {
 	render: () => {
 		const [value, setValue] = useState('option1');
@@ -231,6 +249,9 @@ export const Interactions: Story = {
 	},
 };
 
+/**
+ * @summary keyboard navigation — Tab focuses the group and ArrowDown moves selection between options
+ */
 export const InteractionsKeyboard: Story = {
 	render: () => {
 		const [value, setValue] = useState('option1');

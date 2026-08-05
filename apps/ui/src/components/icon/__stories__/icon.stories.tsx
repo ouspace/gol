@@ -12,7 +12,7 @@ const meta: Meta<typeof Icon> = {
 			codePanel: true,
 		}
 	},
-	tags: ['autodocs', 'typescript', '!dev'],
+	tags: ['autodocs', '!dev'],
 	argTypes: {
 		size: {
 			options: ['smallest', 'small', 'smallless', 'normal', 'bigless', 'big', 'biggest'],
@@ -27,14 +27,18 @@ const meta: Meta<typeof Icon> = {
 export default meta;
 type Story = StoryObj<typeof Icon>;
 
-// Default
+/**
+ * @summary the default icon rendered by name from the Material Symbols dictionary
+ */
 export const Default: Story = {
 	args: {
 		name: '10k'
 	}
 };
 
-// Interactive Behavior Story
+/**
+ * @summary an interactive icon acting as a button — focusable and clickable via onClick
+ */
 export const InteractiveClick: Story = {
 	args: {
 		name: '10k',

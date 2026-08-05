@@ -10,7 +10,9 @@ const meta: Meta<typeof BaseButton> = {
 export default meta;
 type Story = StoryObj<typeof BaseButton>;
 
-// Filled variant
+/**
+ * @summary the filled variant — default emphasis for the primary action in a view
+ */
 export const Filled: Story = {
 	render: (arguments_) => <BaseButton {...arguments_}>Filled</BaseButton>,
 	args: {
@@ -18,7 +20,9 @@ export const Filled: Story = {
 	},
 };
 
-// Elevated variant
+/**
+ * @summary the elevated variant — filled with a shadow for lifted, attention-grabbing actions
+ */
 export const Elevated: Story = {
 	render: (arguments_) => <BaseButton {...arguments_}>Elevated</BaseButton>,
 	args: {
@@ -26,7 +30,9 @@ export const Elevated: Story = {
 	},
 };
 
-// Tonal variant
+/**
+ * @summary the tonal variant — secondary action with a surface-tinted fill
+ */
 export const Tonal: Story = {
 	render: (arguments_) => <BaseButton {...arguments_}>Tonal</BaseButton>,
 	args: {
@@ -34,7 +40,9 @@ export const Tonal: Story = {
 	},
 };
 
-// Outlined variant
+/**
+ * @summary the outlined variant — important but low-emphasis action with a border
+ */
 export const Outlined: Story = {
 	render: (arguments_) => <BaseButton {...arguments_}>Outlined</BaseButton>,
 	args: {
@@ -42,7 +50,9 @@ export const Outlined: Story = {
 	},
 };
 
-// Text variant
+/**
+ * @summary the text variant — lowest-emphasis action, no fill or border, for dense UIs
+ */
 export const Text: Story = {
 	render: (arguments_) => <BaseButton {...arguments_}>Text</BaseButton>,
 	args: {
@@ -50,7 +60,9 @@ export const Text: Story = {
 	},
 };
 
-// Icon button example
+/**
+ * @summary adding a leading icon to reinforce the action's meaning (icon stays before the label)
+ */
 export const Icon: Story = {
 	render: (arguments_) => (
 		<BaseButton {...arguments_} icon={<span style={{ fontSize: '20px' }}>🔍</span>}>
@@ -62,7 +74,9 @@ export const Icon: Story = {
 	},
 };
 
-// Floating Action Button (FAB)
+/**
+ * @summary a Floating Action Button (FAB) for the primary action of a screen, with a leading plus icon
+ */
 export const FAB: Story = {
 	render: (arguments_) => (
 		<BaseButton {...arguments_} icon={<span style={{ fontSize: '24px' }}>➕</span>}>
@@ -75,8 +89,11 @@ export const FAB: Story = {
 	},
 };
 
-// Segmented group of buttons
+/**
+ * @summary two related actions grouped as a segmented pair (demonstrates contrast between filled and outlined)
+ */
 export const Segmented: Story = {
+	tags: ['!manifest'],
 	render: () => (
 		<div style={{ display: 'flex', gap: '0.5rem' }}>
 			<BaseButton variant='filled'>Option 1</BaseButton>
@@ -85,7 +102,9 @@ export const Segmented: Story = {
 	),
 };
 
-// Button with onClick handler
+/**
+ * @summary wiring an onClick handler to respond to user taps
+ */
 export const Clickable: Story = {
 	render: () => {
 		const handleClick = () => {
@@ -102,7 +121,9 @@ export const Clickable: Story = {
 	},
 };
 
-// Button rendered as anchor tag
+/**
+ * @summary rendering the button as a link by passing `href` (renders an <a> instead of a <button>)
+ */
 export const AsLink: Story = {
 	render: () => (
 		<BaseButton variant='filled' href='/dashboard'>
@@ -111,22 +132,30 @@ export const AsLink: Story = {
 	),
 };
 
-// Disabled button
+/**
+ * @summary the disabled state blocks interaction and signals an unavailable action
+ */
 export const Disabled: Story = {
 	render: () => (
 		<BaseButton disabled>Disabled</BaseButton>
 	),
 };
 
-// Empty button (no text or icon)
+/**
+ * @summary an empty button with no text or icon falls back to a default label (edge case, for instruction only)
+ */
 export const Empty: Story = {
+	tags: ['!manifest'],
 	render: () => (
 		<BaseButton />
 	),
 };
 
-// Layout and fullWidth example
+/**
+ * @summary the horizontal layout with fullWidth stretches the button to fill its container
+ */
 export const Layout: Story = {
+	tags: ['!manifest'],
 	render: () => (
 		<BaseButton layout='horizontal' fullWidth>
 			Layout Test

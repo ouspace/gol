@@ -5,5 +5,14 @@
 	"projectType": "application",
 	"tags": [],
 	"// targets": "to see all targets run: nx show project ui --web",
-	"targets": {}
+	"targets": {
+		"storybook": {
+			"executor": "nx:run-commands",
+			"continuous": true,
+			"options": {
+				"cwd": "apps/ui",
+				"command": "storybook dev -p 6006"
+			}
+		}
+	}
 }

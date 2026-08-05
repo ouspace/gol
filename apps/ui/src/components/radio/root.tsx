@@ -8,16 +8,18 @@ import './styles/index.css';
 /**
  * Radio component
  *
- * @param {Properties} properties - refers to radio properties
+ * Single-choice control that selects one option from a set (group radios by
+ * `name`). Supports custom sizes, colors, icons, label positioning, and native
+ * input attributes.
  *
- * @description
- * Supports custom properties and native input attributes.
+ * @summary single-choice control for selecting one option from a set
  *
  * @example
  * <Radio label="label-text" value="radio-value" color="red" size="normal" />
  * <Radio {...properties} />
  * <Radio label="native props" aria-label="option" data-testid="radio" onFocus={fn} />
  *
+ * @param {Properties} properties - refers to radio properties
  * @returns {React.JSX.Element} element
  */
 export default function Radio(properties?: Properties) {

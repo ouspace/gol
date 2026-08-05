@@ -6,11 +6,16 @@ import './styles/index.css';
 /**
  * Text component
  *
- * @param {Properties} properties - refers to text properties
+ * Typography primitive mapping to Material 3 type scales (display, headline,
+ * title, label, body) with polymorphic element rendering. Use to keep text
+ * styling consistent across the app instead of raw heading/paragraph tags.
+ *
+ * @summary Material 3 typography primitive with polymorphic element rendering
  *
  * @example
  * <Text variant="h1" color="blue" weight="bold">Hello World</Text>
  *
+ * @param {Properties} properties - refers to text properties
  * @returns {React.JSX.Element} element
  */
 export default function Text(properties?: Properties) {

@@ -14,6 +14,22 @@ import type { ButtonProperties } from './types';
 
 type ElementTag = 'button' | 'a' | 'div' | 'span';
 
+/**
+ * Button component
+ *
+ * Polymorphic action element: renders a semantic `<button>` (or an `<a>` when
+ * `href` is provided) with five Material-style variants. Use for in-page
+ * interactions only; for route navigation prefer a Link.
+ *
+ * @summary polymorphic action button (5 variants) for in-page interactions
+ *
+ * @example
+ * <Button variant="filled" onClick={handler}>Save</Button>
+ * <Button variant="text" href="/dashboard">Go to Dashboard</Button>
+ *
+ * @param {ButtonProperties} properties - refers to button properties
+ * @returns {React.JSX.Element} element
+ */
 const Button = React.forwardRef<HTMLElement, ButtonProperties>(({
 	as,
 	href,

@@ -1,11 +1,13 @@
 ---
 name: storybook
-description: Manage and run Storybook for components. INVOKE when the user wants to view component stories, create new stories, or run the Storybook development server. Trigger words - storybook, view stories, create story, run storybook.
+description: Manage and run Storybook for components. INVOKE when the user wants to view component stories, create new stories, or run the Storybook development server. Trigger words - storybook, view stories, create story, run storybook. If the task is composing UI with @gol/ui / design-system components, invoke mcp-storybook FIRST instead.
 ---
 
 # Storybook Management Guide (CSF 3.0 & React 19)
 
 This skill provides the standards and instructions for maintaining visual component documentation and automated behavior tests using Storybook.
+
+**Design-system usage:** If you will use `@gol/ui` components (Button, TextField, Chip, etc.) or need live prop docs, **invoke the `mcp-storybook` skill first**, then return here for CSF/file conventions.
 
 ## Key Principles
 
@@ -14,7 +16,8 @@ This skill provides the standards and instructions for maintaining visual compon
 3. **Automate Interaction Tests**: Write CSF `play` functions for interactive states (e.g. checkbox toggle, dropdown expand) to execute Given/When/Then assertions automatically.
 4. **Theme Alignment**: Wrap stories in the required MD3 theme providers or CSS class container decorators to ensure custom properties are loaded.
 5. **Accessibility (a11y)**: Ensure stories have correct ARIA attributes and visible focus rings. Verify against WCAG AA standards.
-6. **Use Nx CLI**: Execute storybook tasks through Nx workspace scripts: `npx nx run <project>:storybook` or `npx nx run <project>:test-storybook`.
+6. **Use Nx CLI**: Execute Storybook tasks through Nx workspace commands: `npx nx run <project>:storybook` or `npx nx run <project>:test-storybook`.
+7. **MCP for real APIs**: Never invent design-system props — use the `mcp-storybook` skill / MCP tools.
 
 ---
 
@@ -23,7 +26,7 @@ This skill provides the standards and instructions for maintaining visual compon
 ### 1. Project Discovery
 Check `project.json` or `package.json` to find Storybook targets:
 ```bash
-npx nx show projects --with-target storybook
+npx nx show projects --withTarget storybook
 ```
 
 ### 2. Run Storybook Server
@@ -31,6 +34,8 @@ Start the local development server:
 ```bash
 npx nx run <project-name>:storybook
 ```
+
+For `@gol/ui`, port is **6006** (`npx nx run ui:storybook`) so MCP stays at `http://localhost:6006/mcp`.
 
 ### 3. Create a Story (Template)
 Create `<component-name>.stories.tsx` next to the component file:

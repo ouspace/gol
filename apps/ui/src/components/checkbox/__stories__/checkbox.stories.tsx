@@ -32,7 +32,9 @@ const meta: Meta<typeof Checkbox> = {
 export default meta;
 type Story = StoryObj<typeof Checkbox>;
 
-// Basic
+/**
+ * @summary the default unchecked checkbox — the most common starting state
+ */
 export const Default: Story = {
 	args: {
 		label: 'Default Checkbox',
@@ -40,7 +42,9 @@ export const Default: Story = {
 	},
 };
 
-// States
+/**
+ * @summary the three selection states (unchecked, checked, indeterminate) side by side
+ */
 export const States: Story = {
 	render: () => (
 		<div style={{ display: 'flex', gap: '24px', alignItems: 'center' }}>
@@ -51,7 +55,9 @@ export const States: Story = {
 	),
 };
 
-// Disabled
+/**
+ * @summary the disabled state blocks interaction across all three selection states
+ */
 export const Disabled: Story = {
 	render: () => (
 		<div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
@@ -70,7 +76,9 @@ export const Disabled: Story = {
 	),
 };
 
-// Sizes
+/**
+ * @summary the three sizes (small, normal, big) for fitting different UI densities
+ */
 export const Sizes: Story = {
 	render: () => (
 		<div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
@@ -81,7 +89,9 @@ export const Sizes: Story = {
 	),
 };
 
-// Colors
+/**
+ * @summary preset and custom colors (hex) for matching the checkbox to brand or semantic meaning
+ */
 export const Colors: Story = {
 	render: () => (
 		<div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
@@ -94,7 +104,9 @@ export const Colors: Story = {
 	),
 };
 
-// Label
+/**
+ * @summary label positioning and styling — place the label right/left/top/bottom, recolor it, or use JSX content
+ */
 export const Labels: Story = {
 	render: () => (
 		<div style={{ display: 'flex', gap: '24px', alignItems: 'center' }}>
@@ -108,7 +120,9 @@ export const Labels: Story = {
 	),
 };
 
-// Custom Icons
+/**
+ * @summary replacing the default check glyph with custom icons for checked and unchecked states
+ */
 export const CustomIcons: Story = {
 	render: () => (
 		<div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap', alignItems: 'center' }}>
@@ -200,7 +214,9 @@ export const CustomIcons: Story = {
 	),
 };
 
-// Circular
+/**
+ * @summary the `circular` shape — use when the checkmark should sit in a circular (radio-like) container
+ */
 export const Circular: Story = {
 	render: () => (
 		<div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
@@ -210,6 +226,9 @@ export const Circular: Story = {
 	),
 };
 
+/**
+ * @summary clicking the label or control toggles the value via onChange (interactive)
+ */
 export const InteractionsToggle: Story = {
 	render: () => {
 		const [checked, setChecked] = React.useState(false);
@@ -226,6 +245,9 @@ export const InteractionsToggle: Story = {
 	},
 };
 
+/**
+ * @summary keyboard users can focus the checkbox with Tab and toggle it with Space
+ */
 export const InteractionsKeyboard: Story = {
 	render: () => {
 		const [checked, setChecked] = React.useState(false);
@@ -247,6 +269,9 @@ export const InteractionsKeyboard: Story = {
 	},
 };
 
+/**
+ * @summary clicking the label text toggles the checkbox too (useful for larger hit areas)
+ */
 export const InteractionsLabelClick: Story = {
 	render: () => {
 		const [checked, setChecked] = React.useState(false);
@@ -263,6 +288,9 @@ export const InteractionsLabelClick: Story = {
 	},
 };
 
+/**
+ * @summary a disabled checkbox ignores clicks and stays unchecked with a disabled state
+ */
 export const InteractionsDisabled: Story = {
 	render: () => {
 		return <Checkbox label='Disabled checkbox' value={false} disabled />;
