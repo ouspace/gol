@@ -11,11 +11,16 @@ import './styles/index.css';
 /**
  * Icon component
  *
- * @param {Properties} properties - refers to icon properties
+ * Renders an SVG glyph from the Material Symbols dictionary by name, with
+ * outlined/filled variants, sizes, colors and rotation. Can act as a button
+ * when `onClick` is supplied.
+ *
+ * @summary Material Symbols SVG icon with sizes, colors, variants and rotation
  *
  * @example
  * <Icon name="1k" size="small" color="black" variant="outlined" />
  *
+ * @param {Properties} properties - refers to icon properties
  * @returns {React.JSX.Element} element
  */
 export default function Icon(properties?: Properties) {

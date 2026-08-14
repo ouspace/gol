@@ -56,8 +56,14 @@ const meta: Meta<typeof TextField> = {
 export default meta;
 type Story = StoryObj<typeof TextField>;
 
+/**
+ * @summary the default filled TextField with a floating label — the most common starting point
+ */
 export const Default: Story = {};
 
+/**
+ * @summary the filled vs outlined variants and the fullWidth layout that stretches to the container
+ */
 export const Variants: Story = {
 	render: () => (
 		<div style={{ display: 'flex', flexDirection: 'column', gap: '24px', width: '480px' }}>
@@ -71,6 +77,9 @@ export const Variants: Story = {
 	),
 };
 
+/**
+ * @summary the main value/disabled/readonly/required/error states shown together for quick comparison
+ */
 export const States: Story = {
 	render: () => (
 		<div style={{ display: 'flex', gap: '24px', flexWrap: 'wrap', alignItems: 'flex-start' }}>
@@ -85,6 +94,9 @@ export const States: Story = {
 	),
 };
 
+/**
+ * @summary the supported input types — text, email, password, number (with/without spinner), search, tel, url and textarea
+ */
 export const Types: Story = {
 	render: () => (
 		<div style={{ display: 'flex', gap: '24px', flexWrap: 'wrap', alignItems: 'flex-start' }}>
@@ -101,6 +113,9 @@ export const Types: Story = {
 	),
 };
 
+/**
+ * @summary leading/trailing icons, multiple icons, password visibility toggle, and prefix/suffix text for currency/URLs
+ */
 export const Icons: Story = {
 	render: () => (
 		<div style={{ display: 'flex', gap: '24px', flexWrap: 'wrap', alignItems: 'flex-start' }}>
@@ -133,6 +148,9 @@ export const Icons: Story = {
 	),
 };
 
+/**
+ * @summary helper text, error text, and how an error replaces the helper until it resolves
+ */
 export const Error: Story = {
 	render: () => (
 		<div style={{ display: 'flex', gap: '24px', flexWrap: 'wrap', alignItems: 'flex-start' }}>
@@ -164,6 +182,9 @@ export const Error: Story = {
 	),
 };
 
+/**
+ * @summary the three sizes across both variants plus custom color usage (hex/keyword)
+ */
 export const Size: Story = {
 	render: () => (
 		<div style={{ display: 'flex', flexDirection: 'column', gap: '24px', alignItems: 'flex-start' }}>
@@ -207,6 +228,9 @@ export const Size: Story = {
 	),
 };
 
+/**
+ * @summary controlled value binding, disabled, required, and error states verified interactively
+ */
 export const Interactions: Story = {
 	render: () => {
 		const [name, setName] = useState('');
@@ -252,6 +276,9 @@ export const Interactions: Story = {
 	},
 };
 
+/**
+ * @summary keyboard flow — Tab moves focus between fields and typing fills the focused field
+ */
 export const InteractionsKeyboard: Story = {
 	render: () => {
 		const [value, setValue] = useState('');

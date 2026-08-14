@@ -5,6 +5,11 @@
 			"type": "local",
 			"command": ["npx", "nx", "mcp"],
 			"enabled": true
+		},
+		"mcp-storybook": {
+			"type": "remote",
+			"url": "http://localhost:6006/mcp",
+			"enabled": true
 		}
 	}
 }

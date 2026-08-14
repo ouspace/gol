@@ -80,12 +80,18 @@ const meta: Meta<typeof Text> = {
 export default meta;
 type Story = StoryObj<typeof Text>;
 
+/**
+ * @summary the default text — the simplest typography primitive with content only
+ */
 export const Default: Story = {
 	args: {
 		content: 'Default text',
 	},
 };
 
+/**
+ * @summary the full Material 3 type scale (display, headline, title, label, body) for choosing a level
+ */
 export const TypeScale: Story = {
 	render: () => (
 		<div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
@@ -138,6 +144,9 @@ export const TypeScale: Story = {
 	),
 };
 
+/**
+ * @summary text states — disabled, italic, no-wrap, and unselectable — that affect appearance and behavior
+ */
 export const States: Story = {
 	render: () => (
 		<div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
@@ -155,6 +164,9 @@ export const States: Story = {
 
 const colorTokens = ['black', 'red', 'green', 'blue', 'orange', 'purple', 'teal', 'pink', 'brown', 'grey'] as const;
 
+/**
+ * @summary the preset semantic color tokens available for text
+ */
 export const Colors: Story = {
 	render: () => (
 		<div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
@@ -165,6 +177,9 @@ export const Colors: Story = {
 	),
 };
 
+/**
+ * @summary numeric and keyword font weights for emphasizing or de-emphasizing text
+ */
 export const Weights: Story = {
 	render: () => (
 		<div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
